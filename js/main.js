@@ -29,21 +29,21 @@ const TRANSLATIONS = {
     hero_line1:      'From Idea',
     hero_line2:      'to Global',
     hero_line3:      'Scale.',
-    hero_sub:        'OakDev is a premium app studio building mobile applications, AI platforms, and automation systems — from concept to launch for founders and forward-thinking companies.',
+    hero_sub:        'OakDev is a premium app studio building mobile applications, AI platforms, and automation systems. We take ideas from concept to launch for founders and forward-thinking companies.',
     hero_cta1:       'Start a Project',
     hero_cta2:       'Explore Our Work',
     scroll:          'Scroll',
     /* Services */
     services_tag:    'What We Build',
-    services_title:  'Core Services',
-    services_desc:   'From mobile apps to AI systems — we build production-ready products that deliver real user value at global scale.',
+    services_title:  'Services',
+    services_desc:   'From mobile apps to AI systems, we build production-ready products that deliver real user value at global scale.',
     service_01:      '01',
     service_02:      '02',
     service_03:      '03',
     studio_title:    'App Studio',
-    studio_desc:     'Mobile and web applications built for production — from concept and MVP to App Store launch with rock-solid technical foundations and long-term scalability.',
+    studio_desc:     'Mobile and web applications built for production. From concept and MVP to App Store launch, with solid technical foundations and long-term scalability.',
     ai_title:        'AI & Automation',
-    ai_desc:         'Intelligent systems, AI integrations, and workflow automation that transform how businesses operate — built with modern LLMs, APIs, and cloud infrastructure.',
+    ai_desc:         'Intelligent systems, AI integrations, and workflow automation that transform how businesses operate. Built with modern LLMs, APIs, and cloud infrastructure.',
     consulting_title:'Consulting',
     consulting_desc: 'Strategic technology guidance for startups and enterprises. Architecture reviews, product strategy, tech stack decisions, and execution roadmaps.',
     learn_more:      'Learn More',
@@ -64,14 +64,14 @@ const TRANSLATIONS = {
     about_tag:       'About OakDev',
     about_title:     'A Product Studio Built for Execution',
     about_text1:     'OakDev is a modern app and AI product studio focused on building scalable digital products from idea to launch. We design, develop, and deploy high-quality mobile applications and AI-powered platforms for startups, founders, and forward-thinking companies.',
-    about_text2:     'We operate at the intersection of technology, product strategy, and artificial intelligence — combining rapid execution with long-term scalability.',
+    about_text2:     'We operate at the intersection of technology, product strategy, and artificial intelligence. Rapid execution combined with long-term scalability.',
     feat1:           'Production-ready from day one',
     feat2:           'Founder-driven, execution-focused',
     feat3:           'AI-first product development',
     feat4:           'Global scale architecture',
     about_card_label:'Our Mission',
     about_card_title:'Building software that delivers real user value and sustainable growth.',
-    about_card_text: 'Rather than acting as a traditional agency, OakDev operates as a product-driven studio — emphasizing ownership, execution, and measurable outcomes.',
+    about_card_text: 'Rather than acting as a traditional agency, OakDev operates as a product-driven studio with a focus on ownership, execution, and measurable outcomes.',
     /* Process */
     process_tag:     'How We Work',
     process_title:   'From Discovery to Launch',
@@ -81,7 +81,7 @@ const TRANSLATIONS = {
     step1_desc:      'We dive deep into your idea, market, and goals to define a clear product vision and technical roadmap.',
     step2_num:       '02',
     step2_title:     'Design & Plan',
-    step2_desc:      'Architecture, UI/UX design, and technical planning — every detail mapped before a line of code is written.',
+    step2_desc:      'Architecture, UI/UX design, and technical planning. Every detail is mapped out before a single line of code is written.',
     step3_num:       '03',
     step3_title:     'Build',
     step3_desc:      'Rapid, high-quality development with weekly milestones and full transparency throughout the build.',
@@ -138,21 +138,21 @@ const TRANSLATIONS = {
     hero_line1:      'Från idé',
     hero_line2:      'till global',
     hero_line3:      'skala.',
-    hero_sub:        'OakDev är ett premium app studio som bygger mobilapplikationer, AI-plattformar och automationssystem — från idé till lansering för grundare och framtidsorienterade företag.',
+    hero_sub:        'OakDev är en premium app studio som bygger mobilapplikationer, AI-plattformar och automationssystem, från idé till lansering för innovationssökande och framtidsorienterade företag.',
     hero_cta1:       'Starta ett projekt',
     hero_cta2:       'Utforska vårt arbete',
     scroll:          'Scrolla',
     /* Services */
     services_tag:    'Vad vi bygger',
-    services_title:  'Våra tjänster',
-    services_desc:   'Från mobilappar till AI-system — vi bygger produktionsfärdiga produkter som skapar verkligt användarvärde i global skala.',
+    services_title:  'Tjänster',
+    services_desc:   'Från mobilappar till AI-system bygger vi produktionsfärdiga produkter som skapar verkligt användarvärde i global skala.',
     service_01:      '01',
     service_02:      '02',
     service_03:      '03',
     studio_title:    'App Studio',
-    studio_desc:     'Mobila och webbaserade applikationer byggda för produktion — från koncept och MVP till lansering i App Store med starka tekniska grunder och långsiktig skalbarhet.',
+    studio_desc:     'Mobila och webbaserade applikationer byggda för produktion. Från koncept och MVP till App Store-lansering, med starka tekniska grunder och långsiktig skalbarhet.',
     ai_title:        'AI & Automation',
-    ai_desc:         'Intelligenta system, AI-integrationer och arbetsflödesautomation som transformerar hur företag verkar — byggda med moderna LLM:er, API:er och molninfrastruktur.',
+    ai_desc:         'Intelligenta system, AI-integrationer och arbetsflödesautomation som transformerar hur företag arbetar. Byggda med moderna LLM:er, API:er och molninfrastruktur.',
     consulting_title:'Konsulting',
     consulting_desc: 'Strategisk teknologivägledning för startups och företag. Arkitekturgranskning, produktstrategi, teknologibeslut och genomförandefärdplaner.',
     learn_more:      'Läs mer',
@@ -173,14 +173,14 @@ const TRANSLATIONS = {
     about_tag:       'Om OakDev',
     about_title:     'Ett produktstudio byggt för genomförande',
     about_text1:     'OakDev är ett modernt app- och AI-produktstudio fokuserat på att bygga skalbara digitala produkter från idé till lansering. Vi designar, utvecklar och driftsätter mobilapplikationer och AI-drivna plattformar för startups, grundare och framtidsorienterade företag.',
-    about_text2:     'Vi verkar i skärningspunkten mellan teknologi, produktstrategi och artificiell intelligens — kombinerar snabb genomförande med långsiktig skalbarhet.',
+    about_text2:     'Vi verkar i skärningspunkten mellan teknologi, produktstrategi och artificiell intelligens. Snabbt genomförande kombinerat med långsiktig skalbarhet.',
     feat1:           'Produktionsfärdig från dag ett',
     feat2:           'Grundardriven, genomförandefokuserad',
     feat3:           'AI-first produktutveckling',
     feat4:           'Global skalarkitektur',
     about_card_label:'Vår mission',
     about_card_title:'Att bygga programvara som skapar verkligt användarvärde och hållbar tillväxt.',
-    about_card_text: 'Snarare än att agera som ett traditionellt byrå verkar OakDev som ett produktdrivet studio — med betoning på ägandeskap, genomförande och mätbara resultat.',
+    about_card_text: 'Snarare än att agera som en traditionell byrå verkar OakDev som ett produktdrivet studio med fokus på ägandeskap, genomförande och mätbara resultat.',
     /* Process */
     process_tag:     'Hur vi arbetar',
     process_title:   'Från idé till lansering',
@@ -190,7 +190,7 @@ const TRANSLATIONS = {
     step1_desc:      'Vi fördjupar oss i din idé, marknad och mål för att definiera en tydlig produktvision och teknisk färdplan.',
     step2_num:       '02',
     step2_title:     'Design & planering',
-    step2_desc:      'Arkitektur, UI/UX-design och teknisk planering — varje detalj kartlagd innan en rad kod skrivs.',
+    step2_desc:      'Arkitektur, UI/UX-design och teknisk planering. Varje detalj kartläggs innan en rad kod skrivs.',
     step3_num:       '03',
     step3_title:     'Bygg',
     step3_desc:      'Snabb, högkvalitativ utveckling med veckovisa milstolpar och full transparens under hela bygget.',
@@ -919,19 +919,13 @@ function initReveal() {
 
 /* ============================================================
    CONTACT FORM
-   Input validation + honeypot + Formspree submission
+   Input validation + honeypot + FormSubmit.co submission
+   No account needed — uses hello@oakdev.app directly.
    ============================================================ */
 function initContactForm() {
   const form   = document.getElementById('contactForm');
   const status = document.getElementById('formStatus');
   if (!form || !status) return;
-
-  // Basic sanitize — strip HTML tags from text inputs
-  function sanitize(str) {
-    return String(str).replace(/[<>"'&]/g, (c) => ({
-      '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '&': '&amp;',
-    }[c]));
-  }
 
   function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
@@ -943,8 +937,8 @@ function initContactForm() {
     const lang = Lang.get();
     const t    = TRANSLATIONS[lang];
 
-    // Honeypot check
-    const honey = form.querySelector('[name="website"]');
+    // Honeypot check (_honey field — bots fill it, humans don't)
+    const honey = form.querySelector('[name="_honey"]');
     if (honey && honey.value) return; // Silently reject bots
 
     const nameEl    = form.querySelector('[name="name"]');
@@ -963,7 +957,7 @@ function initContactForm() {
       return;
     }
 
-    // Submit
+    // Submit via AJAX to FormSubmit.co
     submitBtn.disabled = true;
     submitBtn.textContent = '...';
     status.className = 'form-status';
@@ -975,7 +969,9 @@ function initContactForm() {
         body:    new FormData(form),
       });
 
-      if (res.ok) {
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success !== 'false') {
         status.textContent = t.form_success;
         status.className   = 'form-status success';
         form.reset();

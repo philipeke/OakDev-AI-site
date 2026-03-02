@@ -13,10 +13,10 @@
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: blob:;
-    connect-src 'self' https://formspree.io;
+    connect-src 'self' https://formsubmit.co;
     frame-ancestors 'none';
     base-uri 'self';
-    form-action 'self' https://formspree.io;
+    form-action 'self' https://formsubmit.co;
     upgrade-insecure-requests;
   " />
 
@@ -642,22 +642,26 @@
 
           <!-- Contact form -->
           <!--
-            SETUP REQUIRED:
-            1. Create a free account at https://formspree.io
-            2. Create a new form and copy your form ID
-            3. Replace "YOUR_FORM_ID" in the action attribute below
+            Powered by FormSubmit.co — no account needed.
+            FIRST USE: FormSubmit.co will send one activation email to hello@oakdev.app.
+            Click the confirmation link once, and all future submissions arrive directly.
           -->
           <form
             id="contactForm"
             class="contact-form"
-            action="https://formspree.io/f/YOUR_FORM_ID"
+            action="https://formsubmit.co/hello@oakdev.app"
             method="POST"
             novalidate
             data-reveal="right"
           >
+            <!-- FormSubmit.co configuration -->
+            <input type="hidden" name="_subject" value="New project inquiry — OakDev website" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+
             <!-- Honeypot anti-spam field (hidden from users, bots fill it) -->
             <div class="form-honey" aria-hidden="true">
-              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
             </div>
 
             <div class="form-grid">
