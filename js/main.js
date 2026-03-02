@@ -715,22 +715,29 @@ function initGSAP() {
     .from('.hero-social',      { opacity: 0, y: 15, duration: 0.6 }, 1.55)
     .from('.scroll-hint',      { opacity: 0, duration: 0.6 }, 2.0);
 
-  /* Generic scroll reveal via data-reveal attributes */
+  /* Generic scroll reveal via data-reveal attributes
+     Use gsap.set() to hide initially (no CSS opacity:0 needed),
+     then gsap.to() to explicitly animate to visible — avoids CSS conflicts. */
   document.querySelectorAll('[data-reveal]').forEach((el) => {
     const dir   = el.dataset.reveal;
-    const delay = parseFloat(el.dataset.revealDelay || 0) * 0.1;
+    const init  = { opacity: 0 };
+    if (!dir || dir === 'up') init.y = 40;
+    else if (dir === 'left')  init.x = -50;
+    else if (dir === 'right') init.x =  50;
+    else if (dir === 'scale') { init.scale = 0.88; init.y = 20; }
+    gsap.set(el, init);
+  });
 
-    const fromVars = { opacity: 0, duration: 0.9, ease: 'power3.out', delay };
-    if (!dir || dir === 'up')    fromVars.y = 40;
-    if (dir === 'left')          fromVars.x = -50;
-    if (dir === 'right')         fromVars.x =  50;
-    if (dir === 'scale')         { fromVars.scale = 0.88; fromVars.y = 20; }
-
+  document.querySelectorAll('[data-reveal]').forEach((el) => {
+    const delay = parseFloat(el.dataset.revealDelay || 0) * 0.12;
     ScrollTrigger.create({
       trigger: el,
       start:   'top 88%',
       once:    true,
-      onEnter: () => gsap.from(el, fromVars),
+      onEnter: () => gsap.to(el, {
+        opacity: 1, y: 0, x: 0, scale: 1,
+        duration: 0.9, ease: 'power3.out', delay,
+      }),
     });
   });
 
@@ -881,15 +888,27 @@ function initCounters() {
 }
 
 /* ============================================================
-   SCROLL REVEAL (CSS-based fallback when GSAP unavailable)
+   SCROLL REVEAL (IntersectionObserver fallback when GSAP unavailable)
    ============================================================ */
 function initReveal() {
   if (typeof gsap !== 'undefined') return; // GSAP handles this
 
+  // Hide elements via inline styles (no CSS dependency)
+  document.querySelectorAll('[data-reveal]').forEach((el) => {
+    const dir = el.dataset.reveal;
+    el.style.opacity    = '0';
+    el.style.transition = 'opacity 0.85s ease, transform 0.85s ease';
+    if (!dir || dir === 'up')  el.style.transform = 'translateY(30px)';
+    else if (dir === 'left')   el.style.transform = 'translateX(-40px)';
+    else if (dir === 'right')  el.style.transform = 'translateX(40px)';
+    else if (dir === 'scale')  el.style.transform = 'scale(0.9) translateY(20px)';
+  });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(({ isIntersecting, target }) => {
       if (isIntersecting) {
-        target.classList.add('revealed');
+        target.style.opacity   = '1';
+        target.style.transform = 'none';
         observer.unobserve(target);
       }
     });
