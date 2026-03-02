@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Security ──────────────────────────────────────────── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://formsubmit.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formsubmit.co;
+    upgrade-insecure-requests;
+  " />
+
+  <!-- ── SEO ───────────────────────────────────────────────── -->
+  <title>App Studio — OakDev &amp; AI AB | Mobile &amp; Web App Development</title>
+  <meta name="description" content="OakDev App Studio builds native iOS & Android, cross-platform, AI-powered, and web applications from concept to global launch. See our portfolio apps." />
+  <meta name="keywords" content="app development, mobile apps, iOS, Android, React Native, Flutter, AI apps, SaaS, Sweden, OakDev" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/app-studio/" />
+
+  <!-- ── Open Graph ────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://oakdev.app/app-studio/" />
+  <meta property="og:title"       content="App Studio — OakDev &amp; AI AB" />
+  <meta property="og:description" content="We build native, cross-platform, and AI-powered mobile applications from idea to App Store. See ChristBay, TipsyPal, and Vespera." />
+  <meta property="og:image"       content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <!-- ── Fonts ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ── Favicon ───────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="../assets/icon.png" />
+  <link rel="apple-touch-icon"      href="../assets/icon.png" />
+
+  <!-- ── Stylesheet ────────────────────────────────────────── -->
+  <link rel="stylesheet" href="../css/styles.css" />
+
+  <!-- ── Page-specific styles ──────────────────────────────── -->
+  <style>
+    /* ═══ STUDIO HERO ═══════════════════════════════════════ */
+    .studio-hero {
+      background: #020202;
+    }
+
+    /* Animated grid mesh */
+    .studio-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(118,185,0,0.05) 1px, transparent 1px),
+        linear-gradient(to right, rgba(118,185,0,0.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask: radial-gradient(ellipse 85% 85% at 50% 50%, black 40%, transparent 100%);
+      mask: radial-gradient(ellipse 85% 85% at 50% 50%, black 40%, transparent 100%);
+      z-index: 0;
+    }
+
+    /* Ambient gradient glows */
+    .studio-hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 65% at 12% 55%, rgba(118,185,0,0.09), transparent),
+        radial-gradient(ellipse 45% 45% at 88% 35%, rgba(57,255,20,0.04), transparent),
+        radial-gradient(ellipse 40% 50% at 55% 92%, rgba(118,185,0,0.06), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .studio-hero .hero-content {
+      z-index: 2;
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2rem;
+      align-items: center;
+      text-align: left;
+    }
+
+    .studio-hero-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .studio-hero-left .hero-badge {
+      margin-bottom: 1.75rem;
+    }
+
+    .studio-hero-left .hero-subtext {
+      text-align: left;
+      margin: 1.5rem 0 0;
+    }
+
+    .studio-hero-left .hero-ctas {
+      margin-top: 2rem;
+    }
+
+    /* Floating phone outlines */
+    .studio-phones {
+      position: relative;
+      width: 360px;
+      height: 480px;
+      flex-shrink: 0;
+    }
+
+    .phone-outline {
+      position: absolute;
+      border-radius: 2.5rem;
+    }
+
+    .phone-outline-1 {
+      width: 176px;
+      height: 340px;
+      border: 1.5px solid rgba(118,185,0,0.22);
+      background: rgba(118,185,0,0.025);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-7deg);
+      animation: floatP1 5.5s ease-in-out infinite;
+    }
+
+    .phone-outline-2 {
+      width: 156px;
+      height: 300px;
+      border: 1.5px solid rgba(118,185,0,0.14);
+      background: rgba(118,185,0,0.015);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(10deg) translateX(55px) translateY(-25px);
+      animation: floatP2 6.5s ease-in-out infinite;
+    }
+
+    .phone-outline-3 {
+      width: 138px;
+      height: 268px;
+      border: 1px solid rgba(57,255,20,0.08);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-16deg) translateX(-62px) translateY(35px);
+      animation: floatP3 7.5s ease-in-out infinite;
+    }
+
+    /* Notch line inside each phone */
+    .phone-outline::before {
+      content: '';
+      position: absolute;
+      top: 1.1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(118,185,0,0.3);
+    }
+
+    /* Home indicator */
+    .phone-outline::after {
+      content: '';
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(118,185,0,0.2);
+    }
+
+    /* Glow behind phones */
+    .phone-glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(118,185,0,0.12), transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(40px);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes floatP1 {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-7deg) translateY(0); }
+      50%       { transform: translate(-50%, -50%) rotate(-7deg) translateY(-18px); }
+    }
+    @keyframes floatP2 {
+      0%, 100% { transform: translate(-50%, -50%) rotate(10deg) translateX(55px) translateY(-25px); }
+      50%       { transform: translate(-50%, -50%) rotate(10deg) translateX(55px) translateY(-40px); }
+    }
+    @keyframes floatP3 {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-16deg) translateX(-62px) translateY(35px); }
+      50%       { transform: translate(-50%, -50%) rotate(-16deg) translateX(-62px) translateY(20px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    @media (max-width: 960px) {
+      .studio-hero .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .studio-hero-left {
+        align-items: center;
+      }
+      .studio-hero-left .hero-subtext { text-align: center; }
+      .studio-phones { display: none; }
+    }
+
+    /* ═══ APP TYPES GRID ════════════════════════════════════ */
+    .app-types-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 960px) {
+      .app-types-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .app-types-grid { grid-template-columns: 1fr; }
+    }
+
+    .app-type-card {
+      position: relative;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 1.5rem;
+      padding: 2.25rem 2rem 2rem;
+      overflow: hidden;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
+    }
+
+    .app-type-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse at 80% 10%, rgba(118,185,0,0.1), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .app-type-card:hover {
+      border-color: rgba(118,185,0,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(118,185,0,0.08), 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .app-type-card:hover::after { opacity: 1; }
+
+    .app-type-card--ai {
+      border-color: rgba(118,185,0,0.18);
+      background: rgba(118,185,0,0.03);
+    }
+
+    .atype-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #76b900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .atype-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(118,185,0,0.1);
+      border: 1px solid rgba(118,185,0,0.22);
+      border-radius: 14px;
+      color: #76b900;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .app-type-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      line-height: 1.3;
+    }
+
+    .app-type-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.72;
+      margin-bottom: 1.25rem;
+    }
+
+    .atype-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .atype-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.25rem 0.65rem;
+      background: rgba(118,185,0,0.08);
+      border: 1px solid rgba(118,185,0,0.18);
+      border-radius: 999px;
+      color: rgba(118,185,0,0.88);
+    }
+
+    /* ═══ PORTFOLIO SHOWCASE ════════════════════════════════ */
+    .portfolio-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-top: 4rem;
+    }
+
+    .portfolio-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      min-height: 400px;
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-card {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .portfolio-card:nth-child(even) .portfolio-logo-area { order: 0 !important; }
+      .portfolio-card:nth-child(even) .portfolio-info-area { order: 0 !important; }
+    }
+
+    /* Alternating layout */
+    .portfolio-card:nth-child(even) .portfolio-logo-area { order: 2; }
+    .portfolio-card:nth-child(even) .portfolio-info-area { order: 1; }
+
+    .portfolio-logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Per-app tinted backgrounds */
+    .portfolio-card--christbay .portfolio-logo-area {
+      background: linear-gradient(135deg, rgba(15,25,65,0.7) 0%, rgba(8,12,30,0.9) 100%);
+    }
+    .portfolio-card--tipsypal .portfolio-logo-area {
+      background: linear-gradient(135deg, rgba(60,28,0,0.7) 0%, rgba(25,10,0,0.9) 100%);
+    }
+    .portfolio-card--vespera .portfolio-logo-area {
+      background: linear-gradient(135deg, rgba(50,35,0,0.7) 0%, rgba(20,14,0,0.9) 100%);
+    }
+
+    /* Glowing blob behind logo */
+    .portfolio-logo-area::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      opacity: 0.55;
+      transition: opacity 0.4s;
+    }
+    .portfolio-card--christbay .portfolio-logo-area::before { background: rgba(80,120,255,0.45); }
+    .portfolio-card--tipsypal .portfolio-logo-area::before  { background: rgba(255,130,0,0.5); }
+    .portfolio-card--vespera .portfolio-logo-area::before   { background: rgba(200,160,0,0.4); }
+
+    .portfolio-card:hover .portfolio-logo-area::before { opacity: 0.8; }
+
+    .portfolio-logo {
+      max-width: 200px;
+      max-height: 200px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      animation: floatLogo 5s ease-in-out infinite;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+    }
+
+    /* Make dark ChristBay logo visible on dark bg */
+    .portfolio-logo--christbay {
+      filter: brightness(0) invert(0.92) drop-shadow(0 4px 20px rgba(100,140,255,0.35));
+    }
+
+    .portfolio-card:nth-child(2) .portfolio-logo { animation-delay: -1.8s; }
+    .portfolio-card:nth-child(3) .portfolio-logo { animation-delay: -3.5s; }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-14px); }
+    }
+
+    .portfolio-info-area {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      padding: 3rem;
+      background: rgba(255,255,255,0.018);
+    }
+
+    .portfolio-app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #76b900;
+      padding: 0.35rem 1rem;
+      background: rgba(118,185,0,0.08);
+      border: 1px solid rgba(118,185,0,0.2);
+      border-radius: 999px;
+      width: fit-content;
+    }
+
+    .portfolio-app-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+      flex-shrink: 0;
+    }
+
+    .portfolio-info-area h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .portfolio-info-area p {
+      font-size: 1rem;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.58);
+      max-width: 520px;
+      margin: 0;
+    }
+
+    .btn-visit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      background: transparent;
+      border: 1px solid rgba(118,185,0,0.35);
+      border-radius: 999px;
+      color: #76b900;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      width: fit-content;
+      margin-top: 0.5rem;
+    }
+
+    .btn-visit:hover {
+      background: rgba(118,185,0,0.12);
+      border-color: #76b900;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(118,185,0,0.18);
+    }
+
+    /* ═══ TECH STACK ════════════════════════════════════════ */
+    .tech-marquee-outer {
+      margin-top: 4rem;
+      overflow: hidden;
+      -webkit-mask: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+      mask: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+    }
+
+    .tech-row {
+      display: flex;
+      gap: 1rem;
+      white-space: nowrap;
+      padding: 0.5rem 0;
+      animation: techLeft 32s linear infinite;
+    }
+
+    .tech-row + .tech-row {
+      margin-top: 0.85rem;
+      animation: techRight 42s linear infinite;
+    }
+
+    @keyframes techLeft {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes techRight {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.72);
+      flex-shrink: 0;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .tech-pill:hover {
+      border-color: rgba(118,185,0,0.4);
+      color: #76b900;
+    }
+
+    .tech-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+      flex-shrink: 0;
+    }
+
+    /* ═══ STUDIO CTA ════════════════════════════════════════ */
+    .studio-cta-section {
+      padding-bottom: clamp(5rem, 10vw, 9rem);
+    }
+
+    .studio-cta-box {
+      position: relative;
+      text-align: center;
+      padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 6vw, 5rem);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 2.5rem;
+      overflow: hidden;
+    }
+
+    /* Central glow */
+    .studio-cta-box::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(118,185,0,0.1), transparent 68%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Animated corner glow */
+    .studio-cta-box::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(57,255,20,0.04);
+      bottom: -100px;
+      right: -80px;
+      filter: blur(80px);
+    }
+
+    .studio-cta-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #76b900;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .studio-cta-label::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+    }
+
+    .studio-cta-headline {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .studio-cta-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.52);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-cta-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.75rem;
+      background: linear-gradient(135deg, #76b900, #8ece00);
+      border-radius: 999px;
+      color: #020202;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 40px rgba(118,185,0,0.3), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .btn-cta-green:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 60px rgba(118,185,0,0.45), 0 8px 32px rgba(0,0,0,0.4);
+      filter: brightness(1.08);
+    }
+
+    /* ═══ COUNT STRIP ═══════════════════════════════════════ */
+    .studio-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      margin-top: 5rem;
+    }
+
+    @media (max-width: 768px) {
+      .studio-stats-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .studio-stat {
+      padding: 2rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.35rem;
+    }
+
+    .studio-stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #76b900, #39ff14);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .studio-stat-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip to main content (accessibility) -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── Noise overlay ─────────────────────────────────────── -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       COOKIE CONSENT BANNER
+       ══════════════════════════════════════════════════════════ -->
+  <div id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+    <div class="cookie-inner">
+      <div class="cookie-icon" aria-hidden="true">🍪</div>
+      <div class="cookie-text">
+        <h3 id="cookie-title" data-i18n="cookie_title">We use cookies</h3>
+        <p data-i18n="cookie_text">We use cookies to improve your experience.</p>
+        <p class="cookie-links">
+          <a href="/privacy/" data-i18n="cookie_privacy">Privacy Policy</a>
+          <span class="cookie-sep" aria-hidden="true">·</span>
+          <a href="/terms/" data-i18n="cookie_terms">Terms of Use</a>
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept" data-i18n="cookie_accept">Accept All</button>
+        <button id="cookieDecline" class="btn-cookie-decline" data-i18n="cookie_decline">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════════════════════ -->
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+
+      <!-- Logo -->
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/"               class="nav-link"        data-i18n="nav_home">Home</a>
+        <a href="/app-studio/"    class="nav-link active"  data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="nav-link"        data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/"    class="nav-link"        data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/"         class="nav-link"        data-i18n="nav_about">About</a>
+        <a href="/contact/"       class="nav-link"        data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" data-i18n="nav_book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/"               class="mobile-link" data-i18n="nav_home">Home</a>
+        <a href="/app-studio/"    class="mobile-link" data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/"    class="mobile-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/"         class="mobile-link" data-i18n="nav_about">About</a>
+        <a href="/contact/"       class="mobile-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" style="display:block;text-align:center;" data-i18n="nav_book">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ══════════════════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ──────────────────────────────────────────────────────
+         HERO
+         ────────────────────────────────────────────────────── -->
+    <section class="hero studio-hero" aria-label="App Studio hero">
+
+      <!-- Ambient glow layer -->
+      <div class="studio-hero-glow" aria-hidden="true"></div>
+
+      <!-- Hero content -->
+      <div class="hero-content">
+
+        <!-- Left: text content -->
+        <div class="studio-hero-left">
+          <div class="hero-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            <span data-i18n="studio_hero_badge">App Studio</span>
+          </div>
+
+          <h1 class="hero-headline">
+            <span class="headline-line" data-i18n="studio_hero_title1">We Build Apps</span>
+            <span class="headline-line gradient-text" data-i18n="studio_hero_title2">The World Uses.</span>
+          </h1>
+
+          <p class="hero-subtext" data-i18n="studio_hero_sub">
+            From idea to App Store, OakDev designs and ships native, cross-platform, and AI-powered applications that users love and companies scale on.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="/contact/" class="btn-primary">
+              <span data-i18n="hero_cta1">Start a Project</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </a>
+            <a href="#portfolio" class="btn-ghost">
+              <span data-i18n="studio_see_apps">See Our Apps</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: animated phone outlines -->
+        <div class="studio-phones" aria-hidden="true">
+          <div class="phone-glow"></div>
+          <div class="phone-outline phone-outline-1"></div>
+          <div class="phone-outline phone-outline-2"></div>
+          <div class="phone-outline phone-outline-3"></div>
+        </div>
+
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-text" data-i18n="scroll">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         MARQUEE STRIP
+         ────────────────────────────────────────────────────── -->
+    <div class="marquee-wrapper" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>Native iOS</span><span class="marquee-dot">●</span>
+          <span>Android</span><span class="marquee-dot">●</span>
+          <span>React Native</span><span class="marquee-dot">●</span>
+          <span>Flutter</span><span class="marquee-dot">●</span>
+          <span>AI-Powered Apps</span><span class="marquee-dot">●</span>
+          <span>SaaS Platforms</span><span class="marquee-dot">●</span>
+          <span>Progressive Web Apps</span><span class="marquee-dot">●</span>
+          <span>App Store Launch</span><span class="marquee-dot">●</span>
+          <span>MVP Development</span><span class="marquee-dot">●</span>
+          <span>Swift</span><span class="marquee-dot">●</span>
+          <span>Kotlin</span><span class="marquee-dot">●</span>
+          <span>TypeScript</span><span class="marquee-dot">●</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span>Native iOS</span><span class="marquee-dot">●</span>
+          <span>Android</span><span class="marquee-dot">●</span>
+          <span>React Native</span><span class="marquee-dot">●</span>
+          <span>Flutter</span><span class="marquee-dot">●</span>
+          <span>AI-Powered Apps</span><span class="marquee-dot">●</span>
+          <span>SaaS Platforms</span><span class="marquee-dot">●</span>
+          <span>Progressive Web Apps</span><span class="marquee-dot">●</span>
+          <span>App Store Launch</span><span class="marquee-dot">●</span>
+          <span>MVP Development</span><span class="marquee-dot">●</span>
+          <span>Swift</span><span class="marquee-dot">●</span>
+          <span>Kotlin</span><span class="marquee-dot">●</span>
+          <span>TypeScript</span><span class="marquee-dot">●</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         WHAT WE BUILD — 6 APP TYPES
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="capabilities" aria-labelledby="types-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="studio_types_tag">What We Build</div>
+          <h2 id="types-heading" class="section-title">
+            Built for Every <span class="gradient-text" data-i18n="studio_types_title">Every Type of App.</span>
+          </h2>
+          <p class="section-desc" data-i18n="studio_types_desc">
+            We cover the full spectrum of mobile and web development — from native performance and AI intelligence to SaaS infrastructure and rapid MVPs.
+          </p>
+        </div>
+
+        <div class="app-types-grid">
+
+          <!-- Native iOS & Android -->
+          <div class="app-type-card" data-reveal="up" data-reveal-delay="0">
+            <div class="atype-num">01</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_native_title">Native iOS &amp; Android</h3>
+            <p data-i18n="type_native_desc">Pure native apps built with Swift and Kotlin. Maximum performance, platform-perfect UX, and full hardware access.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Swift</span>
+              <span class="atype-tag">Kotlin</span>
+              <span class="atype-tag">Xcode</span>
+            </div>
+          </div>
+
+          <!-- Cross-Platform -->
+          <div class="app-type-card" data-reveal="up" data-reveal-delay="1">
+            <div class="atype-num">02</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="8" height="14" rx="1.5"/>
+                <rect x="14" y="3" width="8" height="14" rx="1.5"/>
+                <line x1="6" y1="20" x2="18" y2="20"/>
+                <line x1="12" y1="17" x2="12" y2="20"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_cross_title">Cross-Platform</h3>
+            <p data-i18n="type_cross_desc">One codebase, two platforms. React Native and Flutter for fast time-to-market without sacrificing quality.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">React Native</span>
+              <span class="atype-tag">Flutter</span>
+              <span class="atype-tag">Expo</span>
+            </div>
+          </div>
+
+          <!-- AI-Powered Apps (featured) -->
+          <div class="app-type-card app-type-card--ai" data-reveal="up" data-reveal-delay="2">
+            <div class="atype-num">03</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/>
+                <line x1="9" y1="10" x2="9.01" y2="10" stroke-width="2.5"/>
+                <line x1="15" y1="10" x2="15.01" y2="10" stroke-width="2.5"/>
+                <path d="M10 14s1 1 2 1 2-1 2-1"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_ai_title">AI-Powered Apps</h3>
+            <p data-i18n="type_ai_desc">Apps with integrated intelligence — LLM backends, real-time AI features, personalization engines, and smart automation built in.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">OpenAI</span>
+              <span class="atype-tag">Claude AI</span>
+              <span class="atype-tag">LangChain</span>
+            </div>
+          </div>
+
+          <!-- Web & PWA -->
+          <div class="app-type-card" data-reveal="up" data-reveal-delay="3">
+            <div class="atype-num">04</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_web_title">Web &amp; PWA</h3>
+            <p data-i18n="type_web_desc">Progressive Web Apps and modern web platforms. Installable, offline-capable, and blazing fast on any device.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Next.js</span>
+              <span class="atype-tag">TypeScript</span>
+              <span class="atype-tag">PWA</span>
+            </div>
+          </div>
+
+          <!-- SaaS Platforms -->
+          <div class="app-type-card" data-reveal="up" data-reveal-delay="4">
+            <div class="atype-num">05</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="4" rx="1"/>
+                <rect x="2" y="10" width="20" height="4" rx="1"/>
+                <rect x="2" y="17" width="20" height="4" rx="1"/>
+                <line x1="6" y1="5" x2="6.01" y2="5" stroke-width="2.5"/>
+                <line x1="6" y1="12" x2="6.01" y2="12" stroke-width="2.5"/>
+                <line x1="6" y1="19" x2="6.01" y2="19" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_saas_title">SaaS Platforms</h3>
+            <p data-i18n="type_saas_desc">Subscription platforms with admin panels, user management, billing systems, and scalable cloud infrastructure.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Supabase</span>
+              <span class="atype-tag">Stripe</span>
+              <span class="atype-tag">AWS</span>
+            </div>
+          </div>
+
+          <!-- MVP & Rapid Build -->
+          <div class="app-type-card" data-reveal="up" data-reveal-delay="5">
+            <div class="atype-num">06</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_mvp_title">MVP &amp; Rapid Build</h3>
+            <p data-i18n="type_mvp_desc">From idea to working product in weeks. Validated MVPs built for speed so you can test, learn, and iterate fast.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Figma</span>
+              <span class="atype-tag">Firebase</span>
+              <span class="atype-tag">Vercel</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Stats strip -->
+        <div class="studio-stats-strip" data-reveal>
+          <div class="studio-stat">
+            <span class="studio-stat-val">6</span>
+            <span class="studio-stat-label">App Categories</span>
+          </div>
+          <div class="studio-stat">
+            <span class="studio-stat-val">3</span>
+            <span class="studio-stat-label">Live Portfolio Apps</span>
+          </div>
+          <div class="studio-stat">
+            <span class="studio-stat-val">AI</span>
+            <span class="studio-stat-label">First Approach</span>
+          </div>
+          <div class="studio-stat">
+            <span class="studio-stat-val">∞</span>
+            <span class="studio-stat-label">Scalability</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         PORTFOLIO SHOWCASE
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="portfolio" aria-labelledby="portfolio-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="portfolio_tag">Our Portfolio</div>
+          <h2 id="portfolio-heading" class="section-title">
+            <span data-i18n="portfolio_h_pre">Apps We've</span> <span class="gradient-text" data-i18n="portfolio_h_main">Shipped</span>
+          </h2>
+          <p class="section-desc" data-i18n="portfolio_desc">
+            Real products, real users. These are some of the apps we have built and launched.
+          </p>
+        </div>
+
+        <div class="portfolio-showcase">
+
+          <!-- ── ChristBay ── -->
+          <article class="portfolio-card portfolio-card--christbay" data-reveal="up">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/christbay-high-resolution-logo-transparent.png"
+                   alt="ChristBay app logo"
+                   class="portfolio-logo portfolio-logo--christbay"
+                   width="200" height="200"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="cb_tagline">Faith Community Platform</span>
+              <h3 data-i18n="cb_name">ChristBay</h3>
+              <p data-i18n="cb_desc">A spiritual community platform connecting believers through prayer, worship, and devotional content. Built for deep engagement and meaningful connections.</p>
+              <a href="https://christbay.oakdev.app/"
+                 class="btn-visit"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Visit ChristBay live site">
+                <span data-i18n="cb_cta">Visit ChristBay</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- ── TipsyPal ── -->
+          <article class="portfolio-card portfolio-card--tipsypal" data-reveal="up" data-reveal-delay="1">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/tipsypal-high-resolution-logo-transparent.png"
+                   alt="TipsyPal app logo"
+                   class="portfolio-logo"
+                   width="200" height="200"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="tp_tagline">Smart Tipping Assistant</span>
+              <h3 data-i18n="tp_name">TipsyPal</h3>
+              <p data-i18n="tp_desc">The smartest way to tip — TipsyPal calculates the perfect amount, splits bills instantly, and makes every dining experience completely seamless.</p>
+              <a href="https://tipsypal.oakdev.app/"
+                 class="btn-visit"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Visit TipsyPal live site">
+                <span data-i18n="tp_cta">Visit TipsyPal</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- ── Vespera ── -->
+          <article class="portfolio-card portfolio-card--vespera" data-reveal="up" data-reveal-delay="2">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/ChatGPT%20Image%2027%20feb.%202026%2021_50_58.png"
+                   alt="Vespera app logo"
+                   class="portfolio-logo"
+                   width="200" height="200"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="vespera_tagline">Evening Prayer App</span>
+              <h3 data-i18n="vespera_name">Vespera</h3>
+              <p data-i18n="vespera_desc">A beautiful daily devotional app for evening prayers, scripture readings, and spiritual reflection. Elegantly designed for quiet, meaningful moments.</p>
+              <a href="https://vespera.oakdev.app/"
+                 class="btn-visit"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Visit Vespera live site">
+                <span data-i18n="vespera_cta">Visit Vespera</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         TECH STACK
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="tech-stack" aria-labelledby="tech-heading">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="tech_tag">Tech Stack</div>
+          <h2 id="tech-heading" class="section-title">
+            Built with <span class="gradient-text" data-i18n="tech_title">Modern Technology</span>
+          </h2>
+          <p class="section-desc" data-i18n="tech_desc">
+            We use cutting-edge tools and frameworks to deliver production-grade apps that perform at global scale.
+          </p>
+        </div>
+      </div>
+
+      <!-- Full-width double marquee -->
+      <div class="tech-marquee-outer">
+
+        <!-- Row 1: left scroll -->
+        <div class="tech-row">
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Swift</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Kotlin</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>React Native</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Flutter</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>TypeScript</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Next.js</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Node.js</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Python</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>FastAPI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>GraphQL</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Expo</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Tailwind CSS</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Swift</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Kotlin</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>React Native</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Flutter</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>TypeScript</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Next.js</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Node.js</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Python</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>FastAPI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>GraphQL</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Expo</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Tailwind CSS</span>
+        </div>
+
+        <!-- Row 2: right scroll -->
+        <div class="tech-row">
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Firebase</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Supabase</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>PostgreSQL</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>AWS</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Google Cloud</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Vercel</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Claude AI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>OpenAI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>LangChain</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Stripe</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Figma</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>GitHub Actions</span>
+          <!-- Duplicate -->
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Firebase</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Supabase</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>PostgreSQL</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>AWS</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Google Cloud</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Vercel</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Claude AI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>OpenAI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>LangChain</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Stripe</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Figma</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>GitHub Actions</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         CTA SECTION
+         ────────────────────────────────────────────────────── -->
+    <section class="section studio-cta-section" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="studio-cta-box" data-reveal="scale">
+          <div class="studio-cta-label" data-i18n="studio_cta_tag">Start Building</div>
+          <h2 id="cta-heading" class="studio-cta-headline" data-i18n="studio_cta_title">
+            Your App Idea Deserves to Exist.
+          </h2>
+          <p class="studio-cta-sub" data-i18n="studio_cta_desc">
+            Tell us what you're building. We'll take it from concept to launch.
+          </p>
+          <a href="/contact/" class="btn-cta-green">
+            <span data-i18n="studio_cta_btn">Start a Project</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /#main -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+
+          <!-- Brand -->
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p data-i18n="footer_desc">
+              Premium app studio and AI product company. Building tomorrow's digital products today.
+            </p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Discord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/46763909381" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_company">Company</h4>
+            <a href="/about/"   data-i18n="nav_about">About</a>
+            <a href="/contact/" data-i18n="nav_contact">Contact</a>
+          </div>
+
+          <!-- Services links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_services">Services</h4>
+            <a href="/app-studio/"    data-i18n="nav_studio">App Studio</a>
+            <a href="/ai-automation/" data-i18n="nav_ai">AI &amp; Automation</a>
+            <a href="/consulting/"    data-i18n="nav_consulting">Consulting</a>
+          </div>
+
+          <!-- Legal links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_legal">Legal</h4>
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/"   data-i18n="footer_terms">Terms of Use</a>
+          </div>
+
+          <!-- Connect -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_connect">Connect</h4>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:+46708105766">+46 70 810 57 66</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">© 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/"   data-i18n="footer_terms">Terms of Use</a>
+            <a href="/about/"   data-i18n="nav_about">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SCRIPTS — no Three.js needed on this page
+       ══════════════════════════════════════════════════════════ -->
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+
+  <!-- OakDev main script -->
+  <script src="../js/main.js" defer></script>
+
+</body>
+</html>
