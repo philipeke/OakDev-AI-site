@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Security ──────────────────────────────────────────── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://formspree.io;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    upgrade-insecure-requests;
+  " />
+
+  <!-- ── SEO ───────────────────────────────────────────────── -->
+  <title>OakDev &amp; AI AB — App Studio &amp; AI Product Company</title>
+  <meta name="description" content="OakDev is a premium app studio and AI product company. We build mobile applications, AI platforms, and automation systems from concept to global launch." />
+  <meta name="keywords" content="app development, AI integration, automation, mobile apps, Sweden, OakDev" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/" />
+
+  <!-- ── Open Graph ────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://oakdev.app/" />
+  <meta property="og:title"       content="OakDev &amp; AI AB — App Studio &amp; AI Product Company" />
+  <meta property="og:description" content="Premium app studio building mobile apps, AI platforms, and automation systems from concept to global scale." />
+  <meta property="og:image"       content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <!-- ── Fonts ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ── Favicon ───────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="apple-touch-icon"      href="assets/icon.png" />
+
+  <!-- ── Stylesheet ────────────────────────────────────────── -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <!-- Skip to main content (accessibility) -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── Noise overlay ─────────────────────────────────────── -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       COOKIE CONSENT BANNER
+       ══════════════════════════════════════════════════════════ -->
+  <div id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+    <div class="cookie-inner">
+      <div class="cookie-icon" aria-hidden="true">🍪</div>
+      <div class="cookie-text">
+        <h3 id="cookie-title" data-i18n="cookie_title">We use cookies</h3>
+        <p data-i18n="cookie_text">We use cookies to improve your experience. You can accept all cookies or decline non-essential ones.</p>
+        <p class="cookie-links">
+          <a href="privacy/" data-i18n="cookie_privacy">Privacy Policy</a>
+          <span class="cookie-sep" aria-hidden="true">·</span>
+          <a href="terms/" data-i18n="cookie_terms">Terms of Use</a>
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept" data-i18n="cookie_accept">Accept All</button>
+        <button id="cookieDecline" class="btn-cookie-decline" data-i18n="cookie_decline">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════════════════════ -->
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+
+      <!-- Logo -->
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="assets/oakdev-ai-high-resolution-logo-transparent.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/"                class="nav-link active" data-i18n="nav_home">Home</a>
+        <a href="app-studio/"      class="nav-link"        data-i18n="nav_studio">App Studio</a>
+        <a href="ai-automation/"   class="nav-link"        data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="consulting/"      class="nav-link"        data-i18n="nav_consulting">Consulting</a>
+        <a href="about/"           class="nav-link"        data-i18n="nav_about">About</a>
+        <a href="contact/"         class="nav-link"        data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <!-- Language switcher -->
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+
+        <!-- Book CTA -->
+        <a href="contact/" class="btn-book" data-i18n="nav_book">Book a Call</a>
+
+        <!-- Mobile toggle -->
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/"              class="mobile-link" data-i18n="nav_home">Home</a>
+        <a href="app-studio/"    class="mobile-link" data-i18n="nav_studio">App Studio</a>
+        <a href="ai-automation/" class="mobile-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="consulting/"    class="mobile-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="about/"         class="mobile-link" data-i18n="nav_about">About</a>
+        <a href="contact/"       class="mobile-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="contact/" class="btn-book" style="display:block;text-align:center;" data-i18n="nav_book">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ══════════════════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ──────────────────────────────────────────────────────
+         HERO
+         ────────────────────────────────────────────────────── -->
+    <section id="hero" class="hero" aria-label="Hero section">
+      <!-- Three.js WebGL canvas -->
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+      <!-- Gradient vignette -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- Hero content -->
+      <div class="hero-content">
+        <!-- Logo with glowing halos -->
+        <div class="hero-logo-wrapper">
+          <div class="logo-halo logo-halo-3" aria-hidden="true"></div>
+          <div class="logo-halo logo-halo-2" aria-hidden="true"></div>
+          <div class="logo-halo logo-halo-1" aria-hidden="true"></div>
+          <img src="assets/oakdev-ai-high-resolution-logo-transparent.png"
+               alt="OakDev &amp; AI AB"
+               class="hero-logo"
+               width="280" height="auto"
+               loading="eager" />
+        </div>
+
+        <!-- Badge -->
+        <div class="hero-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          <span data-i18n="hero_badge">App Studio &amp; AI Product Company</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-headline">
+          <span class="headline-line" data-i18n="hero_line1">From Idea</span>
+          <span class="headline-line gradient-text" data-i18n="hero_line2">to Global</span>
+          <span class="headline-line" data-i18n="hero_line3">Scale.</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="hero-subtext" data-i18n="hero_sub">
+          OakDev is a premium app studio building mobile applications, AI platforms, and automation systems — from concept to launch for founders and forward-thinking companies.
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-ctas">
+          <a href="contact/" class="btn-primary">
+            <span data-i18n="hero_cta1">Start a Project</span>
+            <!-- Arrow right icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="app-studio/" class="btn-ghost">
+            <span data-i18n="hero_cta2">Explore Our Work</span>
+          </a>
+        </div>
+
+        <!-- Social icons -->
+        <div class="hero-social">
+          <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank" rel="noopener noreferrer"
+             class="social-icon" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank" rel="noopener noreferrer"
+             class="social-icon" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="https://discord.gg/SpsZjB22Cp" target="_blank" rel="noopener noreferrer"
+             class="social-icon" aria-label="Discord">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/46763909381" target="_blank" rel="noopener noreferrer"
+             class="social-icon" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-text" data-i18n="scroll">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         MARQUEE STRIP
+         ────────────────────────────────────────────────────── -->
+    <div class="marquee-wrapper" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>Mobile Apps</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>AI Platforms</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>Automation Systems</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>Cloud Infrastructure</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>Product Strategy</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>MVP Development</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>Tech Consulting</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>App Store Launch</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>AI Integration</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+          <span>Scalable Architecture</span>
+          <span class="marquee-dot" aria-hidden="true">●</span>
+        </div>
+        <!-- Duplicate for seamless infinite loop -->
+        <div class="marquee-content" aria-hidden="true">
+          <span>Mobile Apps</span>
+          <span class="marquee-dot">●</span>
+          <span>AI Platforms</span>
+          <span class="marquee-dot">●</span>
+          <span>Automation Systems</span>
+          <span class="marquee-dot">●</span>
+          <span>Cloud Infrastructure</span>
+          <span class="marquee-dot">●</span>
+          <span>Product Strategy</span>
+          <span class="marquee-dot">●</span>
+          <span>MVP Development</span>
+          <span class="marquee-dot">●</span>
+          <span>Tech Consulting</span>
+          <span class="marquee-dot">●</span>
+          <span>App Store Launch</span>
+          <span class="marquee-dot">●</span>
+          <span>AI Integration</span>
+          <span class="marquee-dot">●</span>
+          <span>Scalable Architecture</span>
+          <span class="marquee-dot">●</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         SERVICES SECTION
+         ────────────────────────────────────────────────────── -->
+    <section id="services" class="section services-section" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="services_tag">What We Build</div>
+          <h2 id="services-heading" class="section-title">
+            Core <span class="gradient-text" data-i18n="services_title">Services</span>
+          </h2>
+          <p class="section-desc" data-i18n="services_desc">
+            From mobile apps to AI systems — we build production-ready products that deliver real user value at global scale.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Card 1: App Studio -->
+          <div class="service-card">
+            <a href="app-studio/" class="service-card-inner" aria-label="App Studio service">
+              <span class="service-num" data-i18n="service_01">01</span>
+              <div class="service-icon" aria-hidden="true">
+                <!-- Smartphone icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                  <line x1="12" y1="18" x2="12.01" y2="18"/>
+                </svg>
+              </div>
+              <h3 data-i18n="studio_title">App Studio</h3>
+              <p data-i18n="studio_desc">
+                Mobile and web applications built for production — from concept and MVP to App Store launch with rock-solid technical foundations and long-term scalability.
+              </p>
+              <div class="service-link">
+                <span data-i18n="learn_more">Learn More</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 2: AI & Automation (featured) -->
+          <div class="service-card service-card--featured">
+            <a href="ai-automation/" class="service-card-inner" aria-label="AI and Automation service">
+              <span class="service-num" data-i18n="service_02">02</span>
+              <div class="service-icon" aria-hidden="true">
+                <!-- Brain/AI icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+                  <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+                </svg>
+              </div>
+              <h3 data-i18n="ai_title">AI &amp; Automation</h3>
+              <p data-i18n="ai_desc">
+                Intelligent systems, AI integrations, and workflow automation that transform how businesses operate — built with modern LLMs, APIs, and cloud infrastructure.
+              </p>
+              <div class="service-link">
+                <span data-i18n="learn_more">Learn More</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 3: Consulting -->
+          <div class="service-card">
+            <a href="consulting/" class="service-card-inner" aria-label="Consulting service">
+              <span class="service-num" data-i18n="service_03">03</span>
+              <div class="service-icon" aria-hidden="true">
+                <!-- Chart/strategy icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="20" x2="18" y2="10"/>
+                  <line x1="12" y1="20" x2="12" y2="4"/>
+                  <line x1="6"  y1="20" x2="6"  y2="14"/>
+                </svg>
+              </div>
+              <h3 data-i18n="consulting_title">Consulting</h3>
+              <p data-i18n="consulting_desc">
+                Strategic technology guidance for startups and enterprises. Architecture reviews, product strategy, tech stack decisions, and execution roadmaps.
+              </p>
+              <div class="service-link">
+                <span data-i18n="learn_more">Learn More</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         STATS SECTION
+         ────────────────────────────────────────────────────── -->
+    <section class="stats-section" aria-label="Company statistics">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item" data-reveal data-reveal-delay="1">
+            <div class="stat-value-wrapper">
+              <span class="stat-number" data-count="100" data-i18n="stat1_val">100</span>
+              <span class="stat-suffix" data-i18n="stat1_suf">%</span>
+            </div>
+            <span class="stat-label" data-i18n="stat1_label">Execution Focus</span>
+          </div>
+          <div class="stat-item" data-reveal data-reveal-delay="2">
+            <div class="stat-value-wrapper">
+              <span class="stat-number" style="font-size:clamp(1.75rem,3vw,2.75rem)" data-i18n="stat2_val">AI</span>
+            </div>
+            <span class="stat-label" data-i18n="stat2_label">First Approach</span>
+          </div>
+          <div class="stat-item" data-reveal data-reveal-delay="3">
+            <div class="stat-value-wrapper">
+              <span class="stat-number" style="font-size:clamp(2rem,3.5vw,3rem)" data-i18n="stat3_val">∞</span>
+            </div>
+            <span class="stat-label" data-i18n="stat3_label">Scalability</span>
+          </div>
+          <div class="stat-item" data-reveal data-reveal-delay="4">
+            <div class="stat-value-wrapper">
+              <span class="stat-number" data-count="24" data-i18n="stat4_val">24</span>
+              <span class="stat-suffix" data-i18n="stat4_suf">h</span>
+            </div>
+            <span class="stat-label" data-i18n="stat4_label">Response Time</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         ABOUT SECTION
+         ────────────────────────────────────────────────────── -->
+    <section id="about" class="section about-section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <!-- Left: text -->
+          <div class="about-text-col">
+            <div class="about-tag" data-reveal data-i18n="about_tag">About OakDev</div>
+            <h2 id="about-heading" class="about-title" data-reveal data-reveal-delay="1" data-i18n="about_title">
+              A Product Studio Built for Execution
+            </h2>
+            <p class="about-text" data-reveal data-reveal-delay="2" data-i18n="about_text1">
+              OakDev is a modern app and AI product studio focused on building scalable digital products from idea to launch. We design, develop, and deploy high-quality mobile applications and AI-powered platforms for startups, founders, and forward-thinking companies.
+            </p>
+            <p class="about-text" data-reveal data-reveal-delay="3" data-i18n="about_text2">
+              We operate at the intersection of technology, product strategy, and artificial intelligence — combining rapid execution with long-term scalability.
+            </p>
+
+            <ul class="about-features" data-reveal data-reveal-delay="4" aria-label="Key values">
+              <li class="about-feature">
+                <span class="feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="3"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </span>
+                <span data-i18n="feat1">Production-ready from day one</span>
+              </li>
+              <li class="about-feature">
+                <span class="feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="3"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </span>
+                <span data-i18n="feat2">Founder-driven, execution-focused</span>
+              </li>
+              <li class="about-feature">
+                <span class="feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="3"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </span>
+                <span data-i18n="feat3">AI-first product development</span>
+              </li>
+              <li class="about-feature">
+                <span class="feature-check" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="3"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </span>
+                <span data-i18n="feat4">Global scale architecture</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right: card visual -->
+          <div class="about-visual" data-reveal="right">
+            <div class="about-card">
+              <div class="about-card-label" data-i18n="about_card_label">Our Mission</div>
+              <h3 class="about-card-title" data-i18n="about_card_title">
+                Building software that delivers real user value and sustainable growth.
+              </h3>
+              <p class="about-card-text" data-i18n="about_card_text">
+                Rather than acting as a traditional agency, OakDev operates as a product-driven studio — emphasizing ownership, execution, and measurable outcomes. Every project is built with a launch mindset.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         PROCESS SECTION
+         ────────────────────────────────────────────────────── -->
+    <section id="process" class="section process-section" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="process_tag">How We Work</div>
+          <h2 id="process-heading" class="section-title" data-i18n="process_title">
+            From Discovery to <span class="gradient-text">Launch</span>
+          </h2>
+          <p class="section-desc" data-i18n="process_desc">
+            A clear, proven process that takes your idea from concept to a production-ready product.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-step">
+            <div class="process-number" aria-hidden="true" data-i18n="step1_num">01</div>
+            <h4 data-i18n="step1_title">Discovery</h4>
+            <p data-i18n="step1_desc">We dive deep into your idea, market, and goals to define a clear product vision and technical roadmap.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number" aria-hidden="true" data-i18n="step2_num">02</div>
+            <h4 data-i18n="step2_title">Design &amp; Plan</h4>
+            <p data-i18n="step2_desc">Architecture, UI/UX design, and technical planning — every detail mapped before a line of code is written.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number" aria-hidden="true" data-i18n="step3_num">03</div>
+            <h4 data-i18n="step3_title">Build</h4>
+            <p data-i18n="step3_desc">Rapid, high-quality development with weekly milestones and full transparency throughout the build.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number" aria-hidden="true" data-i18n="step4_num">04</div>
+            <h4 data-i18n="step4_title">Launch</h4>
+            <p data-i18n="step4_desc">App Store submission, deployment, monitoring, and ongoing support to ensure a successful launch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         CONTACT SECTION
+         ────────────────────────────────────────────────────── -->
+    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="contact_tag">Get in Touch</div>
+          <h2 id="contact-heading" class="section-title">
+            <span data-i18n="contact_title">Ready to Build Something</span><br/>
+            <span class="gradient-text" data-i18n="contact_title2">Extraordinary?</span>
+          </h2>
+          <p class="section-desc" data-i18n="contact_desc">
+            Let's talk about your project. We typically respond within 24 hours.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact info -->
+          <div class="contact-info" data-reveal="left">
+            <h3 data-i18n="contact_h3">Contact Details</h3>
+
+            <ul class="contact-info-items">
+              <li class="contact-info-item">
+                <span class="contact-info-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </span>
+                <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>
+              </li>
+              <li class="contact-info-item">
+                <span class="contact-info-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </span>
+                <a href="tel:+46708105766">+46 70 810 57 66</a>
+              </li>
+              <li class="contact-info-item">
+                <span class="contact-info-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                       fill="none" stroke="currentColor" stroke-width="1.5"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </span>
+                <span>Kristevik 633, 451 96 Uddevalla, Sweden</span>
+              </li>
+            </ul>
+
+            <div class="contact-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank"
+                 rel="noopener noreferrer" class="contact-social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+                LinkedIn
+              </a>
+              <a href="https://wa.me/46763909381" target="_blank"
+                 rel="noopener noreferrer" class="contact-social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                </svg>
+                WhatsApp
+              </a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank"
+                 rel="noopener noreferrer" class="contact-social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+                Discord
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <!--
+            SETUP REQUIRED:
+            1. Create a free account at https://formspree.io
+            2. Create a new form and copy your form ID
+            3. Replace "YOUR_FORM_ID" in the action attribute below
+          -->
+          <form
+            id="contactForm"
+            class="contact-form"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+            novalidate
+            data-reveal="right"
+          >
+            <!-- Honeypot anti-spam field (hidden from users, bots fill it) -->
+            <div class="form-honey" aria-hidden="true">
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="f-name" data-i18n="form_name">Full Name</label>
+                <input id="f-name" name="name" type="text"
+                       placeholder="Your name"
+                       autocomplete="name"
+                       required
+                       minlength="2" maxlength="100" />
+              </div>
+
+              <div class="form-field">
+                <label for="f-email" data-i18n="form_email">Email Address</label>
+                <input id="f-email" name="email" type="email"
+                       placeholder="you@company.com"
+                       autocomplete="email"
+                       required
+                       maxlength="254" />
+              </div>
+
+              <div class="form-field">
+                <label for="f-company" data-i18n="form_company">Company (optional)</label>
+                <input id="f-company" name="company" type="text"
+                       placeholder="Your company"
+                       autocomplete="organization"
+                       maxlength="100" />
+              </div>
+
+              <div class="form-field">
+                <label for="f-service" data-i18n="form_service">Service of Interest</label>
+                <select id="f-service" name="service">
+                  <option value=""       disabled selected>Select a service</option>
+                  <option value="app"    data-i18n="svc_app">App Development</option>
+                  <option value="ai"     data-i18n="svc_ai">AI &amp; Automation</option>
+                  <option value="consult"data-i18n="svc_consulting">Consulting</option>
+                  <option value="other"  data-i18n="svc_other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-field full">
+                <label for="f-message" data-i18n="form_message">Tell us about your project</label>
+                <textarea id="f-message" name="message"
+                          placeholder="Describe your project, goals, and timeline..."
+                          required
+                          minlength="10" maxlength="2000"
+                          rows="5"></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span data-i18n="form_submit">Send Message</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+
+            <div id="formStatus" class="form-status" role="alert" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /#main -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+
+          <!-- Brand -->
+          <div class="footer-brand footer-col">
+            <img src="assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p data-i18n="footer_desc">
+              Premium app studio and AI product company. Building tomorrow's digital products today.
+            </p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Discord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/46763909381" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_company">Company</h4>
+            <a href="about/"   data-i18n="nav_about">About</a>
+            <a href="contact/" data-i18n="nav_contact">Contact</a>
+          </div>
+
+          <!-- Services links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_services">Services</h4>
+            <a href="app-studio/"    data-i18n="nav_studio">App Studio</a>
+            <a href="ai-automation/" data-i18n="nav_ai">AI &amp; Automation</a>
+            <a href="consulting/"    data-i18n="nav_consulting">Consulting</a>
+          </div>
+
+          <!-- Legal links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_legal">Legal</h4>
+            <a href="privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="terms/"   data-i18n="footer_terms">Terms of Use</a>
+          </div>
+
+          <!-- Connect / contact quick -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_connect">Connect</h4>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:+46708105766">+46 70 810 57 66</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">© 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+            <p class="footer-updated">Last Updated: February 22, 2026</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="terms/"   data-i18n="footer_terms">Terms of Use</a>
+            <a href="about/"   data-i18n="nav_about">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SCRIPTS  (load order matters)
+       ══════════════════════════════════════════════════════════ -->
+
+  <!-- Three.js r162 -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.min.js" defer></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+
+  <!-- OakDev main script -->
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
