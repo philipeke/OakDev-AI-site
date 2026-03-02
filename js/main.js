@@ -951,7 +951,7 @@ function initContactForm() {
     const email   = emailEl?.value.trim() || '';
     const message = messageEl?.value.trim() || '';
 
-    if (!name || !validateEmail(email) || message.length < 10) {
+    if (!name || !validateEmail(email) || message.length < 5) {
       status.textContent = t.form_validation;
       status.className   = 'form-status error';
       return;
