@@ -715,6 +715,159 @@
       color: rgba(255,255,255,0.45);
       letter-spacing: 0.04em;
     }
+
+    /* ═══ PRICING SECTION ════════════════════════════════════ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    }
+    .pricing-card {
+      position: relative;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .pricing-card:hover {
+      border-color: rgba(118,185,0,0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(118,185,0,0.07), 0 4px 24px rgba(0,0,0,0.4);
+    }
+    .pricing-card--featured {
+      border-color: rgba(118,185,0,0.3);
+      background: rgba(118,185,0,0.045);
+      transform: scale(1.03);
+    }
+    .pricing-card--featured:hover { transform: scale(1.03) translateY(-6px); }
+    @media (max-width: 900px) {
+      .pricing-card--featured { transform: none; }
+      .pricing-card--featured:hover { transform: translateY(-6px); }
+    }
+    .pricing-popular {
+      display: inline-flex;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #020202;
+      background: linear-gradient(135deg, #76b900, #8ece00);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      width: fit-content;
+      margin-bottom: 1.25rem;
+    }
+    .pricing-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .pricing-tagline {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.75rem;
+    }
+    .pricing-price {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 1.75rem;
+    }
+    .pricing-from {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pricing-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      color: #76b900;
+      line-height: 1;
+    }
+    .pricing-card--featured .pricing-amount {
+      background: linear-gradient(135deg, #76b900, #39ff14);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+    .pricing-features li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+    .btn-pricing-outline,
+    .btn-pricing-solid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.5rem;
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-top: auto;
+    }
+    .btn-pricing-outline {
+      background: transparent;
+      border: 1px solid rgba(118,185,0,0.35);
+      color: #76b900;
+    }
+    .btn-pricing-outline:hover {
+      background: rgba(118,185,0,0.1);
+      border-color: #76b900;
+    }
+    .btn-pricing-solid {
+      background: linear-gradient(135deg, #76b900, #8ece00);
+      border: 1px solid transparent;
+      color: #020202;
+      box-shadow: 0 0 30px rgba(118,185,0,0.25);
+    }
+    .btn-pricing-solid:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 0 50px rgba(118,185,0,0.4);
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 
@@ -1177,6 +1330,96 @@
           </article>
 
         </div>
+      </div>
+    </section>
+
+
+    <!-- ──────────────────────────────────────────────────────
+         PRICING SECTION
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="pricing" aria-labelledby="app-pricing-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="app_pricing_tag">Pricing</div>
+          <h2 id="app-pricing-heading" class="section-title">
+            <span data-i18n="app_pricing_title">App Development Packages</span>
+          </h2>
+          <p class="section-desc" data-i18n="app_pricing_desc">
+            Transparent pricing for every project size. From first prototype to enterprise launch. All prices excl. VAT.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- MVP -->
+          <div class="pricing-card" data-reveal="up" data-reveal-delay="0">
+            <div class="pricing-name" data-i18n="pkg_mvp_name">MVP</div>
+            <div class="pricing-tagline" data-i18n="pkg_mvp_tagline">Validate your idea fast</div>
+            <div class="pricing-price">
+              <span class="pricing-from" data-i18n="pkg_from">Starting from</span>
+              <span class="pricing-amount">&euro;4,900</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Core feature set (3&ndash;5 features)</li>
+              <li>iOS or Android (or Web app)</li>
+              <li>Basic backend &amp; API</li>
+              <li>UI/UX design included</li>
+              <li>App Store submission</li>
+              <li>30 days post-launch support</li>
+            </ul>
+            <a href="/contact/" class="btn-pricing-outline">
+              <span data-i18n="pkg_get_started">Start a Project</span>
+            </a>
+          </div>
+
+          <!-- Studio (featured) -->
+          <div class="pricing-card pricing-card--featured" data-reveal="up" data-reveal-delay="1">
+            <div class="pricing-popular" data-i18n="pkg_popular">Most Popular</div>
+            <div class="pricing-name" data-i18n="pkg_pro_name">Studio</div>
+            <div class="pricing-tagline" data-i18n="pkg_pro_tagline">Full-featured production app</div>
+            <div class="pricing-price">
+              <span class="pricing-from" data-i18n="pkg_from">Starting from</span>
+              <span class="pricing-amount">&euro;12,900</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Full feature set &amp; user auth</li>
+              <li>iOS + Android (cross-platform)</li>
+              <li>Scalable backend &amp; database</li>
+              <li>Admin panel &amp; analytics</li>
+              <li>Push notifications &amp; payments</li>
+              <li>AI integration (optional add-on)</li>
+              <li>6 months post-launch support</li>
+            </ul>
+            <a href="/contact/" class="btn-pricing-solid">
+              <span data-i18n="pkg_get_started">Start a Project</span>
+            </a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card" data-reveal="up" data-reveal-delay="2">
+            <div class="pricing-name" data-i18n="pkg_ent_name">Enterprise</div>
+            <div class="pricing-tagline" data-i18n="pkg_ent_tagline">Complex systems at scale</div>
+            <div class="pricing-price">
+              <span class="pricing-from" data-i18n="pkg_from">Starting from</span>
+              <span class="pricing-amount">&euro;28,900</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Custom architecture &amp; design</li>
+              <li>Native iOS + Android + Web</li>
+              <li>Enterprise integrations &amp; SSO</li>
+              <li>Advanced AI &amp; ML features</li>
+              <li>Dedicated cloud infrastructure</li>
+              <li>SLA &amp; dedicated support team</li>
+              <li>Ongoing development retainer</li>
+            </ul>
+            <a href="/contact/" class="btn-pricing-outline">
+              <span data-i18n="pkg_contact_us">Contact Us</span>
+            </a>
+          </div>
+
+        </div>
+
       </div>
     </section>
 

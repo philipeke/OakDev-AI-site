@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Security ──────────────────────────────────────────── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://formsubmit.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formsubmit.co;
+    upgrade-insecure-requests;
+  " />
+
+  <!-- ── SEO ───────────────────────────────────────────────── -->
+  <title>AI &amp; Automation — OakDev &amp; AI AB | AI Agents &amp; Workflow Automation</title>
+  <meta name="description" content="OakDev builds intelligent AI agents, LLM integrations, RAG knowledge systems, and workflow automation that transform how businesses operate. Get a free AI audit." />
+  <meta name="keywords" content="AI agents, workflow automation, LLM integration, RAG, AI analytics, OpenAI, Claude AI, Sweden, OakDev" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/ai-automation/" />
+
+  <!-- ── Open Graph ────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://oakdev.app/ai-automation/" />
+  <meta property="og:title"       content="AI &amp; Automation — OakDev &amp; AI AB" />
+  <meta property="og:description" content="Autonomous AI agents, LLM integrations, and workflow automation for forward-thinking businesses. OakDev builds intelligent systems that work 24/7." />
+  <meta property="og:image"       content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <!-- ── Fonts ─────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- ── Favicon ───────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="../assets/icon.png" />
+  <link rel="apple-touch-icon"      href="../assets/icon.png" />
+
+  <!-- ── Stylesheet ────────────────────────────────────────── -->
+  <link rel="stylesheet" href="../css/styles.css" />
+
+  <!-- ── Page-specific styles ─────────────────────────────── -->
+  <style>
+    /* ═══ AI HERO ════════════════════════════════════════════ */
+    .ai-hero {
+      position: relative;
+      overflow: hidden;
+      background: #020202;
+    }
+
+    /* Neural network background */
+    .ai-hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* Animated grid lines */
+    .ai-hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      background-image:
+        linear-gradient(rgba(118,185,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(118,185,0,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridDrift 28s linear infinite;
+    }
+
+    @keyframes gridDrift {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Neural nodes */
+    .ai-node {
+      position: absolute;
+      border-radius: 50%;
+      background: #76b900;
+      box-shadow: 0 0 12px rgba(118,185,0,0.6), 0 0 28px rgba(118,185,0,0.3);
+    }
+
+    .ai-node-1  { width: 6px;  height: 6px;  top: 18%; left: 12%; animation: nodePulse 3.2s ease-in-out infinite; }
+    .ai-node-2  { width: 4px;  height: 4px;  top: 32%; left: 28%; animation: nodePulse 4.1s ease-in-out infinite 0.8s; }
+    .ai-node-3  { width: 8px;  height: 8px;  top: 55%; left: 8%;  animation: nodePulse 2.8s ease-in-out infinite 1.5s; }
+    .ai-node-4  { width: 5px;  height: 5px;  top: 72%; left: 22%; animation: nodePulse 3.7s ease-in-out infinite 0.3s; }
+    .ai-node-5  { width: 4px;  height: 4px;  top: 22%; left: 68%; animation: nodePulse 3.4s ease-in-out infinite 1.1s; }
+    .ai-node-6  { width: 7px;  height: 7px;  top: 44%; left: 82%; animation: nodePulse 2.9s ease-in-out infinite 0.6s; }
+    .ai-node-7  { width: 5px;  height: 5px;  top: 65%; left: 76%; animation: nodePulse 4.2s ease-in-out infinite 1.9s; }
+    .ai-node-8  { width: 4px;  height: 4px;  top: 80%; left: 60%; animation: nodePulse 3.1s ease-in-out infinite 0.4s; }
+    .ai-node-9  { width: 6px;  height: 6px;  top: 12%; left: 48%; animation: nodePulse 3.8s ease-in-out infinite 1.3s; }
+    .ai-node-10 { width: 5px;  height: 5px;  top: 88%; left: 38%; animation: nodePulse 2.6s ease-in-out infinite 0.9s; }
+    .ai-node-11 { width: 4px;  height: 4px;  top: 38%; left: 55%; animation: nodePulse 4.5s ease-in-out infinite 2.1s; opacity: 0.7; }
+    .ai-node-12 { width: 6px;  height: 6px;  top: 15%; left: 85%; animation: nodePulse 3.3s ease-in-out infinite 1.7s; opacity: 0.8; }
+
+    @keyframes nodePulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.5); }
+    }
+
+    /* Connection lines between nodes (SVG overlay) */
+    .ai-connections {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ai-connection-line {
+      stroke: rgba(118,185,0,0.15);
+      stroke-width: 1;
+      fill: none;
+      stroke-dasharray: 6 4;
+      animation: dashFlow 4s linear infinite;
+    }
+
+    .ai-connection-line:nth-child(2) { animation-duration: 5.5s; stroke: rgba(118,185,0,0.1); }
+    .ai-connection-line:nth-child(3) { animation-duration: 3.8s; stroke: rgba(118,185,0,0.12); }
+    .ai-connection-line:nth-child(4) { animation-duration: 6.2s; stroke: rgba(118,185,0,0.08); }
+    .ai-connection-line:nth-child(5) { animation-duration: 4.5s; stroke: rgba(118,185,0,0.11); }
+    .ai-connection-line:nth-child(6) { animation-duration: 7s;   stroke: rgba(118,185,0,0.09); }
+
+    @keyframes dashFlow {
+      to { stroke-dashoffset: -20; }
+    }
+
+    /* Signal pulse travelling along a line */
+    .ai-signal {
+      r: 3;
+      fill: #76b900;
+      filter: drop-shadow(0 0 6px #76b900);
+    }
+
+    /* Ambient glows */
+    .ai-glow-left {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(118,185,0,0.08) 0%, transparent 68%);
+      top: 50%;
+      left: -180px;
+      transform: translateY(-50%);
+      animation: breathe 8s ease-in-out infinite;
+    }
+
+    .ai-glow-right {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(57,255,20,0.05) 0%, transparent 68%);
+      top: 20%;
+      right: -100px;
+      animation: breathe 10s ease-in-out infinite 3s;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+      50%       { opacity: 1;   transform: translateY(-50%) scale(1.1); }
+    }
+    .ai-glow-right { transform: none; }
+    @keyframes breatheRight {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.15); }
+    }
+    /* Override for right glow */
+    .ai-glow-right { animation: breatheRight 10s ease-in-out infinite 3s; }
+
+    /* Hero content */
+    .ai-hero .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .ai-hero .hero-headline {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+    }
+
+    /* Animated "typing" underline on title2 */
+    .ai-hero .headline-line:last-child {
+      position: relative;
+    }
+
+    /* ═══ AI TYPES GRID ══════════════════════════════════════ */
+    .ai-types-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 960px) {
+      .ai-types-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .ai-types-grid { grid-template-columns: 1fr; }
+    }
+
+    .ai-type-card {
+      position: relative;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 1.5rem;
+      padding: 2.25rem 2rem 2rem;
+      overflow: hidden;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: default;
+    }
+
+    .ai-type-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse at 80% 10%, rgba(118,185,0,0.1), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .ai-type-card:hover {
+      border-color: rgba(118,185,0,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(118,185,0,0.08), 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .ai-type-card:hover::after { opacity: 1; }
+
+    .ai-type-card--agents {
+      border-color: rgba(118,185,0,0.2);
+      background: rgba(118,185,0,0.03);
+    }
+
+    .atype-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #76b900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .atype-icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(118,185,0,0.1);
+      border: 1px solid rgba(118,185,0,0.22);
+      border-radius: 14px;
+      color: #76b900;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .ai-type-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      line-height: 1.3;
+    }
+
+    .ai-type-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.72;
+      margin-bottom: 1.25rem;
+    }
+
+    .atype-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .atype-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.25rem 0.65rem;
+      background: rgba(118,185,0,0.08);
+      border: 1px solid rgba(118,185,0,0.18);
+      border-radius: 999px;
+      color: rgba(118,185,0,0.88);
+    }
+
+    /* ═══ WHY AI AGENTS ══════════════════════════════════════ */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 900px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .benefits-grid { grid-template-columns: 1fr; } }
+
+    .benefit-card {
+      background: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+    }
+
+    .benefit-card:hover {
+      border-color: rgba(118,185,0,0.22);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(118,185,0,0.06);
+    }
+
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(118,185,0,0.1);
+      border: 1px solid rgba(118,185,0,0.2);
+      border-radius: 12px;
+      color: #76b900;
+      margin-bottom: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .benefit-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .benefit-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    /* Big stat highlight in benefits */
+    .benefit-stat {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #76b900, #39ff14);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ═══ AI TRENDS STRIP ════════════════════════════════════ */
+    .trends-section {
+      background: rgba(118,185,0,0.03);
+      border-top: 1px solid rgba(118,185,0,0.1);
+      border-bottom: 1px solid rgba(118,185,0,0.1);
+    }
+
+    .trends-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 3.5rem;
+    }
+
+    @media (max-width: 860px) { .trends-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .trends-grid { grid-template-columns: 1fr; } }
+
+    .trend-item {
+      padding: 2rem 1.75rem;
+      border-left: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.3s;
+    }
+
+    .trend-item:first-child { border-left: none; }
+
+    @media (max-width: 860px) {
+      .trend-item:nth-child(odd) { border-left: none; }
+      .trend-item:nth-child(3), .trend-item:nth-child(4) {
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+    }
+
+    .trend-item:hover { background: rgba(118,185,0,0.04); }
+
+    .trend-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(118,185,0,0.1);
+      border: 1px solid rgba(118,185,0,0.18);
+      border-radius: 10px;
+      color: #76b900;
+      margin-bottom: 1rem;
+    }
+
+    .trend-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .trend-item p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+    }
+
+    /* ═══ AI PROCESS ═════════════════════════════════════════ */
+    .ai-process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    @media (max-width: 860px) {
+      .ai-process-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+    @media (max-width: 500px) {
+      .ai-process-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Connecting line */
+    .ai-process-grid::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(118,185,0,0.3), rgba(118,185,0,0.3), transparent);
+      pointer-events: none;
+    }
+
+    @media (max-width: 860px) { .ai-process-grid::before { display: none; } }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .process-num-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .process-num-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(118,185,0,0.25);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+
+    .process-step:nth-child(2) .process-num-ring { animation-delay: 0.75s; }
+    .process-step:nth-child(3) .process-num-ring { animation-delay: 1.5s; }
+    .process-step:nth-child(4) .process-num-ring { animation-delay: 2.25s; }
+
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.08); }
+    }
+
+    .process-num-inner {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(118,185,0,0.08);
+      border: 1px solid rgba(118,185,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #76b900;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-step h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .process-step p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.7;
+    }
+
+    /* ═══ AI PRICING ═════════════════════════════════════════ */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    }
+
+    .pricing-card {
+      position: relative;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .pricing-card:hover {
+      border-color: rgba(118,185,0,0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(118,185,0,0.07), 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .pricing-card--featured {
+      border-color: rgba(118,185,0,0.3);
+      background: rgba(118,185,0,0.045);
+      transform: scale(1.03);
+    }
+
+    .pricing-card--featured:hover { transform: scale(1.03) translateY(-6px); }
+
+    @media (max-width: 900px) {
+      .pricing-card--featured { transform: none; }
+      .pricing-card--featured:hover { transform: translateY(-6px); }
+    }
+
+    .pricing-popular {
+      display: inline-flex;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #020202;
+      background: linear-gradient(135deg, #76b900, #8ece00);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      width: fit-content;
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .pricing-tagline {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.75rem;
+    }
+
+    .pricing-price {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 1.75rem;
+    }
+
+    .pricing-from {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pricing-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      color: #76b900;
+      line-height: 1;
+    }
+
+    .pricing-card--featured .pricing-amount {
+      background: linear-gradient(135deg, #76b900, #39ff14);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    .pricing-features li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    .btn-pricing-outline,
+    .btn-pricing-solid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.5rem;
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-top: auto;
+    }
+
+    .btn-pricing-outline {
+      background: transparent;
+      border: 1px solid rgba(118,185,0,0.35);
+      color: #76b900;
+    }
+
+    .btn-pricing-outline:hover {
+      background: rgba(118,185,0,0.1);
+      border-color: #76b900;
+    }
+
+    .btn-pricing-solid {
+      background: linear-gradient(135deg, #76b900, #8ece00);
+      border: 1px solid transparent;
+      color: #020202;
+      box-shadow: 0 0 30px rgba(118,185,0,0.25);
+    }
+
+    .btn-pricing-solid:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 0 50px rgba(118,185,0,0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Enterprise custom price */
+    .pricing-custom {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.7);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    /* ═══ TECH STACK MARQUEE ═════════════════════════════════ */
+    .tech-marquee-outer {
+      margin-top: 4rem;
+      overflow: hidden;
+      -webkit-mask: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+      mask: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
+    }
+
+    .tech-row {
+      display: flex;
+      gap: 1rem;
+      white-space: nowrap;
+      padding: 0.5rem 0;
+      animation: techLeft 32s linear infinite;
+    }
+
+    .tech-row + .tech-row {
+      margin-top: 0.85rem;
+      animation: techRight 42s linear infinite;
+    }
+
+    @keyframes techLeft {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes techRight {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.72);
+      flex-shrink: 0;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .tech-pill:hover {
+      border-color: rgba(118,185,0,0.4);
+      color: #76b900;
+    }
+
+    .tech-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+      flex-shrink: 0;
+    }
+
+    /* ═══ AI CTA ══════════════════════════════════════════════ */
+    .ai-cta-section {
+      padding-bottom: clamp(5rem, 10vw, 9rem);
+    }
+
+    .ai-cta-box {
+      position: relative;
+      text-align: center;
+      padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 6vw, 5rem);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 2.5rem;
+      overflow: hidden;
+    }
+
+    .ai-cta-box::before {
+      content: '';
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(118,185,0,0.1), transparent 68%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .ai-cta-box::after {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: rgba(57,255,20,0.04);
+      bottom: -120px;
+      right: -80px;
+      filter: blur(100px);
+    }
+
+    .ai-cta-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #76b900;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-cta-label::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #76b900;
+    }
+
+    .ai-cta-headline {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-cta-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.52);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-cta-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.75rem;
+      background: linear-gradient(135deg, #76b900, #8ece00);
+      border-radius: 999px;
+      color: #020202;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 40px rgba(118,185,0,0.3), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .btn-cta-green:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 60px rgba(118,185,0,0.45), 0 8px 32px rgba(0,0,0,0.4);
+      filter: brightness(1.08);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip to main content (accessibility) -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── Noise overlay ─────────────────────────────────────── -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       COOKIE CONSENT BANNER
+       ══════════════════════════════════════════════════════════ -->
+  <div id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+    <div class="cookie-inner">
+      <div class="cookie-icon" aria-hidden="true">🍪</div>
+      <div class="cookie-text">
+        <h3 id="cookie-title" data-i18n="cookie_title">We use cookies</h3>
+        <p data-i18n="cookie_text">We use cookies to improve your experience.</p>
+        <p class="cookie-links">
+          <a href="/privacy/" data-i18n="cookie_privacy">Privacy Policy</a>
+          <span class="cookie-sep" aria-hidden="true">·</span>
+          <a href="/terms/" data-i18n="cookie_terms">Terms of Use</a>
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookieAccept" class="btn-cookie-accept" data-i18n="cookie_accept">Accept All</button>
+        <button id="cookieDecline" class="btn-cookie-decline" data-i18n="cookie_decline">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR
+       ══════════════════════════════════════════════════════════ -->
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+
+      <!-- Logo -->
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/"               class="nav-link"        data-i18n="nav_home">Home</a>
+        <a href="/app-studio/"    class="nav-link"        data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="nav-link active"  data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/"    class="nav-link"        data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/"         class="nav-link"        data-i18n="nav_about">About</a>
+        <a href="/contact/"       class="nav-link"        data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" data-i18n="nav_book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/"               class="mobile-link" data-i18n="nav_home">Home</a>
+        <a href="/app-studio/"    class="mobile-link" data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/"    class="mobile-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/"         class="mobile-link" data-i18n="nav_about">About</a>
+        <a href="/contact/"       class="mobile-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" style="display:block;text-align:center;" data-i18n="nav_book">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+       ══════════════════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ──────────────────────────────────────────────────────
+         HERO
+         ────────────────────────────────────────────────────── -->
+    <section class="hero ai-hero" aria-label="AI and Automation hero">
+
+      <!-- Background -->
+      <div class="ai-hero-bg" aria-hidden="true">
+
+        <!-- Neural nodes -->
+        <div class="ai-node ai-node-1"></div>
+        <div class="ai-node ai-node-2"></div>
+        <div class="ai-node ai-node-3"></div>
+        <div class="ai-node ai-node-4"></div>
+        <div class="ai-node ai-node-5"></div>
+        <div class="ai-node ai-node-6"></div>
+        <div class="ai-node ai-node-7"></div>
+        <div class="ai-node ai-node-8"></div>
+        <div class="ai-node ai-node-9"></div>
+        <div class="ai-node ai-node-10"></div>
+        <div class="ai-node ai-node-11"></div>
+        <div class="ai-node ai-node-12"></div>
+
+        <!-- SVG connection lines -->
+        <svg class="ai-connections" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line class="ai-connection-line" x1="12" y1="18" x2="28" y2="32"/>
+          <line class="ai-connection-line" x1="28" y1="32" x2="8" y2="55"/>
+          <line class="ai-connection-line" x1="8" y1="55" x2="22" y2="72"/>
+          <line class="ai-connection-line" x1="68" y1="22" x2="82" y2="44"/>
+          <line class="ai-connection-line" x1="82" y1="44" x2="76" y2="65"/>
+          <line class="ai-connection-line" x1="28" y1="32" x2="55" y2="38"/>
+          <line class="ai-connection-line" x1="48" y1="12" x2="68" y2="22"/>
+          <line class="ai-connection-line" x1="60" y1="80" x2="76" y2="65"/>
+          <line class="ai-connection-line" x1="38" y1="88" x2="60" y2="80"/>
+          <!-- Animated signals -->
+          <circle class="ai-signal">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath href="#path1"/>
+            </animateMotion>
+          </circle>
+          <path id="path1" d="M 12 18 L 28 32 L 8 55 L 22 72" fill="none"/>
+          <circle class="ai-signal" r="2.5" opacity="0.7">
+            <animateMotion dur="5.5s" repeatCount="indefinite">
+              <mpath href="#path2"/>
+            </animateMotion>
+          </circle>
+          <path id="path2" d="M 68 22 L 82 44 L 76 65" fill="none"/>
+        </svg>
+
+        <!-- Ambient glows -->
+        <div class="ai-glow-left"></div>
+        <div class="ai-glow-right"></div>
+      </div>
+
+      <!-- Hero content -->
+      <div class="hero-content">
+
+        <div class="hero-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          <span data-i18n="ai_hero_badge">AI &amp; Automation</span>
+        </div>
+
+        <h1 class="hero-headline">
+          <span class="headline-line" data-i18n="ai_hero_title1">The Future of Business</span>
+          <span class="headline-line gradient-text" data-i18n="ai_hero_title2">Is Automated.</span>
+        </h1>
+
+        <p class="hero-subtext" data-i18n="ai_hero_sub">
+          OakDev builds intelligent systems, autonomous AI agents, and workflow automation that transform how companies operate — freeing your team to focus on what matters.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="/contact/" class="btn-primary">
+            <span data-i18n="hero_cta1">Start a Project</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#ai-types" class="btn-ghost">
+            <span data-i18n="ai_see_more">See What's Possible</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-text" data-i18n="scroll">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         MARQUEE STRIP
+         ────────────────────────────────────────────────────── -->
+    <div class="marquee-wrapper" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>AI Agents</span><span class="marquee-dot">●</span>
+          <span>LLM Integration</span><span class="marquee-dot">●</span>
+          <span>RAG Systems</span><span class="marquee-dot">●</span>
+          <span>Workflow Automation</span><span class="marquee-dot">●</span>
+          <span>GPT-4o</span><span class="marquee-dot">●</span>
+          <span>Claude AI</span><span class="marquee-dot">●</span>
+          <span>Vector Databases</span><span class="marquee-dot">●</span>
+          <span>Multi-Agent Systems</span><span class="marquee-dot">●</span>
+          <span>AI Analytics</span><span class="marquee-dot">●</span>
+          <span>Voice AI</span><span class="marquee-dot">●</span>
+          <span>Computer Vision</span><span class="marquee-dot">●</span>
+          <span>Fine-tuning</span><span class="marquee-dot">●</span>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <span>AI Agents</span><span class="marquee-dot">●</span>
+          <span>LLM Integration</span><span class="marquee-dot">●</span>
+          <span>RAG Systems</span><span class="marquee-dot">●</span>
+          <span>Workflow Automation</span><span class="marquee-dot">●</span>
+          <span>GPT-4o</span><span class="marquee-dot">●</span>
+          <span>Claude AI</span><span class="marquee-dot">●</span>
+          <span>Vector Databases</span><span class="marquee-dot">●</span>
+          <span>Multi-Agent Systems</span><span class="marquee-dot">●</span>
+          <span>AI Analytics</span><span class="marquee-dot">●</span>
+          <span>Voice AI</span><span class="marquee-dot">●</span>
+          <span>Computer Vision</span><span class="marquee-dot">●</span>
+          <span>Fine-tuning</span><span class="marquee-dot">●</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         WHAT WE BUILD — 6 AI TYPES
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="ai-types" aria-labelledby="ai-types-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="ai_types_tag">What We Build</div>
+          <h2 id="ai-types-heading" class="section-title">
+            <span data-i18n="ai_types_title">Every Type of AI System.</span>
+          </h2>
+          <p class="section-desc" data-i18n="ai_types_desc">
+            From standalone integrations to full autonomous agent networks — we design and deploy intelligent systems that work for your business around the clock.
+          </p>
+        </div>
+
+        <div class="ai-types-grid">
+
+          <!-- AI Agents (featured) -->
+          <div class="ai-type-card ai-type-card--agents" data-reveal="up" data-reveal-delay="0">
+            <div class="atype-num">01</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/>
+                <line x1="9" y1="10" x2="9.01" y2="10" stroke-width="2.5"/>
+                <line x1="15" y1="10" x2="15.01" y2="10" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_agents_title">AI Agents</h3>
+            <p data-i18n="type_agents_desc">Autonomous AI workers that plan, decide, and execute complex multi-step tasks using tools, APIs, and data — operating 24/7 with minimal human oversight.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">LangChain</span>
+              <span class="atype-tag">AutoGPT</span>
+              <span class="atype-tag">CrewAI</span>
+            </div>
+          </div>
+
+          <!-- LLM Integration -->
+          <div class="ai-type-card" data-reveal="up" data-reveal-delay="1">
+            <div class="atype-num">02</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_llm_title">LLM Integration</h3>
+            <p data-i18n="type_llm_desc">GPT-4, Claude 3, Gemini — we embed the world's most powerful language models into your products, workflows, and customer experiences.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">OpenAI</span>
+              <span class="atype-tag">Claude AI</span>
+              <span class="atype-tag">Gemini</span>
+            </div>
+          </div>
+
+          <!-- RAG Knowledge Systems -->
+          <div class="ai-type-card" data-reveal="up" data-reveal-delay="2">
+            <div class="atype-num">03</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_rag_title">RAG Knowledge Systems</h3>
+            <p data-i18n="type_rag_desc">AI trained on your company's data. Instant, accurate answers from your documents, wikis, databases, and internal tools — no hallucinations.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Pinecone</span>
+              <span class="atype-tag">Weaviate</span>
+              <span class="atype-tag">Embeddings</span>
+            </div>
+          </div>
+
+          <!-- Workflow Automation -->
+          <div class="ai-type-card" data-reveal="up" data-reveal-delay="3">
+            <div class="atype-num">04</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_workflow_title">Workflow Automation</h3>
+            <p data-i18n="type_workflow_desc">End-to-end automation of repetitive business processes. Trigger-based flows connecting your tools, CRMs, databases, and APIs seamlessly.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">n8n</span>
+              <span class="atype-tag">Make</span>
+              <span class="atype-tag">Zapier</span>
+            </div>
+          </div>
+
+          <!-- AI Analytics -->
+          <div class="ai-type-card" data-reveal="up" data-reveal-delay="4">
+            <div class="atype-num">05</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_ai_analytics">AI Analytics</h3>
+            <p data-i18n="type_ai_analytics_desc">Automated reporting, anomaly detection, and intelligent insights that turn raw business data into clear, actionable decisions in real time.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Python</span>
+              <span class="atype-tag">BigQuery</span>
+              <span class="atype-tag">Metabase</span>
+            </div>
+          </div>
+
+          <!-- Voice & Vision AI -->
+          <div class="ai-type-card" data-reveal="up" data-reveal-delay="5">
+            <div class="atype-num">06</div>
+            <div class="atype-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </div>
+            <h3 data-i18n="type_voice_vision">Voice &amp; Vision AI</h3>
+            <p data-i18n="type_voice_vision_desc">Transcription, speech synthesis, image recognition, and video analysis. Multimodal AI for next-generation product interfaces.</p>
+            <div class="atype-tags">
+              <span class="atype-tag">Whisper</span>
+              <span class="atype-tag">Vision API</span>
+              <span class="atype-tag">ElevenLabs</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         WHY AI AGENTS — BENEFITS
+         ────────────────────────────────────────────────────── -->
+    <section class="section trends-section" id="ai-agents" aria-labelledby="agents-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="agents_tag">Why AI Agents</div>
+          <h2 id="agents-heading" class="section-title">
+            <span data-i18n="agents_title">Autonomous AI Workers for Your Business</span>
+          </h2>
+          <p class="section-desc" data-i18n="agents_desc">
+            AI agents are programs that independently plan, decide, and act to achieve goals. Unlike basic automation, they adapt to unexpected situations and learn from context.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+
+          <!-- 24/7 Operation -->
+          <div class="benefit-card" data-reveal="up" data-reveal-delay="0">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="benefit-stat">24/7</div>
+            <h3 data-i18n="benefit1_title">24/7 Operation</h3>
+            <p data-i18n="benefit1_desc">AI agents never sleep. They process tasks and respond to events continuously — no breaks, no sick days, no time zones.</p>
+          </div>
+
+          <!-- 80% Less Manual Work -->
+          <div class="benefit-card" data-reveal="up" data-reveal-delay="1">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="20" x2="12" y2="10"/>
+                <line x1="18" y1="20" x2="18" y2="4"/>
+                <line x1="6"  y1="20" x2="6"  y2="16"/>
+              </svg>
+            </div>
+            <div class="benefit-stat">80%</div>
+            <h3 data-i18n="benefit2_title">80% Less Manual Work</h3>
+            <p data-i18n="benefit2_desc">Automate repetitive tasks consuming your team — data entry, reporting, customer queries, scheduling, and routine decisions.</p>
+          </div>
+
+          <!-- Scale Without Hiring -->
+          <div class="benefit-card" data-reveal="up" data-reveal-delay="2">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="benefit-stat">10×</div>
+            <h3 data-i18n="benefit3_title">Scale Without Hiring</h3>
+            <p data-i18n="benefit3_desc">Handle 10x the workload without adding headcount. AI capacity scales instantly with your business demands.</p>
+          </div>
+
+          <!-- Error-Free Execution -->
+          <div class="benefit-card" data-reveal="up" data-reveal-delay="3">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="benefit-stat">0</div>
+            <h3 data-i18n="benefit4_title">Error-Free Execution</h3>
+            <p data-i18n="benefit4_desc">Consistent, accurate task completion every time. No human errors, no forgotten steps, no missed deadlines.</p>
+          </div>
+
+          <!-- Instant Insights -->
+          <div class="benefit-card" data-reveal="up" data-reveal-delay="4">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <div class="benefit-stat">∞</div>
+            <h3 data-i18n="benefit5_title">Instant Insights</h3>
+            <p data-i18n="benefit5_desc">Process thousands of data points in seconds. Real-time business intelligence, alerts, and recommendations on demand.</p>
+          </div>
+
+          <!-- Compound Efficiency -->
+          <div class="benefit-card" data-reveal="up" data-reveal-delay="5">
+            <div class="benefit-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                <polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+            <div class="benefit-stat">+</div>
+            <h3 data-i18n="benefit6_title">Compound Efficiency</h3>
+            <p data-i18n="benefit6_desc">Every automated process frees your team for creative and strategic work — building a compounding productivity advantage over time.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         AI TRENDS — WHAT WE INTEGRATE
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="ai-trends" aria-labelledby="trends-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag">Latest Trends</div>
+          <h2 id="trends-heading" class="section-title">
+            Built on the <span class="gradient-text">Cutting Edge</span>
+          </h2>
+          <p class="section-desc">
+            We stay ahead of the AI curve — integrating the latest models, frameworks, and architectures into production-ready systems for real business impact.
+          </p>
+        </div>
+
+        <div class="trends-grid">
+
+          <div class="trend-item" data-reveal="up" data-reveal-delay="0">
+            <div class="trend-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+              </svg>
+            </div>
+            <h4>Multi-Agent Systems</h4>
+            <p>Networks of specialized AI agents that collaborate, delegate, and solve complex problems beyond the reach of any single model.</p>
+          </div>
+
+          <div class="trend-item" data-reveal="up" data-reveal-delay="1">
+            <div class="trend-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <h4>Long-Context AI</h4>
+            <p>GPT-4o and Claude 3.5 with 128k+ context windows. AI that can read entire codebases, documents, and conversations in a single pass.</p>
+          </div>
+
+          <div class="trend-item" data-reveal="up" data-reveal-delay="2">
+            <div class="trend-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/>
+                <rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="8" height="8" rx="1"/>
+              </svg>
+            </div>
+            <h4>Multimodal AI</h4>
+            <p>AI that sees, hears, and reads. Vision models, audio transcription, and document understanding combined into unified intelligent pipelines.</p>
+          </div>
+
+          <div class="trend-item" data-reveal="up" data-reveal-delay="3">
+            <div class="trend-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h4>On-Premise AI</h4>
+            <p>Open-source models like Llama 3, Mistral, and Mixtral deployed on your infrastructure. Full data sovereignty with no API dependency.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         PROCESS — 4 STEPS
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="ai-process" aria-labelledby="process-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="ai_process_tag">How We Work</div>
+          <h2 id="process-heading" class="section-title">
+            <span data-i18n="ai_process_title">From Audit to Deployed Intelligence</span>
+          </h2>
+          <p class="section-desc" data-i18n="ai_process_desc">
+            A structured approach to building AI systems that actually work in production — and keep improving.
+          </p>
+        </div>
+
+        <div class="ai-process-grid">
+
+          <div class="process-step" data-reveal="up" data-reveal-delay="0">
+            <div class="process-num-wrap">
+              <div class="process-num-ring"></div>
+              <div class="process-num-inner">01</div>
+            </div>
+            <h3 data-i18n="ai_step1_title">Audit</h3>
+            <p data-i18n="ai_step1_desc">We map your workflows, data, and goals to identify the highest-impact automation opportunities.</p>
+          </div>
+
+          <div class="process-step" data-reveal="up" data-reveal-delay="1">
+            <div class="process-num-wrap">
+              <div class="process-num-ring"></div>
+              <div class="process-num-inner">02</div>
+            </div>
+            <h3 data-i18n="ai_step2_title">Design</h3>
+            <p data-i18n="ai_step2_desc">Architecture, model selection, and integration planning. Full technical blueprint before any code is written.</p>
+          </div>
+
+          <div class="process-step" data-reveal="up" data-reveal-delay="2">
+            <div class="process-num-wrap">
+              <div class="process-num-ring"></div>
+              <div class="process-num-inner">03</div>
+            </div>
+            <h3 data-i18n="ai_step3_title">Build</h3>
+            <p data-i18n="ai_step3_desc">Rapid development with weekly demos. Built for production reliability and real-world edge cases from day one.</p>
+          </div>
+
+          <div class="process-step" data-reveal="up" data-reveal-delay="3">
+            <div class="process-num-wrap">
+              <div class="process-num-ring"></div>
+              <div class="process-num-inner">04</div>
+            </div>
+            <h3 data-i18n="ai_step4_title">Deploy</h3>
+            <p data-i18n="ai_step4_desc">Launch, monitoring, team training, and ongoing optimization to ensure real, measurable business impact.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         AI PRICING
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="ai-pricing" aria-labelledby="ai-pricing-heading">
+      <div class="container">
+
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="ai_pricing_tag">Pricing</div>
+          <h2 id="ai-pricing-heading" class="section-title">
+            <span data-i18n="ai_pricing_title">AI &amp; Automation Packages</span>
+          </h2>
+          <p class="section-desc" data-i18n="ai_pricing_desc">
+            Clear pricing for intelligent systems. From first integration to full automation. All prices excl. VAT.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- AI Starter -->
+          <div class="pricing-card" data-reveal="up" data-reveal-delay="0">
+            <div class="pricing-name" data-i18n="pkg_ai1_name">AI Starter</div>
+            <div class="pricing-tagline" data-i18n="pkg_ai1_tagline">Your first AI integration</div>
+            <div class="pricing-price">
+              <span class="pricing-from" data-i18n="pkg_from">Starting from</span>
+              <span class="pricing-amount">&euro;2,900</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Single AI use case integration</li>
+              <li>LLM API setup (OpenAI/Claude)</li>
+              <li>Prompt engineering &amp; tuning</li>
+              <li>Integration with 1 existing system</li>
+              <li>Basic automation flow</li>
+              <li>2&ndash;3 week delivery</li>
+            </ul>
+            <a href="/contact/" class="btn-pricing-outline">
+              <span data-i18n="pkg_get_started">Start a Project</span>
+            </a>
+          </div>
+
+          <!-- AI Platform (featured) -->
+          <div class="pricing-card pricing-card--featured" data-reveal="up" data-reveal-delay="1">
+            <div class="pricing-popular" data-i18n="pkg_popular">Most Popular</div>
+            <div class="pricing-name" data-i18n="pkg_ai2_name">AI Platform</div>
+            <div class="pricing-tagline" data-i18n="pkg_ai2_tagline">Full AI-powered system</div>
+            <div class="pricing-price">
+              <span class="pricing-from" data-i18n="pkg_from">Starting from</span>
+              <span class="pricing-amount">&euro;8,900</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Up to 5 AI automations &amp; agents</li>
+              <li>RAG knowledge base setup</li>
+              <li>Custom LLM integration</li>
+              <li>Workflow automation pipelines</li>
+              <li>API + web dashboard</li>
+              <li>AI analytics &amp; monitoring</li>
+              <li>3 months post-launch support</li>
+            </ul>
+            <a href="/contact/" class="btn-pricing-solid">
+              <span data-i18n="pkg_get_started">Start a Project</span>
+            </a>
+          </div>
+
+          <!-- Enterprise AI -->
+          <div class="pricing-card" data-reveal="up" data-reveal-delay="2">
+            <div class="pricing-name" data-i18n="pkg_ai3_name">Enterprise AI</div>
+            <div class="pricing-tagline" data-i18n="pkg_ai3_tagline">Complete automation transformation</div>
+            <div class="pricing-price">
+              <span class="pricing-from">Custom</span>
+              <span class="pricing-custom">Let's Talk</span>
+            </div>
+            <ul class="pricing-features">
+              <li>Full AI transformation audit</li>
+              <li>Multi-agent autonomous systems</li>
+              <li>Custom model fine-tuning</li>
+              <li>Enterprise integrations &amp; SSO</li>
+              <li>On-premise or private cloud</li>
+              <li>Dedicated AI team</li>
+              <li>Ongoing development retainer</li>
+            </ul>
+            <a href="/contact/" class="btn-pricing-outline">
+              <span data-i18n="pkg_contact_us">Contact Us</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         TECH STACK
+         ────────────────────────────────────────────────────── -->
+    <section class="section" id="tech-stack" aria-labelledby="ai-tech-heading">
+      <div class="container">
+        <div class="section-intro" data-reveal>
+          <div class="section-tag" data-i18n="tech_tag">Tech Stack</div>
+          <h2 id="ai-tech-heading" class="section-title">
+            Built with <span class="gradient-text">Frontier AI Technology</span>
+          </h2>
+          <p class="section-desc" data-i18n="tech_desc">
+            We use cutting-edge tools and frameworks to deliver production-grade AI systems that perform at global scale.
+          </p>
+        </div>
+      </div>
+
+      <!-- Full-width double marquee -->
+      <div class="tech-marquee-outer">
+
+        <!-- Row 1: left scroll -->
+        <div class="tech-row">
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>OpenAI GPT-4o</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Claude 3.5</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Gemini Pro</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>LangChain</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>LlamaIndex</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>CrewAI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>AutoGen</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Llama 3</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Mistral</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Whisper</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>ElevenLabs</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Stable Diffusion</span>
+          <!-- Duplicate for loop -->
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>OpenAI GPT-4o</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Claude 3.5</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Gemini Pro</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>LangChain</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>LlamaIndex</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>CrewAI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>AutoGen</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Llama 3</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Mistral</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Whisper</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>ElevenLabs</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Stable Diffusion</span>
+        </div>
+
+        <!-- Row 2: right scroll -->
+        <div class="tech-row">
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Pinecone</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Weaviate</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Qdrant</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>n8n</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Make</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Python</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>FastAPI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>PostgreSQL</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Redis</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>AWS Bedrock</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Google Vertex AI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Hugging Face</span>
+          <!-- Duplicate -->
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Pinecone</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Weaviate</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Qdrant</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>n8n</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Make</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Python</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>FastAPI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>PostgreSQL</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Redis</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>AWS Bedrock</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Google Vertex AI</span>
+          <span class="tech-pill"><span class="tech-dot" aria-hidden="true"></span>Hugging Face</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────
+         CTA SECTION
+         ────────────────────────────────────────────────────── -->
+    <section class="section ai-cta-section" aria-labelledby="ai-cta-heading">
+      <div class="container">
+        <div class="ai-cta-box" data-reveal="scale">
+          <div class="ai-cta-label">Get Started</div>
+          <h2 id="ai-cta-heading" class="ai-cta-headline" data-i18n="ai_cta_title">
+            Ready to Automate Your Business?
+          </h2>
+          <p class="ai-cta-sub" data-i18n="ai_cta_desc">
+            Tell us about your workflows. We'll design an AI system that transforms how your company operates.
+          </p>
+          <a href="/contact/" class="btn-cta-green">
+            <span data-i18n="nav_book">Book a Call</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /#main -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+
+          <!-- Brand -->
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p data-i18n="footer_desc">
+              Premium app studio and AI product company. Building tomorrow's digital products today.
+            </p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Discord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/46763909381" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_company">Company</h4>
+            <a href="/about/"   data-i18n="nav_about">About</a>
+            <a href="/contact/" data-i18n="nav_contact">Contact</a>
+          </div>
+
+          <!-- Services links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_services">Services</h4>
+            <a href="/app-studio/"    data-i18n="nav_studio">App Studio</a>
+            <a href="/ai-automation/" data-i18n="nav_ai">AI &amp; Automation</a>
+            <a href="/consulting/"    data-i18n="nav_consulting">Consulting</a>
+          </div>
+
+          <!-- Legal links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_legal">Legal</h4>
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/"   data-i18n="footer_terms">Terms of Use</a>
+          </div>
+
+          <!-- Connect -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_connect">Connect</h4>
+            <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://discord.gg/SpsZjB22Cp"               target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="https://wa.me/46763909381"                    target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 OakDev &amp; AI AB. Reg. 559431-6787. All rights reserved.</p>
+        <p>Last Updated: March 03, 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SCRIPTS  (no Three.js on sub-pages)
+       ══════════════════════════════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="../js/main.js" defer></script>
+
+</body>
+</html>
