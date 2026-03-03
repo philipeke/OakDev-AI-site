@@ -91,7 +91,7 @@ const TRANSLATIONS = {
     step4_desc:      'App Store submission, deployment, monitoring, and ongoing support to ensure a successful launch.',
     /* Contact */
     contact_tag:     'Get in Touch',
-    contact_title:   'Ready to Build Something',
+    contact_title:   'Ready to build something',
     contact_title2:  'Extraordinary?',
     contact_desc:    "Let's talk about your project. We typically respond within 24 hours.",
     contact_h3:      'Contact Details',
@@ -326,7 +326,7 @@ const TRANSLATIONS = {
 
     // Contact page
     contact_hero_badge:     'Contact',
-    contact_hero_title:     'Let\'s Build Something',
+    contact_hero_title:     'Let\'s build something',
     contact_hero_title2:    'Together',
     contact_hero_sub:       'We are a small team of tech enthusiasts with over 20 years in the game — and we genuinely love talking about new technology. Reach out however feels right.',
     contact_ch_email_title: 'Email',
@@ -421,7 +421,7 @@ const TRANSLATIONS = {
     about_jonathan_title:   'Marketing & Communication',
     about_jonathan_bio:     'Jonathan shapes how the world sees OakDev. From brand strategy to content and growth and he builds the signal that cuts through the noise.',
     about_clients_tag:      'Trusted By',
-    about_clients_title:    'Companies We Have Helped Build',
+    about_clients_title:    'Companies we have helped Build',
     about_values_tag:       'How We Work',
     about_values_title:     'Our Principles',
     about_v1_title:         'AI-Native by Default',
@@ -432,9 +432,9 @@ const TRANSLATIONS = {
     about_v3_desc:          'No bloated processes. You talk directly to the developer building your product. We ship fast, we communicate clearly.',
     about_v4_title:         'Always Learning',
     about_v4_desc:          'The tech landscape moves fast. We move faster — constantly exploring new models, tools, and frameworks to stay ahead.',
-    about_cta_title:        'Ready to Build Something Remarkable?',
-    about_cta_sub:          'Whether you have a fully-formed idea or just a spark — let us talk. We love early conversations.',
-    about_cta_btn:          'Start a Conversation',
+    about_cta_title:        'Ready to build something Remarkable?',
+    about_cta_sub:          'Whether you have a fully-formed idea or just a spark, let us talk. We love early conversations.',
+    about_cta_btn:          'Start a conversation',
   },
 
   sv: {
@@ -850,7 +850,7 @@ const TRANSLATIONS = {
     about_jonathan_title:   'Marknadsföring & Kommunikation',
     about_jonathan_bio:     'Jonathan formar hur världen ser OakDev. Från varumärkesstrategi till innehåll och tillväxt och han bygger signalen som skär genom bruset.',
     about_clients_tag:      'Betrodda Av',
-    about_clients_title:    'Företag Vi Hjälpt Att Bygga',
+    about_clients_title:    'Företag vi hjälpt att Bygga',
     about_values_tag:       'Hur Vi Arbetar',
     about_values_title:     'Våra Principer',
     about_v1_title:         'AI-nativt som Standard',
@@ -861,9 +861,9 @@ const TRANSLATIONS = {
     about_v3_desc:          'Inga uppsvällda processer. Du pratar direkt med expertisen som bygger din produkt. Vi levererar snabbt, vi kommunicerar tydligt.',
     about_v4_title:         'Alltid Lärande',
     about_v4_desc:          'Tekniklandskapet rör sig snabbt. Vi rör oss snabbare och utforskar ständigt nya modeller, verktyg och ramverk för att ligga steget före.',
-    about_cta_title:        'Redo att Bygga Något Enastående?',
-    about_cta_sub:          'Oavsett om du har en fullt formad idé eller bara en gnista — låt oss prata. Vi älskar tidiga samtal.',
-    about_cta_btn:          'Starta en Konversation',
+    about_cta_title:        'Redo att bygga något Enastående?',
+    about_cta_sub:          'Oavsett om du har en fullt formad idé eller bara en gnista, hör av er. Vi älskar tidiga samtal.',
+    about_cta_btn:          'Starta en konversation',
   },
 };
 
