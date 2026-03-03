@@ -650,7 +650,27 @@
       animation: client-scroll 40s linear infinite;
     }
 
-    .client-track:hover { animation-play-state: paused; }
+    /* Drag cursor */
+    .client-track { cursor: ew-resize; }
+    .client-track.is-speeding { cursor: w-resize; user-select: none; }
+
+    /* Scroll-hint arrow on right edge */
+    .marquee-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      color: #76b900;
+      pointer-events: none;
+      animation: arrow-bounce 1.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(118,185,0,0.8));
+      transition: opacity 0.35s ease;
+    }
+    @keyframes arrow-bounce {
+      0%, 100% { transform: translateY(-50%) translateX(0);   opacity: 0.7; }
+      50%       { transform: translateY(-50%) translateX(8px); opacity: 1;   }
+    }
 
     @keyframes client-scroll {
       0%   { transform: translateX(0); }
@@ -1261,6 +1281,107 @@
         });
       }, { threshold: 0.5 });
       counters.forEach(c => observer.observe(c));
+    })();
+
+    /* ── Marquee: drag-left to speed up + animated arrow hint ── */
+    (function () {
+      const wrap  = document.querySelector('.client-marquee-wrap');
+      const track = document.querySelector('.client-track');
+      if (!track || !wrap) return;
+
+      const BASE_DURATION = 40;   // seconds — matches CSS
+      const SENSITIVITY   = 90;   // px of drag for 2× speed
+      const MAX_MULT      = 5;    // cap at 5× speed
+
+      /* Read current translateX from computed style */
+      function getTX () {
+        const mat = new DOMMatrix(window.getComputedStyle(track).transform);
+        return mat.m41;
+      }
+
+      /* Change animation speed while preserving scroll position */
+      function setSpeed (duration) {
+        const halfW    = track.offsetWidth / 2;
+        const progress = Math.abs(getTX()) / halfW;
+        track.style.animationDuration = duration + 's';
+        track.style.animationDelay   = -(progress * duration) + 's';
+      }
+
+      /* ── Animated right-edge arrow ── */
+      const arrow = document.createElement('div');
+      arrow.className = 'marquee-arrow';
+      arrow.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+      wrap.appendChild(arrow);
+
+      function hideArrow () { arrow.style.opacity = '0'; }
+      function showArrow () { arrow.style.opacity = '';  }
+
+      const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+      if (!isTouch) {
+        /* ── Desktop: click + drag left = speed up ── */
+        let pressing = false;
+        let startX   = 0;
+
+        track.addEventListener('mousedown', e => {
+          pressing = true;
+          startX   = e.clientX;
+          track.classList.add('is-speeding');
+          hideArrow();
+          e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', e => {
+          if (!pressing) return;
+          const delta = startX - e.clientX;       // positive = dragging left
+          if (delta > 0) {
+            const mult = Math.min(MAX_MULT, 1 + delta / SENSITIVITY);
+            setSpeed(BASE_DURATION / mult);
+          } else {
+            setSpeed(BASE_DURATION);
+          }
+        });
+
+        document.addEventListener('mouseup', () => {
+          if (!pressing) return;
+          pressing = false;
+          track.classList.remove('is-speeding');
+          setSpeed(BASE_DURATION);
+          showArrow();
+        });
+
+      } else {
+        /* ── Mobile: swipe left = speed up ── */
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isSpeeding  = false;
+
+        track.addEventListener('touchstart', e => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          isSpeeding  = false;
+          hideArrow();
+        }, { passive: true });
+
+        track.addEventListener('touchmove', e => {
+          const deltaX = touchStartX - e.touches[0].clientX;  // positive = left
+          const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+          if (deltaY > deltaX + 10) return;   // vertical scroll intent — ignore
+          if (deltaX > 0) {
+            isSpeeding = true;
+            const mult = Math.min(MAX_MULT, 1 + deltaX / SENSITIVITY);
+            setSpeed(BASE_DURATION / mult);
+          } else {
+            if (isSpeeding) { setSpeed(BASE_DURATION); isSpeeding = false; }
+          }
+        }, { passive: true });
+
+        track.addEventListener('touchend', () => {
+          setSpeed(BASE_DURATION);
+          isSpeeding = false;
+          setTimeout(showArrow, 600);
+        }, { passive: true });
+      }
     })();
   </script>
 </body>

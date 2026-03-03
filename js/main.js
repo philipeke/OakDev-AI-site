@@ -344,7 +344,7 @@ const TRANSLATIONS = {
     contact_form_msg:       'Message',
     contact_form_placeholder:'Tell us about your project, ask a question, or just say hello...',
     contact_about_title:    'Who we Are',
-    contact_about_text:     'OakDev & AI AB is a Swedish app studio and AI product company, stationiert in Uddevalla on the west coast of Sweden. We are a tight-knit team of passionate developers with over 20 years of combined experience in software, web, and product development.',
+    contact_about_text:     'OakDev & AI AB is a Swedish app studio and AI product company, stationiert in Uddevalla on the west coast of Sweden. We are a tight-knit team of passionate developers with over 20 years of combined experience in both hardware and software, web and product development.',
     contact_about_text2:    'We love learning and working with cutting-edge technology — from mobile apps and AI systems to webshops and cloud infrastructure. If it involves code and creativity, we are in.',
     contact_location_title: 'Based In',
     /* Privacy Policy */
@@ -773,7 +773,7 @@ const TRANSLATIONS = {
     contact_form_msg:       'Meddelande',
     contact_form_placeholder:'Berätta om ditt projekt, ställ en fråga eller bara säg hej...',
     contact_about_title:    'Vilka vi Är',
-    contact_about_text:     'OakDev & AI AB är en svensk app-studio och ett AI-produktbolag, stationerat i Uddevalla på Sveriges västkust. Vi är ett tight-knit team av passionerade utvecklare med över 20 års samlad erfarenhet inom mjukvara, webb och produktutveckling.',
+    contact_about_text:     'OakDev & AI AB är en svensk app-studio och ett AI-produktbolag, stationerat i Uddevalla på Sveriges västkust. Vi är ett sammansvetsat team av passionerade utvecklare med över 20 års samlad erfarenhet inom både hård och mjukvara, webb och produktutveckling.',
     contact_about_text2:    'Vi älskar att lära oss och arbeta med banbrytande teknik, från mobilappar och AI-system till webbutiker och molninfrastruktur. Om det handlar om kod och kreativitet är vi med.',
     contact_location_title: 'Baserade I',
     /* Privacy Policy */
