@@ -17,6 +17,7 @@ const TRANSLATIONS = {
     nav_about:       'About',
     nav_contact:     'Contact',
     nav_book:        'Book a Call',
+    explore_services: 'Explore Services',
     /* Cookie */
     cookie_title:    'We use cookies',
     cookie_text:     'We use cookies to improve your experience. You can accept all cookies or decline non-essential ones.',
@@ -357,6 +358,7 @@ const TRANSLATIONS = {
     nav_about:       'Om oss',
     nav_contact:     'Kontakt',
     nav_book:        'Boka samtal',
+    explore_services: 'Utforska tjänster',
     /* Cookie */
     cookie_title:    'Vi använder cookies',
     cookie_text:     'Vi använder cookies för att förbättra din upplevelse. Du kan acceptera alla cookies eller avböja icke-nödvändiga.',
