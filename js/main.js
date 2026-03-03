@@ -836,7 +836,7 @@ const TRANSLATIONS = {
     about_story_p3:         'Vi finns i Kristevik, Uddevalla på Sveriges vackra västkust. Ett litet men vasst team med stora ambitioner och ett track record som backar upp dem.',
     about_stats_years:      'År i Branschen',
     about_stats_projects:   'Levererade Projekt',
-    about_stats_stacks:     'Bemästrade Teknikstackar',
+    about_stats_stacks:     'AI-modeller i bruk',
     about_stats_uptime:     'Drifttidsgaranti',
     about_team_tag:         'Teamet',
     about_team_title:       'Möt Teamet',
