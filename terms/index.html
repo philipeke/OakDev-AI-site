@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Terms of Use — OakDev &amp; AI</title>
+  <meta name="description" content="Terms of Use for OakDev & AI AB — the rules, rights, and limitations governing your use of our website and services.">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../assets/icon.png" type="image/png">
+
+  <style>
+    /* =========================================================
+       TERMS PAGE — SCOPED STYLES
+       ========================================================= */
+
+    /* Lang-based content switching */
+    [lang-show] { display: block; }
+    html[lang="sv"] [lang-show="en"] { display: none !important; }
+    html[lang="en"] [lang-show="sv"] { display: none !important; }
+
+    /* ── Hero ── */
+    .terms-hero {
+      position: relative;
+      background: #020202;
+      padding: 140px 24px 80px;
+      overflow: hidden;
+    }
+
+    .terms-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(118,185,0,0.05) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(118,185,0,0.025) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Diagonal line grid for a different feel from privacy */
+    .terms-hero-lines {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 40px,
+        rgba(118,185,0,0.04) 40px,
+        rgba(118,185,0,0.04) 41px
+      );
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .terms-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .terms-hero-inner .hero-badge { margin-bottom: 32px; }
+
+    .terms-hero-inner h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #f0f0f0;
+      margin-bottom: 24px;
+    }
+
+    .terms-hero-inner h1 span { color: #76b900; }
+
+    .terms-hero-inner p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
+
+    .terms-updated-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(118,185,0,0.07);
+      border: 1px solid rgba(118,185,0,0.18);
+      border-radius: 100px;
+      padding: 5px 16px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .terms-updated-badge span { color: #76b900; font-weight: 600; }
+
+    /* ── Layout ── */
+    .terms-body {
+      background: #020202;
+      padding: 80px 24px 120px;
+    }
+
+    .terms-layout {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .terms-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ── TOC Sidebar ── */
+    .terms-toc {
+      position: sticky;
+      top: 100px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    @media (max-width: 860px) { .terms-toc { position: static; } }
+
+    .terms-toc h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+
+    .terms-toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .terms-toc ol li a {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+
+    .terms-toc ol li a:hover {
+      color: #76b900;
+      background: rgba(118,185,0,0.06);
+    }
+
+    /* ── Content ── */
+    .terms-content {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .terms-section {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 48px;
+    }
+
+    .terms-section:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .terms-section h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 800;
+      color: #f0f0f0;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .terms-section h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #76b900;
+      margin: 28px 0 10px;
+    }
+
+    .terms-section p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 14px;
+    }
+
+    .terms-section p:last-child { margin-bottom: 0; }
+
+    .terms-section ul,
+    .terms-section ol {
+      padding-left: 20px;
+      margin: 10px 0 14px;
+    }
+
+    .terms-section li {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+    }
+
+    .terms-section a {
+      color: #76b900;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(118,185,0,0.3);
+      transition: border-color 0.2s;
+    }
+
+    .terms-section a:hover { border-color: #76b900; }
+
+    .terms-section strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+
+    /* Highlight box for important clauses */
+    .terms-highlight {
+      background: rgba(118,185,0,0.04);
+      border: 1px solid rgba(118,185,0,0.15);
+      border-left: 3px solid #76b900;
+      border-radius: 0 12px 12px 0;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+
+    .terms-highlight p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* Warning box */
+    .terms-warning {
+      background: rgba(255,165,0,0.04);
+      border: 1px solid rgba(255,165,0,0.15);
+      border-left: 3px solid rgba(255,165,0,0.6);
+      border-radius: 0 12px 12px 0;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+
+    .terms-warning p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* Contact card */
+    .terms-contact-card {
+      margin-top: 24px;
+      background: rgba(118,185,0,0.04);
+      border: 1px solid rgba(118,185,0,0.15);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+
+    .terms-contact-card p { margin-bottom: 6px; }
+    .terms-contact-card p strong {
+      color: #76b900;
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    /* Back to top */
+    .back-top-row {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 24px;
+    }
+
+    .back-top-row a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-top-row a:hover { color: #76b900; }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link" data-i18n="nav_home">Home</a>
+        <a href="/app-studio/" class="nav-link" data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="nav-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/" class="nav-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/" class="nav-link" data-i18n="nav_about">About</a>
+        <a href="/contact/" class="nav-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" data-i18n="nav_book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/" class="mobile-link" data-i18n="nav_home">Home</a>
+        <a href="/app-studio/" class="mobile-link" data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/" class="mobile-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/" class="mobile-link" data-i18n="nav_about">About</a>
+        <a href="/contact/" class="mobile-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" style="display:block;text-align:center;" data-i18n="nav_book">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="terms-hero" id="hero">
+    <div class="terms-hero-bg"></div>
+    <div class="terms-hero-lines"></div>
+
+    <div class="terms-hero-inner">
+      <div class="hero-badge reveal" data-i18n="terms_badge">Terms of Use</div>
+
+      <h1 class="reveal" style="margin-top:28px;">
+        <span data-i18n="terms_title">Terms &amp;</span><br>
+        <span data-i18n="terms_title2">Conditions</span>
+      </h1>
+
+      <p class="reveal" data-i18n="terms_sub">
+        By using our website and services you agree to these terms. Please read them carefully. They are governed by Swedish law.
+      </p>
+
+      <div class="terms-updated-badge reveal">
+        <span data-i18n="terms_updated">Last Updated: March 3, 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BODY ──────────────────────────────────────────────── -->
+  <div class="terms-body">
+    <div class="terms-layout">
+
+      <!-- ── TABLE OF CONTENTS ── -->
+      <aside class="terms-toc reveal">
+        <h3 data-i18n="terms_toc">Table of Contents</h3>
+        <ol>
+          <li><a href="#s1" data-i18n="terms_s1_title">1. Acceptance of Terms</a></li>
+          <li><a href="#s2" data-i18n="terms_s2_title">2. Our Services</a></li>
+          <li><a href="#s3" data-i18n="terms_s3_title">3. Permitted Use</a></li>
+          <li><a href="#s4" data-i18n="terms_s4_title">4. Intellectual Property</a></li>
+          <li><a href="#s5" data-i18n="terms_s5_title">5. User Communications</a></li>
+          <li><a href="#s6" data-i18n="terms_s6_title">6. Disclaimer of Warranties</a></li>
+          <li><a href="#s7" data-i18n="terms_s7_title">7. Limitation of Liability</a></li>
+          <li><a href="#s8" data-i18n="terms_s8_title">8. Indemnification</a></li>
+          <li><a href="#s9" data-i18n="terms_s9_title">9. Third-Party Services</a></li>
+          <li><a href="#s10" data-i18n="terms_s10_title">10. Governing Law</a></li>
+          <li><a href="#s11" data-i18n="terms_s11_title">11. Changes to These Terms</a></li>
+          <li><a href="#s12" data-i18n="terms_s12_title">12. Contact</a></li>
+        </ol>
+      </aside>
+
+      <!-- ── CONTENT ── -->
+      <main class="terms-content">
+
+        <!-- 1. Acceptance -->
+        <section class="terms-section reveal" id="s1">
+          <h2 data-i18n="terms_s1_title">1. Acceptance of Terms</h2>
+
+          <div lang-show="en">
+            <p>
+              These Terms of Use ("Terms") govern your access to and use of the website located at <a href="https://oakdev.app" target="_blank" rel="noopener">oakdev.app</a> and any related content, services, or communications provided by <strong>OakDev &amp; AI AB</strong> (registration number 559431-6787, VAT SE55943167870), a Swedish limited company ("OakDev", "we", "us", or "our").
+            </p>
+            <p>
+              By accessing or using this website, you confirm that you are at least <strong>18 years old</strong> (or 16 with parental consent), that you have read and understood these Terms, and that you agree to be bound by them. If you do not agree, please do not use this website.
+            </p>
+            <p>
+              These Terms should be read together with our <a href="/privacy/">Privacy Policy</a>, which is incorporated into these Terms by reference.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              Dessa användarvillkor ("Villkor") reglerar din åtkomst till och användning av webbplatsen på <a href="https://oakdev.app" target="_blank" rel="noopener">oakdev.app</a> och allt relaterat innehåll, tjänster eller kommunikation som tillhandahålls av <strong>OakDev &amp; AI AB</strong> (organisationsnummer 559431-6787, VAT SE55943167870), ett svenskt aktiebolag ("OakDev", "vi", "oss" eller "vår").
+            </p>
+            <p>
+              Genom att öppna eller använda denna webbplats bekräftar du att du är minst <strong>18 år gammal</strong> (eller 16 med föräldrars samtycke), att du har läst och förstått dessa Villkor, och att du godkänner att vara bunden av dem. Om du inte godkänner, vänligen använd inte denna webbplats.
+            </p>
+            <p>
+              Dessa Villkor bör läsas tillsammans med vår <a href="/privacy/">Integritetspolicy</a>, som är inkorporerad i dessa Villkor genom hänvisning.
+            </p>
+          </div>
+        </section>
+
+        <!-- 2. Services -->
+        <section class="terms-section reveal" id="s2">
+          <h2 data-i18n="terms_s2_title">2. Our Services</h2>
+
+          <div lang-show="en">
+            <p>OakDev &amp; AI AB is an app studio and AI product company offering the following categories of services:</p>
+            <ul>
+              <li><strong>App Studio</strong> — Custom mobile and web application development, from MVP to full-scale products</li>
+              <li><strong>AI &amp; Automation</strong> — Integration of artificial intelligence, machine learning, and workflow automation into business processes</li>
+              <li><strong>IT Consulting</strong> — Strategic and technical advice on software architecture, web development, databases, webshops, and digital transformation</li>
+            </ul>
+            <p>
+              This website serves as an informational and marketing presence. It does not constitute an offer to enter into a contract. Any engagement for paid services is governed by a separate written agreement between OakDev &amp; AI AB and the client.
+            </p>
+            <p>
+              We reserve the right to modify, suspend, or discontinue any aspect of our services or this website at any time without prior notice, unless otherwise agreed in a separate client contract.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>OakDev &amp; AI AB är ett app-studio och AI-produktbolag som erbjuder följande tjänstekategorier:</p>
+            <ul>
+              <li><strong>App Studio</strong> — Skräddarsydd mobil- och webbapplikationsutveckling, från MVP till fullskaliga produkter</li>
+              <li><strong>AI &amp; Automatisering</strong> — Integrering av artificiell intelligens, maskininlärning och arbetsflödesautomatisering i affärsprocesser</li>
+              <li><strong>IT-konsultation</strong> — Strategisk och teknisk rådgivning om mjukvaruarkitektur, webbutveckling, databaser, webbutiker och digital transformation</li>
+            </ul>
+            <p>
+              Denna webbplats fungerar som en informations- och marknadsföringsnärvaro. Den utgör inte ett erbjudande om att ingå avtal. Alla engagemang för betalda tjänster regleras av ett separat skriftligt avtal mellan OakDev &amp; AI AB och kunden.
+            </p>
+            <p>
+              Vi förbehåller oss rätten att när som helst ändra, avbryta eller upphöra med någon del av våra tjänster eller denna webbplats utan föregående meddelande, om inte annat avtalats i ett separat kundavtal.
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. Permitted Use -->
+        <section class="terms-section reveal" id="s3">
+          <h2 data-i18n="terms_s3_title">3. Permitted Use</h2>
+
+          <div lang-show="en">
+            <p>You may use this website for lawful purposes only. You agree not to:</p>
+            <ul>
+              <li>Use the website in any way that violates applicable Swedish, EU, or international law or regulation</li>
+              <li>Transmit or upload unsolicited commercial communications (spam), malware, viruses, or any other harmful code</li>
+              <li>Attempt to gain unauthorised access to any part of the website, its servers, or connected systems</li>
+              <li>Scrape, crawl, or systematically extract data from the website without our prior written consent</li>
+              <li>Use the website in a way that imposes an unreasonable or disproportionately large load on our infrastructure</li>
+              <li>Reproduce, duplicate, copy, sell, or exploit any part of the website for commercial purposes without our express written permission</li>
+              <li>Engage in any conduct that restricts or inhibits others' use and enjoyment of the website</li>
+              <li>Impersonate OakDev &amp; AI AB, our team, or any other person in connection with our website or services</li>
+            </ul>
+            <p>We reserve the right to terminate access for any user who violates these Terms, with or without notice.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Du får endast använda denna webbplats för lagliga ändamål. Du godkänner att inte:</p>
+            <ul>
+              <li>Använda webbplatsen på ett sätt som strider mot tillämplig svensk, EU-rättslig eller internationell lag eller förordning</li>
+              <li>Skicka eller ladda upp oönskad kommersiell kommunikation (skräppost), skadlig kod, virus eller annan skadlig kod</li>
+              <li>Försöka få obehörig åtkomst till någon del av webbplatsen, dess servrar eller anslutna system</li>
+              <li>Skrapa, crawla eller systematiskt extrahera data från webbplatsen utan vårt föregående skriftliga medgivande</li>
+              <li>Använda webbplatsen på ett sätt som lägger en orimlig eller oproportionerligt stor belastning på vår infrastruktur</li>
+              <li>Reproducera, duplicera, kopiera, sälja eller utnyttja någon del av webbplatsen för kommersiella ändamål utan vårt uttryckliga skriftliga tillstånd</li>
+              <li>Ägna sig åt beteende som begränsar eller hämmar andras användning och åtnjutande av webbplatsen</li>
+              <li>Utge sig för att vara OakDev &amp; AI AB, vårt team eller någon annan person i samband med vår webbplats eller tjänster</li>
+            </ul>
+            <p>Vi förbehåller oss rätten att avsluta åtkomsten för alla användare som bryter mot dessa Villkor, med eller utan föregående meddelande.</p>
+          </div>
+        </section>
+
+        <!-- 4. Intellectual Property -->
+        <section class="terms-section reveal" id="s4">
+          <h2 data-i18n="terms_s4_title">4. Intellectual Property</h2>
+
+          <div lang-show="en">
+            <h3>4.1 Our Content</h3>
+            <p>
+              All content on this website — including but not limited to text, graphics, logos, icons, images, code snippets, animations, and the overall design — is the intellectual property of OakDev &amp; AI AB or its licensors and is protected under Swedish and EU copyright law (Upphovsrättslagen 1960:729) and international conventions.
+            </p>
+            <p>
+              You may view and print content from this website for your own personal, non-commercial use. You may not reproduce, distribute, modify, publicly display, or create derivative works from our content without our express prior written consent.
+            </p>
+            <h3>4.2 Our Brand</h3>
+            <p>
+              "OakDev", "OakDev &amp; AI AB", and our logo are trademarks and trade names of OakDev &amp; AI AB. You may not use our brand identifiers in any way that implies endorsement, affiliation, or association without our prior written approval.
+            </p>
+            <h3>4.3 Open Source</h3>
+            <p>
+              Certain libraries and frameworks used on this website are licensed under open-source licences (MIT, Apache 2.0, etc.). These libraries remain the property of their respective authors and are used in compliance with their licence terms. Nothing in these Terms grants you any rights in those third-party libraries beyond what their own licences allow.
+            </p>
+            <h3>4.4 Client Work</h3>
+            <p>
+              Intellectual property rights in work produced for clients under a paid engagement are governed by the separate client contract. Unless otherwise explicitly agreed in writing, OakDev &amp; AI AB retains full ownership of all code, designs, and materials until payment in full has been received.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <h3>4.1 Vårt Innehåll</h3>
+            <p>
+              Allt innehåll på denna webbplats — inklusive men inte begränsat till text, grafik, logotyper, ikoner, bilder, kodsnuttar, animationer och den övergripande designen — är OakDev &amp; AI AB:s eller dess licensgivares immateriella egendom och är skyddat enligt svensk och EU-upphovsrätt (Upphovsrättslagen 1960:729) och internationella konventioner.
+            </p>
+            <p>
+              Du kan visa och skriva ut innehåll från denna webbplats för eget personligt, icke-kommersiellt bruk. Du får inte reproducera, distribuera, modifiera, offentligt visa eller skapa härledda verk från vårt innehåll utan vårt uttryckliga skriftliga medgivande.
+            </p>
+            <h3>4.2 Vårt Varumärke</h3>
+            <p>
+              "OakDev", "OakDev &amp; AI AB" och vår logotyp är varumärken och handelsnamn för OakDev &amp; AI AB. Du får inte använda våra varumärkesidentifierare på något sätt som antyder godkännande, anknytning eller association utan vårt skriftliga godkännande.
+            </p>
+            <h3>4.3 Öppen Källkod</h3>
+            <p>
+              Vissa bibliotek och ramverk som används på denna webbplats är licensierade under öppen källkods-licenser (MIT, Apache 2.0 m.fl.). Dessa bibliotek förblir respektive upphovsmäns egendom och används i enlighet med deras licensvillkor. Ingenting i dessa Villkor ger dig några rättigheter till dessa tredjepartsbibliotek utöver vad deras egna licenser tillåter.
+            </p>
+            <h3>4.4 Kundarbete</h3>
+            <p>
+              Immateriella rättigheter i arbete som utförs för kunder inom ramen för ett betalt uppdrag regleras av det separata kundavtalet. Om inte annat uttryckligen avtalats skriftligen, behåller OakDev &amp; AI AB fullt ägarskap av all kod, design och material tills full betalning har mottagits.
+            </p>
+          </div>
+        </section>
+
+        <!-- 5. User Communications -->
+        <section class="terms-section reveal" id="s5">
+          <h2 data-i18n="terms_s5_title">5. User Communications</h2>
+
+          <div lang-show="en">
+            <p>
+              When you submit a message through our contact form, send us an email, or otherwise communicate with us, you agree that:
+            </p>
+            <ul>
+              <li>Your communication is truthful, accurate, and not misleading</li>
+              <li>You have the right to share any information you submit (e.g. you are not sharing confidential information of a third party without authorisation)</li>
+              <li>Your message does not contain unlawful, abusive, defamatory, obscene, or otherwise objectionable content</li>
+            </ul>
+            <p>
+              We do not treat unsolicited project proposals, ideas, or concepts submitted through the website as confidential or proprietary. If you wish to discuss a confidential project, please notify us in advance and we can arrange a mutual NDA before the discussion.
+            </p>
+            <p>
+              We aim to respond to all inquiries within <strong>2 business days</strong>. Response times are not guaranteed and do not create a binding obligation.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              När du skickar ett meddelande via vårt kontaktformulär, skickar oss ett e-postmeddelande eller på annat sätt kommunicerar med oss, godkänner du att:
+            </p>
+            <ul>
+              <li>Din kommunikation är sanningsenlig, korrekt och inte vilseledande</li>
+              <li>Du har rätt att dela den information du skickar in (t.ex. att du inte delar konfidentiell information från tredje part utan tillstånd)</li>
+              <li>Ditt meddelande inte innehåller olagligt, missbrukande, ärekränkande, obscent eller på annat sätt stötande innehåll</li>
+            </ul>
+            <p>
+              Vi behandlar inte oombedda projektförslag, idéer eller koncept som skickas via webbplatsen som konfidentiella eller proprietära. Om du vill diskutera ett konfidentiellt projekt, vänligen meddela oss i förväg så kan vi ordna ett ömsesidigt sekretessavtal (NDA) innan diskussionen.
+            </p>
+            <p>
+              Vi strävar efter att svara på alla förfrågningar inom <strong>2 arbetsdagar</strong>. Svarstider är inte garanterade och skapar inga bindande skyldigheter.
+            </p>
+          </div>
+        </section>
+
+        <!-- 6. Disclaimer -->
+        <section class="terms-section reveal" id="s6">
+          <h2 data-i18n="terms_s6_title">6. Disclaimer of Warranties</h2>
+
+          <div class="terms-warning">
+            <div lang-show="en">
+              <p><strong>This website and its content are provided "as is" and "as available" without any warranty of any kind</strong>, whether express, implied, statutory, or otherwise, including but not limited to warranties of merchantability, fitness for a particular purpose, non-infringement, or that the website will be uninterrupted, error-free, or free of viruses.</p>
+            </div>
+            <div lang-show="sv">
+              <p><strong>Denna webbplats och dess innehåll tillhandahålls "i befintligt skick" och "i mån av tillgång" utan någon garanti av något slag</strong>, vare sig uttrycklig, underförstådd, lagstadgad eller på annat sätt, inklusive men inte begränsat till garantier om säljbarhet, lämplighet för ett visst ändamål, icke-intrång, eller att webbplatsen kommer att vara avbrottsfri, felfri eller fri från virus.</p>
+            </div>
+          </div>
+
+          <div lang-show="en">
+            <p>
+              Information published on this website is provided for general informational purposes only. While we take reasonable care to keep information accurate and up to date, we make no representations or warranties about the accuracy, completeness, or suitability of that information for any particular purpose.
+            </p>
+            <p>
+              Pricing, availability, and service descriptions shown on this website are indicative only and subject to change. Binding commitments are only made through formal written agreements.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              Information som publiceras på denna webbplats tillhandahålls enbart för allmänna informationsändamål. Även om vi tar rimlig hänsyn till att hålla information korrekt och aktuell, lämnar vi inga utfästelser eller garantier om noggrannheten, fullständigheten eller lämpligheten av den informationen för något särskilt ändamål.
+            </p>
+            <p>
+              Priser, tillgänglighet och tjänstebeskrivningar som visas på denna webbplats är enbart vägledande och kan ändras. Bindande åtaganden görs endast genom formella skriftliga avtal.
+            </p>
+          </div>
+        </section>
+
+        <!-- 7. Limitation of Liability -->
+        <section class="terms-section reveal" id="s7">
+          <h2 data-i18n="terms_s7_title">7. Limitation of Liability</h2>
+
+          <div class="terms-highlight">
+            <div lang-show="en">
+              <p>To the maximum extent permitted by applicable Swedish law, OakDev &amp; AI AB shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits, revenue, data, goodwill, or business opportunities arising out of or in connection with your use of this website.</p>
+            </div>
+            <div lang-show="sv">
+              <p>I den mån det är tillåtet enligt tillämplig svensk lag ska OakDev &amp; AI AB inte vara ansvarig för några indirekta, oförutsedda, särskilda, följdrelaterade eller straffskadestånd, eller förlust av vinst, intäkt, data, goodwill eller affärsmöjligheter som uppstår i samband med din användning av denna webbplats.</p>
+            </div>
+          </div>
+
+          <div lang-show="en">
+            <p>
+              In no event shall our aggregate liability to you for any claim arising from use of this website exceed <strong>SEK 1,000 (one thousand Swedish kronor)</strong>.
+            </p>
+            <p>
+              Nothing in these Terms limits or excludes our liability for: (i) death or personal injury caused by our negligence; (ii) fraud or fraudulent misrepresentation; or (iii) any liability which cannot lawfully be excluded under Swedish law (including the Swedish Consumer Contracts Act, Konsumentköplagen, where applicable).
+            </p>
+            <p>
+              If you are a consumer (konsument) under Swedish law, statutory consumer rights apply and cannot be waived by these Terms.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              Under inga omständigheter ska vårt samlade ansvar gentemot dig för något krav som uppstår från användning av denna webbplats överstiga <strong>1 000 SEK (ett tusen svenska kronor)</strong>.
+            </p>
+            <p>
+              Ingenting i dessa Villkor begränsar eller utesluter vårt ansvar för: (i) dödsfall eller personskada orsakad av vår försumlighet; (ii) bedrägeri eller bedräglig felaktig framställning; eller (iii) ansvar som inte lagligen kan uteslutas enligt svensk rätt (inklusive Konsumentköplagen, där tillämplig).
+            </p>
+            <p>
+              Om du är konsument enligt svensk rätt gäller lagstadgade konsumenträttigheter och kan inte frångås av dessa Villkor.
+            </p>
+          </div>
+        </section>
+
+        <!-- 8. Indemnification -->
+        <section class="terms-section reveal" id="s8">
+          <h2 data-i18n="terms_s8_title">8. Indemnification</h2>
+
+          <div lang-show="en">
+            <p>
+              To the extent permitted by law, you agree to indemnify, defend, and hold harmless OakDev &amp; AI AB, its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or in connection with:
+            </p>
+            <ul>
+              <li>Your use of or access to this website in violation of these Terms</li>
+              <li>Your violation of any applicable law or regulation</li>
+              <li>Any content you submit or transmit to us that infringes the rights of any third party</li>
+            </ul>
+            <p>This clause does not apply to consumers acting in their private capacity under Swedish consumer protection law.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              I den mån det är tillåtet enligt lag godkänner du att hålla OakDev &amp; AI AB, dess tjänstemän, styrelseledamöter, anställda och ombud skadeslösa från och mot alla anspråk, ansvar, skador, förluster och kostnader (inklusive rimliga advokatkostnader) som uppstår i samband med:
+            </p>
+            <ul>
+              <li>Din användning av eller åtkomst till denna webbplats i strid med dessa Villkor</li>
+              <li>Din överträdelse av tillämplig lag eller förordning</li>
+              <li>Allt innehåll du skickar in eller vidarebefordrar till oss som gör intrång i tredje parts rättigheter</li>
+            </ul>
+            <p>Denna klausul gäller inte konsumenter som agerar i sin privata egenskap enligt svensk konsumentskyddslagstiftning.</p>
+          </div>
+        </section>
+
+        <!-- 9. Third-Party Services -->
+        <section class="terms-section reveal" id="s9">
+          <h2 data-i18n="terms_s9_title">9. Third-Party Services</h2>
+
+          <div lang-show="en">
+            <p>
+              This website utilises the following third-party services. By using our website, you also interact with these services and their respective terms:
+            </p>
+            <ul>
+              <li><strong>jsDelivr</strong> — CDN for JavaScript libraries. <a href="https://www.jsdelivr.com/terms" target="_blank" rel="noopener noreferrer">jsDelivr Terms</a></li>
+              <li><strong>Google Fonts</strong> — Web font delivery. <a href="https://fonts.google.com/about" target="_blank" rel="noopener noreferrer">Google Fonts FAQ</a></li>
+              <li><strong>FormSubmit.co</strong> — Contact form processing. <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener noreferrer">FormSubmit Privacy</a></li>
+              <li><strong>GitHub Pages</strong> — Website hosting. <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" target="_blank" rel="noopener noreferrer">GitHub Terms of Service</a></li>
+            </ul>
+            <p>
+              We are not responsible for the practices, content, or availability of third-party services. Links to external websites do not imply endorsement. We recommend reading the terms and privacy policies of any third-party service before using it.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              Denna webbplats använder följande tredjepartstjänster. Genom att använda vår webbplats interagerar du även med dessa tjänster och deras respektive villkor:
+            </p>
+            <ul>
+              <li><strong>jsDelivr</strong> — CDN för JavaScript-bibliotek. <a href="https://www.jsdelivr.com/terms" target="_blank" rel="noopener noreferrer">jsDelivr Villkor</a></li>
+              <li><strong>Google Fonts</strong> — Webbteckensnittsleverans. <a href="https://fonts.google.com/about" target="_blank" rel="noopener noreferrer">Google Fonts FAQ</a></li>
+              <li><strong>FormSubmit.co</strong> — Kontaktformulärbehandling. <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener noreferrer">FormSubmit Integritet</a></li>
+              <li><strong>GitHub Pages</strong> — Webbplatshosting. <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" target="_blank" rel="noopener noreferrer">GitHubs användarvillkor</a></li>
+            </ul>
+            <p>
+              Vi ansvarar inte för praxis, innehåll eller tillgänglighet hos tredjepartstjänster. Länkar till externa webbplatser innebär inte att vi stöder dem. Vi rekommenderar att du läser villkoren och integritetspolicyerna för alla tredjepartstjänster innan du använder dem.
+            </p>
+          </div>
+        </section>
+
+        <!-- 10. Governing Law -->
+        <section class="terms-section reveal" id="s10">
+          <h2 data-i18n="terms_s10_title">10. Governing Law</h2>
+
+          <div lang-show="en">
+            <p>
+              These Terms and any dispute or claim arising out of or in connection with them (including non-contractual disputes or claims) shall be governed by and construed in accordance with the laws of <strong>Sweden</strong>, without regard to its conflict of law provisions.
+            </p>
+            <p>
+              Any disputes shall first be subject to good-faith negotiations between the parties. If not resolved within 30 days, disputes shall be submitted to the <strong>District Court of Västra Sverige (Västra Sverige tingsrätt)</strong> as the court of first instance, unless mandatory consumer protection law requires otherwise.
+            </p>
+            <p>
+              If you are a consumer, you also have the right to refer the dispute to the <strong>National Board for Consumer Disputes (Allmänna reklamationsnämnden, ARN)</strong> at <a href="https://www.arn.se" target="_blank" rel="noopener noreferrer">arn.se</a>, or use the EU Online Dispute Resolution platform at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              Dessa Villkor och eventuella tvister eller anspråk som uppstår ur eller i samband med dem (inklusive icke-avtalsrättsliga tvister eller anspråk) ska regleras av och tolkas i enlighet med <strong>svensk rätt</strong>, utan hänsyn till dess lagvalsregler.
+            </p>
+            <p>
+              Eventuella tvister ska först bli föremål för förhandlingar i god tro mellan parterna. Om de inte löses inom 30 dagar ska tvister hänskjutas till <strong>Västra Sveriges tingsrätt</strong> som första instans, om inte tvingande konsumentskyddslagstiftning kräver annat.
+            </p>
+            <p>
+              Om du är konsument har du också rätt att hänskjuta tvisten till <strong>Allmänna reklamationsnämnden (ARN)</strong> på <a href="https://www.arn.se" target="_blank" rel="noopener noreferrer">arn.se</a>, eller använda EU:s plattform för onlinelösning av tvister på <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>.
+            </p>
+          </div>
+        </section>
+
+        <!-- 11. Changes -->
+        <section class="terms-section reveal" id="s11">
+          <h2 data-i18n="terms_s11_title">11. Changes to These Terms</h2>
+
+          <div lang-show="en">
+            <p>
+              We may revise these Terms at any time by updating this page. Changes take effect immediately upon posting unless we state otherwise. The "Last Updated" date at the top of this page will be updated to reflect any changes.
+            </p>
+            <p>
+              Your continued use of the website after changes are posted constitutes your acceptance of the revised Terms. If a change materially affects your rights, we will make reasonable efforts to notify you (e.g. via a prominent notice on the website).
+            </p>
+            <p>
+              We recommend checking this page periodically. If you have an active client contract with us, those terms govern for your engagement; changes to these website Terms do not alter existing signed agreements.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              Vi kan när som helst revidera dessa Villkor genom att uppdatera denna sida. Ändringar träder i kraft omedelbart efter publicering om vi inte anger annat. Datumet "Senast Uppdaterad" längst upp på denna sida uppdateras för att återspegla eventuella ändringar.
+            </p>
+            <p>
+              Din fortsatta användning av webbplatsen efter att ändringar publicerats utgör ditt godkännande av de reviderade Villkoren. Om en ändring väsentligt påverkar dina rättigheter, gör vi rimliga ansträngningar för att meddela dig (t.ex. via ett framträdande meddelande på webbplatsen).
+            </p>
+            <p>
+              Vi rekommenderar att du kontrollerar denna sida med jämna mellanrum. Om du har ett aktivt kundavtal med oss, reglerar dessa villkor ditt engagemang; ändringar av dessa webbplatsvillkor ändrar inte befintliga undertecknade avtal.
+            </p>
+          </div>
+        </section>
+
+        <!-- 12. Contact -->
+        <section class="terms-section reveal" id="s12">
+          <h2 data-i18n="terms_s12_title">12. Contact</h2>
+
+          <div lang-show="en">
+            <p>If you have any questions, concerns, or feedback about these Terms, please reach out to us:</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Om du har frågor, funderingar eller feedback om dessa Villkor, vänligen kontakta oss:</p>
+          </div>
+
+          <div class="terms-contact-card">
+            <p>
+              <strong>OakDev &amp; AI AB</strong>
+              Reg. No. 559431-6787 | VAT SE55943167870<br>
+              Kristevik 633, 451 96 Uddevalla, Sweden
+            </p>
+            <p>
+              📧 <a href="mailto:hello@oakdev.app">hello@oakdev.app</a><br>
+              📞 <a href="tel:+46763909381">+46 76 390 93 81</a>
+            </p>
+          </div>
+
+          <div class="back-top-row">
+            <a href="#hero" data-i18n="terms_back_top">↑ Back to Top</a>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+
+          <!-- Brand -->
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p data-i18n="footer_desc">
+              Premium app studio and AI product company. Building tomorrow's digital products today.
+            </p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Discord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/46763909381" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_company">Company</h4>
+            <a href="/about/" data-i18n="nav_about">About</a>
+            <a href="/contact/" data-i18n="nav_contact">Contact</a>
+          </div>
+
+          <!-- Services links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_services">Services</h4>
+            <a href="/app-studio/" data-i18n="nav_studio">App Studio</a>
+            <a href="/ai-automation/" data-i18n="nav_ai">AI &amp; Automation</a>
+            <a href="/consulting/" data-i18n="nav_consulting">Consulting</a>
+          </div>
+
+          <!-- Legal links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_legal">Legal</h4>
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/" data-i18n="footer_terms">Terms of Use</a>
+          </div>
+
+          <!-- Connect / contact quick -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_connect">Connect</h4>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:+46763909381">+46 76 390 93 81</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+            <p class="footer-updated">Last Updated: March 03, 2026</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/" data-i18n="footer_terms">Terms of Use</a>
+            <a href="/about/" data-i18n="nav_about">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="../js/main.js"></script>
+
+</body>
+</html>
