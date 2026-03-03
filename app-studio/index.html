@@ -868,6 +868,37 @@
       box-shadow: 0 0 50px rgba(118,185,0,0.4);
       transform: translateY(-2px);
     }
+
+    /* ── Studio wireframe visualisation ── */
+    .studio-viz-wrap {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      margin: 2.5rem 0 3.5rem;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(118,185,0,0.1);
+      background: radial-gradient(ellipse at 50% 60%, rgba(118,185,0,0.04) 0%, transparent 70%);
+    }
+    #studioViz {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .studio-viz-label {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(118,185,0,0.35);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    @media (max-width: 600px) { .studio-viz-wrap { height: 180px; } }
   </style>
 </head>
 
@@ -1076,6 +1107,13 @@
           <p class="section-desc" data-i18n="studio_types_desc">
             We cover the full spectrum of mobile and web development — from native performance and AI intelligence to SaaS infrastructure and rapid MVPs.
           </p>
+        </div>
+
+
+        <!-- Studio wireframe visualisation -->
+        <div class="studio-viz-wrap" aria-hidden="true">
+          <canvas id="studioViz"></canvas>
+          <div class="studio-viz-label">Crafting experiences across every platform</div>
         </div>
 
         <div class="app-types-grid">
@@ -1660,6 +1698,214 @@
 
   <!-- OakDev main script -->
   <script src="../js/main.js" defer></script>
+
+
+  <script>
+    /* ── Studio wireframe canvas ── */
+    (function () {
+      const canvas = document.getElementById('studioViz');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W = 0, H = 0;
+
+      function resize () {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      /* UI frame blueprint definitions */
+      const TYPES = [
+        { w: 30, h: 54, r: 5, kind: 'phone' },
+        { w: 22, h: 40, r: 4, kind: 'phone' },
+        { w: 58, h: 40, r: 4, kind: 'browser' },
+        { w: 50, h: 34, r: 4, kind: 'tablet' },
+        { w: 46, h: 28, r: 3, kind: 'card' },
+        { w: 32, h: 32, r: 8, kind: 'square' },
+      ];
+
+      class UIFrame {
+        constructor (init) { this.respawn(init); }
+
+        respawn (init) {
+          const t = TYPES[Math.floor(Math.random() * TYPES.length)];
+          const s = 0.65 + Math.random() * 1.2;
+          this.w    = t.w * s;
+          this.h    = t.h * s;
+          this.r    = t.r;
+          this.kind = t.kind;
+          this.x    = init ? W * 0.05 + Math.random() * W * 0.9
+                           : (Math.random() > 0.5 ? -70 : W + 70);
+          this.y    = init ? H * 0.05 + Math.random() * H * 0.9
+                           : Math.random() * H;
+          this.vx   = (Math.random() - 0.5) * 0.22;
+          this.vy   = (Math.random() - 0.5) * 0.16;
+          this.ang  = (Math.random() - 0.5) * 0.45;
+          this.va   = (Math.random() - 0.5) * 0.0007;
+          this.base = 0.12 + Math.random() * 0.2;
+          this.ph   = Math.random() * Math.PI * 2;
+          this.ps   = 0.013 + Math.random() * 0.011;
+        }
+
+        update () {
+          this.x  += this.vx;
+          this.y  += this.vy;
+          this.ang += this.va;
+          this.ph  += this.ps;
+          if (this.x < -120 || this.x > W + 120 || this.y < -120 || this.y > H + 120) {
+            this.respawn(false);
+          }
+        }
+
+        draw () {
+          const a  = this.base + Math.sin(this.ph) * 0.055;
+          const da = a * 0.55;
+          const hw = this.w / 2, hh = this.h / 2;
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.ang);
+          ctx.strokeStyle = 'rgba(118,185,0,' + a + ')';
+          ctx.lineWidth   = 0.85;
+
+          /* Outer shell */
+          ctx.beginPath();
+          ctx.roundRect(-hw, -hh, this.w, this.h, this.r);
+          ctx.stroke();
+
+          /* Interior details */
+          ctx.fillStyle   = 'rgba(118,185,0,' + (da * 0.65) + ')';
+
+          if (this.kind === 'phone') {
+            /* status bar */
+            ctx.fillRect(-hw + 3, -hh + 5, this.w - 6, 1.5);
+            /* content bars */
+            ctx.fillRect(-hw + 5, -hh + 12, (this.w - 10) * 0.7, 1);
+            ctx.fillRect(-hw + 5, -hh + 16, (this.w - 10) * 0.5, 1);
+            ctx.fillRect(-hw + 5, -hh + 20, (this.w - 10) * 0.8, 1);
+            /* home button */
+            ctx.strokeStyle = 'rgba(118,185,0,' + da + ')';
+            ctx.lineWidth   = 0.7;
+            ctx.beginPath();
+            ctx.arc(0, hh - 6, 2.5, 0, Math.PI * 2);
+            ctx.stroke();
+
+          } else if (this.kind === 'browser') {
+            /* chrome bar */
+            ctx.fillStyle = 'rgba(118,185,0,' + (da * 0.45) + ')';
+            ctx.fillRect(-hw + 2, -hh + 2, this.w - 4, 6);
+            /* three dots */
+            [7, 13, 19].forEach(function (ox) {
+              ctx.beginPath();
+              ctx.arc(-hw + ox, -hh + 5, 1.8, 0, Math.PI * 2);
+              ctx.fill();
+            });
+            /* content lines */
+            ctx.fillRect(-hw + 4, -hh + 13, (this.w - 8) * 0.8, 1);
+            ctx.fillRect(-hw + 4, -hh + 17, (this.w - 8) * 0.55, 1);
+            ctx.fillRect(-hw + 4, -hh + 21, (this.w - 8) * 0.9, 1);
+
+          } else if (this.kind === 'tablet') {
+            ctx.fillRect(-hw + 5, -hh + 5, (this.w - 10) * 0.6, 3);
+            ctx.fillRect(-hw + 5, -hh + 13, (this.w - 10) * 0.8, 1);
+            ctx.fillRect(-hw + 5, -hh + 17, (this.w - 10) * 0.6, 1);
+            /* side notch */
+            ctx.strokeStyle = 'rgba(118,185,0,' + da + ')';
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.roundRect(hw - 1.5, -hh + 9, 1.5, 8, 1);
+            ctx.stroke();
+
+          } else if (this.kind === 'card') {
+            ctx.fillRect(-hw + 5, -hh + 6, (this.w - 10) * 0.65, 2.5);
+            ctx.fillRect(-hw + 5, -hh + 13, (this.w - 10) * 0.45, 1.5);
+            ctx.fillRect(-hw + 5, -hh + 17, (this.w - 10) * 0.8, 1.5);
+
+          } else if (this.kind === 'square') {
+            /* app icon grid */
+            const g = this.w / 3;
+            for (var row = 0; row < 2; row++) {
+              for (var col = 0; col < 2; col++) {
+                ctx.beginPath();
+                ctx.roundRect(-hw + 5 + col * g, -hh + 5 + row * g, g - 4, g - 4, 2);
+                ctx.strokeStyle = 'rgba(118,185,0,' + (da * 0.6) + ')';
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+              }
+            }
+          }
+          ctx.restore();
+        }
+      }
+
+      /* Pulse ring */
+      class Pulse {
+        constructor (x, y) {
+          this.x = x; this.y = y;
+          this.r = 0;
+          this.maxR = 35 + Math.random() * 30;
+        }
+        get done () { return this.r >= this.maxR; }
+        update () { this.r += 0.9; }
+        draw () {
+          const a = 0.38 * (1 - this.r / this.maxR);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(118,185,0,' + a + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      /* Init */
+      resize();
+      const frames = Array.from({ length: 18 }, function () { return new UIFrame(true); });
+      const pulses = [];
+      let pulseTimer = 0;
+
+      window.addEventListener('resize', function () {
+        resize();
+        frames.forEach(function (f) { f.respawn(true); });
+      });
+
+      function drawLinks () {
+        var DIST = 130;
+        for (var i = 0; i < frames.length; i++) {
+          for (var j = i + 1; j < frames.length; j++) {
+            var dx = frames[i].x - frames[j].x;
+            var dy = frames[i].y - frames[j].y;
+            var d  = Math.sqrt(dx * dx + dy * dy);
+            if (d < DIST) {
+              ctx.beginPath();
+              ctx.moveTo(frames[i].x, frames[i].y);
+              ctx.lineTo(frames[j].x, frames[j].y);
+              ctx.strokeStyle = 'rgba(118,185,0,' + (0.09 * (1 - d / DIST)) + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function loop () {
+        ctx.clearRect(0, 0, W, H);
+        drawLinks();
+        frames.forEach(function (f) { f.update(); f.draw(); });
+
+        pulseTimer++;
+        if (pulseTimer > 190) {
+          pulseTimer = 0;
+          var f = frames[Math.floor(Math.random() * frames.length)];
+          pulses.push(new Pulse(f.x, f.y));
+        }
+        for (var i = pulses.length - 1; i >= 0; i--) {
+          pulses[i].update();
+          pulses[i].draw();
+          if (pulses[i].done) pulses.splice(i, 1);
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+  </script>
 
 </body>
 </html>
