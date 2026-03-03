@@ -1283,29 +1283,45 @@
       counters.forEach(c => observer.observe(c));
     })();
 
-    /* ── Marquee: drag-left to speed up + animated arrow hint ── */
+    /* ── Marquee: RAF-driven scroll + drag-left to speed up ── */
     (function () {
       const wrap  = document.querySelector('.client-marquee-wrap');
       const track = document.querySelector('.client-track');
       if (!track || !wrap) return;
 
-      const BASE_DURATION = 40;   // seconds — matches CSS
-      const SENSITIVITY   = 90;   // px of drag for 2× speed
-      const MAX_MULT      = 5;    // cap at 5× speed
+      const BASE_SPEED  = 22;   // px/sec base scroll speed (slow & calm)
+      const MAX_MULT    = 5;    // max speed multiplier while dragging
+      const SENSITIVITY = 80;   // px of drag needed for 2× speed
 
-      /* Read current translateX from computed style */
-      function getTX () {
-        const mat = new DOMMatrix(window.getComputedStyle(track).transform);
-        return mat.m41;
+      // Disable CSS animation — JS drives the position instead
+      track.style.animation = 'none';
+
+      let posX     = 0;          // current X offset in px (negative)
+      let halfW    = 0;          // width of one logo set (seamless loop point)
+      let speed    = BASE_SPEED; // current px/sec (interpolated)
+      let targetSp = BASE_SPEED; // desired px/sec
+      let lastTs   = null;
+
+      function measureHalf () { halfW = track.scrollWidth / 2; }
+
+      function loop (ts) {
+        if (lastTs === null) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05); // cap at 50ms
+        lastTs = ts;
+
+        // Smooth acceleration / deceleration
+        speed += (targetSp - speed) * Math.min(dt * 8, 1);
+
+        posX -= speed * dt;
+        if (halfW && posX <= -halfW) posX += halfW; // seamless loop
+
+        track.style.transform = 'translateX(' + posX.toFixed(2) + 'px)';
+        requestAnimationFrame(loop);
       }
 
-      /* Change animation speed while preserving scroll position */
-      function setSpeed (duration) {
-        const halfW    = track.offsetWidth / 2;
-        const progress = Math.abs(getTX()) / halfW;
-        track.style.animationDuration = duration + 's';
-        track.style.animationDelay   = -(progress * duration) + 's';
-      }
+      measureHalf();
+      window.addEventListener('resize', measureHalf);
+      requestAnimationFrame(loop);
 
       /* ── Animated right-edge arrow ── */
       const arrow = document.createElement('div');
@@ -1319,7 +1335,7 @@
       const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
       if (!isTouch) {
-        /* ── Desktop: click + drag left = speed up ── */
+        /* Desktop: click + hold + drag left = speed up */
         let pressing = false;
         let startX   = 0;
 
@@ -1333,52 +1349,46 @@
 
         document.addEventListener('mousemove', e => {
           if (!pressing) return;
-          const delta = startX - e.clientX;       // positive = dragging left
-          if (delta > 0) {
-            const mult = Math.min(MAX_MULT, 1 + delta / SENSITIVITY);
-            setSpeed(BASE_DURATION / mult);
-          } else {
-            setSpeed(BASE_DURATION);
-          }
+          const delta = startX - e.clientX;   // positive = dragging left
+          targetSp = delta > 0
+            ? BASE_SPEED * Math.min(MAX_MULT, 1 + delta / SENSITIVITY)
+            : BASE_SPEED;
         });
 
         document.addEventListener('mouseup', () => {
           if (!pressing) return;
           pressing = false;
           track.classList.remove('is-speeding');
-          setSpeed(BASE_DURATION);
+          targetSp = BASE_SPEED;
           showArrow();
         });
 
       } else {
-        /* ── Mobile: swipe left = speed up ── */
+        /* Mobile: swipe left = speed up */
         let touchStartX = 0;
         let touchStartY = 0;
-        let isSpeeding  = false;
 
         track.addEventListener('touchstart', e => {
           touchStartX = e.touches[0].clientX;
           touchStartY = e.touches[0].clientY;
-          isSpeeding  = false;
           hideArrow();
         }, { passive: true });
 
         track.addEventListener('touchmove', e => {
-          const deltaX = touchStartX - e.touches[0].clientX;  // positive = left
+          const deltaX = touchStartX - e.touches[0].clientX; // positive = left swipe
           const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
-          if (deltaY > deltaX + 10) return;   // vertical scroll intent — ignore
-          if (deltaX > 0) {
-            isSpeeding = true;
-            const mult = Math.min(MAX_MULT, 1 + deltaX / SENSITIVITY);
-            setSpeed(BASE_DURATION / mult);
-          } else {
-            if (isSpeeding) { setSpeed(BASE_DURATION); isSpeeding = false; }
+          // If scrolling mostly vertically, don't interfere
+          if (deltaY > Math.abs(deltaX) + 15) {
+            targetSp = BASE_SPEED;
+            return;
           }
+          targetSp = deltaX > 10
+            ? BASE_SPEED * Math.min(MAX_MULT, 1 + deltaX / SENSITIVITY)
+            : BASE_SPEED;
         }, { passive: true });
 
         track.addEventListener('touchend', () => {
-          setSpeed(BASE_DURATION);
-          isSpeeding = false;
+          targetSp = BASE_SPEED;
           setTimeout(showArrow, 600);
         }, { passive: true });
       }
