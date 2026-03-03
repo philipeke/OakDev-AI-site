@@ -650,8 +650,8 @@
       animation: client-scroll 40s linear infinite;
     }
 
-    /* Drag cursor */
-    .client-track { cursor: ew-resize; }
+    /* Drag cursor + touch behaviour */
+    .client-track { cursor: ew-resize; touch-action: pan-y; }
     .client-track.is-speeding { cursor: w-resize; user-select: none; }
 
     /* Scroll-hint arrow on right edge */
@@ -1321,6 +1321,7 @@
 
       measureHalf();
       window.addEventListener('resize', measureHalf);
+      window.addEventListener('load', measureHalf);   // re-measure once images load
       requestAnimationFrame(loop);
 
       /* ── Animated right-edge arrow ── */
