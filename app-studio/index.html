@@ -1855,15 +1855,25 @@
         }
       }
 
-      /* Init */
-      resize();
-      const frames = Array.from({ length: 18 }, function () { return new UIFrame(true); });
-      const pulses = [];
-      let pulseTimer = 0;
+      /* Init — defer to rAF so offsetWidth is available after first layout */
+      let frames, pulses, pulseTimer;
+
+      function init () {
+        resize();
+        if (W === 0) {
+          // offsetWidth still 0 — wait one more frame (e.g. inside lazy-loaded section)
+          requestAnimationFrame(init);
+          return;
+        }
+        frames    = Array.from({ length: 18 }, function () { return new UIFrame(true); });
+        pulses    = [];
+        pulseTimer = 0;
+        requestAnimationFrame(loop);
+      }
 
       window.addEventListener('resize', function () {
         resize();
-        frames.forEach(function (f) { f.respawn(true); });
+        if (frames) frames.forEach(function (f) { f.respawn(true); });
       });
 
       function drawLinks () {
@@ -1903,7 +1913,7 @@
         }
         requestAnimationFrame(loop);
       }
-      requestAnimationFrame(loop);
+      requestAnimationFrame(init);
     })();
   </script>
 
