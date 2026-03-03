@@ -819,6 +819,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .scroll-hint:hover { opacity: 0.9; }
 
+@media (max-width: 768px) {
+  .scroll-hint { display: none; }
+}
+
 .scroll-line {
   width: 1px;
   height: 40px;

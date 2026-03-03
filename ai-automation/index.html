@@ -134,11 +134,34 @@
       to { stroke-dashoffset: -20; }
     }
 
-    /* Signal pulse travelling along a line */
-    .ai-signal {
-      r: 3;
-      fill: #76b900;
-      filter: drop-shadow(0 0 6px #76b900);
+    /* Signal dots — HTML divs so they stay circular on all screen ratios */
+    .ai-signal-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: #76b900;
+      box-shadow: 0 0 6px rgba(118,185,0,0.9), 0 0 14px rgba(118,185,0,0.5);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .ai-signal-dot-1 {
+      width: 6px; height: 6px;
+      animation: signalPath1 4s linear infinite;
+    }
+    .ai-signal-dot-2 {
+      width: 5px; height: 5px;
+      opacity: 0.7;
+      animation: signalPath2 5.5s linear infinite;
+    }
+    @keyframes signalPath1 {
+      0%   { left: 12%; top: 18%; }
+      33%  { left: 28%; top: 32%; }
+      67%  { left:  8%; top: 55%; }
+      100% { left: 22%; top: 72%; }
+    }
+    @keyframes signalPath2 {
+      0%   { left: 68%; top: 22%; }
+      50%  { left: 82%; top: 44%; }
+      100% { left: 76%; top: 65%; }
     }
 
     /* Ambient glows */
@@ -1013,20 +1036,11 @@
           <line class="ai-connection-line" x1="48" y1="12" x2="68" y2="22"/>
           <line class="ai-connection-line" x1="60" y1="80" x2="76" y2="65"/>
           <line class="ai-connection-line" x1="38" y1="88" x2="60" y2="80"/>
-          <!-- Animated signals -->
-          <circle class="ai-signal">
-            <animateMotion dur="4s" repeatCount="indefinite">
-              <mpath href="#path1"/>
-            </animateMotion>
-          </circle>
-          <path id="path1" d="M 12 18 L 28 32 L 8 55 L 22 72" fill="none"/>
-          <circle class="ai-signal" r="2.5" opacity="0.7">
-            <animateMotion dur="5.5s" repeatCount="indefinite">
-              <mpath href="#path2"/>
-            </animateMotion>
-          </circle>
-          <path id="path2" d="M 68 22 L 82 44 L 76 65" fill="none"/>
         </svg>
+
+        <!-- Signal dots (HTML divs — always circular, never oval) -->
+        <div class="ai-signal-dot ai-signal-dot-1" aria-hidden="true"></div>
+        <div class="ai-signal-dot ai-signal-dot-2" aria-hidden="true"></div>
 
         <!-- Ambient glows -->
         <div class="ai-glow-left"></div>
