@@ -602,7 +602,9 @@
       border-top: 1px solid rgba(255,255,255,0.05);
       border-bottom: 1px solid rgba(255,255,255,0.05);
       padding: 100px 0;
-      overflow: hidden;
+      overflow: clip;
+      touch-action: pan-y;
+    overscroll-behavior: none;
     }
 
     .clients-header {
@@ -1365,33 +1367,10 @@
         });
 
       } else {
-        /* Mobile: swipe left = speed up */
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        track.addEventListener('touchstart', e => {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-          hideArrow();
-        }, { passive: true });
-
-        track.addEventListener('touchmove', e => {
-          const deltaX = touchStartX - e.touches[0].clientX; // positive = left swipe
-          const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
-          // If scrolling mostly vertically, don't interfere
-          if (deltaY > Math.abs(deltaX) + 15) {
-            targetSp = BASE_SPEED;
-            return;
-          }
-          targetSp = deltaX > 10
-            ? BASE_SPEED * Math.min(MAX_MULT, 1 + deltaX / SENSITIVITY)
-            : BASE_SPEED;
-        }, { passive: true });
-
-        track.addEventListener('touchend', () => {
-          targetSp = BASE_SPEED;
-          setTimeout(showArrow, 600);
-        }, { passive: true });
+        /* Mobile: no touch interception — let page scroll work natively.
+           The RAF loop keeps the marquee auto-scrolling without any gesture capture. */
+        track.addEventListener('touchstart', () => { hideArrow(); }, { passive: true });
+        track.addEventListener('touchend',   () => { setTimeout(showArrow, 600); }, { passive: true });
       }
     })();
   </script>
