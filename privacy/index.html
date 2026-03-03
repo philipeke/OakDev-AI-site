@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Privacy Policy — OakDev &amp; AI</title>
+  <meta name="description" content="Privacy policy for OakDev & AI AB — how we collect, use, and protect your personal data under GDPR.">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../assets/icon.png" type="image/png">
+
+  <style>
+    /* =========================================================
+       PRIVACY PAGE — SCOPED STYLES
+       ========================================================= */
+
+    /* Lang-based content switching */
+    [lang-show] { display: block; }
+    html[lang="sv"] [lang-show="en"] { display: none !important; }
+    html[lang="en"] [lang-show="sv"] { display: none !important; }
+
+    /* ── Hero ── */
+    .privacy-hero {
+      position: relative;
+      background: #020202;
+      padding: 140px 24px 80px;
+      overflow: hidden;
+    }
+
+    .privacy-hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(118,185,0,0.06) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(118,185,0,0.03) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .privacy-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(118,185,0,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(118,185,0,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .privacy-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .privacy-hero-inner .hero-badge { margin-bottom: 32px; }
+
+    .privacy-hero-inner h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #f0f0f0;
+      margin-bottom: 24px;
+    }
+
+    .privacy-hero-inner h1 span { color: #76b900; }
+
+    .privacy-hero-inner p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
+
+    .privacy-updated-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(118,185,0,0.07);
+      border: 1px solid rgba(118,185,0,0.18);
+      border-radius: 100px;
+      padding: 5px 16px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .privacy-updated-badge span { color: #76b900; font-weight: 600; }
+
+    /* ── Layout ── */
+    .privacy-body {
+      background: #020202;
+      padding: 80px 24px 120px;
+    }
+
+    .privacy-layout {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .privacy-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ── TOC Sidebar ── */
+    .privacy-toc {
+      position: sticky;
+      top: 100px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+
+    @media (max-width: 860px) {
+      .privacy-toc { position: static; }
+    }
+
+    .privacy-toc h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+
+    .privacy-toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .privacy-toc ol li a {
+      display: block;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+
+    .privacy-toc ol li a:hover {
+      color: #76b900;
+      background: rgba(118,185,0,0.06);
+    }
+
+    /* ── Content ── */
+    .privacy-content {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .privacy-section {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 48px;
+    }
+
+    .privacy-section:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .privacy-section h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 800;
+      color: #f0f0f0;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .privacy-section h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #76b900;
+      margin: 28px 0 10px;
+    }
+
+    .privacy-section p {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 14px;
+    }
+
+    .privacy-section p:last-child { margin-bottom: 0; }
+
+    .privacy-section ul,
+    .privacy-section ol {
+      padding-left: 20px;
+      margin: 10px 0 14px;
+    }
+
+    .privacy-section li {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+    }
+
+    .privacy-section a {
+      color: #76b900;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(118,185,0,0.3);
+      transition: border-color 0.2s;
+    }
+
+    .privacy-section a:hover {
+      border-color: #76b900;
+    }
+
+    .privacy-section strong {
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+
+    /* Rights grid */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .rights-grid { grid-template-columns: 1fr; }
+    }
+
+    .right-item {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .right-item:hover {
+      border-color: rgba(118,185,0,0.2);
+      background: rgba(118,185,0,0.03);
+    }
+
+    .right-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #76b900;
+      margin-bottom: 6px;
+    }
+
+    .right-item p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* Contact card in DPA section */
+    .privacy-contact-card {
+      margin-top: 24px;
+      background: rgba(118,185,0,0.04);
+      border: 1px solid rgba(118,185,0,0.15);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+
+    .privacy-contact-card p {
+      margin-bottom: 6px;
+    }
+
+    .privacy-contact-card p strong {
+      color: #76b900;
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    /* Back to top */
+    .back-top-row {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 24px;
+    }
+
+    .back-top-row a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-top-row a:hover { color: #76b900; }
+
+    /* Table */
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.87rem;
+    }
+
+    .cookie-table th {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cookie-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.5);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .cookie-table tr:last-child td { border-bottom: none; }
+
+    /* Section label helpers */
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #76b900;
+      margin-bottom: 12px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ─────────────────────────────────────────────── -->
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link" data-i18n="nav_home">Home</a>
+        <a href="/app-studio/" class="nav-link" data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="nav-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/" class="nav-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/" class="nav-link" data-i18n="nav_about">About</a>
+        <a href="/contact/" class="nav-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" data-i18n="nav_book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/" class="mobile-link" data-i18n="nav_home">Home</a>
+        <a href="/app-studio/" class="mobile-link" data-i18n="nav_studio">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link" data-i18n="nav_ai">AI &amp; Automation</a>
+        <a href="/consulting/" class="mobile-link" data-i18n="nav_consulting">Consulting</a>
+        <a href="/about/" class="mobile-link" data-i18n="nav_about">About</a>
+        <a href="/contact/" class="mobile-link" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+        </div>
+        <a href="/contact/" class="btn-book" style="display:block;text-align:center;" data-i18n="nav_book">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="privacy-hero" id="hero">
+    <div class="privacy-hero-bg"></div>
+    <div class="privacy-hero-grid"></div>
+
+    <div class="privacy-hero-inner">
+      <div class="hero-badge reveal" data-i18n="privacy_badge">Privacy Policy</div>
+
+      <h1 class="reveal" style="margin-top:28px;">
+        <span data-i18n="privacy_title">Your Privacy</span><br>
+        <span data-i18n="privacy_title2">Matters to Us</span>
+      </h1>
+
+      <p class="reveal" data-i18n="privacy_sub">
+        We are committed to protecting your personal data and your rights under GDPR. This policy explains what we collect, why, and how you can control it.
+      </p>
+
+      <div class="privacy-updated-badge reveal">
+        <span data-i18n="privacy_updated">Last Updated: March 3, 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BODY ──────────────────────────────────────────────── -->
+  <div class="privacy-body">
+    <div class="privacy-layout">
+
+      <!-- ── TABLE OF CONTENTS ── -->
+      <aside class="privacy-toc reveal">
+        <h3 data-i18n="privacy_toc">Table of Contents</h3>
+        <ol>
+          <li><a href="#s1" data-i18n="privacy_s1_title">1. Who We Are</a></li>
+          <li><a href="#s2" data-i18n="privacy_s2_title">2. What Data We Collect</a></li>
+          <li><a href="#s3" data-i18n="privacy_s3_title">3. How We Use Your Data</a></li>
+          <li><a href="#s4" data-i18n="privacy_s4_title">4. Legal Basis for Processing</a></li>
+          <li><a href="#s5" data-i18n="privacy_s5_title">5. Data Sharing &amp; Third Parties</a></li>
+          <li><a href="#s6" data-i18n="privacy_s6_title">6. Data Retention</a></li>
+          <li><a href="#s7" data-i18n="privacy_s7_title">7. Cookies &amp; Tracking</a></li>
+          <li><a href="#s8" data-i18n="privacy_s8_title">8. Your Rights (GDPR)</a></li>
+          <li><a href="#s9" data-i18n="privacy_s9_title">9. Children's Privacy</a></li>
+          <li><a href="#s10" data-i18n="privacy_s10_title">10. Third-Party Links</a></li>
+          <li><a href="#s11" data-i18n="privacy_s11_title">11. Changes to This Policy</a></li>
+          <li><a href="#s12" data-i18n="privacy_s12_title">12. Contact &amp; Data Protection</a></li>
+        </ol>
+      </aside>
+
+      <!-- ── CONTENT ── -->
+      <main class="privacy-content">
+
+        <!-- 1. Who We Are -->
+        <section class="privacy-section reveal" id="s1">
+          <h2 data-i18n="privacy_s1_title">1. Who We Are</h2>
+
+          <div lang-show="en">
+            <p>
+              <strong>OakDev &amp; AI AB</strong> (registration number 559431-6787, VAT SE55943167870) is a Swedish limited company operating as an app studio and AI product company. We are the data controller for all personal data processed through this website.
+            </p>
+            <p>
+              Our registered address is:<br>
+              OakDev &amp; AI AB<br>
+              Kristevik 633<br>
+              451 96 Uddevalla, Sweden<br>
+              Email: <a href="mailto:hello@oakdev.app">hello@oakdev.app</a><br>
+              Phone: <a href="tel:+46763909381">+46 76 390 93 81</a>
+            </p>
+            <p>
+              This Privacy Policy applies to our website at <a href="https://oakdev.app" target="_blank" rel="noopener">oakdev.app</a> and any services or communications conducted through it.
+            </p>
+          </div>
+
+          <div lang-show="sv">
+            <p>
+              <strong>OakDev &amp; AI AB</strong> (organisationsnummer 559431-6787, VAT SE55943167870) är ett svenskt aktiebolag som bedriver verksamhet som app-studio och AI-produktbolag. Vi är personuppgiftsansvarig för all personuppgiftsbehandling som sker via denna webbplats.
+            </p>
+            <p>
+              Vår registrerade adress är:<br>
+              OakDev &amp; AI AB<br>
+              Kristevik 633<br>
+              451 96 Uddevalla, Sverige<br>
+              E-post: <a href="mailto:hello@oakdev.app">hello@oakdev.app</a><br>
+              Telefon: <a href="tel:+46763909381">+46 76 390 93 81</a>
+            </p>
+            <p>
+              Denna integritetspolicy gäller vår webbplats på <a href="https://oakdev.app" target="_blank" rel="noopener">oakdev.app</a> och eventuella tjänster eller kommunikation som genomförs via den.
+            </p>
+          </div>
+        </section>
+
+        <!-- 2. What Data We Collect -->
+        <section class="privacy-section reveal" id="s2">
+          <h2 data-i18n="privacy_s2_title">2. What Data We Collect</h2>
+
+          <div lang-show="en">
+            <h3>2.1 Data You Provide Directly</h3>
+            <p>When you use our contact form or reach out to us, we may collect:</p>
+            <ul>
+              <li><strong>Name</strong> — to address you personally</li>
+              <li><strong>Email address</strong> — to respond to your inquiry</li>
+              <li><strong>Phone number</strong> — if you choose to provide it</li>
+              <li><strong>Message content</strong> — the content of your inquiry or project description</li>
+              <li><strong>Company name / role</strong> — if voluntarily provided</li>
+            </ul>
+            <p>We do not require you to create an account and we do not store payment card data on our servers.</p>
+
+            <h3>2.2 Data Collected Automatically</h3>
+            <p>When you visit our website, standard web server logs and third-party CDN providers may automatically record:</p>
+            <ul>
+              <li>IP address (anonymised or hashed where possible)</li>
+              <li>Browser type and version</li>
+              <li>Operating system</li>
+              <li>Referring URL</li>
+              <li>Pages visited and time of visit</li>
+              <li>Approximate geographic location (country/city level)</li>
+            </ul>
+            <p>This data is processed for the purpose of ensuring the security and performance of our website and is not used to build personal profiles.</p>
+
+            <h3>2.3 Data from Third-Party Services</h3>
+            <p>We use <strong>FormSubmit.co</strong> to process contact form submissions. When you submit our contact form, your data passes through FormSubmit.co's servers. Please review their <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>. We do not store form data on our own servers beyond what is delivered to our email inbox.</p>
+          </div>
+
+          <div lang-show="sv">
+            <h3>2.1 Uppgifter Du Lämnar Direkt</h3>
+            <p>När du använder vårt kontaktformulär eller kontaktar oss kan vi samla in:</p>
+            <ul>
+              <li><strong>Namn</strong> — för att tilltala dig personligen</li>
+              <li><strong>E-postadress</strong> — för att svara på din förfrågan</li>
+              <li><strong>Telefonnummer</strong> — om du väljer att uppge det</li>
+              <li><strong>Meddelandeinnehåll</strong> — innehållet i din förfrågan eller projektbeskrivning</li>
+              <li><strong>Företagsnamn / roll</strong> — om du frivilligt uppger det</li>
+            </ul>
+            <p>Vi kräver inte att du skapar ett konto och vi lagrar inga betalkortsuppgifter på våra servrar.</p>
+
+            <h3>2.2 Automatiskt Insamlade Uppgifter</h3>
+            <p>När du besöker vår webbplats kan standardloggar för webbservrar och tredjepartsleverantörer av CDN automatiskt registrera:</p>
+            <ul>
+              <li>IP-adress (anonymiserad eller hashad där det är möjligt)</li>
+              <li>Webbläsartyp och -version</li>
+              <li>Operativsystem</li>
+              <li>Hänvisnings-URL</li>
+              <li>Besökta sidor och besökstidpunkt</li>
+              <li>Ungefärlig geografisk plats (på land-/stadsnivå)</li>
+            </ul>
+            <p>Dessa uppgifter behandlas i syfte att säkerställa säkerheten och prestandan på vår webbplats och används inte för att bygga personliga profiler.</p>
+
+            <h3>2.3 Uppgifter från Tredjepartstjänster</h3>
+            <p>Vi använder <strong>FormSubmit.co</strong> för att behandla kontaktformulärinlämningar. När du skickar in vårt kontaktformulär skickas dina uppgifter via FormSubmit.co:s servrar. Läs deras <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener noreferrer">integritetspolicy</a>. Vi lagrar inte formulärdata på våra egna servrar utöver vad som levereras till vår e-postinkorg.</p>
+          </div>
+        </section>
+
+        <!-- 3. How We Use Your Data -->
+        <section class="privacy-section reveal" id="s3">
+          <h2 data-i18n="privacy_s3_title">3. How We Use Your Data</h2>
+
+          <div lang-show="en">
+            <p>We use the personal data we collect for the following purposes:</p>
+            <ul>
+              <li><strong>To respond to your inquiries</strong> — processing and replying to messages submitted through our contact form or sent directly by email</li>
+              <li><strong>To provide our services</strong> — managing client projects and business relationships</li>
+              <li><strong>To improve our website</strong> — analysing aggregated, anonymised usage data to improve performance and user experience</li>
+              <li><strong>To comply with legal obligations</strong> — retaining records as required by Swedish law and EU regulations</li>
+              <li><strong>Security and fraud prevention</strong> — detecting and preventing spam, abuse, or unauthorised access</li>
+            </ul>
+            <p>We do <strong>not</strong> sell, rent, or trade your personal data to any third party for marketing purposes. We do not use automated decision-making or profiling as defined under Article 22 GDPR.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vi använder de personuppgifter vi samlar in för följande ändamål:</p>
+            <ul>
+              <li><strong>För att svara på dina förfrågningar</strong> — behandla och besvara meddelanden som skickats via vårt kontaktformulär eller direkt via e-post</li>
+              <li><strong>För att tillhandahålla våra tjänster</strong> — hantera kundprojekt och affärsrelationer</li>
+              <li><strong>För att förbättra vår webbplats</strong> — analysera aggregerade, anonymiserade användningsdata för att förbättra prestanda och användarupplevelse</li>
+              <li><strong>För att uppfylla rättsliga skyldigheter</strong> — bevara uppgifter i enlighet med svensk lagstiftning och EU-förordningar</li>
+              <li><strong>Säkerhet och bedrägeriförebyggande åtgärder</strong> — detektera och förhindra skräppost, missbruk eller obehörig åtkomst</li>
+            </ul>
+            <p>Vi <strong>säljer, hyr eller handlar inte</strong> med dina personuppgifter till någon tredje part i marknadsföringssyfte. Vi använder inte automatiserat beslutsfattande eller profilering enligt artikel 22 GDPR.</p>
+          </div>
+        </section>
+
+        <!-- 4. Legal Basis -->
+        <section class="privacy-section reveal" id="s4">
+          <h2 data-i18n="privacy_s4_title">4. Legal Basis for Processing</h2>
+
+          <div lang-show="en">
+            <p>Under the General Data Protection Regulation (GDPR — Regulation (EU) 2016/679), we process your personal data on the following legal bases:</p>
+            <ul>
+              <li><strong>Article 6(1)(b) — Performance of a contract / pre-contractual steps:</strong> processing your contact form submission to take steps to enter into a contract with you or to provide the service you requested.</li>
+              <li><strong>Article 6(1)(c) — Legal obligation:</strong> retaining accounting and business records as required under Swedish bookkeeping law (Bokföringslagen 1999:1078).</li>
+              <li><strong>Article 6(1)(f) — Legitimate interests:</strong> protecting the security and integrity of our website, preventing fraud and spam, and improving our services through aggregated analytics. Our legitimate interests do not override your fundamental rights and freedoms.</li>
+              <li><strong>Article 6(1)(a) — Consent:</strong> where we ask for your explicit consent (e.g. for cookies or marketing communications), we will only process your data after you have freely, specifically, and unambiguously given that consent. You may withdraw consent at any time.</li>
+            </ul>
+          </div>
+
+          <div lang-show="sv">
+            <p>Enligt den allmänna dataskyddsförordningen (GDPR — förordning (EU) 2016/679) behandlar vi dina personuppgifter på följande rättsliga grunder:</p>
+            <ul>
+              <li><strong>Artikel 6.1 b — Avtal / föravtalsåtgärder:</strong> behandling av ditt kontaktformulärsvar för att vidta åtgärder inför ingående av ett avtal med dig eller för att tillhandahålla den tjänst du begärt.</li>
+              <li><strong>Artikel 6.1 c — Rättslig skyldighet:</strong> bevara bokförings- och affärsdokument enligt svensk bokföringslag (Bokföringslagen 1999:1078).</li>
+              <li><strong>Artikel 6.1 f — Berättigat intresse:</strong> skydda säkerheten och integriteten hos vår webbplats, förhindra bedrägeri och skräppost samt förbättra våra tjänster via aggregerad analys. Våra berättigade intressen åsidosätter inte dina grundläggande rättigheter och friheter.</li>
+              <li><strong>Artikel 6.1 a — Samtycke:</strong> när vi ber om ditt uttryckliga samtycke (t.ex. för cookies eller marknadsföringskommunikation) behandlar vi dina uppgifter enbart efter att du frivilligt, specifikt och otvetydigt lämnat detta samtycke. Du kan när som helst återkalla ditt samtycke.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 5. Data Sharing -->
+        <section class="privacy-section reveal" id="s5">
+          <h2 data-i18n="privacy_s5_title">5. Data Sharing &amp; Third Parties</h2>
+
+          <div lang-show="en">
+            <p>We do not sell your personal data. We may share data with the following categories of recipients only to the extent necessary:</p>
+            <ul>
+              <li><strong>FormSubmit.co</strong> — processes contact form submissions and delivers them to our inbox. They act as a data processor on our behalf.</li>
+              <li><strong>CDN providers (jsDelivr, Google Fonts)</strong> — these services may log your IP address when assets are loaded from their networks. Both operate under their own privacy policies and GDPR-compliant data processing agreements.</li>
+              <li><strong>Hosting infrastructure</strong> — our website is hosted on GitHub Pages (Microsoft/GitHub). GitHub may log access requests. See GitHub's privacy statement for details.</li>
+              <li><strong>Professional advisors</strong> — lawyers, accountants, or auditors where required by law or to protect our legal rights.</li>
+              <li><strong>Authorities</strong> — law enforcement or regulatory bodies when required by applicable law or court order.</li>
+            </ul>
+            <p>All third-party processors we use are required to implement appropriate technical and organisational security measures and are prohibited from using your data for their own purposes.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vi säljer inte dina personuppgifter. Vi kan dela uppgifter med följande kategorier av mottagare enbart i den utsträckning det är nödvändigt:</p>
+            <ul>
+              <li><strong>FormSubmit.co</strong> — behandlar kontaktformulärsvar och levererar dem till vår inkorg. De agerar som personuppgiftsbiträde för vår räkning.</li>
+              <li><strong>CDN-leverantörer (jsDelivr, Google Fonts)</strong> — dessa tjänster kan logga din IP-adress när tillgångar laddas från deras nätverk. Båda verkar under sina egna integritetspolicyer och GDPR-kompatibla databehandlingsavtal.</li>
+              <li><strong>Värdinfrastruktur</strong> — vår webbplats är hostad på GitHub Pages (Microsoft/GitHub). GitHub kan logga åtkomstbegäranden. Se GitHubs sekretesspolicy för information.</li>
+              <li><strong>Professionella rådgivare</strong> — advokater, revisorer eller granskare när det krävs enligt lag eller för att skydda våra juridiska rättigheter.</li>
+              <li><strong>Myndigheter</strong> — brottsbekämpande myndigheter eller tillsynsorgan när tillämplig lag eller domstolsbeslut kräver det.</li>
+            </ul>
+            <p>Alla tredjepartsbiträden vi använder är skyldiga att genomföra lämpliga tekniska och organisatoriska säkerhetsåtgärder och är förbjudna att använda dina uppgifter för egna ändamål.</p>
+          </div>
+        </section>
+
+        <!-- 6. Data Retention -->
+        <section class="privacy-section reveal" id="s6">
+          <h2 data-i18n="privacy_s6_title">6. Data Retention</h2>
+
+          <div lang-show="en">
+            <p>We retain your personal data only for as long as necessary to fulfil the purposes described in this policy:</p>
+            <ul>
+              <li><strong>Contact form inquiries</strong> — retained in our email inbox for up to <strong>2 years</strong> from the date of receipt, unless the inquiry leads to a business relationship.</li>
+              <li><strong>Business correspondence and client data</strong> — retained for up to <strong>7 years</strong> in accordance with Swedish bookkeeping requirements (Bokföringslagen).</li>
+              <li><strong>Server logs</strong> — typically retained for <strong>30–90 days</strong> by our hosting provider for security and operational purposes.</li>
+              <li><strong>Cookie data</strong> — session cookies expire when you close your browser; preference cookies (language) persist for up to <strong>1 year</strong>.</li>
+            </ul>
+            <p>When data is no longer needed, it is securely deleted or anonymised.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vi sparar dina personuppgifter endast så länge det är nödvändigt för att uppfylla de ändamål som beskrivs i denna policy:</p>
+            <ul>
+              <li><strong>Kontaktformulärsförfrågningar</strong> — sparas i vår e-postinkorg i upp till <strong>2 år</strong> från mottagningsdatumet, om inte förfrågan leder till en affärsrelation.</li>
+              <li><strong>Affärskorrespondens och kunddata</strong> — sparas i upp till <strong>7 år</strong> i enlighet med svenska bokföringskrav (Bokföringslagen).</li>
+              <li><strong>Serverloggar</strong> — sparas vanligtvis i <strong>30–90 dagar</strong> av vår värdleverantör för säkerhets- och driftsändamål.</li>
+              <li><strong>Cookie-data</strong> — sessions-cookies upphör när du stänger webbläsaren; inställningscookies (språk) sparas i upp till <strong>1 år</strong>.</li>
+            </ul>
+            <p>När data inte längre behövs raderas eller anonymiseras den på ett säkert sätt.</p>
+          </div>
+        </section>
+
+        <!-- 7. Cookies -->
+        <section class="privacy-section reveal" id="s7">
+          <h2 data-i18n="privacy_s7_title">7. Cookies &amp; Tracking</h2>
+
+          <div lang-show="en">
+            <p>We use minimal, privacy-respecting technologies on this website. Below is a complete list of cookies and local storage items we use:</p>
+
+            <table class="cookie-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Purpose</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>oakdev_lang</strong></td>
+                  <td>localStorage</td>
+                  <td>Stores your language preference (EN/SV) so you see the site in your chosen language on return visits.</td>
+                  <td>Until cleared</td>
+                </tr>
+                <tr>
+                  <td><strong>oakdev_cc</strong></td>
+                  <td>localStorage</td>
+                  <td>Records whether you have acknowledged our cookie notice.</td>
+                  <td>Until cleared</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:20px;">We do <strong>not</strong> use Google Analytics, Facebook Pixel, advertising trackers, or any third-party tracking scripts. No cross-site tracking takes place on our website.</p>
+            <p>Third-party CDN providers (jsDelivr for JavaScript libraries, Google Fonts) may set their own technical cookies as part of their infrastructure. These are strictly necessary for delivering website assets and are outside our control. They do not track your browsing activity across sites.</p>
+            <p>To manage or delete cookies and localStorage, use your browser settings (<strong>Chrome:</strong> Settings → Privacy → Clear browsing data; <strong>Firefox:</strong> Preferences → Privacy &amp; Security → Cookies; <strong>Safari:</strong> Preferences → Privacy).</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vi använder minimala, integritetsvänliga tekniker på denna webbplats. Nedan finns en komplett lista över cookies och localStorage-objekt vi använder:</p>
+
+            <table class="cookie-table">
+              <thead>
+                <tr>
+                  <th>Namn</th>
+                  <th>Typ</th>
+                  <th>Syfte</th>
+                  <th>Varaktighet</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>oakdev_lang</strong></td>
+                  <td>localStorage</td>
+                  <td>Lagrar ditt språkval (EN/SV) så att du ser webbplatsen på ditt valda språk vid återbesök.</td>
+                  <td>Tills rensad</td>
+                </tr>
+                <tr>
+                  <td><strong>oakdev_cc</strong></td>
+                  <td>localStorage</td>
+                  <td>Registrerar om du har bekräftat vårt cookie-meddelande.</td>
+                  <td>Tills rensad</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p style="margin-top:20px;">Vi använder <strong>inte</strong> Google Analytics, Facebook Pixel, reklamspårare eller några tredjeparts-spårningsskript. Ingen spårning över webbplatser sker på vår webbplats.</p>
+            <p>Tredjeparts CDN-leverantörer (jsDelivr för JavaScript-bibliotek, Google Fonts) kan sätta egna tekniska cookies som en del av sin infrastruktur. Dessa är strikt nödvändiga för att leverera webbplatstillgångar och ligger utanför vår kontroll. De spårar inte din surfaktivitet på andra webbplatser.</p>
+            <p>För att hantera eller radera cookies och localStorage, använd dina webbläsarinställningar (<strong>Chrome:</strong> Inställningar → Sekretess → Rensa webbdata; <strong>Firefox:</strong> Inställningar → Sekretess → Cookies; <strong>Safari:</strong> Inställningar → Sekretess).</p>
+          </div>
+        </section>
+
+        <!-- 8. Your Rights -->
+        <section class="privacy-section reveal" id="s8">
+          <h2 data-i18n="privacy_s8_title">8. Your Rights (GDPR)</h2>
+
+          <div lang-show="en">
+            <p>As a data subject under GDPR, you have the following rights. To exercise any of them, contact us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>. We will respond within <strong>30 days</strong> of your request.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Som registrerad enligt GDPR har du följande rättigheter. För att utöva någon av dem, kontakta oss på <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>. Vi svarar inom <strong>30 dagar</strong> från din begäran.</p>
+          </div>
+
+          <div class="rights-grid">
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_access">Right of Access</h4>
+              <div lang-show="en"><p>You have the right to request a copy of the personal data we hold about you (Art. 15 GDPR).</p></div>
+              <div lang-show="sv"><p>Du har rätt att begära en kopia av de personuppgifter vi har om dig (Art. 15 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_rectify">Right to Rectification</h4>
+              <div lang-show="en"><p>You may request that we correct any inaccurate or incomplete data (Art. 16 GDPR).</p></div>
+              <div lang-show="sv"><p>Du kan begära att vi korrigerar felaktiga eller ofullständiga uppgifter (Art. 16 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_erase">Right to Erasure</h4>
+              <div lang-show="en"><p>You can ask us to delete your personal data where there is no compelling reason for continued processing ("right to be forgotten", Art. 17 GDPR).</p></div>
+              <div lang-show="sv"><p>Du kan be oss radera dina personuppgifter om det inte finns något tvingande skäl för fortsatt behandling ("rätten att bli glömd", Art. 17 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_port">Right to Data Portability</h4>
+              <div lang-show="en"><p>You may request your data in a structured, machine-readable format for transfer to another controller (Art. 20 GDPR).</p></div>
+              <div lang-show="sv"><p>Du kan begära dina uppgifter i ett strukturerat, maskinläsbart format för överföring till en annan personuppgiftsansvarig (Art. 20 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_object">Right to Object</h4>
+              <div lang-show="en"><p>You may object to processing based on legitimate interests or for direct marketing purposes at any time (Art. 21 GDPR).</p></div>
+              <div lang-show="sv"><p>Du kan när som helst invända mot behandling baserad på berättigade intressen eller för direktmarknadsföring (Art. 21 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_restrict">Right to Restrict Processing</h4>
+              <div lang-show="en"><p>You may request that we limit how we use your data in certain circumstances (Art. 18 GDPR).</p></div>
+              <div lang-show="sv"><p>Du kan begära att vi begränsar hur vi använder dina uppgifter i vissa situationer (Art. 18 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4 data-i18n="privacy_rights_withdraw">Right to Withdraw Consent</h4>
+              <div lang-show="en"><p>Where processing is based on consent, you may withdraw it at any time without affecting the lawfulness of prior processing (Art. 7 GDPR).</p></div>
+              <div lang-show="sv"><p>Om behandlingen grundar sig på samtycke kan du när som helst återkalla det utan att det påverkar lagligheten av tidigare behandling (Art. 7 GDPR).</p></div>
+            </div>
+            <div class="right-item">
+              <h4>
+                <span lang-show="en">Right to Lodge a Complaint</span>
+                <span lang-show="sv">Rätt att Lämna Klagomål</span>
+              </h4>
+              <div lang-show="en"><p>If you believe we have mishandled your data, you have the right to file a complaint with the Swedish Data Protection Authority (Integritetsskyddsmyndigheten, <a href="https://www.imy.se" target="_blank" rel="noopener noreferrer">imy.se</a>).</p></div>
+              <div lang-show="sv"><p>Om du anser att vi har hanterat dina uppgifter felaktigt har du rätt att lämna in ett klagomål till Integritetsskyddsmyndigheten (<a href="https://www.imy.se" target="_blank" rel="noopener noreferrer">imy.se</a>).</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Children -->
+        <section class="privacy-section reveal" id="s9">
+          <h2 data-i18n="privacy_s9_title">9. Children's Privacy</h2>
+
+          <div lang-show="en">
+            <p>Our website and services are not directed to children under the age of <strong>16</strong>. We do not knowingly collect personal data from children. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> and we will delete the data promptly.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vår webbplats och tjänster riktar sig inte till barn under <strong>16 år</strong>. Vi samlar inte medvetet in personuppgifter från barn. Om du är förälder eller vårdnadshavare och tror att ditt barn har lämnat personuppgifter till oss, vänligen kontakta oss på <a href="mailto:hello@oakdev.app">hello@oakdev.app</a> och vi kommer att radera uppgifterna omgående.</p>
+          </div>
+        </section>
+
+        <!-- 10. Third-Party Links -->
+        <section class="privacy-section reveal" id="s10">
+          <h2 data-i18n="privacy_s10_title">10. Third-Party Links</h2>
+
+          <div lang-show="en">
+            <p>Our website may contain links to third-party websites, including LinkedIn, Facebook, Discord, and WhatsApp. These sites have their own privacy policies, which we strongly encourage you to review. We are not responsible for the privacy practices or content of any third-party site.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vår webbplats kan innehålla länkar till webbplatser från tredje part, inklusive LinkedIn, Facebook, Discord och WhatsApp. Dessa webbplatser har egna integritetspolicyer som vi starkt uppmuntrar dig att läsa igenom. Vi ansvarar inte för integritetsrutinerna eller innehållet på tredjepartswebbplatser.</p>
+          </div>
+        </section>
+
+        <!-- 11. Changes -->
+        <section class="privacy-section reveal" id="s11">
+          <h2 data-i18n="privacy_s11_title">11. Changes to This Policy</h2>
+
+          <div lang-show="en">
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or for other operational reasons. When we make changes, we will update the "Last Updated" date at the top of this page.</p>
+            <p>For significant changes that materially affect how we handle your data, we will take reasonable steps to notify affected individuals (e.g. by prominently displaying a notice on our website).</p>
+            <p>We encourage you to review this policy periodically. Your continued use of our website after changes are posted constitutes your acknowledgement of the revised policy.</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>Vi kan uppdatera denna integritetspolicy från tid till annan för att återspegla ändringar i våra rutiner, teknik, juridiska krav eller av andra operativa skäl. När vi gör ändringar uppdaterar vi datumet "Senast Uppdaterad" längst upp på denna sida.</p>
+            <p>Vid väsentliga ändringar som påverkar hur vi hanterar dina uppgifter, vidtar vi rimliga åtgärder för att meddela berörda personer (t.ex. genom att tydligt visa ett meddelande på vår webbplats).</p>
+            <p>Vi uppmuntrar dig att regelbundet läsa igenom denna policy. Din fortsatta användning av vår webbplats efter att ändringar publicerats utgör ditt godkännande av den reviderade policyn.</p>
+          </div>
+        </section>
+
+        <!-- 12. Contact -->
+        <section class="privacy-section reveal" id="s12">
+          <h2 data-i18n="privacy_s12_title">12. Contact &amp; Data Protection</h2>
+
+          <div lang-show="en">
+            <p>For all data protection inquiries, access requests, or to exercise any of your rights under GDPR, please contact us:</p>
+          </div>
+
+          <div lang-show="sv">
+            <p>För alla dataskyddsfrågor, tillgångsbegäranden eller för att utöva någon av dina rättigheter enligt GDPR, vänligen kontakta oss:</p>
+          </div>
+
+          <div class="privacy-contact-card">
+            <p>
+              <strong>OakDev &amp; AI AB — Data Controller</strong>
+              Reg. No. 559431-6787 | VAT SE55943167870<br>
+              Kristevik 633, 451 96 Uddevalla, Sweden
+            </p>
+            <p>
+              📧 <a href="mailto:hello@oakdev.app">hello@oakdev.app</a><br>
+              📞 <a href="tel:+46763909381">+46 76 390 93 81</a>
+            </p>
+            <div lang-show="en">
+              <p style="margin-top:14px;font-size:0.82rem;color:rgba(255,255,255,0.35);">
+                We do not currently have a designated Data Protection Officer (DPO) as we are a small enterprise. All privacy matters are handled directly by our management team. If you are unsatisfied with our response, you may contact the Swedish Data Protection Authority: <a href="https://www.imy.se/kontakta-oss/" target="_blank" rel="noopener noreferrer">Integritetsskyddsmyndigheten (imy.se)</a>.
+              </p>
+            </div>
+            <div lang-show="sv">
+              <p style="margin-top:14px;font-size:0.82rem;color:rgba(255,255,255,0.35);">
+                Vi har för närvarande ingen utsedd dataskyddsombud (DPO) eftersom vi är ett litet företag. Alla integritetsfrågor hanteras direkt av vår ledningsgrupp. Om du inte är nöjd med vårt svar kan du kontakta Integritetsskyddsmyndigheten: <a href="https://www.imy.se/kontakta-oss/" target="_blank" rel="noopener noreferrer">imy.se</a>.
+              </p>
+            </div>
+          </div>
+
+          <div class="back-top-row">
+            <a href="#hero" data-i18n="privacy_back_top">↑ Back to Top</a>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+
+          <!-- Brand -->
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p data-i18n="footer_desc">
+              Premium app studio and AI product company. Building tomorrow's digital products today.
+            </p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="Discord">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/46763909381" target="_blank"
+                 rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_company">Company</h4>
+            <a href="/about/" data-i18n="nav_about">About</a>
+            <a href="/contact/" data-i18n="nav_contact">Contact</a>
+          </div>
+
+          <!-- Services links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_services">Services</h4>
+            <a href="/app-studio/" data-i18n="nav_studio">App Studio</a>
+            <a href="/ai-automation/" data-i18n="nav_ai">AI &amp; Automation</a>
+            <a href="/consulting/" data-i18n="nav_consulting">Consulting</a>
+          </div>
+
+          <!-- Legal links -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_legal">Legal</h4>
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/" data-i18n="footer_terms">Terms of Use</a>
+          </div>
+
+          <!-- Connect / contact quick -->
+          <div class="footer-col">
+            <h4 data-i18n="footer_connect">Connect</h4>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <a href="mailto:hello@oakdev.app">hello@oakdev.app</a>
+            </div>
+            <div class="footer-contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:+46763909381">+46 76 390 93 81</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+            <p class="footer-updated">Last Updated: March 03, 2026</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="/privacy/" data-i18n="footer_privacy">Privacy Policy</a>
+            <a href="/terms/" data-i18n="footer_terms">Terms of Use</a>
+            <a href="/about/" data-i18n="nav_about">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="../js/main.js"></script>
+
+</body>
+</html>
