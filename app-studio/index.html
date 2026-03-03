@@ -109,26 +109,102 @@
       margin-top: 2rem;
     }
 
-    /* Floating phone / canvas container */
+    /* Floating phone outlines */
     .studio-phones {
       position: relative;
       width: 360px;
       height: 480px;
       flex-shrink: 0;
-      overflow: hidden;
     }
-    #studioViz { width: 100%; height: 100%; display: block; }
+
+    .phone-outline {
+      position: absolute;
+      border-radius: 2.5rem;
+    }
+
+    .phone-outline-1 {
+      width: 176px; height: 340px;
+      border: 1.5px solid rgba(118,185,0,0.22);
+      background: rgba(118,185,0,0.025);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-7deg);
+      animation: floatP1 5.5s ease-in-out infinite;
+    }
+    .phone-outline-2 {
+      width: 156px; height: 300px;
+      border: 1.5px solid rgba(118,185,0,0.14);
+      background: rgba(118,185,0,0.015);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(10deg) translateX(55px) translateY(-25px);
+      animation: floatP2 6.5s ease-in-out infinite;
+    }
+    .phone-outline-3 {
+      width: 138px; height: 268px;
+      border: 1px solid rgba(57,255,20,0.08);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-16deg) translateX(-62px) translateY(35px);
+      animation: floatP3 7.5s ease-in-out infinite;
+    }
+
+    /* Notch */
+    .phone-outline::before {
+      content: ''; position: absolute;
+      top: 1.1rem; left: 50%; transform: translateX(-50%);
+      width: 38px; height: 5px; border-radius: 999px;
+      background: rgba(118,185,0,0.3);
+    }
+    /* Home indicator */
+    .phone-outline::after {
+      content: ''; position: absolute;
+      bottom: 1rem; left: 50%; transform: translateX(-50%);
+      width: 32px; height: 4px; border-radius: 999px;
+      background: rgba(118,185,0,0.2);
+    }
+
+    /* Glow behind phones */
+    .phone-glow {
+      position: absolute;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(118,185,0,0.12), transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      filter: blur(40px);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    /* Canvas overlay — extra floating UI elements on top of phones */
+    #studioViz {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    @keyframes floatP1 {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-7deg) translateY(0); }
+      50%       { transform: translate(-50%, -50%) rotate(-7deg) translateY(-18px); }
+    }
+    @keyframes floatP2 {
+      0%, 100% { transform: translate(-50%, -50%) rotate(10deg) translateX(55px) translateY(-25px); }
+      50%       { transform: translate(-50%, -50%) rotate(10deg) translateX(55px) translateY(-40px); }
+    }
+    @keyframes floatP3 {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-16deg) translateX(-62px) translateY(35px); }
+      50%       { transform: translate(-50%, -50%) rotate(-16deg) translateX(-62px) translateY(20px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.2); }
+    }
 
     @media (max-width: 960px) {
       .studio-hero .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
       }
-      .studio-hero-left {
-        align-items: center;
-      }
+      .studio-hero-left { align-items: center; }
       .studio-hero-left .hero-subtext { text-align: center; }
-      .studio-phones { display: block; width: 100%; height: 260px; margin-top: 1.5rem; }
+      .studio-phones { display: block; width: 100%; height: 280px; margin-top: 1.5rem; }
     }
 
     /* ═══ APP TYPES GRID ════════════════════════════════════ */
@@ -922,6 +998,10 @@
 
         <!-- Right: animated phone outlines -->
         <div class="studio-phones" aria-hidden="true">
+          <div class="phone-glow"></div>
+          <div class="phone-outline phone-outline-1"></div>
+          <div class="phone-outline phone-outline-2"></div>
+          <div class="phone-outline phone-outline-3"></div>
           <canvas id="studioViz"></canvas>
         </div>
 
@@ -1572,186 +1652,107 @@
   <script src="../js/main.js" defer></script>
 
   <script>
-    /* ── App Studio hero canvas ── */
+    /* ── App Studio hero canvas — overlay effects on top of CSS phones ── */
     (function () {
-      const canvas = document.getElementById('studioViz');
+      var canvas = document.getElementById('studioViz');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let W = 0, H = 0;
+      var ctx = canvas.getContext('2d');
+      var W = 0, H = 0;
 
       function resize () {
         W = canvas.width  = canvas.offsetWidth;
         H = canvas.height = canvas.offsetHeight;
-        if (floaters) { floaters.length = 0; for (let i = 0; i < 10; i++) floaters.push(new Floater()); }
+        if (floaters) { floaters.length = 0; for (var k = 0; k < 8; k++) floaters.push(new Floater(true)); }
       }
 
-      /* round-rect helper (arcTo for Safari compat) */
-      function rrect (x, y, w, h, r) {
-        ctx.beginPath();
-        ctx.moveTo(x + r, y);
-        ctx.lineTo(x + w - r, y);  ctx.arcTo(x + w, y,     x + w, y + r,     r);
-        ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
-        ctx.lineTo(x + r, y + h);  ctx.arcTo(x,     y + h, x,     y + h - r, r);
-        ctx.lineTo(x, y + r);      ctx.arcTo(x,     y,     x + r, y,         r);
-        ctx.closePath();
+      /* ── Phone centres (match CSS positions) ── */
+      function phonePts () {
+        return [
+          { x: W * 0.50, y: H * 0.50 },
+          { x: W * 0.65, y: H * 0.45 },
+          { x: W * 0.33, y: H * 0.57 },
+        ];
       }
 
-      /* ── 3 hero phones (offset from canvas centre as fractions) ── */
-      const PHONES = [
-        { ox: 0.00, oy: 0.00, pw: 0.23, ph: 0.67, rot: -0.12, amp: 17, freq: 0.55, phase: 0.0 },
-        { ox: 0.16, oy:-0.10, pw: 0.19, ph: 0.57, rot:  0.18, amp: 13, freq: 0.45, phase: 1.3 },
-        { ox:-0.17, oy: 0.13, pw: 0.16, ph: 0.49, rot: -0.27, amp: 10, freq: 0.38, phase: 2.6 },
+      /* ── Floating wireframe cards ── */
+      var FSIZES = [
+        { w: 48, h: 30, r: 4 },
+        { w: 60, h: 42, r: 5 },
+        { w: 28, h: 28, r: 6 },
+        { w: 22, h: 38, r: 4 },
       ];
 
-      /* Pre-bake screen-line widths so they don't flicker */
-      const LINE_FRACS = PHONES.map(() => [0.82, 0.62, 0.91, 0.53]);
-
-      function drawPhone (ph, lf, t) {
-        const cx = W * 0.5 + ph.ox * W;
-        const cy = H * 0.5 + ph.oy * H + Math.sin(t * ph.freq + ph.phase) * ph.amp;
-        const pw = ph.pw * W;
-        const pht = ph.ph * H;
-        const r  = Math.max(6, pw * 0.16);
-
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(ph.rot);
-
-        /* body */
-        rrect(-pw/2, -pht/2, pw, pht, r);
-        ctx.fillStyle = 'rgba(118,185,0,0.025)';
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(118,185,0,0.28)';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        /* notch */
-        const nw = Math.max(18, pw * 0.36);
-        rrect(-nw/2, -pht/2 + r * 0.7, nw, 4, 2);
-        ctx.fillStyle = 'rgba(118,185,0,0.35)';
-        ctx.fill();
-
-        /* home indicator */
-        rrect(-nw/3, pht/2 - r - 4, nw * 0.67, 3, 2);
-        ctx.fillStyle = 'rgba(118,185,0,0.2)';
-        ctx.fill();
-
-        /* content rows */
-        const lx = -pw/2 + pw * 0.12;
-        const lw = pw * 0.76;
-        const sy = -pht/2 + r * 1.6 + 6;
-        const step = (pht - r * 3 - 18) / 5;
-        lf.forEach(function (frac, i) {
-          rrect(lx, sy + i * step, lw * frac, 2.5, 1.5);
-          ctx.fillStyle = 'rgba(118,185,0,0.07)';
-          ctx.fill();
-        });
-
-        ctx.restore();
-        return { x: cx, y: cy };
-      }
-
-      /* ── Small drifting UI elements ── */
-      const FTYPES = [
-        { w: 50, h: 32, r: 4 },
-        { w: 62, h: 44, r: 5 },
-        { w: 30, h: 30, r: 7 },
-        { w: 24, h: 40, r: 4 },
-      ];
-
-      function Floater () { this.reset(true); }
-      Floater.prototype.reset = function (init) {
-        const t = FTYPES[Math.floor(Math.random() * FTYPES.length)];
-        const s = 0.55 + Math.random() * 0.8;
+      function Floater (init) {
+        var t = FSIZES[Math.floor(Math.random() * FSIZES.length)];
+        var s = 0.6 + Math.random() * 0.9;
         this.w = t.w * s; this.h = t.h * s; this.r = t.r;
-        this.x = init ? W * 0.05 + Math.random() * W * 0.9 : (Math.random() > 0.5 ? -70 : W + 70);
+        this.x = init ? W * 0.05 + Math.random() * W * 0.9 : (Math.random() > 0.5 ? -60 : W + 60);
         this.y = init ? H * 0.05 + Math.random() * H * 0.9 : Math.random() * H;
-        this.vx = (Math.random() - 0.5) * 0.22;
-        this.vy = (Math.random() - 0.5) * 0.16;
+        this.vx = (Math.random() - 0.5) * 0.20;
+        this.vy = (Math.random() - 0.5) * 0.14;
         this.ang = (Math.random() - 0.5) * 0.5;
-        this.va  = (Math.random() - 0.5) * 0.0006;
-        this.al  = 0.05 + Math.random() * 0.09;
-      };
+        this.va  = (Math.random() - 0.5) * 0.0007;
+        this.al  = 0.06 + Math.random() * 0.10;
+      }
       Floater.prototype.tick = function () {
         this.x += this.vx; this.y += this.vy; this.ang += this.va;
-        if (this.x < -80 || this.x > W + 80 || this.y < -80 || this.y > H + 80) this.reset(false);
+        if (this.x < -70 || this.x > W + 70 || this.y < -70 || this.y > H + 70) {
+          var f = new Floater(false); this.x=f.x; this.y=f.y; this.vx=f.vx; this.vy=f.vy; this.ang=f.ang; this.va=f.va; this.al=f.al;
+        }
       };
       Floater.prototype.draw = function () {
         ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.ang);
-        rrect(-this.w/2, -this.h/2, this.w, this.h, this.r);
+        ctx.translate(this.x, this.y); ctx.rotate(this.ang);
+        ctx.beginPath();
+        var x=-this.w/2, y=-this.h/2, w=this.w, h=this.h, r=this.r;
+        ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.arcTo(x+w,y,x+w,y+r,r);
+        ctx.lineTo(x+w,y+h-r); ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+        ctx.lineTo(x+r,y+h); ctx.arcTo(x,y+h,x,y+h-r,r);
+        ctx.lineTo(x,y+r); ctx.arcTo(x,y,x+r,y,r); ctx.closePath();
         ctx.strokeStyle = 'rgba(118,185,0,' + this.al + ')';
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        ctx.lineWidth = 1; ctx.stroke();
         ctx.restore();
       };
 
       /* ── Connecting lines ── */
       function drawLinks (pts) {
-        var DIST = Math.min(W, H) * 0.62;
+        var DIST = Math.min(W, H) * 0.7;
         for (var i = 0; i < pts.length; i++) {
           for (var j = i + 1; j < pts.length; j++) {
             var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-            var d  = Math.sqrt(dx * dx + dy * dy);
+            var d  = Math.sqrt(dx*dx + dy*dy);
             if (d < DIST) {
-              ctx.beginPath();
-              ctx.moveTo(pts[i].x, pts[i].y);
-              ctx.lineTo(pts[j].x, pts[j].y);
-              ctx.strokeStyle = 'rgba(118,185,0,' + (0.07 * (1 - d / DIST)) + ')';
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
+              ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y);
+              ctx.strokeStyle = 'rgba(118,185,0,' + (0.08*(1-d/DIST)) + ')';
+              ctx.lineWidth = 0.5; ctx.stroke();
             }
           }
         }
       }
 
-      /* ── Ambient glow ── */
-      function drawGlow () {
-        var g = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.5);
-        g.addColorStop(0, 'rgba(118,185,0,0.07)');
-        g.addColorStop(1, 'transparent');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, W, H);
-      }
-
       /* ── Pulse rings ── */
       var pulses = [], pulseTimer = 0;
-
-      /* ── Main loop ── */
       var floaters = null;
 
-      function loop (ts) {
-        var t = ts / 1000;
+      function loop () {
         ctx.clearRect(0, 0, W, H);
-        drawGlow();
-
-        /* phones */
-        var pts = PHONES.map(function (ph, i) { return drawPhone(ph, LINE_FRACS[i], t); });
-
-        /* floaters */
-        floaters.forEach(function (f) { f.tick(); f.draw(); pts.push({ x: f.x, y: f.y }); });
-
+        var pts = phonePts();
+        floaters.forEach(function (f) { f.tick(); f.draw(); pts.push({x:f.x, y:f.y}); });
         drawLinks(pts);
 
-        /* pulse rings */
         pulseTimer++;
-        if (pulseTimer > 155) {
+        if (pulseTimer > 160) {
           pulseTimer = 0;
           var src = pts[Math.floor(Math.random() * 3)];
-          pulses.push({ x: src.x, y: src.y, r: 0, max: 52 + Math.random() * 34 });
+          pulses.push({ x: src.x, y: src.y, r: 0, max: 50 + Math.random() * 30 });
         }
         for (var i = pulses.length - 1; i >= 0; i--) {
-          pulses[i].r += 0.65;
-          var a = 0.28 * (1 - pulses[i].r / pulses[i].max);
-          ctx.beginPath();
-          ctx.arc(pulses[i].x, pulses[i].y, pulses[i].r, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(118,185,0,' + a + ')';
-          ctx.lineWidth = 1;
-          ctx.stroke();
+          pulses[i].r += 0.6;
+          var a = 0.3 * (1 - pulses[i].r / pulses[i].max);
+          ctx.beginPath(); ctx.arc(pulses[i].x, pulses[i].y, pulses[i].r, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(118,185,0,' + a + ')'; ctx.lineWidth = 1; ctx.stroke();
           if (pulses[i].r >= pulses[i].max) pulses.splice(i, 1);
         }
-
         requestAnimationFrame(loop);
       }
 
@@ -1759,7 +1760,7 @@
         resize();
         if (W === 0) { requestAnimationFrame(init); return; }
         floaters = [];
-        for (var i = 0; i < 10; i++) floaters.push(new Floater());
+        for (var i = 0; i < 8; i++) floaters.push(new Floater(true));
         requestAnimationFrame(loop);
       }
 
