@@ -249,7 +249,7 @@ const TRANSLATIONS = {
     cons_hero_badge:       'IT Consulting',
     cons_hero_title1:      'Expert Solutions',
     cons_hero_title2:      'For Every Challenge',
-    cons_hero_sub:         'From a single website to full digital transformation — we bring senior engineering expertise to businesses of all sizes. Websites, webshops, databases, cloud, and everything in between.',
+    cons_hero_sub:         'From a single website to full digital transformation, we bring senior expertise to businesses of all sizes. Websites, webshops, databases, cloud, and everything in between.',
     cons_type_web_title:   'Web Development',
     cons_type_web_desc:    'Fast, beautiful websites and landing pages that convert. Built for performance and scalability from day one.',
     cons_type_ecom_title:  'E-Commerce',
