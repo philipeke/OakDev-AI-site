@@ -826,8 +826,8 @@ const TRANSLATIONS = {
     terms_back_top:         '↑ Tillbaka Till Toppen',
     /* About Page */
     about_badge:            'Vår Historia',
-    about_title:            '20 År av',
-    about_title2:           'Att Bygga Framtiden',
+    about_title:            '20 år av',
+    about_title2:           'att bygga Framtiden',
     about_sub:              'Från IT-konsulter på svenska västkusten till en premium app-studio med ett starkt brinnande intresse för AI, har vi stått i teknikens framkant i över två decennier. Passionerade, envisa och alltid på gång.',
     about_story_tag:        'Resan',
     about_story_title:      'Grundat i Uddevalla. Redo för framtiden.',
