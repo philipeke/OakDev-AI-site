@@ -841,7 +841,7 @@ const TRANSLATIONS = {
     about_team_tag:         'Teamet',
     about_team_title:       'Möt Teamet',
     about_team_sub:         'Ett sammansvetsat team av IT-expertis och utvecklare, AI-byggare och kreativa tänkare, förenade av kärleken till den senaste tekniken.',
-    about_philip_title:     'Lead Developer & AI-specialist',
+    about_philip_title:     'Teknikansvarig & AI-specialist',
     about_philip_bio:       '20+ år av att omvandla komplexa problem till elegant kod. Philip designar våra system, leder AI-integrationer och håller teknikstacken på toppnivå. OakDevs maskinrum.',
     about_elin_title:       'Utvecklare & AI-integration',
     about_elin_bio:         'Elin överbryggar klyftan mellan råa AI-förmågor och verkliga applikationer. Hon bygger de pipelines, agenter och automationsflöden som gör att våra AI-produkter briljerar, pålitligt och i stor skala.',
