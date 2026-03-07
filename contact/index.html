@@ -640,14 +640,14 @@
             </div>
 
             <div class="form-field">
-              <label for="contact-subject" data-i18n="contact_form_subject">Subject</label>
-              <input
-                type="text"
-                id="contact-subject"
-                name="subject"
-                data-i18n-placeholder="contact_form_subject"
-                placeholder="Subject"
-              >
+              <label for="contact-subject" data-i18n="form_service">Service of Interest</label>
+              <select id="contact-subject" name="subject">
+                <option value="" disabled selected>Select a service</option>
+                <option value="app"     data-i18n="svc_app">App Development</option>
+                <option value="ai"      data-i18n="svc_ai">AI &amp; Automation</option>
+                <option value="consult" data-i18n="svc_consulting">Consulting</option>
+                <option value="other"   data-i18n="svc_other">Other</option>
+              </select>
             </div>
 
             <div class="form-field">
