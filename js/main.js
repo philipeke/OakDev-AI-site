@@ -607,7 +607,7 @@ const TRANSLATIONS = {
     /* AI & Automation page */
     ai_hero_badge:        'AI & Automation',
     ai_hero_title1:       'Företagens framtid',
-    ai_hero_title2:       'är automatiserad.',
+    ai_hero_title2:       'är Automatiserad.',
     ai_hero_sub:          'OakDev bygger intelligenta system, autonoma AI-agenter och arbetsflödesautomation som transformerar hur företag verkar och frigör ditt team att fokusera på det som verkligen spelar roll.',
     ai_see_more:          'Se vad som är möjligt',
     ai_types_tag:         'Vad vi bygger',
