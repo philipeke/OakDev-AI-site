@@ -750,12 +750,12 @@ const TRANSLATIONS = {
     pkg_cons3_f3:          'Full dokumentation & överlämning',
     pkg_cons3_f4:          'Support efter lansering ingår',
     pkg_cons3_cta:         'Diskutera Ditt Projekt',
-    cons_cta_title:        'Redo att Komma Igång?',
+    cons_cta_title:        'Redo att komma Igång?',
     cons_cta_desc:         'Berätta vad du behöver. Vi skisserar det, sätter pris och börjar bygga, första draft eller leverans vanligtvis inom en vecka.',
 
     // Contact page (SV)
     contact_hero_badge:     'Kontakt',
-    contact_hero_title:     'Låt Oss Bygga Något',
+    contact_hero_title:     'Låt oss bygga något',
     contact_hero_title2:    'Tillsammans',
     contact_hero_sub:       'Vi är ett litet team av teknikentusiaster med över 20 år i branschen, och vi älskar verkligen att prata om ny teknik. Hör av dig hur det passar dig bäst.',
     contact_ch_email_title: 'E-post',
