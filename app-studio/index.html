@@ -403,6 +403,12 @@
     .portfolio-card:nth-child(2) .portfolio-logo { animation-delay: -1.8s; }
     .portfolio-card:nth-child(3) .portfolio-logo { animation-delay: -3.5s; }
 
+    /* Zoom past transparent padding to match ChristBay visual size */
+    .portfolio-card--tipsypal .portfolio-logo { scale: 2.2; }
+    .portfolio-card--vespera  .portfolio-logo { scale: 2.0; max-width: 260px; max-height: 260px; }
+    .portfolio-card--nuria    .portfolio-logo { scale: 2.4; }
+    .portfolio-card--ayara    .portfolio-logo { scale: 2.4; }
+
     @keyframes floatLogo {
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-14px); }
