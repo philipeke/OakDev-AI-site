@@ -625,6 +625,13 @@
     .client-marquee-wrap {
       position: relative;
       width: 100%;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    .client-marquee-wrap.is-dragging {
+      cursor: grabbing;
     }
 
     /* Fade edges */
@@ -651,11 +658,8 @@
       gap: 0;
       width: max-content;
       animation: client-scroll 40s linear infinite;
+      will-change: transform;
     }
-
-    /* Drag cursor + touch behaviour */
-    .client-track { cursor: ew-resize; touch-action: pan-y; }
-    .client-track.is-speeding { cursor: w-resize; user-select: none; }
 
     /* Scroll-hint arrow on right edge */
     .marquee-arrow {
@@ -665,10 +669,25 @@
       transform: translateY(-50%);
       z-index: 10;
       color: #76b900;
-      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(2, 2, 2, 0.55);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
       animation: arrow-bounce 1.2s ease-in-out infinite;
       filter: drop-shadow(0 0 8px rgba(118,185,0,0.8));
-      transition: opacity 0.35s ease;
+      transition: opacity 0.35s ease, background 0.25s ease, color 0.25s ease;
+    }
+    .marquee-arrow:hover,
+    .marquee-arrow:focus-visible {
+      background: rgba(118, 185, 0, 0.16);
+      color: #9ee52e;
+      outline: none;
     }
     @keyframes arrow-bounce {
       0%, 100% { transform: translateY(-50%) translateX(0);   opacity: 0.7; }
@@ -1179,7 +1198,7 @@
             </div>
             <div class="footer-contact-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <a href="tel:+46 70 810 57 66">+46 76 390 93 81</a>
+              <a href="tel:+46 70 810 57 66">+46 70 810 57 66</a>
             </div>
           </div>
 
@@ -1392,6 +1411,116 @@
         track.addEventListener('touchstart', () => { hideArrow(); }, { passive: true });
         track.addEventListener('touchend',   () => { setTimeout(showArrow, 600); }, { passive: true });
       }
+    })();
+  </script>
+  <script>
+    (() => {
+      const originalWrap = document.querySelector('.client-marquee-wrap');
+      if (!originalWrap || originalWrap.dataset.dragScrollReady === 'true') return;
+
+      const wrap = originalWrap.cloneNode(true);
+      wrap.querySelector('.marquee-arrow')?.remove();
+      wrap.dataset.dragScrollReady = 'true';
+      originalWrap.replaceWith(wrap);
+
+      const track = wrap.querySelector('.client-track');
+      if (!track) return;
+
+      const BASE_SPEED = 22;
+      const JUMP_STEP = 320;
+
+      track.style.animation = 'none';
+
+      let posX = 0;
+      let halfW = 0;
+      let lastTs = null;
+      let isDragging = false;
+      let activePointerId = null;
+      let lastClientX = 0;
+
+      function measureHalf() {
+        halfW = track.scrollWidth / 2;
+      }
+
+      function normalizePos() {
+        if (!halfW) return;
+        while (posX <= -halfW) posX += halfW;
+        while (posX > 0) posX -= halfW;
+      }
+
+      function render() {
+        normalizePos();
+        track.style.transform = `translateX(${posX.toFixed(2)}px)`;
+      }
+
+      function loop(ts) {
+        if (lastTs === null) lastTs = ts;
+        const dt = Math.min((ts - lastTs) / 1000, 0.05);
+        lastTs = ts;
+
+        if (!isDragging) {
+          posX -= BASE_SPEED * dt;
+        }
+
+        render();
+        requestAnimationFrame(loop);
+      }
+
+      function stopDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        activePointerId = null;
+        wrap.classList.remove('is-dragging');
+        arrow.style.opacity = '';
+      }
+
+      const arrow = document.createElement('button');
+      arrow.type = 'button';
+      arrow.className = 'marquee-arrow';
+      arrow.setAttribute('aria-label', 'Scroll company logos forward');
+      arrow.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+      wrap.appendChild(arrow);
+
+      wrap.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0 || arrow.contains(e.target)) return;
+        isDragging = true;
+        activePointerId = e.pointerId;
+        lastClientX = e.clientX;
+        wrap.classList.add('is-dragging');
+        arrow.style.opacity = '0';
+        wrap.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+
+      wrap.addEventListener('pointermove', (e) => {
+        if (!isDragging || e.pointerId !== activePointerId) return;
+        const deltaX = e.clientX - lastClientX;
+        lastClientX = e.clientX;
+        posX += deltaX;
+        render();
+      });
+
+      wrap.addEventListener('pointerup', stopDrag);
+      wrap.addEventListener('pointercancel', stopDrag);
+      wrap.addEventListener('lostpointercapture', stopDrag);
+
+      arrow.addEventListener('click', () => {
+        posX -= Math.min(JUMP_STEP, Math.max(wrap.clientWidth * 0.45, 220));
+        render();
+      });
+
+      measureHalf();
+      render();
+      window.addEventListener('resize', () => {
+        measureHalf();
+        render();
+      });
+      window.addEventListener('load', () => {
+        measureHalf();
+        render();
+      });
+
+      requestAnimationFrame(loop);
     })();
   </script>
 </body>
