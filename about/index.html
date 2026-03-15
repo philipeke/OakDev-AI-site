@@ -380,11 +380,11 @@
     /* Team grid */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
-    @media (max-width: 1140px) { .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+    @media (max-width: 900px)  { .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
     @media (max-width: 560px)  { .team-grid { grid-template-columns: 1fr; } }
     @media (max-width: 560px)  { .team-card:first-child .team-photo-wrap img { object-position: 50% -60px !important; } }
 
@@ -957,7 +957,7 @@
       <div class="team-header reveal">
         <span class="section-eyebrow" data-i18n="about_team_tag">The People</span>
         <h2 data-i18n="about_team_title">Meet the Team</h2>
-        <p data-i18n="about_team_sub">A tight-knit crew of engineers, AI builders, and creative thinkers — united by a love for cutting-edge technology.</p>
+        <p data-i18n="about_team_sub">A tight-knit crew of engineers, AI builders, and creative thinkers — united by a love for cutting-edge technology and a deep shared interest in theology. Our team includes a Muslim, a Christian, and a Catholic, and this diversity of faith shapes the inclusive and meaningful products we build.</p>
       </div>
 
       <div class="team-grid">
@@ -1028,6 +1028,23 @@
             <div class="team-name">Jonathan Fransson</div>
             <div class="team-role" data-i18n="about_jonathan_title">Marketing &amp; Communication</div>
             <p class="team-bio" data-i18n="about_jonathan_bio">Jonathan shapes how the world sees OakDev. From brand strategy to content and growth — he builds the signal that cuts through the noise.</p>
+          </div>
+        </div>
+
+        <!-- Adam Ekeberg — Product Manager -->
+        <div class="team-card reveal">
+          <div class="team-photo-wrap">
+            <img src="../assets/personal/Adam.jpeg"
+                 alt="Adam Ekeberg — Product Manager"
+                 loading="lazy"
+                 style="object-position: center 15%;">
+            <div class="team-photo-melt"></div>
+            <div class="team-photo-shine"></div>
+          </div>
+          <div class="team-info">
+            <div class="team-name">Adam Ekeberg</div>
+            <div class="team-role" data-i18n="about_adam_title">Product Manager</div>
+            <p class="team-bio" data-i18n="about_adam_bio">Adam leads product strategy and roadmap, making sure every feature we ship creates real value. He also works closely with marketing to ensure OakDev's products are positioned and presented to the world in the best possible way.</p>
           </div>
         </div>
 

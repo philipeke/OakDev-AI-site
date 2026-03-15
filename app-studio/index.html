@@ -485,6 +485,60 @@
       box-shadow: 0 8px 28px rgba(118,185,0,0.18);
     }
 
+    /* Vespera logo — slightly larger */
+    .portfolio-card--vespera .portfolio-logo {
+      max-width: 260px;
+      max-height: 260px;
+    }
+
+    /* Nuria — Sunni Islamic (deep forest green) */
+    .portfolio-card--nuria .portfolio-logo-area {
+      background: linear-gradient(135deg, rgba(15,40,23,0.85) 0%, rgba(8,18,11,0.95) 100%);
+    }
+    .portfolio-card--nuria .portfolio-logo-area::before { background: rgba(45,190,108,0.45); }
+    .portfolio-card--nuria .portfolio-app-badge {
+      color: #2dbe6c;
+      background: rgba(45,190,108,0.08);
+      border-color: rgba(45,190,108,0.25);
+    }
+    .portfolio-card--nuria .portfolio-app-badge::before { background: #2dbe6c; }
+    .portfolio-card--nuria .btn-visit {
+      border-color: rgba(45,190,108,0.35);
+      color: #2dbe6c;
+    }
+    .portfolio-card--nuria .btn-visit:hover {
+      background: rgba(45,190,108,0.12);
+      border-color: #2dbe6c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(45,190,108,0.18);
+    }
+
+    /* Ayara — Shia Islamic (dark navy + crimson) */
+    .portfolio-card--ayara .portfolio-logo-area {
+      background: linear-gradient(135deg, rgba(18,8,28,0.85) 0%, rgba(6,8,20,0.95) 100%);
+    }
+    .portfolio-card--ayara .portfolio-logo-area::before { background: rgba(194,59,90,0.5); }
+    .portfolio-card--ayara .portfolio-app-badge {
+      color: #e8708a;
+      background: rgba(194,59,90,0.1);
+      border-color: rgba(194,59,90,0.28);
+    }
+    .portfolio-card--ayara .portfolio-app-badge::before { background: #e8708a; }
+    .portfolio-card--ayara .btn-visit {
+      border-color: rgba(194,59,90,0.35);
+      color: #e8708a;
+    }
+    .portfolio-card--ayara .btn-visit:hover {
+      background: rgba(194,59,90,0.12);
+      border-color: #c23b5a;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(194,59,90,0.2);
+    }
+
+    /* Animation delays for cards 4 and 5 */
+    .portfolio-card:nth-child(4) .portfolio-logo { animation-delay: -0.8s; }
+    .portfolio-card:nth-child(5) .portfolio-logo { animation-delay: -2.3s; }
+
     /* ═══ TECH STACK ════════════════════════════════════════ */
     .tech-marquee-outer {
       margin-top: 4rem;
@@ -1201,7 +1255,7 @@
             <span class="studio-stat-label">First Prototype</span>
           </div>
           <div class="studio-stat">
-            <span class="studio-stat-val">3</span>
+            <span class="studio-stat-val">5</span>
             <span class="studio-stat-label">Live Portfolio Apps</span>
           </div>
           <div class="studio-stat">
@@ -1297,7 +1351,7 @@
               <img src="../assets/app%20logos/ChatGPT%20Image%2027%20feb.%202026%2021_50_58.png"
                    alt="Vespera app logo"
                    class="portfolio-logo"
-                   width="200" height="200"
+                   width="260" height="260"
                    loading="lazy" />
             </div>
             <div class="portfolio-info-area">
@@ -1310,6 +1364,62 @@
                  rel="noopener noreferrer"
                  aria-label="Visit Vespera live site">
                 <span data-i18n="vespera_cta">Visit Vespera</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- ── Nuria ── -->
+          <article class="portfolio-card portfolio-card--nuria" data-reveal="up" data-reveal-delay="0">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/nuria.png"
+                   alt="Nuria app logo"
+                   class="portfolio-logo"
+                   width="200" height="200"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="nuria_tagline">Sunni Islamic Companion</span>
+              <h3 data-i18n="nuria_name">Nuria</h3>
+              <p data-i18n="nuria_desc">A spiritually immersive Sunni Islamic app offering daily prayers, Quran readings, hadith, and guidance — beautifully designed for Muslims seeking a deeper connection to their faith.</p>
+              <a href="https://nuria.oakdev.app/"
+                 class="btn-visit"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Visit Nuria live site">
+                <span data-i18n="nuria_cta">Visit Nuria</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- ── Ayara ── -->
+          <article class="portfolio-card portfolio-card--ayara" data-reveal="up" data-reveal-delay="1">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/ayara.png"
+                   alt="Ayara app logo"
+                   class="portfolio-logo"
+                   width="200" height="200"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="ayara_tagline">Shia Islamic Wisdom</span>
+              <h3 data-i18n="ayara_name">Ayara</h3>
+              <p data-i18n="ayara_desc">A reverent Shia Islamic app delivering daily Du'a, Quran, and teachings of the Ahl al-Bayt — crafted with deep respect for Shia tradition and spiritual practice.</p>
+              <a href="https://ayara.oakdev.app/"
+                 class="btn-visit"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Visit Ayara live site">
+                <span data-i18n="ayara_cta">Visit Ayara</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
