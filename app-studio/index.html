@@ -406,7 +406,7 @@
     /* Zoom past transparent padding to match ChristBay visual size */
     .portfolio-card--tipsypal .portfolio-logo { scale: 2.2; --float-y: -6px; }
     .portfolio-card--vespera  .portfolio-logo { scale: 2.0; max-width: 260px; max-height: 260px; --float-y: -7px; }
-    .portfolio-card--nuria    .portfolio-logo { scale: 2.15; --float-y: -6px; }
+    .portfolio-card--nuria    .portfolio-logo { scale: 2.05; --float-y: -6px; }
     .portfolio-card--ayara    .portfolio-logo { scale: 2.4; --float-y: -6px; }
 
     @keyframes floatLogo {
@@ -501,7 +501,15 @@
     .portfolio-card--nuria .portfolio-logo-area {
       background: linear-gradient(135deg, rgba(15,40,23,0.85) 0%, rgba(8,18,11,0.95) 100%);
     }
-    .portfolio-card--nuria .portfolio-logo-area::before { background: rgba(45,190,108,0.45); }
+    .portfolio-card--nuria .portfolio-logo-area::before {
+      width: 228px;
+      height: 228px;
+      filter: blur(76px);
+      background: rgba(45,190,108,0.62);
+    }
+    .portfolio-card--nuria .portfolio-logo {
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55)) drop-shadow(0 0 26px rgba(45,190,108,0.22));
+    }
     .portfolio-card--nuria .portfolio-app-badge {
       color: #2dbe6c;
       background: rgba(45,190,108,0.08);
