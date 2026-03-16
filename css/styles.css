@@ -1604,13 +1604,14 @@ h1, h2, h3, h4, h5, h6 {
 .footer-social-icon {
   width: 34px;
   height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 50%;
   color: var(--text-3);
+  padding: 0;
+  line-height: 0;
   transition: color var(--dur-fast) ease,
               border-color var(--dur-fast) ease,
               background var(--dur-fast) ease;
@@ -1631,6 +1632,7 @@ h1, h2, h3, h4, h5, h6 {
 .process-number svg {
   display: block;
   flex-shrink: 0;
+  margin: auto;
 }
 
 .footer-col h4 {
