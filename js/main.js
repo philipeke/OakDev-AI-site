@@ -1006,7 +1006,7 @@ class HeroScene {
     this.glowLayers = [];
 
     // Reduce particles on mobile for performance
-    this.particleCount = window.innerWidth < 768 ? 600 : 1400;
+    this.particleCount = window.innerWidth < 768 ? 400 : 1200;
 
     this.setup();
     this.createParticles();
@@ -1691,6 +1691,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Three.js (non-blocking)
   if (typeof THREE !== 'undefined') {
     new HeroScene();
+    new ScrollGridAnimation();
   }
 
   // Smooth scroll

@@ -1855,6 +1855,23 @@ h1, h2, h3, h4, h5, h6 {
 
 .skip-link:focus { top: 1rem; }
 
+/* ── SCROLL GRID CANVAS ───────────────────────────────────── */
+#scroll-grid-canvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  #scroll-grid-canvas {
+    display: none;
+  }
+}
+
 /* ── REDUCED MOTION ──────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
