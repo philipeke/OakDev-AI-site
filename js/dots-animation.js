@@ -27,9 +27,7 @@ if (canvas && ctx) {
 
     const mobileOptions = {
         ...desktopOptions,
-        particleColor: "rgba(0, 255, 100, 0.24)",
-        lineAlpha: 0.025,
-        linkRadius: 90,
+        lineAlpha: 0.12,
         particleAmount: 34,
     };
 
@@ -71,10 +69,8 @@ if (canvas && ctx) {
             this.y = Math.random() * canvas.height;
             this.radius = options.defaultRadius + Math.random() * options.variantRadius;
 
-            const speed = options.defaultSpeed + Math.random() * options.variantSpeed;
-            const angle = Math.random() * Math.PI * 2;
-            this.speedX = Math.cos(angle) * speed;
-            this.speedY = Math.sin(angle) * speed;
+            this.speedX = (Math.random() - 0.5) * options.defaultSpeed;
+            this.speedY = (Math.random() - 0.5) * options.defaultSpeed;
         }
 
         update() {
