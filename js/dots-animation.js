@@ -16,7 +16,7 @@ if (canvas && ctx) {
     const desktopOptions = {
         particleColor: "rgba(0, 255, 100, 0.5)",
         lineColorRgb: "0, 255, 100",
-        lineAlpha: 0.18,
+        lineAlpha: 0.22,
         particleAmount: 50,
         defaultRadius: 2,
         variantRadius: 2,
@@ -27,7 +27,9 @@ if (canvas && ctx) {
 
     const mobileOptions = {
         ...desktopOptions,
-        lineAlpha: 0.12,
+        defaultRadius: 1.4,
+        variantRadius: 1.2,
+        lineAlpha: 0.15,
         particleAmount: 34,
     };
 
