@@ -16,7 +16,7 @@ if (canvas && ctx) {
     const desktopOptions = {
         particleColor: "rgba(0, 255, 100, 0.5)",
         lineColorRgb: "0, 255, 100",
-        lineAlpha: 0.15,
+        lineAlpha: 0.18,
         particleAmount: 50,
         defaultRadius: 2,
         variantRadius: 2,
@@ -39,12 +39,21 @@ if (canvas && ctx) {
 
     function resizeCanvas() {
         const heroSection = document.getElementById('hero');
+        const previousWidth = canvas.width || heroSection.offsetWidth;
+        const previousHeight = canvas.height || heroSection.offsetHeight;
         options = isMobileViewport() ? mobileOptions : desktopOptions;
         canvas.width = heroSection.offsetWidth;
         canvas.height = heroSection.offsetHeight;
         if (isMobileViewport()) {
             clearPointer();
         }
+
+        return {
+            previousWidth,
+            previousHeight,
+            nextWidth: canvas.width,
+            nextHeight: canvas.height,
+        };
     }
 
     function updatePointer(clientX, clientY) {
@@ -125,6 +134,29 @@ if (canvas && ctx) {
         }
     }
 
+    function syncParticlesToCanvas(size) {
+        if (!particles.length) {
+            return;
+        }
+
+        const scaleX = size.previousWidth > 0 ? size.nextWidth / size.previousWidth : 1;
+        const scaleY = size.previousHeight > 0 ? size.nextHeight / size.previousHeight : 1;
+
+        particles.forEach((particle) => {
+            particle.x = clamp(particle.x * scaleX, 0, size.nextWidth);
+            particle.y = clamp(particle.y * scaleY, 0, size.nextHeight);
+        });
+
+        if (particles.length > options.particleAmount) {
+            particles.length = options.particleAmount;
+            return;
+        }
+
+        while (particles.length < options.particleAmount) {
+            particles.push(new Particle());
+        }
+    }
+
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach((particle) => {
@@ -162,8 +194,8 @@ if (canvas && ctx) {
     }
 
     window.addEventListener('resize', () => {
-        resizeCanvas();
-        createParticles();
+        const size = resizeCanvas();
+        syncParticlesToCanvas(size);
     });
 
     window.addEventListener('mousemove', (event) => {
