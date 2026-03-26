@@ -1087,7 +1087,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   background: var(--glass-border);
   border: 1px solid var(--glass-border);
@@ -1100,6 +1100,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 0;
   padding: 2.5rem 1.5rem;
   background: var(--bg-2);
   text-align: center;
@@ -1140,6 +1141,8 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 500;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 /* ── ABOUT SECTION ──────────────────────────────────────────── */
@@ -1772,7 +1775,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1805,7 +1808,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat-item {
+    padding: 2rem 1rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
   }
 
   .footer-grid {
