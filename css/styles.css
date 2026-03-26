@@ -1838,40 +1838,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ── SKIP LINK (A11Y) ────────────────────────────────────────── */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 1rem;
-  z-index: 99999;
-  padding: 0.75rem 1.5rem;
-  background: var(--green);
-  color: #000;
-  font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: var(--radius-md);
-  transition: top 0.1s;
-}
-
-.skip-link:focus { top: 1rem; }
-
-/* ── SCROLL GRID CANVAS ───────────────────────────────────── */
-#scroll-grid-canvas {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100px;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-@media (max-width: 900px) {
-  #scroll-grid-canvas {
-    display: none;
-  }
-}
-
 /* ── REDUCED MOTION ──────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
