@@ -116,8 +116,9 @@
     packets.push({ ax: a.x, ay: a.y, bx: b.x, by: b.y, t: 0, speed: 0.007 + Math.random() * 0.011 });
   }
 
-  /* ── spawn centre pulse ring ─────────────────────────────────── */
+  /* ── spawn centre pulse ring (desktop only) ─────────────────── */
   function spawnRing () {
+    if (W < 768) return;
     pulseRings.push({ r: 4, alpha: 0.55 });
   }
   setInterval(spawnRing, 3800);
@@ -363,41 +364,6 @@
     }
   }
 
-  /* ── draw: HUD overlay text ─────────────────────────────────── */
-  function fmt3 (n) {
-    return Math.round(n).toString().padStart(3, '0');
-  }
-
-  function drawHUD () {
-    const az = ((sweep + Math.PI / 2) * (180 / Math.PI) + 360) % 360;
-    const contacts = blips.filter(b => !b.mouse && b.alpha > 0.1).length;
-
-    ctx.save();
-    ctx.font        = '9px "Space Grotesk", monospace';
-    ctx.fillStyle   = G + '0.28)';
-    ctx.textBaseline = 'top';
-
-    // Top-left block
-    const lines = [
-      `SYS : ONLINE`,
-      `MODE: PASSIVE`,
-      `AZ  : ${fmt3(az)}°`,
-      `RNG : ${Math.round(R / 10) * 10}m`,
-      `CONTACTS: ${contacts}`,
-    ];
-    lines.forEach((l, i) => {
-      ctx.fillText(l, 14, 22 + i * 14);
-    });
-
-    // Bottom-right signature
-    ctx.textAlign    = 'right';
-    ctx.textBaseline = 'bottom';
-    ctx.font         = '8px "Space Grotesk", monospace';
-    ctx.fillStyle    = G + '0.18)';
-    ctx.fillText('OakDev Contact Array  v2.1', W - 12, H - 12);
-
-    ctx.restore();
-  }
 
   /* ── draw: subtle radial background glow ────────────────────── */
   function drawGlow () {
@@ -425,7 +391,6 @@
     drawPackets();
     drawSweep();
     drawBlips();
-    drawHUD();
 
     // Advance sweep
     sweep += SWEEP_SPEED;
