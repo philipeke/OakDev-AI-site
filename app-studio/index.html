@@ -553,6 +553,21 @@
     .portfolio-card:nth-child(4) .portfolio-logo { animation-delay: -0.8s; }
     .portfolio-card:nth-child(5) .portfolio-logo { animation-delay: -2.3s; }
 
+    /* Mobile: scaled-up logos (transparent padding) read huge in single-column layout */
+    @media (max-width: 768px) {
+      .portfolio-card--tipsypal .portfolio-logo,
+      .portfolio-card--vespera .portfolio-logo,
+      .portfolio-card--nuria .portfolio-logo,
+      .portfolio-card--ayara .portfolio-logo {
+        max-width: 148px;
+        max-height: 148px;
+      }
+      .portfolio-card--tipsypal .portfolio-logo { scale: 1.18; }
+      .portfolio-card--vespera  .portfolio-logo { scale: 1.08; }
+      .portfolio-card--nuria    .portfolio-logo { scale: 1.12; }
+      .portfolio-card--ayara    .portfolio-logo { scale: 1.2; }
+    }
+
     /* ═══ TECH STACK ════════════════════════════════════════ */
     .tech-marquee-outer {
       margin-top: 4rem;
