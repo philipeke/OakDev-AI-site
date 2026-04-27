@@ -1,3 +1,5 @@
+// Legacy landing-page hero dot animation.
+// Removed from index.html on 2026-04-27; keep here until it is moved to another page.
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas?.getContext('2d');
 
