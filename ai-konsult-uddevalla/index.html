@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="sv" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://formsubmit.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formsubmit.co;
+    upgrade-insecure-requests;
+  " />
+
+  <title>AI-konsult Uddevalla | AI-automation | OakDev &amp; AI AB</title>
+  <meta name="description" content="AI-konsult i Uddevalla för företag som vill automatisera administration, kundflöden och interna processer. OakDev bygger AI-flöden, webb och appar." />
+  <meta name="keywords" content="AI Uddevalla, AI-konsult Uddevalla, AI automation Uddevalla, automatisering Bohuslän, IT-konsult Uddevalla, webbutveckling Uddevalla, apputveckling Västra Götaland" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/ai-konsult-uddevalla/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://oakdev.app/ai-konsult-uddevalla/" />
+  <meta property="og:title" content="AI-konsult i Uddevalla | OakDev &amp; AI AB" />
+  <meta property="og:description" content="Konkreta AI- och automationsflöden för företag i Uddevalla, Bohuslän och Västra Götaland." />
+  <meta property="og:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" type="image/png" href="../assets/icon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://oakdev.app/ai-konsult-uddevalla/#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "OakDev & AI AB",
+            "item": "https://oakdev.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI-konsult Uddevalla",
+            "item": "https://oakdev.app/ai-konsult-uddevalla/"
+          }
+        ]
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://oakdev.app/#localbusiness",
+        "name": "OakDev & AI AB",
+        "url": "https://oakdev.app/",
+        "image": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "telephone": "+46708105766",
+        "email": "hello@oakdev.app",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kristevik 633",
+          "postalCode": "451 96",
+          "addressLocality": "Uddevalla",
+          "addressRegion": "Västra Götaland",
+          "addressCountry": "SE"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Uddevalla" },
+          { "@type": "City", "name": "Trollhättan" },
+          { "@type": "City", "name": "Vänersborg" },
+          { "@type": "AdministrativeArea", "name": "Bohuslän" },
+          { "@type": "AdministrativeArea", "name": "Västra Götaland" },
+          { "@type": "Country", "name": "Sweden" }
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://oakdev.app/ai-konsult-uddevalla/#service",
+        "name": "AI-konsult i Uddevalla",
+        "serviceType": "AI consulting, workflow automation and app development",
+        "provider": { "@id": "https://oakdev.app/#localbusiness" },
+        "areaServed": [
+          { "@type": "City", "name": "Uddevalla" },
+          { "@type": "AdministrativeArea", "name": "Västra Götaland" },
+          { "@type": "Country", "name": "Sweden" }
+        ],
+        "description": "AI-integrationer, automationsflöden, LLM-system, webbappar och mobilappar för små och medelstora företag."
+      },
+      {
+        "@type": "Article",
+        "@id": "https://oakdev.app/ai-konsult-uddevalla/#article",
+        "headline": "AI-konsult i Uddevalla - så automatiserar västsvenska företag 2026",
+        "description": "En praktisk guide till hur företag i Uddevalla och Västra Götaland kan använda AI för att spara tid och minska administration.",
+        "author": { "@id": "https://oakdev.app/#localbusiness" },
+        "publisher": { "@id": "https://oakdev.app/#localbusiness" },
+        "datePublished": "2026-05-19",
+        "dateModified": "2026-05-19",
+        "mainEntityOfPage": "https://oakdev.app/ai-konsult-uddevalla/",
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://oakdev.app/ai-konsult-uddevalla/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Vad gör en AI-konsult i Uddevalla?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "En AI-konsult kartlägger repetitiva arbetsflöden, väljer rätt AI-modeller och bygger säkra automationer som kopplar ihop företagets befintliga system."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Kan små företag använda AI-automation utan stor budget?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja. Många flöden går att starta smått med e-post, kalkylark, formulär och API:er. Driftkostnaden kan hållas låg när lösningen byggs runt tydliga uppgifter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Arbetar OakDev bara lokalt i Uddevalla?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "OakDev & AI AB finns i Uddevalla men arbetar med kunder i hela Sverige och på distans internationellt."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .local-page {
+      background:
+        linear-gradient(180deg, rgba(118, 185, 0, 0.06), transparent 420px),
+        #020202;
+    }
+
+    .local-hero {
+      position: relative;
+      min-height: 86vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 128px 0 72px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .local-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(118,185,0,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(118,185,0,0.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.72) 54%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .local-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.7fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .local-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .local-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(118, 185, 0, 0.8);
+    }
+
+    .local-hero h1 {
+      max-width: 920px;
+      font-size: 4.25rem;
+      letter-spacing: 0;
+      margin-bottom: 24px;
+    }
+
+    .local-lead {
+      max-width: 760px;
+      color: var(--text-2);
+      font-size: 1.2rem;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .local-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .local-hero-panel {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 28px;
+    }
+
+    .local-hero-panel img {
+      height: 58px;
+      width: auto;
+      margin-bottom: 28px;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .signal-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .signal-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .signal-row strong {
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      line-height: 1.2;
+    }
+
+    .signal-row span {
+      color: var(--text-2);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .local-section {
+      padding: 88px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .local-section.alt {
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .local-section-header {
+      max-width: 800px;
+      margin-bottom: 42px;
+    }
+
+    .local-section-header h2 {
+      font-size: 2.4rem;
+      letter-spacing: 0;
+      margin-bottom: 16px;
+    }
+
+    .local-section-header p {
+      color: var(--text-2);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .flow-card,
+    .region-card,
+    .faq-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 24px;
+    }
+
+    .flow-card:nth-child(2),
+    .flow-card:nth-child(5) {
+      border-color: rgba(118, 185, 0, 0.28);
+      background: rgba(118, 185, 0, 0.045);
+    }
+
+    .flow-number {
+      display: inline-block;
+      color: var(--green);
+      font-family: var(--font-head);
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .flow-card h3,
+    .region-card h3,
+    .faq-card h3 {
+      font-size: 1.18rem;
+      letter-spacing: 0;
+      margin-bottom: 12px;
+    }
+
+    .flow-card p,
+    .region-card p,
+    .faq-card p {
+      color: var(--text-2);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .article-body {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(260px, 0.22fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .article-copy {
+      max-width: 780px;
+    }
+
+    .article-copy p {
+      color: var(--text-2);
+      font-size: 1.02rem;
+      line-height: 1.85;
+      margin-bottom: 22px;
+    }
+
+    .article-copy h2 {
+      font-size: 2rem;
+      letter-spacing: 0;
+      margin: 42px 0 18px;
+    }
+
+    .local-aside {
+      position: sticky;
+      top: 104px;
+      border: 1px solid rgba(118, 185, 0, 0.25);
+      border-radius: 8px;
+      padding: 22px;
+      background: rgba(118, 185, 0, 0.045);
+    }
+
+    .local-aside h3 {
+      font-size: 1rem;
+      letter-spacing: 0;
+      margin-bottom: 10px;
+    }
+
+    .local-aside p,
+    .local-aside li {
+      color: var(--text-2);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .local-aside ul {
+      list-style: disc;
+      padding-left: 18px;
+      margin: 14px 0 18px;
+    }
+
+    .region-grid,
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .scan-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(280px, 0.3fr);
+      gap: 28px;
+      align-items: center;
+      border: 1px solid rgba(118, 185, 0, 0.28);
+      border-radius: 8px;
+      padding: 34px;
+      background:
+        linear-gradient(135deg, rgba(118,185,0,0.08), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.025);
+    }
+
+    .scan-panel h2 {
+      font-size: 2.1rem;
+      letter-spacing: 0;
+      margin-bottom: 14px;
+    }
+
+    .scan-panel p {
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    .scan-list {
+      list-style: disc;
+      padding-left: 20px;
+      color: var(--text-2);
+      line-height: 1.9;
+    }
+
+    .local-final {
+      text-align: center;
+      padding: 96px 0;
+    }
+
+    .local-final h2 {
+      max-width: 780px;
+      margin: 0 auto 18px;
+      font-size: 2.6rem;
+      letter-spacing: 0;
+    }
+
+    .local-final p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      color: var(--text-2);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1080px) {
+      .local-page .nav-links {
+        display: none;
+      }
+
+      .local-page .btn-book {
+        display: none;
+      }
+
+      .local-page .menu-toggle,
+      .local-page .mobile-menu {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .local-hero-inner,
+      .article-body,
+      .scan-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .local-aside {
+        position: static;
+      }
+
+      .flow-grid,
+      .region-grid,
+      .faq-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .local-hero {
+        min-height: auto;
+        padding: 112px 0 56px;
+      }
+
+      .local-hero h1 {
+        font-size: 2.55rem;
+      }
+
+      .local-lead {
+        font-size: 1.02rem;
+      }
+
+      .local-section {
+        padding: 64px 0;
+      }
+
+      .local-section-header h2,
+      .scan-panel h2,
+      .local-final h2 {
+        font-size: 1.9rem;
+      }
+
+      .flow-grid,
+      .region-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="local-page">
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/app-studio/" class="nav-link">App Studio</a>
+        <a href="/ai-automation/" class="nav-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="nav-link active">AI Uddevalla</a>
+        <a href="/consulting/" class="nav-link">Consulting</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/contact/" class="btn-book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="/app-studio/" class="mobile-link">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="mobile-link active">AI Uddevalla</a>
+        <a href="/consulting/" class="mobile-link">Consulting</a>
+        <a href="/about/" class="mobile-link">About</a>
+        <a href="/contact/" class="mobile-link">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <a href="/contact/" class="btn-book" style="display:block;text-align:center;">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="local-hero">
+      <div class="container local-hero-inner">
+        <div>
+          <div class="local-kicker">AI-konsult i Uddevalla</div>
+          <h1>AI och automation för företag som vill få tid tillbaka.</h1>
+          <p class="local-lead">
+            OakDev &amp; AI AB finns i Uddevalla och hjälper företag i Bohuslän, Västra Götaland och resten av Sverige att bygga praktiska AI-flöden, webbappar, mobilappar och IT-system som löser riktiga arbetsproblem.
+          </p>
+          <div class="local-ctas">
+            <a href="/contact/" class="btn-primary">Boka ett AI-samtal</a>
+            <a href="#flows" class="btn-ghost">Se konkreta flöden</a>
+          </div>
+        </div>
+
+        <aside class="local-hero-panel" aria-label="OakDev service signals">
+          <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png" alt="OakDev &amp; AI AB" />
+          <div class="signal-list">
+            <div class="signal-row">
+              <strong>Lokalt</strong>
+              <span>Kristevik 633, Uddevalla. Nära företag i Uddevalla, Trollhättan, Vänersborg, Lysekil och Strömstad.</span>
+            </div>
+            <div class="signal-row">
+              <strong>AI</strong>
+              <span>LLM-integrationer, agentflöden, dokument-AI, supportbotar och automation av repetitiva processer.</span>
+            </div>
+            <div class="signal-row">
+              <strong>Bygg</strong>
+              <span>Webbplatser, webbappar, mobilappar, API:er, databaser och molnstruktur från idé till lansering.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="flows" class="local-section">
+      <div class="container">
+        <div class="local-section-header">
+          <h2>Fem AI-flöden som ofta lönar sig först</h2>
+          <p>
+            Det bästa första steget är nästan aldrig ett stort AI-projekt. Det är ett smalt flöde där människor redan gör samma sak om och om igen.
+          </p>
+        </div>
+
+        <div class="flow-grid">
+          <article class="flow-card">
+            <span class="flow-number">01</span>
+            <h3>Offertuppföljning</h3>
+            <p>AI sammanfattar offerten, skriver ett personligt uppföljningsmail efter 3, 7 och 14 dagar och låter säljaren godkänna innan något skickas.</p>
+          </article>
+          <article class="flow-card">
+            <span class="flow-number">02</span>
+            <h3>Inkorgstriage</h3>
+            <p>Info-inkorgen sorteras automatiskt efter kund, leverantör, brådska och åtgärd. Teamet börjar dagen med prioriteringar istället för brus.</p>
+          </article>
+          <article class="flow-card">
+            <span class="flow-number">03</span>
+            <h3>Dokument och kvitton</h3>
+            <p>AI läser kvitton, avtal, arbetsorder eller PDF:er, plockar ut rätt fält och skickar datan vidare till kalkylark, CRM eller affärssystem.</p>
+          </article>
+          <article class="flow-card">
+            <span class="flow-number">04</span>
+            <h3>Intern kunskapsbot</h3>
+            <p>En AI-assistent söker i era rutiner, dokument, tidigare offerter och produktblad så personalen snabbt hittar rätt svar.</p>
+          </article>
+          <article class="flow-card">
+            <span class="flow-number">05</span>
+            <h3>Marknadsmotor</h3>
+            <p>En idé blir blogginlägg, LinkedIn-inlägg, korta mail, FAQ och lokala SEO-sidor. Det är precis den typen av motor OakDev använder här.</p>
+          </article>
+          <article class="flow-card">
+            <span class="flow-number">06</span>
+            <h3>Webb och app runt flödet</h3>
+            <p>När automationen behöver ett snyggt gränssnitt bygger vi webbapp, kundportal eller mobilapp ovanpå samma tekniska grund.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="local-section alt">
+      <div class="container article-body">
+        <article class="article-copy">
+          <p>
+            Många företag i Uddevalla sitter redan på allt som krävs för att börja med AI: mejl, dokument, offerter, kundfrågor, kalenderbokningar och återkommande administrativa beslut. Det som saknas är oftast inte mer mjukvara, utan en tydlig koppling mellan systemen.
+          </p>
+          <p>
+            En modern AI-lösning kan läsa, tolka, sammanfatta, föreslå nästa steg och skicka information vidare. Den behöver inte ersätta personalen. Den kan ta bort de tråkiga mellanleden så att människor får mer tid till försäljning, kundkontakt och leverans.
+          </p>
+
+          <h2>Varför lokal AI-kompetens spelar roll</h2>
+          <p>
+            För små och medelstora företag är det en fördel att kunna prata med någon som förstår vardagen utanför storstädernas konsultmodeller. Vi kan komma förbi i Uddevalla med omnejd, titta på hur jobbet faktiskt görs och börja med ett avgränsat flöde istället för en tung förstudie.
+          </p>
+          <p>
+            Samtidigt bygger vi för produktion. OakDev &amp; AI AB arbetar med apputveckling, webbutveckling, moln, databaser, API:er och AI-integrationer, vilket gör att automationen inte blir en lösryckt demo. Den kan växa till ett riktigt system.
+          </p>
+
+          <h2>Vad första steget brukar vara</h2>
+          <p>
+            Vi börjar med att välja ett arbetsflöde där uppgiften är vanlig, tydlig och mätbar. Det kan vara offertuppföljning, inkommande kundmail, dokumenthantering, rapporter eller intern support. Sedan bygger vi en första version som körs parallellt med det manuella arbetet tills ni litar på resultatet.
+          </p>
+          <p>
+            Målet är enkelt: visa värde snabbt, hålla driftkostnaden låg och skapa ett system som går att förstå, ändra och äga.
+          </p>
+        </article>
+
+        <aside class="local-aside">
+          <h3>Snabb AI-scan</h3>
+          <p>Har ni ett flöde som matchar minst två punkter är det ofta värt att automatisera.</p>
+          <ul>
+            <li>Uppgiften görs varje vecka.</li>
+            <li>Data finns redan digitalt.</li>
+            <li>Någon kopierar mellan system.</li>
+            <li>Fel kostar tid eller pengar.</li>
+            <li>Svaret följer återkommande mönster.</li>
+          </ul>
+          <a href="/contact/" class="btn-primary">Skicka flödet</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="local-section">
+      <div class="container">
+        <div class="local-section-header">
+          <h2>Vi hjälper både lokalt och på distans</h2>
+          <p>
+            Sökningar som “AI Uddevalla” och “AI-konsult Uddevalla” är lokala, men lösningarna kan levereras lika bra digitalt.
+          </p>
+        </div>
+
+        <div class="region-grid">
+          <article class="region-card">
+            <h3>Uddevalla och Bohuslän</h3>
+            <p>Lokala besök, workshoppar och snabba genomgångar för företag i Uddevalla, Lysekil, Munkedal, Strömstad och närliggande orter.</p>
+          </article>
+          <article class="region-card">
+            <h3>Västra Götaland</h3>
+            <p>AI-automation, IT-konsulting, webbutveckling och apputveckling för företag i Trollhättan, Vänersborg, Göteborg och resten av regionen.</p>
+          </article>
+          <article class="region-card">
+            <h3>Sverige och internationellt</h3>
+            <p>Distansleveranser via Teams, GitHub, molntjänster och moderna AI-verktyg när uppdraget inte kräver ett fysiskt möte.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="local-section alt">
+      <div class="container">
+        <div class="scan-panel">
+          <div>
+            <h2>Vill du veta vad som går att automatisera hos er?</h2>
+            <p>
+              Skicka tre arbetsmoment ni gör ofta. Vi svarar med vilka som är rimliga att automatisera först, vilken data som behövs och hur en första version kan se ut.
+            </p>
+          </div>
+          <ul class="scan-list">
+            <li>Beskriv uppgiften kort.</li>
+            <li>Säg vilka verktyg ni använder.</li>
+            <li>Nämn vad som tar mest tid.</li>
+            <li>Vi föreslår första flödet.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="local-section">
+      <div class="container">
+        <div class="local-section-header">
+          <h2>Vanliga frågor om AI och automation</h2>
+          <p>Korta svar för företag som vill börja praktiskt, utan att låsa in sig i ett dyrt transformationsprojekt.</p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>Vad kostar AI-automation i drift?</h3>
+            <p>Det beror på volym och modellval, men många första flöden kan köras med låg tokenkostnad när uppgiften är tydligt avgränsad.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Behöver vi byta system?</h3>
+            <p>Ofta inte. Vi börjar helst med verktygen ni redan använder och kopplar ihop dem via formulär, API:er, kalkylark eller databaser.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Kan AI skriva direkt till kunder?</h3>
+            <p>Ja, men i början rekommenderar vi oftast mänskligt godkännande innan externa svar skickas. Det bygger förtroende och minskar risk.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="local-final">
+      <div class="container">
+        <h2>OakDev &amp; AI AB: AI-konsult i Uddevalla, byggpartner för resten.</h2>
+        <p>
+          Om ni vill automatisera ett flöde, bygga en AI-driven webbapp eller få ordning på ett digitalt system kan vi hjälpa från första analys till driftsatt lösning.
+        </p>
+        <a href="/contact/" class="btn-primary">Kontakta OakDev</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p>AI-konsult, appstudio och IT-partner i Uddevalla.</p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">in</a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">f</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/app-studio/">App Studio</a>
+            <a href="/ai-automation/">AI &amp; Automation</a>
+            <a href="/ai-konsult-uddevalla/">AI-konsult Uddevalla</a>
+            <a href="/consulting/">Consulting</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Use</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-contact-item"><a href="mailto:hello@oakdev.app">hello@oakdev.app</a></div>
+            <div class="footer-contact-item"><a href="tel:+46708105766">+46 70 810 57 66</a></div>
+            <div class="footer-contact-item">Kristevik 633, 451 96 Uddevalla</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Use</a>
+            <a href="/about/">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

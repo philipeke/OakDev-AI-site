@@ -9,7 +9,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://cdn.jsdelivr.net;
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: blob:;
@@ -21,18 +21,125 @@
   " />
 
   <!-- ── SEO ───────────────────────────────────────────────── -->
-  <title>OakDev &amp; AI AB — App Studio &amp; AI Product Company</title>
-  <meta name="description" content="OakDev is a premium app studio and AI product company. We build mobile applications, AI platforms, and automation systems from concept to global launch." />
-  <meta name="keywords" content="app development, AI integration, automation, mobile apps, Sweden, OakDev" />
+  <title>OakDev &amp; AI AB — AI-konsult, automation och appstudio i Uddevalla</title>
+  <meta name="description" content="OakDev &amp; AI AB är en AI-konsult och appstudio i Uddevalla. Vi bygger AI-automation, webbappar, mobilappar och IT-flöden för företag i Sverige och globalt." />
+  <meta name="keywords" content="AI Uddevalla, AI-konsult Uddevalla, AI automation, automatisering Bohuslän, IT-konsult Uddevalla, apputveckling Sverige, webbutveckling Västra Götaland, OakDev" />
   <meta name="author" content="OakDev &amp; AI AB" />
   <link rel="canonical" href="https://oakdev.app/" />
 
   <!-- ── Open Graph ────────────────────────────────────────── -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://oakdev.app/" />
-  <meta property="og:title"       content="OakDev &amp; AI AB — App Studio &amp; AI Product Company" />
-  <meta property="og:description" content="Premium app studio building mobile apps, AI platforms, and automation systems from concept to global scale." />
+  <meta property="og:title"       content="OakDev &amp; AI AB — AI-konsult och appstudio i Uddevalla" />
+  <meta property="og:description" content="AI-automation, webbappar, mobilappar och IT-konsulting från Uddevalla till Sverige och världen." />
   <meta property="og:image"       content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://oakdev.app/#organization",
+        "name": "OakDev & AI AB",
+        "alternateName": ["OakDev", "OakDev AI", "OakDev & AI"],
+        "url": "https://oakdev.app/",
+        "logo": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "description": "AI-konsult och appstudio i Uddevalla som bygger mobilappar, webbappar, AI-plattformar och automationssystem.",
+        "email": "hello@oakdev.app",
+        "telephone": "+46708105766",
+        "foundingDate": "2024",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kristevik 633",
+          "postalCode": "451 96",
+          "addressLocality": "Uddevalla",
+          "addressRegion": "Västra Götaland",
+          "addressCountry": "SE"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Uddevalla" },
+          { "@type": "AdministrativeArea", "name": "Bohuslän" },
+          { "@type": "AdministrativeArea", "name": "Västra Götaland" },
+          { "@type": "Country", "name": "Sweden" },
+          { "@type": "Place", "name": "Remote and international" }
+        ],
+        "knowsAbout": [
+          "AI automation",
+          "AI consulting",
+          "LLM integration",
+          "Workflow automation",
+          "Mobile app development",
+          "Web development",
+          "IT consulting",
+          "Cloud infrastructure",
+          "Product strategy",
+          "MVP development"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/oakdev-ai/",
+          "https://www.facebook.com/profile.php?id=61585121092758"
+        ]
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://oakdev.app/#localbusiness",
+        "name": "OakDev & AI AB",
+        "image": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "url": "https://oakdev.app/",
+        "telephone": "+46708105766",
+        "email": "hello@oakdev.app",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kristevik 633",
+          "postalCode": "451 96",
+          "addressLocality": "Uddevalla",
+          "addressRegion": "Västra Götaland",
+          "addressCountry": "SE"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          }
+        ],
+        "parentOrganization": { "@id": "https://oakdev.app/#organization" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://oakdev.app/#service-ai-automation",
+        "name": "AI-konsult och automationsflöden",
+        "serviceType": "AI consulting and workflow automation",
+        "provider": { "@id": "https://oakdev.app/#organization" },
+        "areaServed": [
+          { "@type": "City", "name": "Uddevalla" },
+          { "@type": "Country", "name": "Sweden" }
+        ],
+        "description": "AI-integrationer, LLM-system, agentflöden och automatisering av administrativa processer för företag."
+      },
+      {
+        "@type": "Service",
+        "@id": "https://oakdev.app/#service-app-development",
+        "name": "Mobilappar och webbappar",
+        "serviceType": "App development and web development",
+        "provider": { "@id": "https://oakdev.app/#organization" },
+        "areaServed": { "@type": "Country", "name": "Sweden" },
+        "description": "Produktion av mobilappar, webbappar, SaaS-plattformar och MVP:er från idé till lansering."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://oakdev.app/#website",
+        "url": "https://oakdev.app/",
+        "name": "OakDev & AI AB",
+        "publisher": { "@id": "https://oakdev.app/#organization" },
+        "inLanguage": ["sv-SE", "en"]
+      }
+    ]
+  }
+  </script>
 
   <!-- ── Fonts ─────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -789,6 +896,7 @@
             <h4 data-i18n="footer_services">Services</h4>
             <a href="app-studio/"    data-i18n="nav_studio">App Studio</a>
             <a href="ai-automation/" data-i18n="nav_ai">AI &amp; Automation</a>
+            <a href="ai-konsult-uddevalla/">AI-konsult Uddevalla</a>
             <a href="consulting/"    data-i18n="nav_consulting">Consulting</a>
           </div>
 
