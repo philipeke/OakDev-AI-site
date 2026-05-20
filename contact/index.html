@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co; img-src 'self' https: data:;">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; img-src 'self' https: data:;">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Kontakta OakDev & AI | AI-konsult i Uddevalla</title>
   <meta name="description" content="Kontakta OakDev & AI AB i Uddevalla för AI-automation, appar, webbutveckling och IT-konsulting. Mail, telefon, WhatsApp och Discord.">
@@ -623,6 +623,7 @@
             id="contactForm"
             class="contact-form"
             action="https://formsubmit.co/hello@oakdev.app"
+            data-ajax-action="https://formsubmit.co/ajax/hello@oakdev.app"
             method="POST"
             novalidate
           >
@@ -630,6 +631,7 @@
             <input type="hidden" name="_subject" value="New message from OakDev website">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://oakdev.app/contact/?sent=1">
 
             <!-- Honeypot anti-spam -->
             <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off">

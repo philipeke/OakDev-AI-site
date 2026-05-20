@@ -1587,8 +1587,20 @@ function initContactForm() {
   const status = document.getElementById('formStatus');
   if (!form || !status) return;
 
+  const sentParam = new URLSearchParams(window.location.search).get('sent');
+  if (sentParam === '1') {
+    const t = TRANSLATIONS[Lang.get()];
+    status.textContent = t.form_success;
+    status.className   = 'form-status success';
+    window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+  }
+
   function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  }
+
+  function submitWithBrowser() {
+    HTMLFormElement.prototype.submit.call(form);
   }
 
   form.addEventListener('submit', async (e) => {
@@ -1605,6 +1617,7 @@ function initContactForm() {
     const emailEl   = form.querySelector('[name="email"]');
     const messageEl = form.querySelector('[name="message"]');
     const submitBtn = form.querySelector('[type="submit"]');
+    const submitBtnHTML = submitBtn?.innerHTML || '';
 
     // Validate
     const name    = nameEl?.value.trim() || '';
@@ -1617,36 +1630,59 @@ function initContactForm() {
       return;
     }
 
-    // Submit via AJAX to FormSubmit.co
-    submitBtn.disabled = true;
-    submitBtn.textContent = '...';
+    const payload = Object.fromEntries(new FormData(form).entries());
+    payload._replyto = email;
+
+    // Submit via the FormSubmit AJAX endpoint. If that path is blocked by a
+    // browser or service issue, fall back to the normal HTML form post.
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = '...';
+    }
     status.className = 'form-status';
+    let isBrowserFallback = false;
 
     try {
-      const res = await fetch(form.action, {
+      const res = await fetch(form.dataset.ajaxAction || form.action, {
         method:  'POST',
-        headers: { 'Accept': 'application/json' },
-        body:    new FormData(form),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept':       'application/json',
+        },
+        body: JSON.stringify(payload),
       });
 
-      const data = await res.json().catch(() => ({}));
+      const contentType = res.headers.get('content-type') || '';
+      const data = contentType.includes('application/json')
+        ? await res.json().catch(() => ({}))
+        : {};
 
-      if (res.ok && data.success !== 'false') {
+      if (res.ok && String(data.success ?? '').toLowerCase() !== 'false') {
         status.textContent = t.form_success;
         status.className   = 'form-status success';
         form.reset();
       } else {
-        throw new Error('Server error');
+        throw new Error(data.message || 'Server error');
       }
     } catch {
-      status.textContent = t.form_error;
-      status.className   = 'form-status error';
+      isBrowserFallback = true;
+      submitWithBrowser();
+      return;
     } finally {
-      submitBtn.disabled    = false;
-      submitBtn.textContent = t.form_submit;
+      if (!isBrowserFallback) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = submitBtnHTML || t.form_submit;
+        }
+      }
+    }
+
+    if (isBrowserFallback) {
+      return;
     }
   });
 }
+
 
 /* ============================================================
    MARQUEE — clone children for seamless loop fallback
