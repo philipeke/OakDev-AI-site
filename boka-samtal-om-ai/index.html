@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="sv" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' https: data: blob:;
+    connect-src 'self' https://formsubmit.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formsubmit.co;
+    upgrade-insecure-requests;
+  " />
+
+  <title>Boka samtal om AI och automation | OakDev &amp; AI AB</title>
+  <meta name="description" content="Boka ett samtal om AI, automation, webbappar eller mobilappar med OakDev &amp; AI AB i Uddevalla. Vi hjälper företag hitta ett första konkret AI-flöde." />
+  <meta name="keywords" content="boka samtal om AI, AI automation Uddevalla, AI-konsult Uddevalla, automatisera företag, OakDev AI" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/boka-samtal-om-ai/" />
+  <!-- Hreflang TODO: dedicated /en/ route variants do not exist yet; add the en alternate when that structure is published. -->
+  <link rel="alternate" hreflang="sv-SE" href="https://oakdev.app/boka-samtal-om-ai/" />
+  <link rel="alternate" hreflang="x-default" href="https://oakdev.app/boka-samtal-om-ai/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://oakdev.app/boka-samtal-om-ai/" />
+  <meta property="og:title" content="Boka samtal om AI och automation | OakDev &amp; AI AB" />
+  <meta property="og:description" content="Prata med OakDev om ett konkret första AI- eller automationsflöde för ert företag." />
+  <meta property="og:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Boka samtal om AI och automation | OakDev &amp; AI AB" />
+  <meta name="twitter:description" content="Prata med OakDev om ett konkret första AI- eller automationsflöde för ert företag." />
+  <meta name="twitter:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" type="image/png" href="../assets/icon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://oakdev.app/boka-samtal-om-ai/#webpage",
+        "url": "https://oakdev.app/boka-samtal-om-ai/",
+        "name": "Boka samtal om AI och automation",
+        "description": "Boka ett samtal med OakDev & AI AB om AI, automation, webbappar och mobilappar.",
+        "isPartOf": { "@id": "https://oakdev.app/#website" },
+        "about": { "@id": "https://oakdev.app/#organization" },
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://oakdev.app/#organization",
+        "name": "OakDev & AI AB",
+        "url": "https://oakdev.app/",
+        "logo": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "email": "hello@oakdev.app",
+        "telephone": "+46708105766",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kristevik 633",
+          "postalCode": "451 96",
+          "addressLocality": "Uddevalla",
+          "addressRegion": "Västra Götaland",
+          "addressCountry": "SE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/oakdev-ai/",
+          "https://www.facebook.com/profile.php?id=61585121092758",
+          "https://discord.gg/SpsZjB22Cp",
+          "https://api.whatsapp.com/send/?phone=46763909381&text&type=phone_number&app_absent=0"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "hello@oakdev.app",
+          "telephone": "+46708105766",
+          "areaServed": "SE",
+          "availableLanguage": ["sv", "en"]
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://oakdev.app/boka-samtal-om-ai/#service",
+        "name": "Samtal om AI och automation",
+        "serviceType": "AI consulting and workflow automation discovery",
+        "provider": { "@id": "https://oakdev.app/#organization" },
+        "areaServed": [
+          { "@type": "City", "name": "Uddevalla" },
+          { "@type": "AdministrativeArea", "name": "Västra Götaland" },
+          { "@type": "Country", "name": "Sweden" }
+        ],
+        "description": "En kort genomgång där OakDev hjälper företag hitta ett konkret första AI- eller automationsflöde."
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .booking-page {
+      background: #020202;
+      color: var(--text);
+    }
+
+    .booking-hero {
+      position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      padding: 132px 0 74px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(118,185,0,0.1), transparent 44%),
+        radial-gradient(circle at 82% 20%, rgba(118,185,0,0.11), transparent 30%),
+        #020202;
+    }
+
+    .booking-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(118,185,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(118,185,0,0.04) 1px, transparent 1px);
+      background-size: 62px 62px;
+      mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.72) 62%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .booking-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.65fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .booking-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .booking-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(118,185,0,0.8);
+    }
+
+    .booking-title {
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(2.7rem, 7vw, 5.4rem);
+      line-height: 0.96;
+      letter-spacing: 0;
+      margin: 0 0 24px;
+      color: #fff;
+    }
+
+    .booking-lead {
+      max-width: 720px;
+      color: var(--text-2);
+      font-size: 1.12rem;
+      line-height: 1.75;
+      margin: 0 0 32px;
+    }
+
+    .booking-actions,
+    .booking-card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .booking-panel,
+    .booking-card,
+    .booking-note {
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .booking-panel {
+      padding: 28px;
+    }
+
+    .booking-panel img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 24px;
+    }
+
+    .booking-panel h2,
+    .booking-card h2,
+    .booking-card h3 {
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    .booking-panel h2 {
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+    }
+
+    .booking-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .booking-list li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      color: var(--text-2);
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .booking-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-top: 9px;
+      box-shadow: 0 0 12px rgba(118,185,0,0.55);
+    }
+
+    .booking-section {
+      padding: 84px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 34px;
+    }
+
+    .booking-card {
+      padding: 26px;
+    }
+
+    .booking-card h3 {
+      color: #fff;
+      font-size: 1.12rem;
+      margin-bottom: 10px;
+    }
+
+    .booking-card p {
+      color: var(--text-2);
+      line-height: 1.7;
+      margin: 0 0 20px;
+      font-size: 0.96rem;
+    }
+
+    .booking-price {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      color: var(--green);
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+    }
+
+    .booking-price small {
+      color: var(--text-3);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .booking-note {
+      padding: 24px;
+      margin-top: 30px;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .booking-note strong {
+      color: #fff;
+    }
+
+    .booking-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .booking-form label {
+      display: grid;
+      gap: 8px;
+      color: rgba(255,255,255,0.48);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .booking-form input,
+    .booking-form textarea,
+    .booking-form select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+
+    .booking-form textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .booking-form input:focus,
+    .booking-form textarea:focus,
+    .booking-form select:focus {
+      border-color: rgba(118,185,0,0.55);
+      background: rgba(118,185,0,0.045);
+    }
+
+    .booking-form .form-honey {
+      display: none !important;
+    }
+
+    .booking-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .booking-submit {
+      justify-self: start;
+      border: 0;
+      cursor: pointer;
+    }
+
+    @media (max-width: 980px) {
+      .booking-hero-inner,
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-hero {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .booking-hero {
+        padding-top: 116px;
+      }
+
+      .booking-two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="booking-page">
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png" alt="OakDev &amp; AI AB" width="140" height="36" loading="eager" />
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/app-studio/" class="nav-link">App Studio</a>
+        <a href="/ai-automation/" class="nav-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="nav-link">AI Uddevalla</a>
+        <a href="/consulting/" class="nav-link">Consulting</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/boka-samtal-om-ai/" class="btn-book active">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="/app-studio/" class="mobile-link">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="mobile-link">AI Uddevalla</a>
+        <a href="/consulting/" class="mobile-link">Consulting</a>
+        <a href="/about/" class="mobile-link">About</a>
+        <a href="/contact/" class="mobile-link">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <a href="/boka-samtal-om-ai/" class="btn-book" style="display:block;text-align:center;">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="booking-hero">
+      <div class="container booking-hero-inner">
+        <div>
+          <span class="booking-kicker">OakDev &amp; AI AB i Uddevalla</span>
+          <h1 class="booking-title">Boka samtal om AI och automation</h1>
+          <p class="booking-lead">
+            Berätta vilket arbetsflöde som tar tid idag. Vi hjälper er hitta ett litet, konkret första steg: ett mailflöde, en offertuppföljning, en intern app, en AI-assistent eller en integration mellan systemen ni redan använder.
+          </p>
+          <div class="booking-actions">
+            <a class="btn-primary" href="#booking-form">Skicka förfrågan</a>
+            <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=46763909381&amp;text=Hej%20OakDev%2C%20jag%20vill%20boka%20ett%20samtal%20om%20AI%20och%20automation&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener noreferrer">Skriv på WhatsApp</a>
+          </div>
+        </div>
+
+        <aside class="booking-panel" aria-label="Vad samtalet handlar om">
+          <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png" alt="OakDev &amp; AI AB" />
+          <h2>Vad vi går igenom</h2>
+          <ul class="booking-list">
+            <li>Vilka moment som tar mest tid i vardagen.</li>
+            <li>Vilka system ni redan använder och vad som går att koppla ihop.</li>
+            <li>Vilket första flöde som kan byggas snabbt och säkert.</li>
+            <li>Vad AI kan göra själv och vad en människa bör godkänna.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="booking-section" aria-labelledby="offer-heading">
+      <div class="container">
+        <span class="section-tag">Första steg</span>
+        <h2 id="offer-heading" class="section-title">Börja smalt. Bevisa värdet. Skala sedan.</h2>
+        <p class="section-desc">
+          På webbplatsen ligger AI Starter från €2,900 för en riktig första integration. För Google Business och lokala leads rekommenderar vi ett mindre insteg först, så tröskeln blir låg och samtalet blir konkret.
+        </p>
+
+        <div class="booking-grid">
+          <article class="booking-card">
+            <h3>Kostnadsfri AI-genomgång</h3>
+            <div class="booking-price">0 kr <small>20-30 min</small></div>
+            <p>En kort avstämning där vi hittar ett möjligt första AI- eller automationsflöde och säger ärligt om det är värt att bygga.</p>
+            <a class="btn-ghost" href="#booking-form">Boka genomgång</a>
+          </article>
+
+          <article class="booking-card">
+            <h3>AI-pilot</h3>
+            <div class="booking-price">från 14 900 kr <small>exkl. moms</small></div>
+            <p>Ett avgränsat pilotflöde, till exempel offertuppföljning, inkorgstriage eller ett internt formulär som skapar utkast med mänskligt godkännande.</p>
+            <a class="btn-ghost" href="mailto:hello@oakdev.app?subject=AI-pilot%20fr%C3%A5n%2014%20900%20kr">Fråga om pilot</a>
+          </article>
+
+          <article class="booking-card">
+            <h3>AI Starter</h3>
+            <div class="booking-price">från €2,900 <small>exkl. moms</small></div>
+            <p>Första riktiga integrationen med LLM, promptarbete, API-koppling och ett produktionsnära automationsflöde.</p>
+            <a class="btn-ghost" href="/ai-automation/">Se AI-paket</a>
+          </article>
+        </div>
+
+        <p class="booking-note">
+          <strong>Rekommendation:</strong> Använd “Kostnadsfri AI-genomgång” i Google Business Profile nu. När leads börjar komma in kan ni följa upp med AI-piloten som ett tydligt, betalt nästa steg.
+        </p>
+      </div>
+    </section>
+
+    <section class="booking-section" aria-labelledby="booking-form-heading">
+      <div class="container">
+        <div class="booking-grid" style="grid-template-columns:minmax(0,0.9fr) minmax(280px,0.55fr);align-items:start;">
+          <div>
+            <span class="section-tag">Boka</span>
+            <h2 id="booking-form-heading" class="section-title">Skicka några rader så tar vi det därifrån</h2>
+            <p class="section-desc">
+              Skriv kort vad ni vill automatisera eller bygga. Det räcker med ett par meningar.
+            </p>
+
+            <form id="booking-form" class="booking-form" action="https://formsubmit.co/hello@oakdev.app" method="POST">
+              <input type="hidden" name="_subject" value="Boka samtal om AI och automation">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://oakdev.app/boka-samtal-om-ai/?sent=1">
+              <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off">
+
+              <div class="booking-two-col">
+                <label>
+                  Namn
+                  <input type="text" name="name" autocomplete="name" required>
+                </label>
+                <label>
+                  E-post
+                  <input type="email" name="email" autocomplete="email" required>
+                </label>
+              </div>
+
+              <label>
+                Vad gäller det?
+                <select name="topic" required>
+                  <option value="" selected disabled>Välj område</option>
+                  <option value="AI och automation">AI och automation</option>
+                  <option value="Webbplats eller app">Webbplats eller app</option>
+                  <option value="IT-konsulting">IT-konsulting</option>
+                  <option value="Osäker, vill prata igenom">Osäker, vill prata igenom</option>
+                </select>
+              </label>
+
+              <label>
+                Kort beskrivning
+                <textarea name="message" required placeholder="Exempel: Vi skickar många offerter och tappar uppföljningen. Kan AI hjälpa oss skapa påminnelser och mailutkast?"></textarea>
+              </label>
+
+              <button class="btn-primary booking-submit" type="submit">Skicka förfrågan</button>
+            </form>
+          </div>
+
+          <aside class="booking-card">
+            <h3>Snabbare kontakt</h3>
+            <p>Vill du hellre skriva direkt? Använd mail eller WhatsApp så kan vi boka en tid manuellt.</p>
+            <div class="booking-card-actions">
+              <a class="btn-ghost" href="mailto:hello@oakdev.app?subject=Boka%20samtal%20om%20AI%20och%20automation">Maila OakDev</a>
+              <a class="btn-ghost" href="https://api.whatsapp.com/send/?phone=46763909381&amp;text=Hej%20OakDev%2C%20jag%20vill%20boka%20ett%20samtal%20om%20AI%20och%20automation&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png" alt="OakDev &amp; AI AB" width="140" height="36" loading="lazy" />
+          <p>AI, automation, appar och webb från Uddevalla.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/ai-konsult-uddevalla/">AI-konsult Uddevalla</a>
+            <a href="/ai-automation/">AI &amp; Automation</a>
+            <a href="/app-studio/">App Studio</a>
+            <a href="/consulting/">Consulting</a>
+          </div>
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-contact-item"><a href="mailto:hello@oakdev.app">hello@oakdev.app</a></div>
+            <div class="footer-contact-item"><a href="tel:+46708105766">+46 70 810 57 66</a></div>
+            <div class="footer-contact-item">Kristevik 633, 451 96 Uddevalla</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal navigation">
+          <a href="/privacy/">Privacy Policy</a>
+          <a href="/terms/">Terms of Use</a>
+          <a href="/about/">About</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
