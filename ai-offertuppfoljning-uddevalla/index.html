@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="sv" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' https: data: blob:;
+    connect-src 'self' https://formsubmit.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formsubmit.co;
+    upgrade-insecure-requests;
+  " />
+
+  <title>AI för offertuppföljning i Uddevalla | OakDev &amp; AI</title>
+  <meta name="description" content="Så kan företag i Uddevalla använda AI för offertuppföljning: automatiska påminnelser, personliga mailutkast och mänskligt godkännande innan skick." />
+  <meta name="keywords" content="AI offertuppföljning Uddevalla, AI-konsult Uddevalla, automatisera offerter, säljautomation Bohuslän, AI automation småföretag" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/ai-offertuppfoljning-uddevalla/" />
+  <!-- Hreflang TODO: dedicated /en/ route variants do not exist yet; add the en alternate when that structure is published. -->
+  <link rel="alternate" hreflang="sv-SE" href="https://oakdev.app/ai-offertuppfoljning-uddevalla/" />
+  <link rel="alternate" hreflang="x-default" href="https://oakdev.app/ai-offertuppfoljning-uddevalla/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://oakdev.app/ai-offertuppfoljning-uddevalla/" />
+  <meta property="og:title" content="AI för offertuppföljning i Uddevalla" />
+  <meta property="og:description" content="En praktisk guide till hur företag kan följa upp offerter snabbare med AI, utan att tappa mänsklig kontroll." />
+  <meta property="og:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI för offertuppföljning i Uddevalla" />
+  <meta name="twitter:description" content="Automatiska påminnelser, personliga mailutkast och mänskligt godkännande för offertuppföljning." />
+  <meta name="twitter:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" type="image/png" href="../assets/icon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://oakdev.app/ai-offertuppfoljning-uddevalla/#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "OakDev & AI AB",
+            "item": "https://oakdev.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI-konsult Uddevalla",
+            "item": "https://oakdev.app/ai-konsult-uddevalla/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "AI för offertuppföljning",
+            "item": "https://oakdev.app/ai-offertuppfoljning-uddevalla/"
+          }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://oakdev.app/#organization",
+        "name": "OakDev & AI AB",
+        "url": "https://oakdev.app/",
+        "logo": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "email": "hello@oakdev.app",
+        "telephone": "+46708105766",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kristevik 633",
+          "postalCode": "451 96",
+          "addressLocality": "Uddevalla",
+          "addressRegion": "Västra Götaland",
+          "addressCountry": "SE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/oakdev-ai/",
+          "https://www.facebook.com/profile.php?id=61585121092758",
+          "https://discord.gg/SpsZjB22Cp",
+          "https://api.whatsapp.com/send/?phone=46763909381&text&type=phone_number&app_absent=0"
+        ]
+      },
+      {
+        "@type": "Article",
+        "@id": "https://oakdev.app/ai-offertuppfoljning-uddevalla/#article",
+        "headline": "AI för offertuppföljning i Uddevalla",
+        "description": "En praktisk guide till hur små och medelstora företag kan använda AI för att följa upp offerter utan att tappa mänsklig kontroll.",
+        "author": { "@id": "https://oakdev.app/#organization" },
+        "publisher": { "@id": "https://oakdev.app/#organization" },
+        "datePublished": "2026-05-20",
+        "dateModified": "2026-05-20",
+        "mainEntityOfPage": "https://oakdev.app/ai-offertuppfoljning-uddevalla/",
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://oakdev.app/ai-offertuppfoljning-uddevalla/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Kan AI skicka offertuppföljningar automatiskt?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja, men OakDev rekommenderar ofta att AI först skapar mailutkast som en människa godkänner innan något skickas externt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Vilka system kan ett offertflöde kopplas till?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ett offertflöde kan ofta kopplas till e-post, kalkylark, CRM, formulär, ekonomisystem eller ett enklare internt adminverktyg."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Passar AI-offertuppföljning små företag?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja, särskilt när företaget skickar återkommande offerter och vill minska risken att uppföljningar glöms bort."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .guide-page {
+      background: #020202;
+    }
+
+    .guide-hero {
+      position: relative;
+      padding: 132px 0 80px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(118,185,0,0.11), transparent 42%),
+        radial-gradient(circle at 80% 18%, rgba(118,185,0,0.12), transparent 34%),
+        #020202;
+    }
+
+    .guide-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(118,185,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(118,185,0,0.04) 1px, transparent 1px);
+      background-size: 58px 58px;
+      pointer-events: none;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 100%);
+    }
+
+    .guide-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(280px, 0.28fr);
+      gap: 44px;
+      align-items: end;
+    }
+
+    .guide-kicker {
+      display: inline-flex;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .guide-hero h1 {
+      max-width: 860px;
+      font-size: 4rem;
+      letter-spacing: 0;
+      margin-bottom: 22px;
+    }
+
+    .guide-lead {
+      max-width: 760px;
+      color: var(--text-2);
+      font-size: 1.16rem;
+      line-height: 1.78;
+    }
+
+    .guide-panel {
+      border: 1px solid rgba(118,185,0,0.28);
+      border-radius: 8px;
+      background: rgba(118,185,0,0.045);
+      padding: 24px;
+    }
+
+    .guide-panel h2 {
+      font-size: 1.15rem;
+      letter-spacing: 0;
+      margin-bottom: 12px;
+    }
+
+    .guide-panel ul {
+      list-style: disc;
+      padding-left: 20px;
+      color: var(--text-2);
+      line-height: 1.9;
+      font-size: 0.95rem;
+    }
+
+    .guide-section {
+      padding: 82px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .guide-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.68fr) minmax(280px, 0.32fr);
+      gap: 52px;
+      align-items: start;
+    }
+
+    .guide-copy {
+      max-width: 800px;
+    }
+
+    .guide-copy h2 {
+      font-size: 2rem;
+      letter-spacing: 0;
+      margin: 42px 0 16px;
+    }
+
+    .guide-copy h2:first-child {
+      margin-top: 0;
+    }
+
+    .guide-copy p,
+    .guide-copy li {
+      color: var(--text-2);
+      font-size: 1.02rem;
+      line-height: 1.85;
+    }
+
+    .guide-copy p {
+      margin-bottom: 20px;
+    }
+
+    .guide-copy ol,
+    .guide-copy ul {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 24px;
+      padding-left: 24px;
+    }
+
+    .step-list {
+      counter-reset: steps;
+      list-style: none;
+      padding-left: 0 !important;
+    }
+
+    .step-list li {
+      counter-increment: steps;
+      position: relative;
+      padding: 18px 18px 18px 58px;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .step-list li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.82rem;
+    }
+
+    .guide-aside {
+      position: sticky;
+      top: 104px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .aside-card {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.035);
+      padding: 22px;
+    }
+
+    .aside-card h3 {
+      font-size: 1.05rem;
+      letter-spacing: 0;
+      margin-bottom: 10px;
+    }
+
+    .aside-card p,
+    .aside-card li {
+      color: var(--text-2);
+      font-size: 0.92rem;
+      line-height: 1.68;
+    }
+
+    .aside-card ul {
+      list-style: disc;
+      padding-left: 18px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .faq-card {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.035);
+      padding: 22px;
+    }
+
+    .faq-card h3 {
+      font-size: 1rem;
+      letter-spacing: 0;
+      margin-bottom: 10px;
+    }
+
+    .faq-card p {
+      color: var(--text-2);
+      font-size: 0.94rem;
+      line-height: 1.68;
+      margin: 0;
+    }
+
+    .guide-final {
+      padding: 88px 0;
+      text-align: center;
+      background: rgba(255,255,255,0.018);
+    }
+
+    .guide-final h2 {
+      max-width: 760px;
+      margin: 0 auto 16px;
+      font-size: 2.25rem;
+      letter-spacing: 0;
+    }
+
+    .guide-final p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 980px) {
+      .guide-page .nav-links {
+        display: none;
+      }
+
+      .guide-page .btn-book {
+        display: none;
+      }
+
+      .guide-page .menu-toggle,
+      .guide-page .mobile-menu {
+        display: flex;
+      }
+
+      .guide-hero-inner,
+      .guide-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .guide-aside {
+        position: static;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .guide-hero {
+        padding: 112px 0 58px;
+      }
+
+      .guide-hero h1 {
+        font-size: 2.45rem;
+      }
+
+      .guide-lead {
+        font-size: 1rem;
+      }
+
+      .guide-section {
+        padding: 62px 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="guide-page">
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png"
+             alt="OakDev &amp; AI AB"
+             width="140" height="36"
+             loading="eager" />
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/app-studio/" class="nav-link">App Studio</a>
+        <a href="/ai-automation/" class="nav-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="nav-link">AI Uddevalla</a>
+        <a href="/consulting/" class="nav-link">Consulting</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/contact/" class="btn-book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+                aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="/app-studio/" class="mobile-link">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="mobile-link">AI Uddevalla</a>
+        <a href="/consulting/" class="mobile-link">Consulting</a>
+        <a href="/about/" class="mobile-link">About</a>
+        <a href="/contact/" class="mobile-link">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <a href="/contact/" class="btn-book" style="display:block;text-align:center;">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="guide-hero">
+      <div class="container guide-hero-inner">
+        <div>
+          <div class="guide-kicker">AI-offertuppföljning</div>
+          <h1>AI för offertuppföljning i Uddevalla</h1>
+          <p class="guide-lead">
+            Många affärer tappas inte för att offerten är dålig, utan för att uppföljningen kommer för sent eller glöms bort. Här är ett konkret AI-flöde som hjälper företag att följa upp snabbare utan att låta AI skicka okontrollerade kundmail.
+          </p>
+        </div>
+
+        <aside class="guide-panel" aria-label="Guide summary">
+          <h2>Passar särskilt bra när ni...</h2>
+          <ul>
+            <li>skickar offerter varje vecka</li>
+            <li>följer upp manuellt i mail</li>
+            <li>har återkommande frågor från kunder</li>
+            <li>vill behålla mänskligt godkännande</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <div class="container guide-layout">
+        <article class="guide-copy">
+          <h2>Problemet: offerter hamnar i ett tyst mellanläge</h2>
+          <p>
+            En offert skickas. Kunden öppnar den kanske, kanske inte. Någon i teamet tänker att den ska följas upp "senare". Sedan kommer en ny kund, ett nytt jobb, ett nytt möte och uppföljningen försvinner bakom allt annat.
+          </p>
+          <p>
+            Det här är vanligt hos små och medelstora företag i Uddevalla, Bohuslän och Västra Götaland. Det är inte ett motivationsproblem. Det är ett systemproblem. Uppföljningen behöver ett tydligt flöde som inte bygger på minnet hos en stressad människa.
+          </p>
+
+          <h2>Så kan ett AI-flöde se ut</h2>
+          <ol class="step-list">
+            <li>Offerten loggas när den skickas, till exempel via ett kalkylark, CRM, formulär eller mailregel.</li>
+            <li>AI läser offertens innehåll och sammanfattar vad kunden frågat efter, vilka beslutspunkter som finns och vad nästa rimliga fråga är.</li>
+            <li>Efter 3, 7 och 14 dagar skapas ett personligt mailutkast med rätt ton, kundens sammanhang och en tydlig fråga.</li>
+            <li>En människa får godkänna, ändra eller stoppa mailet innan något skickas externt.</li>
+            <li>Status uppdateras automatiskt så teamet ser vilka offerter som väntar, följts upp eller är redo för nästa steg.</li>
+          </ol>
+
+          <h2>Varför AI passar just här</h2>
+          <p>
+            Vanlig automation kan påminna dig om att följa upp. AI kan dessutom skriva ett relevant utkast baserat på vad offerten faktiskt handlade om. Den kan skilja mellan en snabb prisfråga, ett större projekt, en kund som behöver trygghet och en kund som redan nästan bestämt sig.
+          </p>
+          <p>
+            Det viktiga är att inte börja med "AI ska sköta försäljningen". Börja med att AI tar fram ett bättre underlag för människan som redan äger kundrelationen.
+          </p>
+
+          <h2>Exempel på ett uppföljningsutkast</h2>
+          <p>
+            Ett bra AI-genererat utkast ska vara kort, mänskligt och kopplat till offertens innehåll. Till exempel: "Hej Anna, jag ville bara följa upp offerten kring er nya bokningssida. Är det framför allt tidplanen eller kopplingen till ert befintliga system ni vill reda ut innan ni tar beslut?"
+          </p>
+          <p>
+            Det är inte aggressiv försäljning. Det är bara ordning, timing och relevans.
+          </p>
+
+          <h2>Vad som behövs för att bygga första versionen</h2>
+          <ul>
+            <li>Var offerten finns: PDF, mail, CRM, kalkylark eller offertsystem.</li>
+            <li>Vilka tidsgränser som ska trigga uppföljning.</li>
+            <li>Vilken ton ni vill ha i kommunikationen.</li>
+            <li>Vem som ska godkänna utkast innan skick.</li>
+            <li>Hur status ska visas för teamet.</li>
+          </ul>
+
+          <h2>Första versionen ska vara liten</h2>
+          <p>
+            En bra start är inte ett stort sälj-CRM. En bra start är ett flöde som hanterar 10-30 offerter, skapar utkast och visar tydligt vad som händer. När teamet litar på det kan man koppla på fler system, bättre rapporter och fler steg.
+          </p>
+          <p>
+            OakDev &amp; AI AB bygger sådana flöden från Uddevalla. Vi kan hjälpa både med den enkla automationen och med webbappar, kundportaler eller interna verktyg om flödet behöver ett tydligare gränssnitt.
+          </p>
+        </article>
+
+        <aside class="guide-aside">
+          <div class="aside-card">
+            <h3>Snabb check</h3>
+            <ul>
+              <li>Skickar ni minst 5 offerter i månaden?</li>
+              <li>Missas uppföljningar ibland?</li>
+              <li>Skriver ni liknande mail om och om igen?</li>
+              <li>Vill ni godkänna innan AI skickar?</li>
+            </ul>
+          </div>
+
+          <div class="aside-card">
+            <h3>Nästa steg</h3>
+            <p>Skicka ett exempel på hur ert offertflöde fungerar idag. Vi kan föreslå en första automation utan att göra det större än det behöver vara.</p>
+            <a href="/contact/" class="btn-primary" style="margin-top:14px;">Prata med oss</a>
+          </div>
+
+          <div class="aside-card">
+            <h3>Relaterat</h3>
+            <p><a href="/ai-konsult-uddevalla/">Läs mer om OakDev som AI-konsult i Uddevalla.</a></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <div class="container">
+        <div class="guide-copy">
+          <h2>Vanliga frågor</h2>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>Kan AI skicka mailen automatiskt?</h3>
+            <p>Ja, men vi rekommenderar ofta att börja med godkännande. AI skriver utkastet, människan trycker skick.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Måste vi ha ett CRM?</h3>
+            <p>Nej. Första versionen kan ofta byggas runt mail, kalkylark eller ett enkelt formulär.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Blir det opersonligt?</h3>
+            <p>Inte om flödet byggs rätt. AI ska använda kundens sammanhang och er ton, inte massproducera generiska mail.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-final">
+      <div class="container">
+        <h2>Vill ni följa upp offerter snabbare utan att tappa kontrollen?</h2>
+        <p>
+          OakDev &amp; AI AB hjälper företag i Uddevalla och resten av Sverige att bygga AI-flöden som sparar tid i vardagen.
+        </p>
+        <a href="/contact/" class="btn-primary">Boka ett AI-samtal</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png"
+                 alt="OakDev &amp; AI AB"
+                 width="130" height="auto"
+                 loading="lazy" />
+            <p>AI-konsult, appstudio och IT-partner i Uddevalla.</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/app-studio/">App Studio</a>
+            <a href="/ai-automation/">AI &amp; Automation</a>
+            <a href="/ai-konsult-uddevalla/">AI-konsult Uddevalla</a>
+            <a href="/consulting/">Consulting</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Guides</h4>
+            <a href="/ai-offertuppfoljning-uddevalla/">AI för offertuppföljning</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-contact-item"><a href="mailto:hello@oakdev.app">hello@oakdev.app</a></div>
+            <div class="footer-contact-item"><a href="tel:+46708105766">+46 70 810 57 66</a></div>
+            <div class="footer-contact-item">Kristevik 633, 451 96 Uddevalla</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Use</a>
+            <a href="/about/">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

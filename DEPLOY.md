@@ -2,42 +2,29 @@
 
 This site is deployed as a static site for `https://oakdev.app/`.
 
-## Search Engine Verification Codes
+## Search Engine Verification
 
-Every HTML page contains these placeholder tags in `<head>`:
+Google Search Console is verified through DNS at the domain provider level. Do not add placeholder HTML verification tags to the site.
 
-```html
-<!-- Search engine verification: replace these placeholders after registering oakdev.app in Google Search Console and Bing Webmaster Tools. -->
-<meta name="google-site-verification" content="REPLACE_WITH_GOOGLE_CODE">
-<meta name="msvalidate.01" content="REPLACE_WITH_BING_CODE">
-```
-
-When the site is added to the search tools, replace:
-
-- `REPLACE_WITH_GOOGLE_CODE` with the meta tag content value from Google Search Console.
-- `REPLACE_WITH_BING_CODE` with the meta tag content value from Bing Webmaster Tools.
-
-Because this is a static site without a shared layout/template, update the tags in every `*.html` file unless a shared layout is introduced later.
+If Google or Bing ever need HTML meta-tag verification instead of DNS, add the real verification tag to the `<head>` of the homepage only after copying it from the relevant verification screen. Do not publish placeholder values such as `REPLACE_WITH_GOOGLE_CODE` or `REPLACE_WITH_BING_CODE`.
 
 ## Register in Google Search Console
 
 1. Go to Google Search Console.
 2. Add property for `https://oakdev.app/`.
-3. Choose the HTML meta tag verification method.
-4. Copy only the `content` value from Google's verification meta tag.
-5. Replace `REPLACE_WITH_GOOGLE_CODE` in the site files.
-6. Commit, push, and wait for the site to deploy.
-7. Click Verify in Google Search Console.
+3. Choose DNS verification when possible.
+4. Add the TXT record at the domain provider.
+5. Wait for DNS propagation.
+6. Click Verify in Google Search Console.
 
 ## Register in Bing Webmaster Tools
 
 1. Go to Bing Webmaster Tools.
 2. Add site for `https://oakdev.app/`.
-3. Choose the HTML meta tag verification method.
-4. Copy only the `content` value from Bing's `msvalidate.01` meta tag.
-5. Replace `REPLACE_WITH_BING_CODE` in the site files.
-6. Commit, push, and wait for the site to deploy.
-7. Click Verify in Bing Webmaster Tools.
+3. Choose DNS verification when possible.
+4. Add the TXT or CNAME record that Bing provides at the domain provider.
+5. Wait for DNS propagation.
+6. Click Verify in Bing Webmaster Tools.
 
 ## Submit Sitemap
 
