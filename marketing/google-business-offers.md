@@ -12,18 +12,15 @@ Använd detta som ett **Erbjudande** i Google Business Profile. Det säljer ett 
 
 **Beskrivning:**
 
-Vi hjälper företag i Uddevalla, Bohuslän och Västra Götaland hitta ett konkret första steg med AI och automation.
+Nyfiken på om AI faktiskt kan spara tid i ert företag, men vill slippa stora förstudier och fluffiga buzzwords?
 
-Under en kort genomgång tittar vi på ett arbetsflöde som tar tid idag, till exempel offertuppföljning, inkorg, administration, kundfrågor, rapporter eller interna appar.
+Vi tar ett kort samtal och tittar på ett vardagsmoment som tar onödig tid, till exempel offertuppföljning, mejl, administration, kundfrågor, rapporter eller ett internt arbetsflöde.
 
-Efteråt får ni en enkel rekommendation:
-- vad som kan automatiseras först
-- vilka system som behöver kopplas ihop
-- vad AI kan göra själv
-- vad en människa bör godkänna
-- om det är värt att bygga vidare
+Efteråt får ni en rak rekommendation: börja här, vänta med det här, och så enkelt kan första versionen byggas.
 
-Passar små och medelstora företag som vill börja praktiskt, inte med buzzwords.
+Första genomgången är kostnadsfri. Passar företag i Uddevalla, Bohuslän och Västra Götaland som vill börja praktiskt och se om AI är värt det på riktigt.
+
+**Pris i detta inlägg:** nämn bara att första genomgången är kostnadsfri. Spara priset `AI-pilot från 14 900 kr exkl. moms` till uppföljningen eller ett separat betalt erbjudande.
 
 **Länk:**
 
@@ -51,6 +48,24 @@ Priset gäller en smal pilot med tydligt scope. Exkl. moms. Slutpris sätts efte
 **Länk:**
 
 https://oakdev.app/boka-samtal-om-ai/?utm_source=google&utm_medium=business_profile&utm_campaign=ai_pilot_offer
+
+## Uppdatering: ny SEO-guide
+
+Använd detta som en vanlig **Uppdatering** i Google Business Profile när artikeln är publicerad.
+
+**Beskrivning:**
+
+Vi har lagt upp en ny guide för småföretag som vill börja praktiskt med AI och automation.
+
+Den går igenom 7 konkreta flöden som ofta passar som första steg: offertuppföljning, mejlsortering, dokumenthantering, mötesanteckningar, intern kunskapsbot, veckorapporter och lokal marknadsföring.
+
+Tanken är enkel: börja inte med ett stort AI-projekt. Börja med ett vardagsmoment som redan tar tid varje vecka.
+
+Guiden är skriven för företag i Uddevalla, Bohuslän och Västra Götaland som vill förstå vad AI faktiskt kan göra i verksamheten.
+
+**Länk:**
+
+https://oakdev.app/ai-automation-smaforetag-uddevalla/?utm_source=google&utm_medium=business_profile&utm_campaign=small_business_ai_guide
 
 ## Prislogik
 
