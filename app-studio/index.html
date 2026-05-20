@@ -411,6 +411,8 @@
     .portfolio-card:nth-child(3) .portfolio-logo { animation-delay: -3.5s; }
 
     /* Zoom past transparent padding to match ChristBay visual size */
+    .portfolio-card--vikingpal .portfolio-logo { scale: 1.48; max-width: 240px; max-height: 240px; --float-y: -7px; }
+    .portfolio-card--inkmeld  .portfolio-logo { scale: 1.16; max-width: 360px; max-height: 190px; --float-y: -5px; }
     .portfolio-card--tipsypal .portfolio-logo { scale: 2.2; --float-y: -6px; }
     .portfolio-card--vespera  .portfolio-logo { scale: 2.0; max-width: 260px; max-height: 260px; --float-y: -7px; }
     .portfolio-card--nuria    .portfolio-logo { scale: 2.05; --float-y: -6px; }
@@ -504,6 +506,72 @@
       max-height: 260px;
     }
 
+    /* VikingPal — Norse wisdom companion (gold + deep iron) */
+    .portfolio-card--vikingpal .portfolio-logo-area {
+      background:
+        radial-gradient(circle at 50% 47%, rgba(255,211,110,0.18) 0%, rgba(185,116,36,0.13) 36%, transparent 66%),
+        linear-gradient(135deg, rgba(46,31,17,0.9) 0%, rgba(8,14,16,0.97) 100%);
+      box-shadow: inset 0 0 58px rgba(255,184,64,0.11);
+    }
+    .portfolio-card--vikingpal .portfolio-logo-area::before {
+      width: 290px;
+      height: 290px;
+      filter: blur(82px);
+      background: rgba(232,164,54,0.6);
+    }
+    .portfolio-card--vikingpal .portfolio-logo {
+      filter:
+        drop-shadow(0 8px 24px rgba(0,0,0,0.55))
+        drop-shadow(0 0 24px rgba(255,199,83,0.24))
+        drop-shadow(0 0 44px rgba(191,114,31,0.28));
+    }
+    .portfolio-card--vikingpal .portfolio-app-badge {
+      color: #e0ad52;
+      background: rgba(224,173,82,0.09);
+      border-color: rgba(224,173,82,0.28);
+    }
+    .portfolio-card--vikingpal .portfolio-app-badge::before { background: #e0ad52; }
+    .portfolio-card--vikingpal .btn-visit {
+      border-color: rgba(224,173,82,0.35);
+      color: #e0ad52;
+    }
+
+    /* InkMeld — creative writing companion (ink blue + graphite) */
+    .portfolio-card--inkmeld .portfolio-logo-area {
+      background:
+        radial-gradient(circle at 58% 45%, rgba(100,160,235,0.18) 0%, rgba(50,92,150,0.12) 38%, transparent 68%),
+        linear-gradient(135deg, rgba(8,18,34,0.92) 0%, rgba(5,7,15,0.97) 100%);
+      box-shadow: inset 0 0 58px rgba(92,154,230,0.11);
+    }
+    .portfolio-card--inkmeld .portfolio-logo-area::before {
+      width: 310px;
+      height: 220px;
+      filter: blur(76px);
+      background: rgba(75,130,210,0.48);
+    }
+    .portfolio-card--inkmeld .portfolio-logo {
+      filter:
+        drop-shadow(0 8px 24px rgba(0,0,0,0.58))
+        drop-shadow(0 0 24px rgba(125,178,238,0.22))
+        drop-shadow(0 0 44px rgba(45,93,170,0.22));
+    }
+    .portfolio-card--inkmeld .portfolio-app-badge {
+      color: #7eb7ff;
+      background: rgba(126,183,255,0.09);
+      border-color: rgba(126,183,255,0.28);
+    }
+    .portfolio-card--inkmeld .portfolio-app-badge::before { background: #7eb7ff; }
+    .portfolio-card--inkmeld .btn-visit {
+      border-color: rgba(126,183,255,0.35);
+      color: #7eb7ff;
+    }
+    .portfolio-card--inkmeld .btn-visit:hover {
+      background: rgba(126,183,255,0.12);
+      border-color: #7eb7ff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(126,183,255,0.18);
+    }
+
     /* Nuria — Islamic companion (deep forest green) */
     .portfolio-card--nuria .portfolio-logo-area {
       background:
@@ -562,12 +630,20 @@
       box-shadow: 0 8px 28px rgba(194,59,90,0.2);
     }
 
+    .btn-visit--disabled {
+      cursor: default;
+      opacity: 0.74;
+      pointer-events: none;
+    }
+
     /* Animation delays for cards 4 and 5 */
     .portfolio-card:nth-child(4) .portfolio-logo { animation-delay: -0.8s; }
     .portfolio-card:nth-child(5) .portfolio-logo { animation-delay: -2.3s; }
 
     /* Mobile: middle ground — smaller than desktop scale (~2+) but readable on narrow screens */
     @media (max-width: 768px) {
+      .portfolio-card--vikingpal .portfolio-logo,
+      .portfolio-card--inkmeld .portfolio-logo,
       .portfolio-card--tipsypal .portfolio-logo,
       .portfolio-card--vespera .portfolio-logo,
       .portfolio-card--nuria .portfolio-logo,
@@ -575,6 +651,8 @@
         max-width: 200px;
         max-height: 200px;
       }
+      .portfolio-card--vikingpal .portfolio-logo { scale: 1.22; }
+      .portfolio-card--inkmeld  .portfolio-logo { scale: 1; max-width: 280px; max-height: 150px; }
       .portfolio-card--tipsypal .portfolio-logo { scale: 1.58; }
       .portfolio-card--vespera  .portfolio-logo { scale: 1.48; }
       .portfolio-card--nuria    .portfolio-logo { scale: 1.52; }
@@ -1319,17 +1397,64 @@
         <div class="section-intro" data-reveal>
           <div class="section-tag" data-i18n="portfolio_tag">Our Portfolio</div>
           <h2 id="portfolio-heading" class="section-title">
-            <span data-i18n="portfolio_h_pre">Apps We've</span> <span class="gradient-text" data-i18n="portfolio_h_main">Shipped</span>
+            <span data-i18n="portfolio_h_pre">Apps From Our</span> <span class="gradient-text" data-i18n="portfolio_h_main">Studio</span>
           </h2>
           <p class="section-desc" data-i18n="portfolio_desc">
-            Real products, real users. These are some of the apps we have built and launched.
+            Live products, upcoming releases, and focused app concepts from OakDev.
           </p>
         </div>
 
         <div class="portfolio-showcase">
 
+          <!-- ── VikingPal ── -->
+          <article class="portfolio-card portfolio-card--vikingpal" data-reveal="up">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/vikingPal.png"
+                   alt="VikingPal app logo"
+                   class="portfolio-logo"
+                   width="240" height="240"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="vp_tagline">Coming Soon</span>
+              <h3 data-i18n="vp_name">VikingPal</h3>
+              <p data-i18n="vp_desc">A coming Viking-themed app with wisdom inspired by Asatru gods and Norse legends, designed as an atmospheric companion for daily reflection, mythic stories, and timeless guidance.</p>
+              <span class="btn-visit btn-visit--disabled" aria-disabled="true">
+                <span data-i18n="vp_cta">Coming Soon</span>
+              </span>
+            </div>
+          </article>
+
+          <!-- ── InkMeld ── -->
+          <article class="portfolio-card portfolio-card--inkmeld" data-reveal="up" data-reveal-delay="1">
+            <div class="portfolio-logo-area">
+              <img src="../assets/app%20logos/inkMeld-transparent.png"
+                   alt="inkMeld app logo"
+                   class="portfolio-logo"
+                   width="360" height="190"
+                   loading="lazy" />
+            </div>
+            <div class="portfolio-info-area">
+              <span class="portfolio-app-badge" data-i18n="inkmeld_tagline">Coming Soon</span>
+              <h3 data-i18n="inkmeld_name">inkMeld</h3>
+              <p data-i18n="inkmeld_desc">inkMeld is a coming creative writing app for turning loose ideas into polished drafts. It helps writers shape notes, scenes, and longer texts with a focused flow from spark to finished piece.</p>
+              <a href="https://inkmeld.oakdev.app/"
+                 class="btn-visit"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 aria-label="Open inkMeld live site">
+                <span data-i18n="inkmeld_cta">Open inkMeld</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
           <!-- ── ChristBay ── -->
-          <article class="portfolio-card portfolio-card--christbay" data-reveal="up">
+          <article class="portfolio-card portfolio-card--christbay" data-reveal="up" data-reveal-delay="2">
             <div class="portfolio-logo-area">
               <img src="../assets/app%20logos/christbay-high-resolution-logo-transparent.png"
                    alt="ChristBay app logo"
@@ -1357,7 +1482,7 @@
           </article>
 
           <!-- ── TipsyPal ── -->
-          <article class="portfolio-card portfolio-card--tipsypal" data-reveal="up" data-reveal-delay="1">
+          <article class="portfolio-card portfolio-card--tipsypal" data-reveal="up" data-reveal-delay="0">
             <div class="portfolio-logo-area">
               <img src="../assets/app%20logos/tipsypal-high-resolution-logo-transparent.png"
                    alt="TipsyPal app logo"
@@ -1385,7 +1510,7 @@
           </article>
 
           <!-- ── Vespera ── -->
-          <article class="portfolio-card portfolio-card--vespera" data-reveal="up" data-reveal-delay="2">
+          <article class="portfolio-card portfolio-card--vespera" data-reveal="up" data-reveal-delay="1">
             <div class="portfolio-logo-area">
               <img src="../assets/app%20logos/ChatGPT%20Image%2027%20feb.%202026%2021_50_58.png"
                    alt="Vespera app logo"
@@ -1425,7 +1550,7 @@
               <span class="portfolio-app-badge" data-i18n="nuria_tagline">Islamic Companion</span>
               <h3 data-i18n="nuria_name">Nuria</h3>
               <p data-i18n="nuria_desc">An inclusive Islamic app offering daily prayers, Quran readings, hadith, and guidance — beautifully designed for Muslims seeking a deeper connection to their faith.</p>
-              <a href="https://nuria.oakdev.app/"
+              <a href="https://nuria.one/"
                  class="btn-visit"
                  target="_blank"
                  rel="noopener noreferrer"
