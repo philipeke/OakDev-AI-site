@@ -111,6 +111,8 @@ const TRANSLATIONS = {
     /* Footer */
     footer_company:  'Company',
     footer_services: 'Services',
+    footer_local:    'Local SEO',
+    footer_guides:   'Guides',
     footer_legal:    'Legal',
     footer_connect:  'Connect',
     footer_desc:     'Premium app studio and AI product company. Building tomorrow\'s digital products today.',
@@ -558,6 +560,8 @@ const TRANSLATIONS = {
     /* Footer */
     footer_company:  'Företag',
     footer_services: 'Tjänster',
+    footer_local:    'Lokala sidor',
+    footer_guides:   'Guider',
     footer_legal:    'Juridik',
     footer_connect:  'Kontakta',
     footer_desc:     'App-Studio och AI-produktbolag, stationerat i Uddevalla. Bygger morgondagens digitala produkter idag.',

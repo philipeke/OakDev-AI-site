@@ -1581,8 +1581,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-  gap: 2.5rem;
+  grid-template-columns: 1.65fr 0.85fr 0.95fr 1.25fr 1.1fr 1.35fr;
+  gap: 2rem;
 }
 
 .footer-brand img {
