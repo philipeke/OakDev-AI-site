@@ -2,6 +2,31 @@
 
 This site is deployed as a static site for `https://oakdev.app/`.
 
+## oakBot API Backend
+
+oakBot uses the browser widget in `js/main.js`, but OpenAI calls must go through a server-side endpoint so the API key is never exposed in client code.
+
+The local dev server can test the full flow:
+
+```text
+npm run dev
+```
+
+Then open:
+
+```text
+http://localhost:4173/
+```
+
+For production, GitHub Pages cannot run `/api/chatbot` because it is static hosting. Deploy `api/chatbot.js` to a serverless-capable host such as Vercel, Netlify Functions, Firebase Functions, or another Node backend, and set these environment variables there:
+
+```text
+OPENAI_API_KEY
+OPENAI_MODEL
+```
+
+Do not put `OPENAI_API_KEY` in HTML, CSS, browser JavaScript, GitHub Pages variables, or any public repo file.
+
 ## Search Engine Verification
 
 Google Search Console is verified through DNS at the domain provider level. Do not add placeholder HTML verification tags to the site.

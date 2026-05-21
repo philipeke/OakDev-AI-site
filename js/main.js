@@ -17,6 +17,15 @@ const TRANSLATIONS = {
     nav_about:       'About',
     nav_contact:     'Contact',
     nav_book:        'Book a Call',
+    nav_chatbot:     'Try our chatbot',
+    chat_title:      'oakBot',
+    chat_status:     'OakDev assistant online',
+    chat_intro:      'Hi, I am oakBot. Ask me about AI chatbots, automation, apps, websites, or how OakDev could help your company.',
+    chat_placeholder:'Ask about a chatbot, automation, or a project...',
+    chat_send:       'Send',
+    chat_close:      'Close chat',
+    chat_typing:     'Thinking...',
+    chat_error:      'I am connected in the interface, but the secure API endpoint is not active here yet. Add OPENAI_API_KEY on the server to enable live replies.',
     explore_services: 'Explore Services',
     /* Cookie */
     cookie_title:    'We use cookies',
@@ -466,6 +475,15 @@ const TRANSLATIONS = {
     nav_about:       'Om oss',
     nav_contact:     'Kontakt',
     nav_book:        'Boka samtal',
+    nav_chatbot:     'Prova vår chatbot',
+    chat_title:      'oakBot',
+    chat_status:     'OakDev-assistent online',
+    chat_intro:      'Hej, jag är oakBot. Fråga mig om AI-chatbotar, automation, appar, webbsidor eller hur OakDev kan hjälpa ditt företag.',
+    chat_placeholder:'Fråga om chatbot, automation eller ett projekt...',
+    chat_send:       'Skicka',
+    chat_close:      'Stäng chatten',
+    chat_typing:     'Tänker...',
+    chat_error:      'Gränssnittet är på plats, men den säkra API-endpointen är inte aktiv här än. Lägg OPENAI_API_KEY på servern för live-svar.',
     explore_services: 'Utforska tjänster',
     /* Cookie */
     cookie_title:    'Vi använder cookies',
@@ -1718,6 +1736,370 @@ function initMarquee() {
 }
 
 /* ============================================================
+   CHATBOT WIDGET
+   ============================================================ */
+function initChatbot() {
+  if (document.getElementById('oakChatbot')) return;
+
+  const STORAGE_KEY = 'oakdev_oakbot_state';
+  const MAX_STORED_MESSAGES = 30;
+  const getCopy = () => TRANSLATIONS[Lang.get()] || TRANSLATIONS.en;
+  const gsapSrc = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
+  let gsapPromise = null;
+
+  function loadState() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      const storedMessages = Array.isArray(parsed.messages) ? parsed.messages : [];
+      return {
+        open: parsed.open === true,
+        messages: storedMessages
+          .map((message) => ({
+            role: message?.role === 'assistant' ? 'assistant' : 'user',
+            content: String(message?.content || '').trim().slice(0, 1200),
+          }))
+          .filter((message) => message.content),
+      };
+    } catch {
+      return { open: false, messages: [] };
+    }
+  }
+
+  const initialState = loadState();
+  const messages = initialState.messages;
+
+  function loadGsap() {
+    if (typeof gsap !== 'undefined') return Promise.resolve(gsap);
+    if (gsapPromise) return gsapPromise;
+
+    gsapPromise = new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${gsapSrc}"]`);
+      if (existing) {
+        existing.addEventListener('load', () => resolve(window.gsap));
+        existing.addEventListener('error', reject);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = gsapSrc;
+      script.async = true;
+      script.onload = () => resolve(window.gsap);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+
+    return gsapPromise;
+  }
+
+  function closeMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('mobileMenu');
+    toggle?.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    menu?.classList.remove('open');
+    menu?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function makeLauncher(className) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = className;
+    button.dataset.chatbotOpen = 'true';
+    button.dataset.i18n = 'nav_chatbot';
+    button.textContent = getCopy().nav_chatbot;
+    return button;
+  }
+
+  const navActions = document.querySelector('.nav-actions');
+  if (navActions && !navActions.querySelector('[data-chatbot-open]')) {
+    const launcher = makeLauncher('btn-chatbot-nav');
+    const bookButton = navActions.querySelector('.btn-book');
+    navActions.insertBefore(launcher, bookButton || navActions.firstChild);
+  }
+
+  document.querySelectorAll('.mobile-actions').forEach((actions) => {
+    if (actions.querySelector('[data-chatbot-open]')) return;
+    const launcher = makeLauncher('btn-chatbot-mobile');
+    const bookButton = actions.querySelector('.btn-book');
+    actions.insertBefore(launcher, bookButton || null);
+  });
+
+  const widget = document.createElement('section');
+  widget.id = 'oakChatbot';
+  widget.className = 'oak-chatbot';
+  widget.setAttribute('aria-hidden', 'true');
+  widget.innerHTML = `
+    <div class="oak-chatbot-panel" role="dialog" aria-modal="false" aria-labelledby="oakChatbotTitle">
+      <div class="oak-chatbot-topline" aria-hidden="true"></div>
+      <div class="oak-chatbot-grid" aria-hidden="true"></div>
+      <header class="oak-chatbot-header">
+        <div class="oak-chatbot-avatar" aria-hidden="true">
+          <span class="oak-chatbot-ring ring-a"></span>
+          <span class="oak-chatbot-ring ring-b"></span>
+          <span class="oak-chatbot-scanner"></span>
+          <span class="oak-chatbot-face">
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div>
+          <h2 id="oakChatbotTitle" data-i18n="chat_title">${getCopy().chat_title}</h2>
+          <p><span class="oak-chatbot-pulse" aria-hidden="true"></span><span data-i18n="chat_status">${getCopy().chat_status}</span></p>
+        </div>
+        <button type="button" class="oak-chatbot-close" data-chatbot-close aria-label="${getCopy().chat_close}">x</button>
+      </header>
+      <div class="oak-chatbot-messages" aria-live="polite"></div>
+      <form class="oak-chatbot-form">
+        <textarea class="oak-chatbot-input" name="message" rows="1" maxlength="1200" data-i18n="chat_placeholder" placeholder="${getCopy().chat_placeholder}"></textarea>
+        <button type="submit" class="oak-chatbot-send" data-i18n="chat_send">${getCopy().chat_send}</button>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(widget);
+
+  const messageList = widget.querySelector('.oak-chatbot-messages');
+  const form = widget.querySelector('.oak-chatbot-form');
+  const input = widget.querySelector('.oak-chatbot-input');
+  const sendButton = widget.querySelector('.oak-chatbot-send');
+  const closeButton = widget.querySelector('[data-chatbot-close]');
+
+  function saveState(open = widget.classList.contains('open')) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        open,
+        messages: messages.slice(-MAX_STORED_MESSAGES),
+      }));
+    } catch {
+      // Storage can be unavailable in private modes; oakBot still works for the current page.
+    }
+  }
+
+  function friendlyLinkLabel(href) {
+    const lang = Lang.get();
+    const isSv = lang === 'sv';
+    const url = new URL(href, window.location.origin);
+    const path = url.pathname.replace(/\/$/, '/') + url.hash;
+
+    if (url.protocol === 'mailto:') return 'hello@oakdev.app';
+    if (url.protocol === 'tel:') return isSv ? 'ring oss' : 'call us';
+
+    const labels = {
+      '/boka-samtal-om-ai/#booking-form': isSv ? 'boka ett samtal' : 'book a call',
+      '/boka-samtal-om-ai/': isSv ? 'boka ett samtal' : 'book a call',
+      '/contact/': isSv ? 'kontakta oss' : 'contact us',
+      '/ai-chatbot-foretag/': isSv ? 'AI-chatbotar' : 'AI chatbots',
+      '/ai-automation/': 'AI & Automation',
+      '/app-studio/': 'App Studio',
+      '/consulting/': isSv ? 'IT-konsulting' : 'IT consulting',
+      '/webbplats-foretag-uddevalla/': isSv ? 'webbplatser' : 'websites',
+      '/mobilapp-foretag-uddevalla/': isSv ? 'mobilappar' : 'mobile apps',
+      '/about/': isSv ? 'om OakDev' : 'about OakDev',
+    };
+
+    return labels[path] || (isSv ? 'öppna länken' : 'open the link');
+  }
+
+  function createLink(label, href) {
+    const anchor = document.createElement('a');
+    const url = new URL(href, window.location.origin);
+    const isSameOrigin = url.origin === window.location.origin;
+
+    anchor.className = 'oak-chatbot-link';
+    anchor.textContent = label || friendlyLinkLabel(href);
+    anchor.href = isSameOrigin ? `${url.pathname}${url.search}${url.hash}` : url.href;
+
+    if (!isSameOrigin) {
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+    }
+
+    return anchor;
+  }
+
+  function appendTextWithBreaks(parent, text) {
+    text.split('\n').forEach((part, index) => {
+      if (index > 0) parent.appendChild(document.createElement('br'));
+      if (part) parent.appendChild(document.createTextNode(part));
+    });
+  }
+
+  function appendAutolinkedText(parent, text) {
+    const rawUrlPattern = /(https?:\/\/[^\s<)]+|\/[a-z0-9_./#?=&%-]+)/gi;
+    let cursor = 0;
+    let match;
+
+    while ((match = rawUrlPattern.exec(text)) !== null) {
+      appendTextWithBreaks(parent, text.slice(cursor, match.index));
+      parent.appendChild(createLink(friendlyLinkLabel(match[0]), match[0]));
+      cursor = match.index + match[0].length;
+    }
+
+    appendTextWithBreaks(parent, text.slice(cursor));
+  }
+
+  function renderAssistantContent(parent, text) {
+    const markdownLinkPattern = /\[([^\]]{1,120})\]\((https?:\/\/[^\s)]+|\/[^\s)]+|mailto:[^\s)]+|tel:[^\s)]+)\)/g;
+    let cursor = 0;
+    let match;
+
+    while ((match = markdownLinkPattern.exec(text)) !== null) {
+      appendAutolinkedText(parent, text.slice(cursor, match.index));
+      parent.appendChild(createLink(match[1], match[2]));
+      cursor = match.index + match[0].length;
+    }
+
+    appendAutolinkedText(parent, text.slice(cursor));
+  }
+
+  function appendMessage(role, text, options = {}) {
+    const bubble = document.createElement('div');
+    bubble.className = `oak-chatbot-message ${role}`;
+    if (options.pending) {
+      bubble.dataset.pending = 'true';
+      bubble.innerHTML = `<span>${text}</span><span class="oak-chatbot-typing" aria-hidden="true"><i></i><i></i><i></i></span>`;
+    } else if (role === 'assistant') {
+      renderAssistantContent(bubble, text);
+    } else {
+      bubble.textContent = text;
+    }
+    messageList.appendChild(bubble);
+    messageList.scrollTop = messageList.scrollHeight;
+
+    if (widget.classList.contains('open') && !options.skipAnimation) {
+      loadGsap()
+        .then((g) => {
+          if (!g) return;
+          g.fromTo(bubble, { opacity: 0, y: 12, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.32, ease: 'power3.out' });
+        })
+        .catch(() => {});
+    }
+
+    return bubble;
+  }
+
+  function setBusy(isBusy) {
+    input.disabled = isBusy;
+    sendButton.disabled = isBusy;
+    sendButton.textContent = isBusy ? getCopy().chat_typing : getCopy().chat_send;
+  }
+
+  function openChatbot() {
+    widget.classList.add('open');
+    widget.setAttribute('aria-hidden', 'false');
+    saveState(true);
+    closeMobileMenu();
+    window.setTimeout(() => input.focus(), 120);
+
+    loadGsap()
+      .then((g) => {
+        if (!g) return;
+        g.killTweensOf(widget.querySelector('.oak-chatbot-panel'));
+        g.fromTo(
+          widget.querySelector('.oak-chatbot-panel'),
+          { opacity: 0, y: 26, scale: 0.92, rotateX: -12, transformOrigin: '80% 100%' },
+          { opacity: 1, y: 0, scale: 1, rotateX: 0, duration: 0.68, ease: 'expo.out' }
+        );
+        g.fromTo(
+          widget.querySelectorAll('.oak-chatbot-avatar, .oak-chatbot-header h2, .oak-chatbot-header p, .oak-chatbot-message, .oak-chatbot-form'),
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.48, stagger: 0.055, delay: 0.08, ease: 'power3.out' }
+        );
+      })
+      .catch(() => {});
+  }
+
+  function closeChatbot() {
+    widget.classList.remove('open');
+    widget.setAttribute('aria-hidden', 'true');
+    saveState(false);
+  }
+
+  if (!messages.length) {
+    const intro = getCopy().chat_intro;
+    messages.push({ role: 'assistant', content: intro });
+    saveState(initialState.open);
+  }
+
+  messages.forEach((message) => appendMessage(message.role, message.content, { skipAnimation: true }));
+
+  document.querySelectorAll('[data-chatbot-open]').forEach((button) => {
+    button.addEventListener('click', openChatbot);
+  });
+
+  closeButton.addEventListener('click', closeChatbot);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && widget.classList.contains('open')) closeChatbot();
+  });
+
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = `${Math.min(input.scrollHeight, 140)}px`;
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return;
+    event.preventDefault();
+    form.requestSubmit();
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+    appendMessage('user', text);
+    messages.push({ role: 'user', content: text });
+    saveState();
+
+    const pending = appendMessage('assistant', getCopy().chat_typing, { pending: true });
+    setBusy(true);
+
+    try {
+      const response = await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages,
+          page: {
+            path: window.location.pathname,
+            title: document.title,
+          },
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.reply) {
+        throw new Error(data.error || 'Chatbot request failed');
+      }
+
+      pending.remove();
+      appendMessage('assistant', data.reply);
+      messages.push({ role: 'assistant', content: data.reply });
+      saveState();
+    } catch {
+      pending.remove();
+      const errorText = getCopy().chat_error;
+      appendMessage('assistant', errorText);
+      messages.push({ role: 'assistant', content: errorText });
+      saveState();
+    } finally {
+      setBusy(false);
+      input.focus();
+    }
+  });
+
+  Lang.apply(Lang.get());
+
+  if (initialState.open) {
+    window.setTimeout(openChatbot, 120);
+  }
+}
+
+/* ============================================================
    ACTIVE NAV LINK — based on current page
    ============================================================ */
 function setActiveNavLink() {
@@ -1743,6 +2125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initContactForm();
   initMarquee();
+  initChatbot();
 
   // Three.js (non-blocking)
   if (typeof THREE !== 'undefined') {
