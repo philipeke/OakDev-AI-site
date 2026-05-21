@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="sv" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' https: data: blob:;
+    connect-src 'self' https://formsubmit.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https://formsubmit.co;
+    upgrade-insecure-requests;
+  " />
+
+  <title>AI-chatbot för företag | Kundservice, leads och intern kunskap | OakDev</title>
+  <meta name="description" content="OakDev bygger AI-chatbotar för företag: webbchat, leadkvalificering, kundservice, intern kunskapsassistent och integrationer med era system." />
+  <meta name="keywords" content="AI-chatbot företag, chatbot företag, AI kundservice, AI support, intern AI-assistent, chatbot hemsida, OakDev AI" />
+  <meta name="author" content="OakDev &amp; AI AB" />
+  <link rel="canonical" href="https://oakdev.app/ai-chatbot-foretag/" />
+  <!-- Hreflang TODO: dedicated /en/ route variants do not exist yet; add the en alternate when that structure is published. -->
+  <link rel="alternate" hreflang="sv-SE" href="https://oakdev.app/ai-chatbot-foretag/" />
+  <link rel="alternate" hreflang="x-default" href="https://oakdev.app/ai-chatbot-foretag/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://oakdev.app/ai-chatbot-foretag/" />
+  <meta property="og:title" content="AI-chatbot för företag | OakDev &amp; AI AB" />
+  <meta property="og:description" content="AI-chatbotar för webbplats, support, leads och intern kunskap, byggda med tydliga regler, data och mänsklig kontroll." />
+  <meta property="og:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI-chatbot för företag | OakDev &amp; AI AB" />
+  <meta name="twitter:description" content="Bygg en AI-chatbot som faktiskt hjälper kunder och teamet, utan att bli ett löst experiment." />
+  <meta name="twitter:image" content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/seo-pages.css" />
+  <link rel="icon" type="image/png" href="../assets/icon.png" />
+  <link rel="apple-touch-icon" href="../assets/icon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://oakdev.app/ai-chatbot-foretag/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "OakDev & AI AB", "item": "https://oakdev.app/" },
+          { "@type": "ListItem", "position": 2, "name": "AI-chatbot för företag", "item": "https://oakdev.app/ai-chatbot-foretag/" }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://oakdev.app/#organization",
+        "name": "OakDev & AI AB",
+        "url": "https://oakdev.app/",
+        "logo": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "email": "hello@oakdev.app",
+        "telephone": "+46708105766",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kristevik 633",
+          "postalCode": "451 96",
+          "addressLocality": "Uddevalla",
+          "addressRegion": "Västra Götaland",
+          "addressCountry": "SE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/oakdev-ai/",
+          "https://www.facebook.com/profile.php?id=61585121092758",
+          "https://discord.gg/SpsZjB22Cp",
+          "https://api.whatsapp.com/send/?phone=46763909381&text&type=phone_number&app_absent=0"
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://oakdev.app/ai-chatbot-foretag/#service",
+        "name": "AI-chatbot för företag",
+        "serviceType": "AI chatbot development, customer service automation and internal knowledge assistants",
+        "provider": { "@id": "https://oakdev.app/#organization" },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Västra Götaland" },
+          { "@type": "Country", "name": "Sweden" },
+          { "@type": "Place", "name": "Remote" }
+        ],
+        "description": "AI-chatbotar för företag: webbchat, support, leadkvalificering, interna kunskapsassistenter, RAG, integrationer och mänskliga eskaleringsflöden."
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://oakdev.app/ai-chatbot-foretag/#webpage",
+        "url": "https://oakdev.app/ai-chatbot-foretag/",
+        "name": "AI-chatbot för företag",
+        "description": "En landningssida om AI-chatbotar för företag, kundservice, leads och intern kunskap.",
+        "about": { "@id": "https://oakdev.app/ai-chatbot-foretag/#service" },
+        "inLanguage": "sv-SE"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://oakdev.app/ai-chatbot-foretag/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Vad kan en AI-chatbot göra för ett företag?",
+            "acceptedAnswer": { "@type": "Answer", "text": "En AI-chatbot kan svara på vanliga frågor, kvalificera leads, sammanfatta ärenden, söka i dokument och lämna över svåra frågor till rätt person." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kan chatboten använda företagets egna dokument?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. En chatbot kan kopplas till utvalda dokument, FAQ, webbplatsinnehåll och interna kunskapskällor, med tydliga regler för vad den får svara på." }
+          },
+          {
+            "@type": "Question",
+            "name": "Är en AI-chatbot samma sak som vanlig livechatt?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Nej. Livechatt kräver ofta en människa direkt. En AI-chatbot kan hantera första svaret, samla information och eskalera när frågan behöver mänsklig hjälp." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="seo-page" style="--seo-accent:#8be9fd;--seo-accent-rgb:139,233,253;">
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <header id="navbar" class="navbar" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="OakDev home">
+        <img src="../assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png" alt="OakDev &amp; AI AB" width="140" height="36" loading="eager" />
+      </a>
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/app-studio/" class="nav-link">App Studio</a>
+        <a href="/ai-automation/" class="nav-link active">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="nav-link">AI Uddevalla</a>
+        <a href="/consulting/" class="nav-link">Consulting</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="/boka-samtal-om-ai/" class="btn-book">Book a Call</a>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile navigation">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="/app-studio/" class="mobile-link">App Studio</a>
+        <a href="/ai-automation/" class="mobile-link">AI &amp; Automation</a>
+        <a href="/ai-konsult-uddevalla/" class="mobile-link">AI Uddevalla</a>
+        <a href="/consulting/" class="mobile-link">Consulting</a>
+        <a href="/about/" class="mobile-link">About</a>
+        <a href="/contact/" class="mobile-link">Contact</a>
+      </nav>
+      <div class="mobile-actions">
+        <a href="/boka-samtal-om-ai/" class="btn-book" style="display:block;text-align:center;">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="seo-hero">
+      <div class="container seo-hero-inner">
+        <div>
+          <div class="seo-kicker">AI-chatbot för företag</div>
+          <h1>En chatbot som kan hjälpa kunder, kvalificera leads och hitta svar i er kunskap.</h1>
+          <p class="seo-lead">
+            OakDev &amp; AI AB bygger AI-chatbotar för företag som vill ge snabbare svar, fånga bättre leads och minska trycket på support och administration. Byggt med era regler, er data och tydlig mänsklig eskalering.
+          </p>
+          <div class="seo-actions">
+            <a href="/boka-samtal-om-ai/" class="btn-primary">Boka chatbotgenomgång</a>
+            <a href="#chatbot-types" class="btn-ghost">Se användningsfall</a>
+          </div>
+        </div>
+
+        <aside class="seo-panel" aria-label="AI-chatbot för företag">
+          <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png" alt="OakDev &amp; AI AB" />
+          <h2>Från “chatbot” till fungerande kundflöde.</h2>
+          <ul class="signal-list">
+            <li>Svar baserade på godkända källor, dokument och webbplatsinnehåll.</li>
+            <li>Leadkvalificering med sammanfattning till sälj eller support.</li>
+            <li>Eskalering till människa när frågan är oklar, känslig eller värdefull.</li>
+            <li>Integration med formulär, mail, CRM, ärendesystem och interna verktyg.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="chatbot-types" class="seo-section">
+      <div class="container">
+        <div class="seo-section-header">
+          <h2>Tre chatbotar som faktiskt kan vara värda att bygga</h2>
+          <p>En AI-chatbot blir stark först när den har rätt uppgift, rätt kunskap och tydliga gränser. Därför börjar vi med syftet, inte med widgeten.</p>
+        </div>
+        <div class="seo-grid">
+          <article class="seo-card">
+            <strong>Support</strong>
+            <h3>Svara på vanliga frågor</h3>
+            <p>Chatboten kan hjälpa kunder med öppettider, tjänster, priser, processer, felsökning och nästa steg, och skicka vidare när svaret kräver människa.</p>
+          </article>
+          <article class="seo-card">
+            <strong>Leads</strong>
+            <h3>Kvalificera nya förfrågningar</h3>
+            <p>Istället för ett tomt kontaktformulär kan chatboten ställa rätt frågor, summera behovet och ge teamet bättre underlag inför första samtalet.</p>
+          </article>
+          <article class="seo-card">
+            <strong>Internt</strong>
+            <h3>Sök i rutiner och dokument</h3>
+            <p>En intern AI-assistent kan hjälpa personal hitta rätt rutin, sammanfatta dokument och svara på återkommande frågor med källhänvisning.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-section alt">
+      <div class="container seo-layout">
+        <div class="seo-copy">
+          <h2>Bygg chatboten runt kunskap, inte gissningar.</h2>
+          <p>
+            En vanlig risk med AI-chatbotar är att de låter säkra även när de inte borde svara. Därför bygger vi med tydliga källor, instruktioner, fallback-regler och eskalering. Chatboten ska veta när den kan hjälpa och när en människa ska ta över.
+          </p>
+          <p>
+            För externa chatbotar kan vi använda webbplatsinnehåll, FAQ, produktinformation och utvalda dokument. För interna assistenter kan vi koppla in policyer, rutiner, onboardingmaterial, tekniska dokument eller ärendelogik.
+          </p>
+          <h3>Viktiga delar i en seriös chatbot</h3>
+          <ul>
+            <li>Tydlig roll, ton och avgränsning.</li>
+            <li>Godkända kunskapskällor och uppdateringsrutin.</li>
+            <li>Loggning av frågor, missar och förbättringsmöjligheter.</li>
+            <li>Kontaktvägar när kunden behöver mänsklig hjälp.</li>
+            <li>Mätning: lösta frågor, leads, eskaleringar och tidsbesparing.</li>
+          </ul>
+        </div>
+        <aside class="seo-aside glass-panel">
+          <h3>En chatbot passar särskilt bra när...</h3>
+          <ul>
+            <li>Ni får många liknande frågor.</li>
+            <li>Viktig information redan finns i dokument eller på webben.</li>
+            <li>Leads behöver sorteras innan sälj tar vid.</li>
+            <li>Personalen letar efter samma rutiner om och om igen.</li>
+          </ul>
+          <a href="/boka-samtal-om-ai/" class="btn-primary">Boka genomgång</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="seo-section">
+      <div class="container">
+        <div class="seo-section-header">
+          <h2>Så bygger vi en AI-chatbot</h2>
+          <p>Vi börjar smalt, testar med verkliga frågor och gör chatboten bättre utifrån data.</p>
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <div class="timeline-number">1</div>
+            <div>
+              <h3>Definiera uppgiften</h3>
+              <p>Vi bestämmer vad chatboten ska svara på, vad den inte ska svara på och när den ska lämna över till människa.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-number">2</div>
+            <div>
+              <h3>Koppla kunskap och flöden</h3>
+              <p>Vi strukturerar källor, bygger promptar, sätter upp sök/RAG vid behov och kopplar mot formulär, mail eller CRM.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-number">3</div>
+            <div>
+              <h3>Testa, mäta och förbättra</h3>
+              <p>Vi testar mot verkliga frågor, ser var svaren brister och förbättrar kunskap, instruktioner och eskaleringsregler.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-section alt">
+      <div class="container">
+        <div class="seo-band">
+          <div>
+            <h2>Chatboten kan bli första steget i större automation.</h2>
+            <p>När en chatbot förstår kundens fråga kan nästa steg automatiseras: skapa lead, sammanfatta ärende, skicka rätt mail, föreslå uppföljning eller trigga en intern uppgift. Det är där nyttan blir större än själva chatten.</p>
+          </div>
+          <ul class="band-list">
+            <li>Webbchat och kontaktflöden</li>
+            <li>Intern kunskapsassistent</li>
+            <li>RAG och dokumentbaserade svar</li>
+            <li>CRM, mail och ärendeintegrationer</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-section">
+      <div class="container">
+        <div class="seo-section-header">
+          <h2>Vanliga frågor</h2>
+          <p>Korta svar för företag som funderar på AI-chatbot.</p>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-card glass-panel">
+            <h3>Kan chatboten hallucinera?</h3>
+            <p>Ja, om den byggs slarvigt. Därför sätter vi tydliga källor, begränsningar, fallback-regler och mänsklig eskalering för frågor som inte ska besvaras fritt.</p>
+          </article>
+          <article class="faq-card glass-panel">
+            <h3>Kan den svara på svenska?</h3>
+            <p>Ja. Den kan byggas för svenska, engelska eller flera språk, beroende på era kunder och vilket material den ska använda.</p>
+          </article>
+          <article class="faq-card glass-panel">
+            <h3>Behöver vi byta hemsida?</h3>
+            <p>Inte alltid. Chatboten kan ofta läggas ovanpå befintlig webbplats, men ibland är det smart att samtidigt förbättra struktur, innehåll och leadflöden.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-final">
+      <div class="container">
+        <h2>Vill ni se om en AI-chatbot är rätt första steg?</h2>
+        <p>Vi kan titta på era vanligaste frågor, kundflöden och dokument och säga vad som är värt att bygga först.</p>
+        <a href="/boka-samtal-om-ai/" class="btn-primary">Boka chatbotgenomgång</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand footer-col">
+            <img src="../assets/oakdev-ai-high-resolution-logo-transparent.png" alt="OakDev &amp; AI AB" width="130" height="auto" loading="lazy" />
+            <p>AI-konsult, appstudio och IT-partner i Uddevalla.</p>
+            <div class="footer-brand-socials">
+              <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">in</a>
+              <a href="https://www.facebook.com/profile.php?id=61585121092758" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook">f</a>
+              <a href="https://discord.gg/SpsZjB22Cp" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Discord">dc</a>
+              <a href="https://wa.me/46763909381" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="WhatsApp">wa</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+            <a href="/boka-samtal-om-ai/">Boka samtal</a>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="/app-studio/">App Studio</a>
+            <a href="/ai-automation/">AI &amp; Automation</a>
+            <a href="/ai-konsult-uddevalla/">AI-konsult Uddevalla</a>
+            <a href="/ai-konsult-trollhattan/">AI-konsult Trollhättan</a>
+            <a href="/ai-konsult-vanersborg/">AI-konsult Vänersborg</a>
+            <a href="/webbplats-foretag-uddevalla/">Webbplats företag Uddevalla</a>
+            <a href="/mobilapp-foretag-uddevalla/">Mobilapp företag Uddevalla</a>
+            <a href="/ai-chatbot-foretag/">AI-chatbot företag</a>
+            <a href="/consulting/">Consulting</a>
+          </div>
+          <div class="footer-col">
+            <h4>Guides</h4>
+            <a href="/ai-automation-smaforetag-uddevalla/">AI-automation för småföretag</a>
+            <a href="/ai-offertuppfoljning-uddevalla/">AI för offertuppföljning</a>
+          </div>
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-contact-item"><a href="mailto:hello@oakdev.app">hello@oakdev.app</a></div>
+            <div class="footer-contact-item"><a href="tel:+46708105766">+46 70 810 57 66</a></div>
+            <div class="footer-contact-item">Kristevik 633, 451 96 Uddevalla</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <div>
+            <p class="footer-copy">&copy; 2026 OakDev &amp; AI AB. All rights reserved.</p>
+            <p class="footer-reg">Reg. No. 559431-6787 | Kristevik 633, 451 96 Uddevalla, Sweden</p>
+          </div>
+          <nav class="footer-legal-links" aria-label="Legal navigation">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Use</a>
+            <a href="/about/">About</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
