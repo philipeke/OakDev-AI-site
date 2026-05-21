@@ -23,6 +23,7 @@
   <!-- ── SEO ───────────────────────────────────────────────── -->
   <title>OakDev &amp; AI AB — AI-konsult, automation och appstudio i Uddevalla</title>
   <meta name="description" content="OakDev &amp; AI AB är en AI-konsult och appstudio i Uddevalla. Vi bygger AI-automation, webbappar, mobilappar och IT-flöden för företag i Sverige och globalt." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="keywords" content="AI Uddevalla, AI-konsult Uddevalla, AI automation, automatisering Bohuslän, IT-konsult Uddevalla, apputveckling Sverige, webbutveckling Västra Götaland, OakDev" />
   <meta name="author" content="OakDev &amp; AI AB" />
   <link rel="canonical" href="https://oakdev.app/" />
@@ -35,16 +36,31 @@
   <meta property="og:url"         content="https://oakdev.app/" />
   <meta property="og:title"       content="OakDev &amp; AI AB — AI-konsult och appstudio i Uddevalla" />
   <meta property="og:description" content="AI-automation, webbappar, mobilappar och IT-konsulting från Uddevalla till Sverige och världen." />
-  <meta property="og:image"       content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+  <meta property="og:image"       content="https://oakdev.app/assets/oakdev-tree-social.jpg" />
+  <meta property="og:image:secure_url" content="https://oakdev.app/assets/oakdev-tree-social.jpg" />
+  <meta property="og:image:type"  content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content="OakDev AI tree with connected digital networks" />
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="OakDev &amp; AI AB — AI-konsult i Uddevalla" />
   <meta name="twitter:description" content="AI-automation, webbappar, mobilappar och IT-konsulting från Uddevalla till Sverige och världen." />
-  <meta name="twitter:image"       content="https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png" />
+  <meta name="twitter:image"       content="https://oakdev.app/assets/oakdev-tree-social.jpg" />
+  <meta name="twitter:image:alt"   content="OakDev AI tree with connected digital networks" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "ImageObject",
+        "@id": "https://oakdev.app/#primaryimage",
+        "url": "https://oakdev.app/assets/oakdev-tree-social.jpg",
+        "contentUrl": "https://oakdev.app/assets/oakdev-tree-social.jpg",
+        "width": 1200,
+        "height": 630,
+        "caption": "OakDev AI tree with connected digital networks"
+      },
       {
         "@type": "Organization",
         "@id": "https://oakdev.app/#organization",
@@ -52,6 +68,7 @@
         "alternateName": ["OakDev", "OakDev AI", "OakDev & AI"],
         "url": "https://oakdev.app/",
         "logo": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "image": { "@id": "https://oakdev.app/#primaryimage" },
         "description": "AI-konsult och appstudio i Uddevalla som bygger mobilappar, webbappar, AI-plattformar och automationssystem.",
         "email": "hello@oakdev.app",
         "telephone": "+46708105766",
@@ -94,7 +111,7 @@
         "@type": "LocalBusiness",
         "@id": "https://oakdev.app/#localbusiness",
         "name": "OakDev & AI AB",
-        "image": "https://oakdev.app/assets/oakdev-ai-high-resolution-logo-transparent.png",
+        "image": { "@id": "https://oakdev.app/#primaryimage" },
         "url": "https://oakdev.app/",
         "telephone": "+46708105766",
         "email": "hello@oakdev.app",
@@ -139,6 +156,16 @@
         "description": "Produktion av mobilappar, webbappar, SaaS-plattformar och MVP:er från idé till lansering."
       },
       {
+        "@type": "WebPage",
+        "@id": "https://oakdev.app/#webpage",
+        "url": "https://oakdev.app/",
+        "name": "OakDev & AI AB — AI-konsult och appstudio i Uddevalla",
+        "isPartOf": { "@id": "https://oakdev.app/#website" },
+        "about": { "@id": "https://oakdev.app/#organization" },
+        "primaryImageOfPage": { "@id": "https://oakdev.app/#primaryimage" },
+        "inLanguage": ["sv-SE", "en"]
+      },
+      {
         "@type": "WebSite",
         "@id": "https://oakdev.app/#website",
         "url": "https://oakdev.app/",
@@ -156,8 +183,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- ── Favicon ───────────────────────────────────────────── -->
-  <link rel="icon" type="image/png" href="assets/icon.png" />
-  <link rel="apple-touch-icon"      href="assets/icon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/oakdev-tree-favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/oakdev-tree-favicon-96.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/oakdev-tree-favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/oakdev-tree-apple-touch.png" />
 
   <!-- ── Stylesheet ────────────────────────────────────────── -->
   <link rel="stylesheet" href="css/styles.css" />
