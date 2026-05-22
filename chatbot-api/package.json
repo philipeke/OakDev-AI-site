@@ -1,0 +1,12 @@
+{
+  "name": "oakdev-chatbot-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Separate serverless backend for the OakDev oakBot widget.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check api/chatbot.js"
+  }
+}

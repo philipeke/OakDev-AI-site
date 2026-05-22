@@ -24,8 +24,8 @@ const TRANSLATIONS = {
     chat_placeholder:'Ask about a chatbot, automation, or a project...',
     chat_send:       'Send',
     chat_close:      'Close chat',
-    chat_typing:     'Thinking...',
-    chat_error:      'I am connected in the interface, but the secure API endpoint is not active here yet. Add OPENAI_API_KEY on the server to enable live replies.',
+    chat_typing:     'Mapping signal...',
+    chat_error:      'I can still help you find the right path. Tell me if you are looking for a chatbot, automation, an app, a website, or a technical review.',
     explore_services: 'Explore Services',
     /* Cookie */
     cookie_title:    'We use cookies',
@@ -482,8 +482,8 @@ const TRANSLATIONS = {
     chat_placeholder:'Fråga om chatbot, automation eller ett projekt...',
     chat_send:       'Skicka',
     chat_close:      'Stäng chatten',
-    chat_typing:     'Tänker...',
-    chat_error:      'Gränssnittet är på plats, men den säkra API-endpointen är inte aktiv här än. Lägg OPENAI_API_KEY på servern för live-svar.',
+    chat_typing:     'Kartlägger signal...',
+    chat_error:      'Jag kan fortfarande hjälpa dig hitta rätt väg. Skriv om du vill prata chatbot, automation, app, webbplats eller teknisk rådgivning.',
     explore_services: 'Utforska tjänster',
     /* Cookie */
     cookie_title:    'Vi använder cookies',
@@ -1744,8 +1744,16 @@ function initChatbot() {
   const STORAGE_KEY = 'oakdev_oakbot_state';
   const MAX_STORED_MESSAGES = 30;
   const getCopy = () => TRANSLATIONS[Lang.get()] || TRANSLATIONS.en;
+  const apiUrl = window.OAKDEV_CHATBOT_API_URL
+    || document.querySelector('meta[name="oakdev-chatbot-api"]')?.content?.trim()
+    || '/api/chatbot';
   const gsapSrc = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
   let gsapPromise = null;
+  let isClosing = false;
+
+  function isLegacyTechnicalMessage(content) {
+    return /OPENAI_API_KEY|secure API endpoint|säkra API-endpointen|API-endpointen|not active here yet/i.test(content);
+  }
 
   function loadState() {
     try {
@@ -1758,7 +1766,7 @@ function initChatbot() {
             role: message?.role === 'assistant' ? 'assistant' : 'user',
             content: String(message?.content || '').trim().slice(0, 1200),
           }))
-          .filter((message) => message.content),
+          .filter((message) => message.content && !isLegacyTechnicalMessage(message.content)),
       };
     } catch {
       return { open: false, messages: [] };
@@ -1830,6 +1838,12 @@ function initChatbot() {
   widget.className = 'oak-chatbot';
   widget.setAttribute('aria-hidden', 'true');
   widget.innerHTML = `
+    <div class="oak-chatbot-portal" aria-hidden="true">
+      <span class="oak-chatbot-portal-ring ring-1"></span>
+      <span class="oak-chatbot-portal-ring ring-2"></span>
+      <span class="oak-chatbot-portal-ring ring-3"></span>
+      <span class="oak-chatbot-portal-beam"></span>
+    </div>
     <div class="oak-chatbot-panel" role="dialog" aria-modal="false" aria-labelledby="oakChatbotTitle">
       <div class="oak-chatbot-topline" aria-hidden="true"></div>
       <div class="oak-chatbot-grid" aria-hidden="true"></div>
@@ -1847,7 +1861,7 @@ function initChatbot() {
           <h2 id="oakChatbotTitle" data-i18n="chat_title">${getCopy().chat_title}</h2>
           <p><span class="oak-chatbot-pulse" aria-hidden="true"></span><span data-i18n="chat_status">${getCopy().chat_status}</span></p>
         </div>
-        <button type="button" class="oak-chatbot-close" data-chatbot-close aria-label="${getCopy().chat_close}">x</button>
+        <button type="button" class="oak-chatbot-close" data-chatbot-close aria-label="${getCopy().chat_close}">×</button>
       </header>
       <div class="oak-chatbot-messages" aria-live="polite"></div>
       <form class="oak-chatbot-form">
@@ -1952,12 +1966,76 @@ function initChatbot() {
     appendAutolinkedText(parent, text.slice(cursor));
   }
 
+  function userLooksSwedish(text) {
+    return Lang.get() === 'sv' || /[åäöÅÄÖ]|(^|\s)(vad|kan|hjälp|hjalp|företag|foretag|webb|offert|boka|pris|kostar)(\s|$)/i.test(text);
+  }
+
+  function includesAny(text, words) {
+    return words.some((word) => text.includes(word));
+  }
+
+  function buildFallbackReply(userText) {
+    const isSv = userLooksSwedish(userText);
+    const text = userText.toLowerCase();
+
+    if (isSv) {
+      if (includesAny(text, ['chatbot', 'chattbot', 'kundservice', 'support', 'faq'])) {
+        return 'Absolut. OakDev kan bygga AI-chatbotar som svarar på kundfrågor, fångar leads och kopplas till era dokument eller system. Börja gärna med sidan [AI-chatbotar](/ai-chatbot-foretag/) eller [boka ett samtal](/boka-samtal-om-ai/#booking-form) om du vill skissa på en konkret lösning.';
+      }
+      if (includesAny(text, ['automation', 'automatisering', 'flöde', 'flode', 'offert', 'admin', 'crm'])) {
+        return 'OakDev kan hjälpa er automatisera återkommande arbete, till exempel offertuppföljning, kunddialog, rapporter, CRM-flöden och interna processer. Läs mer om [AI & Automation](/ai-automation/) eller berätta vilket flöde som tar mest tid i dag.';
+      }
+      if (includesAny(text, ['app', 'mobil', 'mvp', 'ios', 'android', 'webbapp', 'saas'])) {
+        return 'För appar kan OakDev hjälpa från idé och MVP till design, utveckling, lansering och vidareutveckling. Kika på [App Studio](/app-studio/) eller skriv kort vad appen ska göra så kan jag hjälpa dig formulera nästa steg.';
+      }
+      if (includesAny(text, ['webb', 'hemsida', 'website', 'landningssida', 'seo'])) {
+        return 'OakDev kan bygga snabba, moderna webbplatser och landningssidor som är tydliga, tekniskt stabila och redo för SEO. Se [webbplatser för företag](/webbplats-foretag-uddevalla/) eller berätta vilken typ av sida du vill förbättra.';
+      }
+      if (includesAny(text, ['pris', 'kostar', 'budget', 'paket', 'offert'])) {
+        return 'Pris beror på omfattning, integrationer och hur mycket som ska designas eller automatiseras. Det smartaste nästa steget är en kort behovsbild: mål, system, deadline och ungefärlig budget. Du kan också [boka ett samtal](/boka-samtal-om-ai/#booking-form).';
+      }
+      if (includesAny(text, ['kontakt', 'mail', 'mejl', 'telefon', 'boka', 'möte', 'mote'])) {
+        return 'Du kan nå OakDev via [kontakt](/contact/) eller boka direkt via [boka ett samtal](/boka-samtal-om-ai/#booking-form). Skriv gärna vad du vill bygga eller automatisera så blir första samtalet mer konkret.';
+      }
+      return 'Jag kan hjälpa dig ringa in rätt lösning: AI-chatbotar, automation, appar, webbplatser, interna verktyg och teknisk rådgivning. Skriv vad du vill förbättra, eller börja på [AI & Automation](/ai-automation/), [App Studio](/app-studio/) eller [boka ett samtal](/boka-samtal-om-ai/#booking-form).';
+    }
+
+    if (includesAny(text, ['chatbot', 'support', 'customer service', 'faq'])) {
+      return 'Absolutely. OakDev can build AI chatbots that answer customer questions, capture leads, and connect to your documents or internal systems. Start with [AI chatbots](/ai-chatbot-foretag/) or [book a call](/boka-samtal-om-ai/#booking-form) to shape a concrete solution.';
+    }
+    if (includesAny(text, ['automation', 'workflow', 'quote', 'admin', 'crm', 'agent'])) {
+      return 'OakDev can help automate repeated work: customer follow-up, reports, CRM flows, internal tools, and AI-assisted workflows. Read more about [AI & Automation](/ai-automation/) or tell me which process takes the most time today.';
+    }
+    if (includesAny(text, ['app', 'mobile', 'mvp', 'ios', 'android', 'web app', 'saas'])) {
+      return 'For apps, OakDev can help from idea and MVP to design, development, launch, and iteration. See [App Studio](/app-studio/) or tell me what the app should do and I can help frame the next step.';
+    }
+    if (includesAny(text, ['website', 'webpage', 'landing', 'seo'])) {
+      return 'OakDev can build fast, modern websites and landing pages with strong technical foundations and SEO-ready structure. See [websites](/webbplats-foretag-uddevalla/) or tell me what you want to improve.';
+    }
+    if (includesAny(text, ['price', 'cost', 'budget', 'package', 'quote'])) {
+      return 'Pricing depends on scope, integrations, design depth, and automation complexity. The best next step is a short project outline: goal, systems, deadline, and rough budget. You can also [book a call](/boka-samtal-om-ai/#booking-form).';
+    }
+    if (includesAny(text, ['contact', 'email', 'phone', 'book', 'meeting'])) {
+      return 'You can reach OakDev through [contact](/contact/) or book directly here: [book a call](/boka-samtal-om-ai/#booking-form). Share what you want to build or automate and the first conversation gets much sharper.';
+    }
+    return 'I can help you find the right path: AI chatbots, automation, apps, websites, internal tools, and technical consulting. Tell me what you want to improve, or start with [AI & Automation](/ai-automation/), [App Studio](/app-studio/), or [book a call](/boka-samtal-om-ai/#booking-form).';
+  }
+
   function appendMessage(role, text, options = {}) {
     const bubble = document.createElement('div');
     bubble.className = `oak-chatbot-message ${role}`;
     if (options.pending) {
       bubble.dataset.pending = 'true';
-      bubble.innerHTML = `<span>${text}</span><span class="oak-chatbot-typing" aria-hidden="true"><i></i><i></i><i></i></span>`;
+      bubble.innerHTML = `
+        <span class="oak-chatbot-loader" aria-hidden="true">
+          <span class="oak-chatbot-loader-core"></span>
+          <span class="oak-chatbot-loader-orbit orbit-a"></span>
+          <span class="oak-chatbot-loader-orbit orbit-b"></span>
+          <span class="oak-chatbot-loader-scan"></span>
+        </span>
+        <span class="oak-chatbot-loader-text">${text}</span>
+        <span class="oak-chatbot-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+      `;
     } else if (role === 'assistant') {
       renderAssistantContent(bubble, text);
     } else {
@@ -1981,10 +2059,13 @@ function initChatbot() {
   function setBusy(isBusy) {
     input.disabled = isBusy;
     sendButton.disabled = isBusy;
+    widget.classList.toggle('thinking', isBusy);
     sendButton.textContent = isBusy ? getCopy().chat_typing : getCopy().chat_send;
   }
 
   function openChatbot() {
+    isClosing = false;
+    widget.classList.remove('closing');
     widget.classList.add('open');
     widget.setAttribute('aria-hidden', 'false');
     saveState(true);
@@ -1994,11 +2075,35 @@ function initChatbot() {
     loadGsap()
       .then((g) => {
         if (!g) return;
-        g.killTweensOf(widget.querySelector('.oak-chatbot-panel'));
+        const panel = widget.querySelector('.oak-chatbot-panel');
+        const portal = widget.querySelector('.oak-chatbot-portal');
+        g.killTweensOf([panel, portal]);
         g.fromTo(
-          widget.querySelector('.oak-chatbot-panel'),
-          { opacity: 0, y: 26, scale: 0.92, rotateX: -12, transformOrigin: '80% 100%' },
-          { opacity: 1, y: 0, scale: 1, rotateX: 0, duration: 0.68, ease: 'expo.out' }
+          portal,
+          { opacity: 0, scale: 0.25, rotate: -18 },
+          { opacity: 1, scale: 1, rotate: 0, duration: 0.72, ease: 'expo.out' }
+        );
+        g.fromTo(
+          panel,
+          {
+            opacity: 0,
+            y: 34,
+            scale: 0.86,
+            rotateX: -18,
+            filter: 'blur(10px)',
+            clipPath: 'circle(18% at 88% 92%)',
+            transformOrigin: '82% 100%',
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotateX: 0,
+            filter: 'blur(0px)',
+            clipPath: 'circle(140% at 50% 50%)',
+            duration: 0.78,
+            ease: 'expo.out',
+          }
         );
         g.fromTo(
           widget.querySelectorAll('.oak-chatbot-avatar, .oak-chatbot-header h2, .oak-chatbot-header p, .oak-chatbot-message, .oak-chatbot-form'),
@@ -2010,9 +2115,53 @@ function initChatbot() {
   }
 
   function closeChatbot() {
-    widget.classList.remove('open');
-    widget.setAttribute('aria-hidden', 'true');
+    if (isClosing || !widget.classList.contains('open')) return;
+    isClosing = true;
     saveState(false);
+    widget.classList.add('closing');
+
+    const finishClose = () => {
+      widget.classList.remove('open', 'closing', 'thinking');
+      widget.setAttribute('aria-hidden', 'true');
+      isClosing = false;
+    };
+
+    loadGsap()
+      .then((g) => {
+        if (!g) {
+          window.setTimeout(finishClose, 360);
+          return;
+        }
+        const panel = widget.querySelector('.oak-chatbot-panel');
+        const portal = widget.querySelector('.oak-chatbot-portal');
+        g.killTweensOf([panel, portal]);
+        const tl = g.timeline({ onComplete: finishClose });
+        tl.to(
+          widget.querySelectorAll('.oak-chatbot-message, .oak-chatbot-form, .oak-chatbot-header h2, .oak-chatbot-header p'),
+          { opacity: 0, y: -8, duration: 0.16, stagger: 0.018, ease: 'power2.in' },
+          0
+        )
+          .to(panel, {
+            opacity: 0,
+            y: 20,
+            scale: 0.84,
+            rotateX: 16,
+            filter: 'blur(12px)',
+            clipPath: 'circle(7% at 88% 92%)',
+            duration: 0.42,
+            ease: 'power3.in',
+          }, 0.04)
+          .to(portal, {
+            opacity: 0,
+            scale: 0.18,
+            rotate: 24,
+            duration: 0.42,
+            ease: 'power3.in',
+          }, 0.05);
+      })
+      .catch(() => {
+        window.setTimeout(finishClose, 360);
+      });
   }
 
   if (!messages.length) {
@@ -2059,7 +2208,7 @@ function initChatbot() {
     setBusy(true);
 
     try {
-      const response = await fetch('/api/chatbot', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2082,9 +2231,9 @@ function initChatbot() {
       saveState();
     } catch {
       pending.remove();
-      const errorText = getCopy().chat_error;
-      appendMessage('assistant', errorText);
-      messages.push({ role: 'assistant', content: errorText });
+      const fallbackText = buildFallbackReply(text) || getCopy().chat_error;
+      appendMessage('assistant', fallbackText);
+      messages.push({ role: 'assistant', content: fallbackText });
       saveState();
     } finally {
       setBusy(false);
