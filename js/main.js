@@ -2174,6 +2174,7 @@ function initChatbot() {
     const asksWeather = includesAny(text, ['väder', 'vader', 'weather', 'regn', 'soligt', 'temperatur']);
     const greets = /^(hej|hejsan|hallå|hallo|hello|hi)\b/i.test(text.trim());
     const asksPrice = includesAny(text, ['pris', 'kostar', 'budget', 'paket', 'offert', 'price', 'cost', 'quote']);
+    const asksBudgetFollowup = budget && includesAny(text, ['får jag', 'far jag', 'för det', 'for det', 'räcker', 'racker', 'kommer man', 'kan man få', 'kan man fa']);
     const asksChatbot = includesAny(text, ['chatbot', 'chattbot', 'kundservice', 'support', 'faq']);
     const asksWebsite = includesAny(text, ['webb', 'hemsida', 'website', 'webpage', 'landningssida', 'seo']);
     const asksAutomation = includesAny(text, ['automation', 'automatisering', 'flöde', 'flode', 'offert', 'admin', 'crm', 'workflow', 'agent']);
@@ -2186,7 +2187,7 @@ function initChatbot() {
       if (asksWeather) {
         return 'Jag har ingen liveväderkoppling här, så jag vill inte hitta på prognoser. Men jag hjälper gärna med OakDev-frågor: chatbotar, automation, appar, webbplatser eller vad som vore smartast för ditt företag.';
       }
-      if (budget && hasPriceContext) {
+      if (budget && (hasPriceContext || asksBudgetFollowup)) {
         if (budget < 5000) {
           return `Med ${budget.toLocaleString('sv-SE')} kr skulle jag se det som en liten startinsats snarare än ett färdigt AI-system. Det kan passa för rådgivning, behovsbild, teknisk riktning eller en mini-plan för vilken chatbot/automation som vore mest värd att bygga först.`;
         }
@@ -2237,7 +2238,7 @@ function initChatbot() {
     if (asksWeather) {
       return "I do not have live weather access here, so I do not want to invent a forecast. I can help with OakDev topics though: chatbots, automation, apps, websites, or choosing the smartest first step for your company.";
     }
-    if (budget && hasPriceContext) {
+    if (budget && (hasPriceContext || asksBudgetFollowup)) {
       if (budget < 5000) {
         return `With ${budget.toLocaleString('en-US')} SEK, I would treat it as a small starting engagement rather than a finished AI system. It could cover advice, scoping, technical direction, or a mini-plan for the first chatbot or automation worth building.`;
       }

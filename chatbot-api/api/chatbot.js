@@ -73,6 +73,14 @@ function sanitizeOpenAIError(error) {
   };
 }
 
+function polishReply(reply) {
+  return reply
+    .trim()
+    .replace(/\]\(https:\/\/(?:www\.)?oakdev\.app(\/[^)\s]*)\)/gi, ']($1)')
+    .replace(/\bOm du vill,?\s+kan jag hj\u00e4lpa dig(?:\s+att)?\s+/gi, 'Ett bra n\u00e4sta steg \u00e4r att ')
+    .replace(/\bIf you want,?\s+I can help you(?:\s+to)?\s+/gi, 'A good next step is to ');
+}
+
 module.exports = async function chatbotHandler(req, res) {
   setCors(res);
 
@@ -114,6 +122,7 @@ module.exports = async function chatbotHandler(req, res) {
     'Om besokaren fragar om vader, nyheter eller annan live-data som du inte har tillgang till, sag kort att du inte har livekoppling och erbjud sedan hjalp med OakDev-relevanta fragor.',
     'Anvand konversationshistoriken. Om besokaren namner en budget efter att ha fragat om pris, kommentera budgeten konkret och forklara rimlig nasta niva utan att lova fast pris.',
     'Om besokaren fragar vad nagot kostar: svara pa prisfragan direkt forst. Anvand prisindikatorerna i sajtcontext nar de passar, forklara vad som paverkar priset och stall hogst 1-2 smarta foljdfragor. Ge inte bara en generell tjanstebeskrivning.',
+    'Om besokaren namner en lag budget, sag inte bara nej. Forklara vad budgeten realistiskt kan racka till, till exempel kort radgivning, scope, teknisk plan, kravbild, prioriterad backlog eller en enkel prompt-/FAQ-struktur, och forklara vad som kravs for en byggbar forsta version.',
     'Om besokaren jamfor flera saker, t.ex. hemsida och AI-chatbot, dela upp svaret tydligt per del och ge en rimlig nasta fraga for att kunna scope:a.',
     'Du far hjalpa till med att forklara OakDev, rekommendera ratt tjanst, jamfora losningsvagar, foresla nasta steg, formulera projektbrief, stalla kvalificerande fragor och lotsa besokaren till ratt sida.',
     'Hall dig till OakDev, AI-chatbotar, AI-automation, appar, webbsidor, interna verktyg, integrationer, IT-konsulting och relevanta projektfragor.',
@@ -122,6 +131,8 @@ module.exports = async function chatbotHandler(req, res) {
     'Samla inte in kansliga personuppgifter. Be bara om nodvandig, affarsrelevant information som namn, e-post, foretag och kort projektbeskrivning.',
     'Ge inte juridiska, medicinska eller finansiella rad. Vid sadana fragor, rekommendera relevant expert.',
     'Primart mal: hjalp besokaren fram till ett konkret svar eller nasta steg. Skicka inte alltid till bokning; lank hellre till den sida som passar fragan.',
+    'Avsluta inte slentrianmassigt med "om du vill kan jag". Var mer konkret: foresla nasta praktiska steg eller stall en specifik fraga.',
+    'Anvand aldrig frasen "om du vill". Skriv hellre "nasta steg ar" eller stall en specifik fraga.',
     'Nar bokning ar relevant ska du lanka exakt till [boka ett samtal](/boka-samtal-om-ai/#booking-form).',
     'Nar du lankar, anvand alltid Markdown-lankar med kort beskrivande lanktext. Skriv inte ut ra URLer om inte besokaren specifikt ber om det.',
     'Skriv Markdown-lankar exakt utan mellanslag i parenteserna, exempel: [boka ett samtal](/boka-samtal-om-ai/#booking-form).',
@@ -156,7 +167,7 @@ module.exports = async function chatbotHandler(req, res) {
       return;
     }
 
-    const reply = extractOutputText(data);
+    const reply = polishReply(extractOutputText(data));
     if (!reply) {
       res.status(502).json({ error: 'Chatbot returned an empty response.' });
       return;
