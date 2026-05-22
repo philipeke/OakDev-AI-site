@@ -2173,6 +2173,11 @@ function initChatbot() {
     const hasPriceContext = includesAny(conversationText, ['pris', 'kostar', 'budget', 'offert', 'price', 'cost', 'quote']);
     const asksWeather = includesAny(text, ['väder', 'vader', 'weather', 'regn', 'soligt', 'temperatur']);
     const greets = /^(hej|hejsan|hallå|hallo|hello|hi)\b/i.test(text.trim());
+    const asksPrice = includesAny(text, ['pris', 'kostar', 'budget', 'paket', 'offert', 'price', 'cost', 'quote']);
+    const asksChatbot = includesAny(text, ['chatbot', 'chattbot', 'kundservice', 'support', 'faq']);
+    const asksWebsite = includesAny(text, ['webb', 'hemsida', 'website', 'webpage', 'landningssida', 'seo']);
+    const asksAutomation = includesAny(text, ['automation', 'automatisering', 'flöde', 'flode', 'offert', 'admin', 'crm', 'workflow', 'agent']);
+    const asksApp = includesAny(text, ['app', 'mobil', 'mvp', 'ios', 'android', 'webbapp', 'web app', 'saas']);
 
     if (isSv) {
       if (greets) {
@@ -2189,6 +2194,21 @@ function initChatbot() {
           return `Med cirka ${budget.toLocaleString('sv-SE')} kr går det ofta att göra en avgränsad första etapp: kravbild, enkel prototyp, promptflöde, kunskapsstruktur eller en mindre automation. För en komplett AI-chatbot med integrationer behöver vi avgränsa målet smart, men det är en bra budget för att komma igång konkret.`;
         }
         return `Med en budget runt ${budget.toLocaleString('sv-SE')} kr kan vi börja prata om en tydlig första version: exempelvis chatbot, enklare RAG/kunskapsstöd, automation eller MVP-del. Bäst är att välja ett smalt affärsproblem först så pengarna går till något som märks.`;
+      }
+      if (asksPrice) {
+        if (asksWebsite && asksChatbot) {
+          return 'Bra fråga. För AI-chatbotar listar OakDev paket som AI Starter från €2,900 och AI Platform från €8,900; priset beror mest på kunskapsbas, integrationer, testning och om den ska fånga leads eller kopplas till system. För hemsidor/webbprojekt är det mer scope-styrt: enklare webb/landningssida offereras efter innehåll och design, medan större app-/webbprojekt på sajten börjar från €4,900 respektive €12,900. För att ge ett vettigt spann: hur många sidor behöver hemsidan och ska chatboten bara svara på FAQ eller kopplas till dokument/CRM?';
+        }
+        if (asksChatbot || asksAutomation) {
+          return 'För AI-lösningar listar OakDev AI Starter från €2,900 och AI Platform från €8,900. En enklare chatbot/prototyp ligger närmare starter-nivån, medan en skarp chatbot med kunskapsbas, integrationer, leadflöden och testning ofta behöver mer scope. Ska den bara svara på vanliga frågor, eller ska den kopplas till dokument, CRM eller bokningar?';
+        }
+        if (asksWebsite) {
+          return 'En hemsida prissätts efter scope: antal sidor, designnivå, texter, SEO, formulär och eventuella integrationer. En enklare landningssida kan scope:as smalare, medan större webb-/app-projekt på sajten börjar från €4,900 och Studio-nivån från €12,900. Hur många sidor tänker du dig och finns text/bilder redan?';
+        }
+        if (asksApp) {
+          return 'För appar/webbappar listar OakDev MVP från €4,900, Studio från €12,900 och Enterprise från €28,900. Skillnaden handlar främst om funktioner, designdjup, backend, integrationer och lanseringskrav. Vad ska första versionen kunna göra?';
+        }
+        return 'Pris beror på omfattning, integrationer och hur mycket som ska designas eller automatiseras. Som riktmärken listar OakDev AI Starter från €2,900, AI Platform från €8,900 och app-/MVP-projekt från €4,900. Skriv gärna vad du vill bygga, ungefärlig budget och om det ska kopplas till några system.';
       }
       if (includesAny(text, ['chatbot', 'chattbot', 'kundservice', 'support', 'faq'])) {
         return 'Absolut. OakDev kan bygga AI-chatbotar som svarar på kundfrågor, fångar leads och kopplas till era dokument eller system. Börja gärna med sidan [AI-chatbotar](/ai-chatbot-foretag/) eller [boka ett samtal](/boka-samtal-om-ai/#booking-form) om du vill skissa på en konkret lösning.';
@@ -2225,6 +2245,21 @@ function initChatbot() {
         return `With around ${budget.toLocaleString('en-US')} SEK, a focused first step is realistic: scoping, a simple prototype, prompt flow, knowledge structure, or a small automation. A full integrated chatbot needs tighter scope, but this is enough to start concretely.`;
       }
       return `With a budget around ${budget.toLocaleString('en-US')} SEK, we can start shaping a clear first version: a chatbot, simpler knowledge assistant, automation, or MVP slice. The smart move is to pick one narrow business problem first.`;
+    }
+    if (asksPrice) {
+      if (asksWebsite && asksChatbot) {
+        return 'Good question. For AI chatbots, OakDev lists AI Starter from €2,900 and AI Platform from €8,900; the price depends on knowledge base, integrations, testing, lead capture, and system connections. For websites, pricing depends more on scope: number of pages, design, copy, SEO, forms, and integrations; larger app/web projects on the site start from €4,900 and €12,900. How many pages do you need, and should the chatbot only answer FAQs or connect to documents/CRM?';
+      }
+      if (asksChatbot || asksAutomation) {
+        return 'For AI work, OakDev lists AI Starter from €2,900 and AI Platform from €8,900. A simple chatbot/prototype is closer to starter scope, while a production chatbot with a knowledge base, integrations, lead flows, and testing needs more scoping. Should it only answer FAQs, or connect to documents, CRM, or bookings?';
+      }
+      if (asksWebsite) {
+        return 'Website pricing depends on scope: number of pages, design level, copy, SEO, forms, and integrations. A small landing page can be scoped tighter, while larger app/web projects on the site start from €4,900 and Studio-level projects from €12,900. How many pages do you have in mind?';
+      }
+      if (asksApp) {
+        return 'For apps and web apps, OakDev lists MVP from €4,900, Studio from €12,900, and Enterprise from €28,900. The difference is mainly features, design depth, backend, integrations, and launch requirements. What should version one be able to do?';
+      }
+      return 'Pricing depends on scope, integrations, design depth, and automation complexity. As guideposts, OakDev lists AI Starter from €2,900, AI Platform from €8,900, and app/MVP projects from €4,900. Share what you want to build, rough budget, and any systems it should connect to.';
     }
     if (includesAny(text, ['chatbot', 'support', 'customer service', 'faq'])) {
       return 'Absolutely. OakDev can build AI chatbots that answer customer questions, capture leads, and connect to your documents or internal systems. Start with [AI chatbots](/ai-chatbot-foretag/) or [book a call](/boka-samtal-om-ai/#booking-form) to shape a concrete solution.';
