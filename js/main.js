@@ -2125,13 +2125,13 @@ function initChatbot() {
   }
 
   function appendAutolinkedText(parent, text) {
-    const rawUrlPattern = /(https?:\/\/[^\s<)]+|\/[a-z0-9_./#?=&%-]+)/gi;
+    const rawUrlPattern = /(^|[\s(])((?:https?:\/\/[^\s<)]+)|(?:\/[a-z0-9][a-z0-9_./#?=&%-]*))/gi;
     let cursor = 0;
     let match;
 
     while ((match = rawUrlPattern.exec(text)) !== null) {
-      appendTextWithBreaks(parent, text.slice(cursor, match.index));
-      parent.appendChild(createLink(friendlyLinkLabel(match[0]), match[0]));
+      appendTextWithBreaks(parent, text.slice(cursor, match.index) + match[1]);
+      parent.appendChild(createLink(friendlyLinkLabel(match[2]), match[2]));
       cursor = match.index + match[0].length;
     }
 

@@ -1168,6 +1168,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .oak-chatbot-link {
+  display: inline-block;
+  margin-inline: 0.14em;
   color: var(--green-bright);
   font-weight: 700;
   text-decoration: underline;
