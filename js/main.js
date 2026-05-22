@@ -24,6 +24,9 @@ const TRANSLATIONS = {
     chat_placeholder:'Ask about a chatbot, automation, or a project...',
     chat_send:       'Send',
     chat_close:      'Close chat',
+    chat_minimize:   'Minimize chat',
+    chat_resume:     'Resume chat',
+    chat_dock_label: 'oakBot minimized',
     chat_typing:     'Mapping signal...',
     chat_error:      'I can still help you find the right path. Tell me if you are looking for a chatbot, automation, an app, a website, or a technical review.',
     explore_services: 'Explore Services',
@@ -482,6 +485,9 @@ const TRANSLATIONS = {
     chat_placeholder:'Fråga om chatbot, automation eller ett projekt...',
     chat_send:       'Skicka',
     chat_close:      'Stäng chatten',
+    chat_minimize:   'Minimera chatten',
+    chat_resume:     'Öppna chatten igen',
+    chat_dock_label: 'oakBot minimerad',
     chat_typing:     'Kartlägger signal...',
     chat_error:      'Jag kan fortfarande hjälpa dig hitta rätt väg. Skriv om du vill prata chatbot, automation, app, webbplats eller teknisk rådgivning.',
     explore_services: 'Utforska tjänster',
@@ -1753,9 +1759,11 @@ function initChatbot() {
   const gsapSrc = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
   let gsapPromise = null;
   let isClosing = false;
+  let isMinimizing = false;
+  let sessionId = 0;
 
   function isLegacyTechnicalMessage(content) {
-    return /OPENAI_API_KEY|secure API endpoint|säkra API-endpointen|API-endpointen|not active here yet/i.test(content);
+    return /OPENAI_API_KEY|secure API endpoint|säkra API-endpointen|API-endpointen|not active here yet|Jag kan hjälpa dig ringa in rätt lösning|I can help you find the right path/i.test(content);
   }
 
   function loadState() {
@@ -1764,6 +1772,7 @@ function initChatbot() {
       const storedMessages = Array.isArray(parsed.messages) ? parsed.messages : [];
       return {
         open: parsed.open === true,
+        minimized: parsed.minimized === true,
         messages: storedMessages
           .map((message) => ({
             role: message?.role === 'assistant' ? 'assistant' : 'user',
@@ -1772,7 +1781,7 @@ function initChatbot() {
           .filter((message) => message.content && !isLegacyTechnicalMessage(message.content)),
       };
     } catch {
-      return { open: false, messages: [] };
+      return { open: false, minimized: false, messages: [] };
     }
   }
 
@@ -1847,6 +1856,15 @@ function initChatbot() {
       <span class="oak-chatbot-portal-ring ring-3"></span>
       <span class="oak-chatbot-portal-beam"></span>
     </div>
+    <button type="button" class="oak-chatbot-dock" data-chatbot-restore aria-label="${getCopy().chat_resume}">
+      <span class="oak-chatbot-dock-orbit" aria-hidden="true"></span>
+      <span class="oak-chatbot-dock-avatar" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </span>
+      <span class="oak-chatbot-dock-copy" data-i18n="chat_dock_label">${getCopy().chat_dock_label}</span>
+      <span class="oak-chatbot-dock-wave" aria-hidden="true"></span>
+    </button>
     <div class="oak-chatbot-panel" role="dialog" aria-modal="false" aria-labelledby="oakChatbotTitle">
       <div class="oak-chatbot-topline" aria-hidden="true"></div>
       <div class="oak-chatbot-grid" aria-hidden="true"></div>
@@ -1864,7 +1882,10 @@ function initChatbot() {
           <h2 id="oakChatbotTitle" data-i18n="chat_title">${getCopy().chat_title}</h2>
           <p><span class="oak-chatbot-pulse" aria-hidden="true"></span><span data-i18n="chat_status">${getCopy().chat_status}</span></p>
         </div>
-        <button type="button" class="oak-chatbot-close" data-chatbot-close aria-label="${getCopy().chat_close}">×</button>
+        <div class="oak-chatbot-header-actions">
+          <button type="button" class="oak-chatbot-control oak-chatbot-minimize" data-chatbot-minimize aria-label="${getCopy().chat_minimize}">&minus;</button>
+          <button type="button" class="oak-chatbot-control oak-chatbot-close" data-chatbot-close aria-label="${getCopy().chat_close}">&times;</button>
+        </div>
       </header>
       <div class="oak-chatbot-messages" aria-live="polite"></div>
       <form class="oak-chatbot-form">
@@ -1880,15 +1901,32 @@ function initChatbot() {
   const input = widget.querySelector('.oak-chatbot-input');
   const sendButton = widget.querySelector('.oak-chatbot-send');
   const closeButton = widget.querySelector('[data-chatbot-close]');
+  const minimizeButton = widget.querySelector('[data-chatbot-minimize]');
+  const restoreButton = widget.querySelector('[data-chatbot-restore]');
+  const panel = widget.querySelector('.oak-chatbot-panel');
+  const portal = widget.querySelector('.oak-chatbot-portal');
+  const dock = widget.querySelector('.oak-chatbot-dock');
 
-  function saveState(open = widget.classList.contains('open')) {
+  function saveState(
+    open = widget.classList.contains('open'),
+    minimized = widget.classList.contains('minimized') && !widget.classList.contains('open')
+  ) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         open,
+        minimized,
         messages: messages.slice(-MAX_STORED_MESSAGES),
       }));
     } catch {
       // Storage can be unavailable in private modes; oakBot still works for the current page.
+    }
+  }
+
+  function clearStoredState() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Storage can be unavailable in private modes; closing still resets the current session.
     }
   }
 
@@ -2108,21 +2146,52 @@ function initChatbot() {
     sendButton.textContent = isBusy ? getCopy().chat_typing : getCopy().chat_send;
   }
 
-  function openChatbot() {
+  function ensureIntroMessage(render = false) {
+    if (messages.length) return;
+    const intro = getCopy().chat_intro;
+    messages.push({ role: 'assistant', content: intro });
+    if (render) appendMessage('assistant', intro, { skipAnimation: true });
+  }
+
+  function clearConversation() {
+    messages.length = 0;
+    messageList.innerHTML = '';
+    input.value = '';
+    input.style.height = 'auto';
+    clearStoredState();
+  }
+
+  function openChatbot(options = {}) {
+    const fromDock = options.fromDock === true || widget.classList.contains('minimized');
     isClosing = false;
-    widget.classList.remove('closing');
+    isMinimizing = false;
+    widget.classList.remove('closing', 'minimizing');
     widget.classList.add('open');
     widget.setAttribute('aria-hidden', 'false');
-    saveState(true);
+    ensureIntroMessage(true);
+    saveState(true, false);
     closeMobileMenu();
     window.setTimeout(() => input.focus(), 120);
 
     loadGsap()
       .then((g) => {
-        if (!g) return;
-        const panel = widget.querySelector('.oak-chatbot-panel');
-        const portal = widget.querySelector('.oak-chatbot-portal');
-        g.killTweensOf([panel, portal]);
+        if (!g) {
+          widget.classList.remove('minimized');
+          return;
+        }
+        g.killTweensOf([panel, portal, dock]);
+        if (fromDock) {
+          g.to(dock, {
+            opacity: 0,
+            y: 16,
+            scale: 0.82,
+            duration: 0.24,
+            ease: 'power2.in',
+            onComplete: () => widget.classList.remove('minimized'),
+          });
+        } else {
+          widget.classList.remove('minimized');
+        }
         g.fromTo(
           portal,
           { opacity: 0, scale: 0.25, rotate: -18 },
@@ -2156,18 +2225,23 @@ function initChatbot() {
           { opacity: 1, y: 0, duration: 0.48, stagger: 0.055, delay: 0.08, ease: 'power3.out' }
         );
       })
-      .catch(() => {});
+      .catch(() => {
+        widget.classList.remove('minimized');
+      });
   }
 
   function closeChatbot() {
-    if (isClosing || !widget.classList.contains('open')) return;
+    if (isClosing || (!widget.classList.contains('open') && !widget.classList.contains('minimized'))) return;
     isClosing = true;
-    saveState(false);
+    isMinimizing = false;
+    sessionId += 1;
+    setBusy(false);
     widget.classList.add('closing');
 
     const finishClose = () => {
-      widget.classList.remove('open', 'closing', 'thinking');
+      widget.classList.remove('open', 'minimized', 'closing', 'thinking', 'minimizing');
       widget.setAttribute('aria-hidden', 'true');
+      clearConversation();
       isClosing = false;
     };
 
@@ -2177,53 +2251,120 @@ function initChatbot() {
           window.setTimeout(finishClose, 360);
           return;
         }
-        const panel = widget.querySelector('.oak-chatbot-panel');
-        const portal = widget.querySelector('.oak-chatbot-portal');
-        g.killTweensOf([panel, portal]);
+        g.killTweensOf([panel, portal, dock]);
         const tl = g.timeline({ onComplete: finishClose });
-        tl.to(
-          widget.querySelectorAll('.oak-chatbot-message, .oak-chatbot-form, .oak-chatbot-header h2, .oak-chatbot-header p'),
-          { opacity: 0, y: -8, duration: 0.16, stagger: 0.018, ease: 'power2.in' },
-          0
-        )
-          .to(panel, {
+        if (widget.classList.contains('open')) {
+          tl.to(
+            widget.querySelectorAll('.oak-chatbot-message, .oak-chatbot-form, .oak-chatbot-header h2, .oak-chatbot-header p'),
+            { opacity: 0, y: -8, duration: 0.16, stagger: 0.018, ease: 'power2.in' },
+            0
+          )
+            .to(panel, {
+              opacity: 0,
+              y: 20,
+              scale: 0.84,
+              rotateX: 16,
+              filter: 'blur(12px)',
+              clipPath: 'circle(7% at 88% 92%)',
+              duration: 0.42,
+              ease: 'power3.in',
+            }, 0.04)
+            .to(portal, {
+              opacity: 0,
+              scale: 0.18,
+              rotate: 24,
+              duration: 0.42,
+              ease: 'power3.in',
+            }, 0.05);
+        } else {
+          tl.to(dock, {
             opacity: 0,
             y: 20,
-            scale: 0.84,
-            rotateX: 16,
-            filter: 'blur(12px)',
-            clipPath: 'circle(7% at 88% 92%)',
-            duration: 0.42,
+            scale: 0.62,
+            filter: 'blur(10px)',
+            duration: 0.34,
             ease: 'power3.in',
-          }, 0.04)
-          .to(portal, {
-            opacity: 0,
-            scale: 0.18,
-            rotate: 24,
-            duration: 0.42,
-            ease: 'power3.in',
-          }, 0.05);
+          }, 0);
+        }
       })
       .catch(() => {
         window.setTimeout(finishClose, 360);
       });
   }
 
-  if (!messages.length) {
-    const intro = getCopy().chat_intro;
-    messages.push({ role: 'assistant', content: intro });
-    saveState(initialState.open);
+  function minimizeChatbot() {
+    if (isClosing || isMinimizing || !widget.classList.contains('open')) return;
+    isMinimizing = true;
+    saveState(false, true);
+    widget.classList.add('minimized', 'minimizing');
+    widget.setAttribute('aria-hidden', 'false');
+
+    const finishMinimize = () => {
+      widget.classList.remove('open', 'minimizing');
+      widget.classList.add('minimized');
+      widget.setAttribute('aria-hidden', 'false');
+      saveState(false, true);
+      isMinimizing = false;
+    };
+
+    loadGsap()
+      .then((g) => {
+        if (!g) {
+          window.setTimeout(finishMinimize, 300);
+          return;
+        }
+        g.killTweensOf([panel, portal, dock]);
+        g.set(dock, { opacity: 0, y: 18, scale: 0.78, filter: 'blur(8px)' });
+        const tl = g.timeline({ onComplete: finishMinimize });
+        tl.to(
+          widget.querySelectorAll('.oak-chatbot-message, .oak-chatbot-form, .oak-chatbot-header h2, .oak-chatbot-header p'),
+          { opacity: 0, y: 8, duration: 0.14, stagger: 0.015, ease: 'power2.in' },
+          0
+        )
+          .to(panel, {
+            opacity: 0,
+            y: 22,
+            scale: 0.7,
+            rotateX: 18,
+            filter: 'blur(14px)',
+            clipPath: 'circle(9% at 88% 92%)',
+            duration: 0.36,
+            ease: 'power3.in',
+          }, 0.02)
+          .to(portal, {
+            opacity: 0,
+            scale: 0.28,
+            rotate: 18,
+            duration: 0.34,
+            ease: 'power3.in',
+          }, 0.04)
+          .to(dock, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 0.42,
+            ease: 'back.out(1.7)',
+          }, 0.16);
+      })
+      .catch(() => {
+        window.setTimeout(finishMinimize, 300);
+      });
   }
 
+  ensureIntroMessage(false);
   messages.forEach((message) => appendMessage(message.role, message.content, { skipAnimation: true }));
+  saveState(initialState.open, initialState.minimized && !initialState.open);
 
   document.querySelectorAll('[data-chatbot-open]').forEach((button) => {
     button.addEventListener('click', openChatbot);
   });
 
   closeButton.addEventListener('click', closeChatbot);
+  minimizeButton.addEventListener('click', minimizeChatbot);
+  restoreButton.addEventListener('click', () => openChatbot({ fromDock: true }));
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && widget.classList.contains('open')) closeChatbot();
+    if (event.key === 'Escape' && (widget.classList.contains('open') || widget.classList.contains('minimized'))) closeChatbot();
   });
 
   input.addEventListener('input', () => {
@@ -2251,6 +2392,7 @@ function initChatbot() {
 
     const pending = appendMessage('assistant', getCopy().chat_typing, { pending: true });
     setBusy(true);
+    const requestSession = sessionId;
 
     try {
       const response = await fetch(apiUrl, {
@@ -2266,6 +2408,8 @@ function initChatbot() {
       });
       const data = await response.json().catch(() => ({}));
 
+      if (requestSession !== sessionId) return;
+
       if (!response.ok || !data.reply) {
         throw new Error(data.error || 'Chatbot request failed');
       }
@@ -2275,14 +2419,17 @@ function initChatbot() {
       messages.push({ role: 'assistant', content: data.reply });
       saveState();
     } catch {
+      if (requestSession !== sessionId) return;
       pending.remove();
       const fallbackText = buildFallbackReply(text) || getCopy().chat_error;
       appendMessage('assistant', fallbackText);
       messages.push({ role: 'assistant', content: fallbackText });
       saveState();
     } finally {
-      setBusy(false);
-      input.focus();
+      if (requestSession === sessionId) {
+        setBusy(false);
+        if (widget.classList.contains('open')) input.focus();
+      }
     }
   });
 
@@ -2290,6 +2437,9 @@ function initChatbot() {
 
   if (initialState.open) {
     window.setTimeout(openChatbot, 120);
+  } else if (initialState.minimized) {
+    widget.classList.add('minimized');
+    widget.setAttribute('aria-hidden', 'false');
   }
 }
 
