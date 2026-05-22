@@ -69,6 +69,18 @@ body {
   min-height: 100vh;
 }
 
+html.page-motion-paused *,
+html.page-motion-paused *::before,
+html.page-motion-paused *::after,
+.motion-paused,
+.motion-paused *,
+.motion-paused::before,
+.motion-paused::after,
+.motion-paused *::before,
+.motion-paused *::after {
+  animation-play-state: paused !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -132,6 +144,29 @@ h1, h2, h3, h4, h5, h6 {
   padding: clamp(5rem, 10vw, 9rem) 0;
   position: relative;
   overflow-x: clip;
+}
+
+.service-card,
+.process-step,
+.stat-item,
+.about-card,
+.portfolio-card,
+.pricing-card,
+.type-card,
+.benefit-card,
+.trend-card,
+.tech-card,
+.contact-card,
+.contact-info,
+.contact-form-wrapper,
+.marquee-wrapper {
+  contain: layout style;
+}
+
+#hero-canvas,
+#studioViz,
+.contact-hero-canvas {
+  transform: translateZ(0);
 }
 
 /* ── GLASS UTILITY ──────────────────────────────────────────── */
@@ -648,6 +683,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .oak-chatbot.closing {
   pointer-events: none;
+}
+
+.oak-chatbot:not(.open):not(.minimized) *,
+.oak-chatbot:not(.open):not(.minimized) *::before,
+.oak-chatbot:not(.open):not(.minimized) *::after {
+  animation-play-state: paused !important;
 }
 
 .oak-chatbot-portal {

@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css?v=perf-1">
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/oakdev-tree-favicon-48.png" />
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/oakdev-tree-favicon-96.png" />
@@ -1244,18 +1244,30 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="../js/main.js?v=chatbot-service-3"></script>
+  <script src="../js/main.js?v=chatbot-service-4"></script>
 
   <script>
     /* ── Hero particle canvas ── */
     (function () {
       const canvas = document.getElementById('heroCanvas');
-      const ctx    = canvas.getContext('2d');
+      const ctx    = canvas.getContext('2d', { alpha: true });
       let W, H, particles = [];
+      let raf = null;
+      let lastFrame = 0;
+      let isVisible = true;
+      const constrained = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768 || (navigator.hardwareConcurrency || 4) <= 4;
+      const frameGap = 1000 / (constrained ? 30 : 45);
+      const particleTotal = constrained ? 80 : 120;
+      const maxDpr = constrained ? 1.15 : 1.5;
+      const getDpr = () => Math.min(window.devicePixelRatio || 1, maxDpr);
 
       function resize() {
-        W = canvas.width  = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
+        const dpr = getDpr();
+        W = canvas.offsetWidth;
+        H = canvas.offsetHeight;
+        canvas.width = Math.max(1, Math.floor(W * dpr));
+        canvas.height = Math.max(1, Math.floor(H * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
       class Particle {
@@ -1283,17 +1295,19 @@
 
       function init() {
         resize();
-        particles = Array.from({ length: 140 }, () => new Particle());
+        particles = Array.from({ length: particleTotal }, () => new Particle());
       }
 
       function drawLines() {
         const dist = 110;
+        const distSq = dist * dist;
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d < dist) {
+            const dSq = dx * dx + dy * dy;
+            if (dSq < distSq) {
+              const d = Math.sqrt(dSq);
               ctx.beginPath();
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
@@ -1305,16 +1319,38 @@
         }
       }
 
-      function loop() {
+      function startLoop() {
+        if (!raf && isVisible && !document.hidden) raf = requestAnimationFrame(loop);
+      }
+
+      function loop(ts) {
+        raf = null;
+        if (!isVisible || document.hidden) return;
+        if (lastFrame && ts - lastFrame < frameGap) {
+          startLoop();
+          return;
+        }
+        lastFrame = ts;
         ctx.clearRect(0, 0, W, H);
         particles.forEach(p => { p.update(); p.draw(); });
         drawLines();
-        requestAnimationFrame(loop);
+        startLoop();
       }
 
       init();
-      loop();
-      window.addEventListener('resize', init);
+      startLoop();
+      window.addEventListener('resize', () => {
+        clearTimeout(window.__oakdevHeroResize);
+        window.__oakdevHeroResize = setTimeout(init, 120);
+      });
+      document.addEventListener('visibilitychange', startLoop);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          isVisible = entry.isIntersecting;
+          lastFrame = 0;
+          startLoop();
+        }, { rootMargin: '160px 0px', threshold: 0.01 }).observe(canvas);
+      }
     })();
 
     /* ── Counter animation ── */
@@ -1343,6 +1379,8 @@
 
     /* ── Marquee: RAF-driven scroll + drag-left to speed up ── */
     (function () {
+      // The enhanced pointer marquee below owns this animation loop.
+      return;
       const wrap  = document.querySelector('.client-marquee-wrap');
       const track = document.querySelector('.client-track');
       if (!track || !wrap) return;
@@ -1452,6 +1490,9 @@
       let halfW = 0;
       let lastTs = null;
       let isDragging = false;
+      let isVisible = true;
+      let rafId = null;
+      const frameGap = 1000 / (window.matchMedia('(pointer: coarse)').matches ? 30 : 45);
       let activePointerId = null;
       let lastClientX = 0;
 
@@ -1470,8 +1511,18 @@
         track.style.transform = `translateX(${posX.toFixed(2)}px)`;
       }
 
+      function startLoop() {
+        if (!rafId && isVisible && !document.hidden) rafId = requestAnimationFrame(loop);
+      }
+
       function loop(ts) {
+        rafId = null;
+        if (!isVisible || document.hidden) return;
         if (lastTs === null) lastTs = ts;
+        if (ts - lastTs < frameGap) {
+          startLoop();
+          return;
+        }
         const dt = Math.min((ts - lastTs) / 1000, 0.05);
         lastTs = ts;
 
@@ -1480,7 +1531,7 @@
         }
 
         render();
-        requestAnimationFrame(loop);
+        startLoop();
       }
 
       function stopDrag() {
@@ -1537,7 +1588,15 @@
         render();
       });
 
-      requestAnimationFrame(loop);
+      document.addEventListener('visibilitychange', startLoop);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          isVisible = entry.isIntersecting;
+          lastTs = null;
+          startLoop();
+        }, { rootMargin: '160px 0px', threshold: 0.01 }).observe(wrap);
+      }
+      startLoop();
     })();
   </script>
 </body>

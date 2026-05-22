@@ -54,7 +54,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/oakdev-tree-apple-touch.png" />
 
   <!-- ── Stylesheet ────────────────────────────────────────── -->
-  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/styles.css?v=perf-1" />
 
   <!-- ── Page-specific styles ──────────────────────────────── -->
   <style>
@@ -1881,19 +1881,30 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
 
   <!-- OakDev main script -->
-  <script src="../js/main.js?v=chatbot-service-3" defer></script>
+  <script src="../js/main.js?v=chatbot-service-4" defer></script>
 
   <script>
     /* ── App Studio hero canvas — overlay effects on top of CSS phones ── */
     (function () {
       var canvas = document.getElementById('studioViz');
       if (!canvas) return;
-      var ctx = canvas.getContext('2d');
+      var ctx = canvas.getContext('2d', { alpha: true });
       var W = 0, H = 0;
+      var rafId = null;
+      var lastTs = null;
+      var isVisible = true;
+      var constrained = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768 || (navigator.hardwareConcurrency || 4) <= 4;
+      var frameGap = 1000 / (constrained ? 30 : 45);
+      var maxDpr = constrained ? 1.15 : 1.5;
+      function getDpr () { return Math.min(window.devicePixelRatio || 1, maxDpr); }
 
       function resize () {
-        W = canvas.width  = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
+        var dpr = getDpr();
+        W = canvas.offsetWidth;
+        H = canvas.offsetHeight;
+        canvas.width = Math.max(1, Math.floor(W * dpr));
+        canvas.height = Math.max(1, Math.floor(H * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         if (floaters) { floaters.length = 0; for (var k = 0; k < 8; k++) floaters.push(new Floater(true)); }
       }
 
@@ -1966,7 +1977,18 @@
       var pulses = [], pulseTimer = 0;
       var floaters = null;
 
-      function loop () {
+      function startLoop () {
+        if (!rafId && isVisible && !document.hidden) rafId = requestAnimationFrame(loop);
+      }
+
+      function loop (ts) {
+        rafId = null;
+        if (!isVisible || document.hidden) return;
+        if (lastTs !== null && ts - lastTs < frameGap) {
+          startLoop();
+          return;
+        }
+        lastTs = ts;
         ctx.clearRect(0, 0, W, H);
         var pts = phonePts();
         floaters.forEach(function (f) { f.tick(); f.draw(); pts.push({x:f.x, y:f.y}); });
@@ -1985,7 +2007,7 @@
           ctx.strokeStyle = 'rgba(118,185,0,' + a + ')'; ctx.lineWidth = 1; ctx.stroke();
           if (pulses[i].r >= pulses[i].max) pulses.splice(i, 1);
         }
-        requestAnimationFrame(loop);
+        startLoop();
       }
 
       function init () {
@@ -1993,10 +2015,21 @@
         if (W === 0) { requestAnimationFrame(init); return; }
         floaters = [];
         for (var i = 0; i < 8; i++) floaters.push(new Floater(true));
-        requestAnimationFrame(loop);
+        startLoop();
       }
 
-      window.addEventListener('resize', resize);
+      window.addEventListener('resize', function () {
+        clearTimeout(window.__oakdevStudioResize);
+        window.__oakdevStudioResize = setTimeout(resize, 120);
+      });
+      document.addEventListener('visibilitychange', startLoop);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          isVisible = entries[0].isIntersecting;
+          lastTs = null;
+          startLoop();
+        }, { rootMargin: '160px 0px', threshold: 0.01 }).observe(canvas);
+      }
       requestAnimationFrame(init);
     })();
   </script>

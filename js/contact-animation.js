@@ -34,6 +34,13 @@
   const SWEEP_SPEED = 0.0065;     // rad / frame  (~2.2 RPM at 60fps)
   let time = 0;
   let raf  = null;
+  let lastFrame = 0;
+  let frameScale = 1;
+  let isVisible = true;
+  const constrained = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768 || (navigator.hardwareConcurrency || 4) <= 4;
+  const frameGap = 1000 / (constrained ? 30 : 45);
+  const maxDpr = constrained ? 1.15 : 1.5;
+  const getDpr = () => Math.min(window.devicePixelRatio || 1, maxDpr);
 
   const blips   = [];
   const packets = [];
@@ -41,8 +48,12 @@
 
   /* ── resize ─────────────────────────────────────────────────── */
   function resize () {
-    W  = canvas.width  = canvas.offsetWidth;
-    H  = canvas.height = canvas.offsetHeight;
+    const dpr = getDpr();
+    W  = canvas.offsetWidth;
+    H  = canvas.offsetHeight;
+    canvas.width = Math.max(1, Math.floor(W * dpr));
+    canvas.height = Math.max(1, Math.floor(H * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cx = W * 0.5;
     cy = H * 0.5;
     // Make R equal to half the diagonal → outer ring exactly at corners
@@ -79,7 +90,7 @@
 
   /* ── spawn blip along current sweep line ────────────────────── */
   function spawnSweepBlip () {
-    if (Math.random() > 0.055) return;
+    if (Math.random() > Math.min(0.18, 0.055 * frameScale)) return;
 
     // Find how far the sweep ray extends within canvas bounds
     const cos = Math.cos(sweep), sin = Math.sin(sweep);
@@ -106,7 +117,7 @@
 
   /* ── spawn packet between two random live blips ─────────────── */
   function maybeSpawnPacket () {
-    if (Math.random() > 0.022 || packets.length >= 18) return;
+    if (Math.random() > Math.min(0.08, 0.022 * frameScale) || packets.length >= 18) return;
     const live = blips.filter(b => b.alpha > 0.25);
     if (live.length < 2) return;
     const a = live[Math.floor(Math.random() * live.length)];
@@ -121,7 +132,9 @@
     if (W < 768) return;
     pulseRings.push({ r: 4, alpha: 0.55 });
   }
-  setInterval(spawnRing, 3800);
+  setInterval(() => {
+    if (isVisible && !document.hidden) spawnRing();
+  }, 3800);
 
   /* ── mouse blip ─────────────────────────────────────────────── */
   let mouseBlip = null;
@@ -257,7 +270,7 @@
 
       // Decay non-mouse blips
       if (!b.mouse) {
-        b.alpha -= b.decay;
+        b.alpha -= b.decay * frameScale;
         if (b.alpha <= 0) {
           blips.splice(i, 1);
           continue;
@@ -326,7 +339,7 @@
   function drawPackets () {
     for (let i = packets.length - 1; i >= 0; i--) {
       const p = packets[i];
-      p.t += p.speed;
+      p.t += p.speed * frameScale;
       if (p.t >= 1) { packets.splice(i, 1); continue; }
 
       // Short glowing trail
@@ -349,8 +362,8 @@
   function drawPulseRings () {
     for (let i = pulseRings.length - 1; i >= 0; i--) {
       const ring = pulseRings[i];
-      ring.r     += 1.6;
-      ring.alpha  = Math.max(0, ring.alpha - 0.004);
+      ring.r     += 1.6 * frameScale;
+      ring.alpha  = Math.max(0, ring.alpha - 0.004 * frameScale);
       if (ring.alpha <= 0) { pulseRings.splice(i, 1); continue; }
 
       ctx.beginPath();
@@ -376,9 +389,22 @@
   }
 
   /* ── main animation loop ─────────────────────────────────────── */
-  function loop () {
-    raf  = requestAnimationFrame(loop);
-    time += 0.016;
+  function startLoop () {
+    if (!raf && isVisible && !document.hidden) raf = requestAnimationFrame(loop);
+  }
+
+  function loop (now) {
+    raf = null;
+    if (!isVisible || document.hidden) return;
+    if (lastFrame && now - lastFrame < frameGap) {
+      startLoop();
+      return;
+    }
+
+    const elapsed = lastFrame ? now - lastFrame : 16.67;
+    lastFrame = now;
+    frameScale = Math.min(elapsed / 16.67, 2.2);
+    time += 0.016 * frameScale;
 
     ctx.clearRect(0, 0, W, H);
 
@@ -393,30 +419,48 @@
     drawBlips();
 
     // Advance sweep
-    sweep += SWEEP_SPEED;
+    sweep += SWEEP_SPEED * frameScale;
     if (sweep >= Math.PI * 1.5) sweep -= Math.PI * 2;  // keep in [-π/2, 3π/2)
 
     // Spawn events
     spawnSweepBlip();
     maybeSpawnPacket();
+    startLoop();
   }
 
   /* ── initialise ──────────────────────────────────────────────── */
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__oakdevContactResize);
+    window.__oakdevContactResize = setTimeout(resize, 120);
+  });
 
   // Kick off first pulse ring immediately
   spawnRing();
 
-  loop();
+  startLoop();
 
   // Pause when tab is hidden to save GPU
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(raf);
       raf = null;
-    } else if (!raf) {
-      loop();
+    } else {
+      lastFrame = 0;
+      startLoop();
     }
   });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      lastFrame = 0;
+      if (!isVisible) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      } else {
+        startLoop();
+      }
+    }, { rootMargin: '160px 0px', threshold: 0.01 }).observe(canvas);
+  }
 }());

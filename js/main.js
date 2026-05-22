@@ -1035,6 +1035,61 @@ const Cookies = (() => {
 })();
 
 /* ============================================================
+   PERFORMANCE BUDGET
+   ============================================================ */
+const PerformanceBudget = (() => {
+  const mq = (query) => window.matchMedia?.(query).matches || false;
+  const prefersReducedMotion = mq('(prefers-reduced-motion: reduce)');
+  const coarsePointer = mq('(pointer: coarse)');
+  const lowMemory = Number(navigator.deviceMemory || 4) <= 4;
+  const lowCores = Number(navigator.hardwareConcurrency || 4) <= 4;
+  const smallViewport = window.innerWidth < 768;
+  const constrained = prefersReducedMotion || coarsePointer || lowMemory || lowCores || smallViewport;
+  const maxDpr = constrained ? 1.15 : 1.5;
+  const canvasFps = prefersReducedMotion ? 24 : constrained ? 30 : 45;
+
+  return {
+    prefersReducedMotion,
+    coarsePointer,
+    constrained,
+    canvasFps,
+    getDpr: () => Math.min(window.devicePixelRatio || 1, maxDpr),
+  };
+})();
+
+function rafDebounce(fn) {
+  let raf = null;
+  return (...args) => {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      raf = null;
+      fn(...args);
+    });
+  };
+}
+
+function initMotionBudget() {
+  document.documentElement.classList.toggle('page-motion-paused', document.hidden);
+  document.addEventListener('visibilitychange', () => {
+    document.documentElement.classList.toggle('page-motion-paused', document.hidden);
+  });
+
+  if (!('IntersectionObserver' in window)) return;
+
+  const roots = document.querySelectorAll('.hero, .section, .marquee-wrapper, .client-marquee-wrap, .oak-chatbot');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('motion-paused', !entry.isIntersecting);
+    });
+  }, {
+    rootMargin: '220px 0px',
+    threshold: 0.01,
+  });
+
+  roots.forEach((root) => observer.observe(root));
+}
+
+/* ============================================================
    THREE.JS HERO SCENE
    ============================================================ */
 class HeroScene {
@@ -1042,21 +1097,26 @@ class HeroScene {
     this.canvas = document.getElementById('hero-canvas');
     if (!this.canvas || typeof THREE === 'undefined') return;
 
-    this.time       = 0;
-    this.mouse      = { x: 0, y: 0 };
+    this.hero        = this.canvas.closest('.hero') || this.canvas;
+    this.time        = 0;
+    this.mouse       = { x: 0, y: 0 };
     this.targetMouse = { x: 0, y: 0 };
-    this.isVisible  = true;
-    this.raf        = null;
-    this.glowLayers = [];
+    this.isInView    = true;
+    this.raf         = null;
+    this.lastFrame   = 0;
+    this.frameGap    = 1000 / PerformanceBudget.canvasFps;
+    this.glowLayers  = [];
 
-    // Reduce particles on mobile for performance
-    this.particleCount = window.innerWidth < 768 ? 400 : 1200;
+    // Keep the hero rich, but avoid overdraw on high-DPI and low-power devices.
+    this.particleCount = PerformanceBudget.constrained
+      ? (window.innerWidth < 768 ? 280 : 760)
+      : 1000;
 
     this.setup();
     this.createParticles();
     this.createOrb();
     this.bindEvents();
-    this.animate();
+    this.start();
   }
 
   setup() {
@@ -1072,13 +1132,13 @@ class HeroScene {
 
     this.renderer = new THREE.WebGLRenderer({
       canvas:           this.canvas,
-      antialias:        true,
+      antialias:        !PerformanceBudget.constrained,
       alpha:            true,
       powerPreference:  'high-performance',
       precision:        'mediump',
     });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(PerformanceBudget.getDpr());
+    this.renderer.setSize(window.innerWidth, window.innerHeight, false);
     this.renderer.setClearColor(0x000000, 0);
   }
 
@@ -1127,7 +1187,7 @@ class HeroScene {
     const mat = new THREE.ShaderMaterial({
       uniforms: {
         uTime:  { value: 0 },
-        uPR:    { value: Math.min(window.devicePixelRatio, 2) },
+        uPR:    { value: PerformanceBudget.getDpr() },
       },
       vertexShader: `
         attribute float aSize;
@@ -1176,7 +1236,10 @@ class HeroScene {
 
   createOrb() {
     /* ── Core sphere ── */
-    const orbGeo = new THREE.SphereGeometry(8, 64, 64);
+    const sphereSegments = PerformanceBudget.constrained ? 40 : 64;
+    const glowSegments = PerformanceBudget.constrained ? 24 : 32;
+    const torusSegments = PerformanceBudget.constrained ? 72 : 100;
+    const orbGeo = new THREE.SphereGeometry(8, sphereSegments, sphereSegments);
     const orbMat = new THREE.ShaderMaterial({
       uniforms: {
         uTime:   { value: 0 },
@@ -1228,7 +1291,7 @@ class HeroScene {
     const glowAlphas = [0.30, 0.18, 0.08];
 
     glowRadii.forEach((r, idx) => {
-      const glowGeo = new THREE.SphereGeometry(r, 32, 32);
+      const glowGeo = new THREE.SphereGeometry(r, glowSegments, glowSegments);
       const glowMat = new THREE.ShaderMaterial({
         uniforms: {
           uTime:  { value: 0 },
@@ -1266,7 +1329,7 @@ class HeroScene {
     });
 
     /* ── Orbiting rings ── */
-    const ring1Geo = new THREE.TorusGeometry(11, 0.07, 16, 100);
+    const ring1Geo = new THREE.TorusGeometry(11, 0.07, 16, torusSegments);
     const ring1Mat = new THREE.MeshBasicMaterial({
       color:       0x76b900,
       transparent: true,
@@ -1277,7 +1340,7 @@ class HeroScene {
     this.ring1.rotation.x = Math.PI * 0.3;
     this.scene.add(this.ring1);
 
-    const ring2Geo = new THREE.TorusGeometry(15, 0.04, 16, 100);
+    const ring2Geo = new THREE.TorusGeometry(15, 0.04, 16, torusSegments);
     const ring2Mat = new THREE.MeshBasicMaterial({
       color:       0x39ff14,
       transparent: true,
@@ -1290,11 +1353,39 @@ class HeroScene {
     this.scene.add(this.ring2);
   }
 
-  animate() {
-    this.raf = requestAnimationFrame(() => this.animate());
-    if (!this.isVisible) return;
+  shouldRun() {
+    return this.isInView && !document.hidden;
+  }
 
-    this.time += 0.008;
+  start() {
+    if (this.raf || !this.shouldRun()) return;
+    this.raf = requestAnimationFrame((now) => this.animate(now));
+  }
+
+  stop() {
+    if (!this.raf) return;
+    cancelAnimationFrame(this.raf);
+    this.raf = null;
+  }
+
+  updateRunState() {
+    if (this.shouldRun()) this.start();
+    else this.stop();
+  }
+
+  animate(now = performance.now()) {
+    this.raf = null;
+    if (!this.shouldRun()) return;
+
+    const elapsed = this.lastFrame ? now - this.lastFrame : this.frameGap;
+    if (elapsed < this.frameGap) {
+      this.start();
+      return;
+    }
+
+    const delta = Math.min(elapsed / 16.67, 2.2);
+    this.lastFrame = now;
+    this.time += 0.008 * delta;
 
     /* Particles */
     if (this.particles) {
@@ -1319,7 +1410,7 @@ class HeroScene {
     if (this.ring1) this.ring1.rotation.z  = this.time * 0.28;
     if (this.ring2) {
       this.ring2.rotation.z = -this.time * 0.18;
-      this.ring2.rotation.x += 0.001;
+      this.ring2.rotation.x += 0.001 * delta;
     }
 
     /* Smooth mouse parallax */
@@ -1330,26 +1421,52 @@ class HeroScene {
     this.camera.lookAt(0, 0, 0);
 
     this.renderer.render(this.scene, this.camera);
+    this.start();
   }
 
   bindEvents() {
+    let pendingPointer = null;
+    let pointerRaf = null;
+    const queuePointer = (clientX, clientY) => {
+      if (!this.isInView) return;
+      pendingPointer = { clientX, clientY };
+      if (pointerRaf) return;
+      pointerRaf = requestAnimationFrame(() => {
+        pointerRaf = null;
+        if (!pendingPointer) return;
+        this.targetMouse.x = (pendingPointer.clientX / window.innerWidth - 0.5) * 2;
+        this.targetMouse.y = -(pendingPointer.clientY / window.innerHeight - 0.5) * 2;
+      });
+    };
+
     window.addEventListener('mousemove', (e) => {
-      this.targetMouse.x =  (e.clientX / window.innerWidth  - 0.5) * 2;
-      this.targetMouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+      queuePointer(e.clientX, e.clientY);
     }, { passive: true });
 
     // Touch support
     window.addEventListener('touchmove', (e) => {
       const t = e.touches[0];
-      this.targetMouse.x =  (t.clientX / window.innerWidth  - 0.5) * 2;
-      this.targetMouse.y = -(t.clientY / window.innerHeight - 0.5) * 2;
+      if (t) queuePointer(t.clientX, t.clientY);
     }, { passive: true });
 
-    window.addEventListener('resize', () => this.onResize(), { passive: true });
+    window.addEventListener('resize', rafDebounce(() => this.onResize()), { passive: true });
 
     document.addEventListener('visibilitychange', () => {
-      this.isVisible = !document.hidden;
+      this.lastFrame = 0;
+      this.updateRunState();
     });
+
+    if ('IntersectionObserver' in window) {
+      this.visibilityObserver = new IntersectionObserver(([entry]) => {
+        this.isInView = entry.isIntersecting;
+        this.lastFrame = 0;
+        this.updateRunState();
+      }, {
+        rootMargin: '180px 0px',
+        threshold: 0.01,
+      });
+      this.visibilityObserver.observe(this.hero);
+    }
   }
 
   onResize() {
@@ -1357,8 +1474,10 @@ class HeroScene {
     const h = window.innerHeight;
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(w, h);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const dpr = PerformanceBudget.getDpr();
+    this.renderer.setPixelRatio(dpr);
+    this.renderer.setSize(w, h, false);
+    if (this.particles) this.particles.material.uniforms.uPR.value = dpr;
   }
 }
 
@@ -1367,26 +1486,44 @@ class HeroScene {
    ============================================================ */
 function initLenis() {
   if (typeof Lenis === 'undefined') return null;
+  if (PerformanceBudget.prefersReducedMotion) return null;
 
   const lenis = new Lenis({
-    duration:   1.2,
+    duration:   PerformanceBudget.constrained ? 0.85 : 1.05,
     easing:     (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     direction:  'vertical',
-    smooth:     true,
+    smooth:     !PerformanceBudget.coarsePointer,
+    smoothWheel: !PerformanceBudget.coarsePointer,
     smoothTouch: false,
     touchMultiplier: 2,
   });
 
   // Connect to GSAP ticker if available
   if (typeof gsap !== 'undefined') {
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.add((time) => {
+      if (!document.hidden) lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(500, 33);
   } else {
+    let rafId = null;
     function raf(time) {
+      rafId = null;
+      if (document.hidden) return;
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    const start = () => {
+      if (!rafId && !document.hidden) rafId = requestAnimationFrame(raf);
+    };
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      } else {
+        start();
+      }
+    });
+    start();
   }
 
   // Smooth anchor links
@@ -1408,6 +1545,8 @@ function initGSAP() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
   gsap.registerPlugin(ScrollTrigger);
+  gsap.defaults({ force3D: true });
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   /* Hero entrance — stagger in elements */
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -1438,10 +1577,14 @@ function initGSAP() {
       trigger: el,
       start:   'top 88%',
       once:    true,
-      onEnter: () => gsap.to(el, {
-        opacity: 1, y: 0, x: 0, scale: 1,
-        duration: 0.9, ease: 'power3.out', delay,
-      }),
+      onEnter: () => {
+        el.style.willChange = 'transform, opacity';
+        gsap.to(el, {
+          opacity: 1, y: 0, x: 0, scale: 1,
+          duration: 0.9, ease: 'power3.out', delay,
+          onComplete: () => { el.style.willChange = ''; },
+        });
+      },
     });
   });
 
@@ -2470,11 +2613,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initMarquee();
   initChatbot();
+  initMotionBudget();
 
   // Three.js (non-blocking)
   if (typeof THREE !== 'undefined') {
     new HeroScene();
-    new ScrollGridAnimation();
+    if (typeof ScrollGridAnimation !== 'undefined') {
+      new ScrollGridAnimation();
+    }
   }
 
   // Smooth scroll
