@@ -1744,9 +1744,12 @@ function initChatbot() {
   const STORAGE_KEY = 'oakdev_oakbot_state';
   const MAX_STORED_MESSAGES = 30;
   const getCopy = () => TRANSLATIONS[Lang.get()] || TRANSLATIONS.en;
+  const defaultApiUrl = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    ? '/api/chatbot'
+    : 'https://gf365.vercel.app/api/chatbot';
   const apiUrl = window.OAKDEV_CHATBOT_API_URL
     || document.querySelector('meta[name="oakdev-chatbot-api"]')?.content?.trim()
-    || '/api/chatbot';
+    || defaultApiUrl;
   const gsapSrc = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js';
   let gsapPromise = null;
   let isClosing = false;
@@ -1892,7 +1895,8 @@ function initChatbot() {
   function friendlyLinkLabel(href) {
     const lang = Lang.get();
     const isSv = lang === 'sv';
-    const url = new URL(href, window.location.origin);
+    const baseUrl = /^https?:$/.test(window.location.protocol) ? window.location.origin : 'https://oakdev.app';
+    const url = new URL(href, baseUrl);
     const path = url.pathname.replace(/\/$/, '/') + url.hash;
 
     if (url.protocol === 'mailto:') return 'hello@oakdev.app';
@@ -1916,7 +1920,8 @@ function initChatbot() {
 
   function createLink(label, href) {
     const anchor = document.createElement('a');
-    const url = new URL(href, window.location.origin);
+    const baseUrl = /^https?:$/.test(window.location.protocol) ? window.location.origin : 'https://oakdev.app';
+    const url = new URL(href, baseUrl);
     const isSameOrigin = url.origin === window.location.origin;
 
     anchor.className = 'oak-chatbot-link';
@@ -1953,7 +1958,7 @@ function initChatbot() {
   }
 
   function renderAssistantContent(parent, text) {
-    const markdownLinkPattern = /\[([^\]]{1,120})\]\((https?:\/\/[^\s)]+|\/[^\s)]+|mailto:[^\s)]+|tel:[^\s)]+)\)/g;
+    const markdownLinkPattern = /\[([^\]]{1,120})\]\(\s*(https?:\/\/[^\s)]+|\/[^\s)]+|mailto:[^\s)]+|tel:[^\s)]+)\s*\)/g;
     let cursor = 0;
     let match;
 
@@ -1977,8 +1982,33 @@ function initChatbot() {
   function buildFallbackReply(userText) {
     const isSv = userLooksSwedish(userText);
     const text = userText.toLowerCase();
+    const conversationText = messages
+      .map((message) => String(message.content || '').toLowerCase())
+      .join(' ');
+    const budgetMatch = text.match(/\b(\d[\d\s.,]*)\s*(kr|sek|kronor|:-)?\b/i);
+    const budget = budgetMatch
+      ? Number(budgetMatch[1].replace(/\s/g, '').replace(',', '.'))
+      : null;
+    const hasPriceContext = includesAny(conversationText, ['pris', 'kostar', 'budget', 'offert', 'price', 'cost', 'quote']);
+    const asksWeather = includesAny(text, ['väder', 'vader', 'weather', 'regn', 'soligt', 'temperatur']);
+    const greets = /^(hej|hejsan|hallå|hallo|hello|hi)\b/i.test(text.trim());
 
     if (isSv) {
+      if (greets) {
+        return 'Hej! Kul att du testar oakBot. Jag kan hjälpa dig resonera kring AI-chatbotar, automation, appar, webbplatser och interna verktyg. Vad vill du förbättra eller bygga?';
+      }
+      if (asksWeather) {
+        return 'Jag har ingen liveväderkoppling här, så jag vill inte hitta på prognoser. Men jag hjälper gärna med OakDev-frågor: chatbotar, automation, appar, webbplatser eller vad som vore smartast för ditt företag.';
+      }
+      if (budget && hasPriceContext) {
+        if (budget < 5000) {
+          return `Med ${budget.toLocaleString('sv-SE')} kr skulle jag se det som en liten startinsats snarare än ett färdigt AI-system. Det kan passa för rådgivning, behovsbild, teknisk riktning eller en mini-plan för vilken chatbot/automation som vore mest värd att bygga först.`;
+        }
+        if (budget < 25000) {
+          return `Med cirka ${budget.toLocaleString('sv-SE')} kr går det ofta att göra en avgränsad första etapp: kravbild, enkel prototyp, promptflöde, kunskapsstruktur eller en mindre automation. För en komplett AI-chatbot med integrationer behöver vi avgränsa målet smart, men det är en bra budget för att komma igång konkret.`;
+        }
+        return `Med en budget runt ${budget.toLocaleString('sv-SE')} kr kan vi börja prata om en tydlig första version: exempelvis chatbot, enklare RAG/kunskapsstöd, automation eller MVP-del. Bäst är att välja ett smalt affärsproblem först så pengarna går till något som märks.`;
+      }
       if (includesAny(text, ['chatbot', 'chattbot', 'kundservice', 'support', 'faq'])) {
         return 'Absolut. OakDev kan bygga AI-chatbotar som svarar på kundfrågor, fångar leads och kopplas till era dokument eller system. Börja gärna med sidan [AI-chatbotar](/ai-chatbot-foretag/) eller [boka ett samtal](/boka-samtal-om-ai/#booking-form) om du vill skissa på en konkret lösning.';
       }
@@ -2000,6 +2030,21 @@ function initChatbot() {
       return 'Jag kan hjälpa dig ringa in rätt lösning: AI-chatbotar, automation, appar, webbplatser, interna verktyg och teknisk rådgivning. Skriv vad du vill förbättra, eller börja på [AI & Automation](/ai-automation/), [App Studio](/app-studio/) eller [boka ett samtal](/boka-samtal-om-ai/#booking-form).';
     }
 
+    if (greets) {
+      return 'Hi! Nice to meet you. I can help with AI chatbots, automation, apps, websites, internal tools, and technical consulting. What are you trying to improve or build?';
+    }
+    if (asksWeather) {
+      return "I do not have live weather access here, so I do not want to invent a forecast. I can help with OakDev topics though: chatbots, automation, apps, websites, or choosing the smartest first step for your company.";
+    }
+    if (budget && hasPriceContext) {
+      if (budget < 5000) {
+        return `With ${budget.toLocaleString('en-US')} SEK, I would treat it as a small starting engagement rather than a finished AI system. It could cover advice, scoping, technical direction, or a mini-plan for the first chatbot or automation worth building.`;
+      }
+      if (budget < 25000) {
+        return `With around ${budget.toLocaleString('en-US')} SEK, a focused first step is realistic: scoping, a simple prototype, prompt flow, knowledge structure, or a small automation. A full integrated chatbot needs tighter scope, but this is enough to start concretely.`;
+      }
+      return `With a budget around ${budget.toLocaleString('en-US')} SEK, we can start shaping a clear first version: a chatbot, simpler knowledge assistant, automation, or MVP slice. The smart move is to pick one narrow business problem first.`;
+    }
     if (includesAny(text, ['chatbot', 'support', 'customer service', 'faq'])) {
       return 'Absolutely. OakDev can build AI chatbots that answer customer questions, capture leads, and connect to your documents or internal systems. Start with [AI chatbots](/ai-chatbot-foretag/) or [book a call](/boka-samtal-om-ai/#booking-form) to shape a concrete solution.';
     }
