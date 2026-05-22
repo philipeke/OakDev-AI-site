@@ -76,7 +76,9 @@ function sanitizeOpenAIError(error) {
 function polishReply(reply) {
   return reply
     .trim()
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
     .replace(/\]\(https:\/\/(?:www\.)?oakdev\.app(\/[^)\s]*)\)/gi, ']($1)')
+    .replace(/\[([^\]]+)\]\(#\)/g, '$1')
     .replace(/\bOm du vill,?\s+kan jag hj\u00e4lpa dig(?:\s+att)?\s+/gi, 'Ett bra n\u00e4sta steg \u00e4r att ')
     .replace(/\bIf you want,?\s+I can help you(?:\s+to)?\s+/gi, 'A good next step is to ');
 }
@@ -136,6 +138,8 @@ module.exports = async function chatbotHandler(req, res) {
     'Nar bokning ar relevant ska du lanka exakt till [boka ett samtal](/boka-samtal-om-ai/#booking-form).',
     'Nar du lankar, anvand alltid Markdown-lankar med kort beskrivande lanktext. Skriv inte ut ra URLer om inte besokaren specifikt ber om det.',
     'Skriv Markdown-lankar exakt utan mellanslag i parenteserna, exempel: [boka ett samtal](/boka-samtal-om-ai/#booking-form).',
+    'Anvand aldrig tomma lankar eller #-lankar. Om du inte vet ratt lanksokvag, skriv texten utan lank.',
+    'Anvand inte Markdown-fetstil, kursiv stil eller rubriker. Chatten visar bast vanlig text och riktiga lankar.',
     `Sajtcontext: ${SITE_CONTEXT}`,
   ].join(' ');
 
