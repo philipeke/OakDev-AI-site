@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https://gf365.vercel.app;">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self' https://gf365.vercel.app https://www.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net;">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Privacy Policy — OakDev &amp; AI</title>
   <meta name="description" content="Privacy policy for OakDev & AI AB — how we collect, use, and protect your personal data under GDPR.">
@@ -635,6 +635,7 @@
             <ul>
               <li><strong>FormSubmit.co</strong> — processes contact form submissions and delivers them to our inbox. They act as a data processor on our behalf.</li>
               <li><strong>CDN providers (jsDelivr, Google Fonts)</strong> — these services may log your IP address when assets are loaded from their networks. Both operate under their own privacy policies and GDPR-compliant data processing agreements.</li>
+              <li><strong>Google Analytics 4</strong> — measures website traffic with cookieless consent-mode pings by default, and uses analytics cookies only after you accept optional analytics cookies. Advertising personalization and Google signals are disabled.</li>
               <li><strong>Hosting infrastructure</strong> — our website is hosted on GitHub Pages (Microsoft/GitHub). GitHub may log access requests. See GitHub's privacy statement for details.</li>
               <li><strong>Professional advisors</strong> — lawyers, accountants, or auditors where required by law or to protect our legal rights.</li>
               <li><strong>Authorities</strong> — law enforcement or regulatory bodies when required by applicable law or court order.</li>
@@ -647,6 +648,7 @@
             <ul>
               <li><strong>FormSubmit.co</strong> — behandlar kontaktformulärsvar och levererar dem till vår inkorg. De agerar som personuppgiftsbiträde för vår räkning.</li>
               <li><strong>CDN-leverantörer (jsDelivr, Google Fonts)</strong> — dessa tjänster kan logga din IP-adress när tillgångar laddas från deras nätverk. Båda verkar under sina egna integritetspolicyer och GDPR-kompatibla databehandlingsavtal.</li>
+              <li><strong>Google Analytics 4</strong> — mäter webbplatstrafik med cookieless consent-mode-pings som standard, och använder analyscookies först efter att du accepterar valfria analyscookies. Annonsanpassning och Google signals är avstängda.</li>
               <li><strong>Värdinfrastruktur</strong> — vår webbplats är hostad på GitHub Pages (Microsoft/GitHub). GitHub kan logga åtkomstbegäranden. Se GitHubs sekretesspolicy för information.</li>
               <li><strong>Professionella rådgivare</strong> — advokater, revisorer eller granskare när det krävs enligt lag eller för att skydda våra juridiska rättigheter.</li>
               <li><strong>Myndigheter</strong> — brottsbekämpande myndigheter eller tillsynsorgan när tillämplig lag eller domstolsbeslut kräver det.</li>
@@ -665,7 +667,7 @@
               <li><strong>Contact form inquiries</strong> — retained in our email inbox for up to <strong>2 years</strong> from the date of receipt, unless the inquiry leads to a business relationship.</li>
               <li><strong>Business correspondence and client data</strong> — retained for up to <strong>7 years</strong> in accordance with Swedish bookkeeping requirements (Bokföringslagen).</li>
               <li><strong>Server logs</strong> — typically retained for <strong>30–90 days</strong> by our hosting provider for security and operational purposes.</li>
-              <li><strong>Cookie data</strong> — session cookies expire when you close your browser; preference cookies (language) persist for up to <strong>1 year</strong>.</li>
+              <li><strong>Cookie data</strong> — session cookies expire when you close your browser; preference cookies (language) persist until cleared; Google Analytics cookies may persist for up to <strong>2 years</strong> after consent.</li>
             </ul>
             <p>When data is no longer needed, it is securely deleted or anonymised.</p>
           </div>
@@ -676,7 +678,7 @@
               <li><strong>Kontaktformulärsförfrågningar</strong> — sparas i vår e-postinkorg i upp till <strong>2 år</strong> från mottagningsdatumet, om inte förfrågan leder till en affärsrelation.</li>
               <li><strong>Affärskorrespondens och kunddata</strong> — sparas i upp till <strong>7 år</strong> i enlighet med svenska bokföringskrav (Bokföringslagen).</li>
               <li><strong>Serverloggar</strong> — sparas vanligtvis i <strong>30–90 dagar</strong> av vår värdleverantör för säkerhets- och driftsändamål.</li>
-              <li><strong>Cookie-data</strong> — sessions-cookies upphör när du stänger webbläsaren; inställningscookies (språk) sparas i upp till <strong>1 år</strong>.</li>
+              <li><strong>Cookie-data</strong> — sessions-cookies upphör när du stänger webbläsaren; inställningscookies (språk) sparas tills de rensas; Google Analytics-cookies kan sparas i upp till <strong>2 år</strong> efter samtycke.</li>
             </ul>
             <p>När data inte längre behövs raderas eller anonymiseras den på ett säkert sätt.</p>
           </div>
@@ -706,15 +708,21 @@
                   <td>Until cleared</td>
                 </tr>
                 <tr>
-                  <td><strong>oakdev_cc</strong></td>
+                  <td><strong>oakdev_cookies</strong></td>
                   <td>localStorage</td>
-                  <td>Records whether you have acknowledged our cookie notice.</td>
+                  <td>Records whether you accepted or declined optional analytics cookies.</td>
                   <td>Until cleared</td>
+                </tr>
+                <tr>
+                  <td><strong>_ga</strong>, <strong>_ga_*</strong></td>
+                  <td>Cookie</td>
+                  <td>Google Analytics 4 measurement of page views and engagement after consent.</td>
+                  <td>Up to 2 years</td>
                 </tr>
               </tbody>
             </table>
 
-            <p style="margin-top:20px;">We do <strong>not</strong> use Google Analytics, Facebook Pixel, advertising trackers, or any third-party tracking scripts. No cross-site tracking takes place on our website.</p>
+            <p style="margin-top:20px;">We use <strong>Google Analytics 4</strong> consent mode for basic cookieless measurement when analytics cookies are not accepted. GA4 does not read or write analytics cookies in that state. Optional analytics cookies are used only after you accept them. Advertising personalization, Google signals, and ad storage are disabled.</p>
             <p>Third-party CDN providers (jsDelivr for JavaScript libraries, Google Fonts) may set their own technical cookies as part of their infrastructure. These are strictly necessary for delivering website assets and are outside our control. They do not track your browsing activity across sites.</p>
             <p>To manage or delete cookies and localStorage, use your browser settings (<strong>Chrome:</strong> Settings → Privacy → Clear browsing data; <strong>Firefox:</strong> Preferences → Privacy &amp; Security → Cookies; <strong>Safari:</strong> Preferences → Privacy).</p>
           </div>
@@ -739,15 +747,21 @@
                   <td>Tills rensad</td>
                 </tr>
                 <tr>
-                  <td><strong>oakdev_cc</strong></td>
+                  <td><strong>oakdev_cookies</strong></td>
                   <td>localStorage</td>
-                  <td>Registrerar om du har bekräftat vårt cookie-meddelande.</td>
+                  <td>Registrerar om du har accepterat eller avböjt valfria analyscookies.</td>
                   <td>Tills rensad</td>
+                </tr>
+                <tr>
+                  <td><strong>_ga</strong>, <strong>_ga_*</strong></td>
+                  <td>Cookie</td>
+                  <td>Google Analytics 4-mätning av sidvisningar och engagemang efter samtycke.</td>
+                  <td>Upp till 2 år</td>
                 </tr>
               </tbody>
             </table>
 
-            <p style="margin-top:20px;">Vi använder <strong>inte</strong> Google Analytics, Facebook Pixel, reklamspårare eller några tredjeparts-spårningsskript. Ingen spårning över webbplatser sker på vår webbplats.</p>
+            <p style="margin-top:20px;">Vi använder <strong>Google Analytics 4</strong> consent mode för enkel cookieless mätning när analyscookies inte är accepterade. GA4 läser eller skriver inte analyscookies i det läget. Valfria analyscookies används först efter att du accepterar dem. Annonsanpassning, Google signals och annonslagring är avstängda.</p>
             <p>Tredjeparts CDN-leverantörer (jsDelivr för JavaScript-bibliotek, Google Fonts) kan sätta egna tekniska cookies som en del av sin infrastruktur. Dessa är strikt nödvändiga för att leverera webbplatstillgångar och ligger utanför vår kontroll. De spårar inte din surfaktivitet på andra webbplatser.</p>
             <p>För att hantera eller radera cookies och localStorage, använd dina webbläsarinställningar (<strong>Chrome:</strong> Inställningar → Sekretess → Rensa webbdata; <strong>Firefox:</strong> Inställningar → Sekretess → Cookies; <strong>Safari:</strong> Inställningar → Sekretess).</p>
           </div>

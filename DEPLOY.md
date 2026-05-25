@@ -136,3 +136,19 @@ Bing:
 ## Hreflang Notes
 
 The current site uses a client-side language switcher, and dedicated `/en/` route variants do not exist yet. The HTML heads include `sv-SE` and `x-default` alternates plus TODO comments. When dedicated English routes are published, add matching `hreflang="en"` URLs for each page.
+
+## Google Analytics 4
+
+The site has a GA4 loader in `js/main.js` using advanced consent mode. Before a visitor accepts optional analytics cookies, GA4 runs with `analytics_storage: denied` and sends cookieless measurement pings for basic/modelled statistics. After acceptance, GA4 updates to `analytics_storage: granted`.
+
+To activate it:
+
+1. Create or open the GA4 property in Google Analytics using the Google account that should own the reports.
+2. Copy the web stream Measurement ID, which looks like `G-XXXXXXXXXX`.
+3. Put that ID in `js/main.js` as `DEFAULT_MEASUREMENT_ID`, or expose it before `main.js` loads:
+
+```html
+<meta name="oakdev-ga4-id" content="G-XXXXXXXXXX">
+```
+
+Advertising personalization, Google signals, ad storage, and ad user data are disabled in the loader.

@@ -1,6 +1,6 @@
 /**
  * OakDev & AI AB — main.js
- * Three.js · GSAP · Lenis · i18n · Cookie Consent
+ * Three.js · GSAP · Lenis · i18n · Cookie Consent · Analytics
  */
 'use strict';
 
@@ -32,7 +32,7 @@ const TRANSLATIONS = {
     explore_services: 'Explore Services',
     /* Cookie */
     cookie_title:    'We use cookies',
-    cookie_text:     'We use cookies to improve your experience. You can accept all cookies or decline non-essential ones.',
+    cookie_text:     'We use cookieless measurement for basic traffic stats. Optional analytics cookies improve accuracy.',
     cookie_privacy:  'Privacy Policy',
     cookie_terms:    'Terms of Use',
     cookie_accept:   'Accept All',
@@ -493,7 +493,7 @@ const TRANSLATIONS = {
     explore_services: 'Utforska tjänster',
     /* Cookie */
     cookie_title:    'Vi använder cookies',
-    cookie_text:     'Vi använder cookies för att förbättra din upplevelse. Du kan acceptera alla cookies eller avböja icke-nödvändiga.',
+    cookie_text:     'Vi använder cookieless mätning för enkel trafikstatistik. Valfria analyscookies förbättrar precisionen.',
     cookie_privacy:  'Integritetspolicy',
     cookie_terms:    'Användarvillkor',
     cookie_accept:   'Acceptera alla',
@@ -996,12 +996,150 @@ const Lang = (() => {
 })();
 
 /* ============================================================
+   ANALYTICS
+   Google Analytics 4 uses cookieless consent mode until cookies are accepted.
+   ============================================================ */
+const Analytics = (() => {
+  const META_NAME = 'oakdev-ga4-id';
+  const COOKIE_CONSENT_KEY = 'oakdev_cookies';
+  const DEFAULT_MEASUREMENT_ID = 'G-BJ58JS0TCX';
+  const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '::1']);
+  let loaded = false;
+
+  function getMeasurementId() {
+    const fromWindow = typeof window.OAKDEV_GA4_ID === 'string' ? window.OAKDEV_GA4_ID : '';
+    const fromMeta = document.querySelector(`meta[name="${META_NAME}"]`)?.content || '';
+    const id = (fromWindow || fromMeta || DEFAULT_MEASUREMENT_ID).trim().toUpperCase();
+    return /^G-[A-Z0-9]+$/.test(id) ? id : '';
+  }
+
+  function isLocalPreview() {
+    return window.location.protocol === 'file:' || LOCAL_HOSTS.has(window.location.hostname);
+  }
+
+  function ensureDataLayer() {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() {
+      window.dataLayer.push(arguments);
+    };
+  }
+
+  function setDisabled(disabled) {
+    const measurementId = getMeasurementId();
+    if (!measurementId) return;
+    window[`ga-disable-${measurementId}`] = disabled;
+  }
+
+  function setConsent(analyticsStorage, command = 'update') {
+    ensureDataLayer();
+    window.gtag('consent', command, {
+      ad_personalization: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      analytics_storage: analyticsStorage,
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+    });
+  }
+
+  function hasConsent() {
+    try {
+      return localStorage.getItem(COOKIE_CONSENT_KEY) === 'accepted';
+    } catch {
+      return false;
+    }
+  }
+
+  function load(analyticsStorage = 'denied') {
+    const measurementId = getMeasurementId();
+    if (!measurementId || isLocalPreview()) return;
+
+    setDisabled(false);
+    ensureDataLayer();
+    setConsent(analyticsStorage, loaded ? 'update' : 'default');
+
+    if (loaded) return;
+    loaded = true;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+    document.head.appendChild(script);
+
+    window.gtag('set', 'ads_data_redaction', true);
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, {
+      allow_ad_personalization_signals: false,
+      allow_google_signals: false,
+      page_path: window.location.pathname + window.location.search + window.location.hash,
+      page_title: document.title,
+      send_page_view: true,
+      transport_type: 'beacon',
+    });
+  }
+
+  function accept() {
+    load('granted');
+  }
+
+  function decline() {
+    load('denied');
+  }
+
+  function init() {
+    if (hasConsent()) {
+      accept();
+    } else {
+      decline();
+    }
+  }
+
+  function track(eventName, params = {}) {
+    if (!loaded || typeof window.gtag !== 'function') return;
+    window.gtag('event', eventName, params);
+  }
+
+  return { accept, decline, init, track };
+})();
+
+/* ============================================================
    COOKIE CONSENT
    ============================================================ */
 const Cookies = (() => {
   const STORAGE_KEY = 'oakdev_cookies';
 
+  function ensureBanner() {
+    if (document.getElementById('cookie-banner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'cookie-banner';
+    banner.className = 'cookie-banner hidden';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-modal', 'true');
+    banner.setAttribute('aria-labelledby', 'cookie-title');
+    banner.innerHTML = `
+      <div class="cookie-inner">
+        <div class="cookie-icon" aria-hidden="true">&#127850;</div>
+        <div class="cookie-text">
+          <h3 id="cookie-title" data-i18n="cookie_title">We use cookies</h3>
+          <p data-i18n="cookie_text">We use cookieless measurement for basic traffic stats. Optional analytics cookies improve accuracy.</p>
+          <p class="cookie-links">
+            <a href="/privacy/" data-i18n="cookie_privacy">Privacy Policy</a>
+            <span class="cookie-sep" aria-hidden="true">&middot;</span>
+            <a href="/terms/" data-i18n="cookie_terms">Terms of Use</a>
+          </p>
+        </div>
+        <div class="cookie-actions">
+          <button id="cookieAccept" class="btn-cookie-accept" data-i18n="cookie_accept">Accept All</button>
+          <button id="cookieDecline" class="btn-cookie-decline" data-i18n="cookie_decline">Decline</button>
+        </div>
+      </div>
+    `;
+    document.body.prepend(banner);
+  }
+
   function show() {
+    ensureBanner();
     const banner = document.getElementById('cookie-banner');
     if (!banner) return;
     // Delay show for a slick entrance
@@ -1015,6 +1153,10 @@ const Cookies = (() => {
   }
 
   function init() {
+    ensureBanner();
+    Lang.apply(Lang.get());
+    Analytics.init();
+
     const consent = localStorage.getItem(STORAGE_KEY);
     if (consent) return; // Already decided
 
@@ -1022,11 +1164,13 @@ const Cookies = (() => {
 
     document.getElementById('cookieAccept')?.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, 'accepted');
+      Analytics.accept();
       hide();
     });
 
     document.getElementById('cookieDecline')?.addEventListener('click', () => {
       localStorage.setItem(STORAGE_KEY, 'declined');
+      Analytics.decline();
       hide();
     });
   }
@@ -1848,6 +1992,7 @@ function initContactForm() {
         status.textContent = t.form_success;
         status.className   = 'form-status success';
         form.reset();
+        Analytics.track('generate_lead', { method: 'contact_form' });
       } else {
         throw new Error(data.message || 'Server error');
       }
@@ -2350,6 +2495,10 @@ function initChatbot() {
     ensureIntroMessage(true);
     saveState(true, false);
     closeMobileMenu();
+    Analytics.track('select_content', {
+      content_type: 'chatbot',
+      item_id: 'oakbot',
+    });
     window.setTimeout(() => input.focus(), 120);
 
     loadGsap()

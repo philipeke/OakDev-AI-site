@@ -9,11 +9,11 @@
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' https://cdn.jsdelivr.net;
+    script-src 'self' https://cdn.jsdelivr.net https://www.googletagmanager.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' https: data: blob:;
-    connect-src 'self' https://gf365.vercel.app https://formsubmit.co;
+    connect-src 'self' https://gf365.vercel.app https://formsubmit.co https://www.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net;
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'self' https://formsubmit.co;
@@ -542,21 +542,26 @@
     /* InkMeld — creative writing companion (ink blue + graphite) */
     .portfolio-card--inkmeld .portfolio-logo-area {
       background:
-        radial-gradient(circle at 58% 45%, rgba(100,160,235,0.18) 0%, rgba(50,92,150,0.12) 38%, transparent 68%),
+        radial-gradient(circle at 55% 44%, rgba(225,242,255,0.18) 0%, rgba(104,168,238,0.16) 34%, transparent 66%),
         linear-gradient(135deg, rgba(8,18,34,0.92) 0%, rgba(5,7,15,0.97) 100%);
-      box-shadow: inset 0 0 58px rgba(92,154,230,0.11);
+      box-shadow:
+        inset 0 0 58px rgba(92,154,230,0.15),
+        inset 0 0 0 1px rgba(190,220,255,0.05);
     }
     .portfolio-card--inkmeld .portfolio-logo-area::before {
       width: 310px;
       height: 220px;
       filter: blur(76px);
-      background: rgba(75,130,210,0.48);
+      background: rgba(115,175,245,0.6);
     }
     .portfolio-card--inkmeld .portfolio-logo {
       filter:
+        brightness(1.14)
+        contrast(1.1)
         drop-shadow(0 8px 24px rgba(0,0,0,0.58))
-        drop-shadow(0 0 24px rgba(125,178,238,0.22))
-        drop-shadow(0 0 44px rgba(45,93,170,0.22));
+        drop-shadow(0 0 18px rgba(236,247,255,0.24))
+        drop-shadow(0 0 34px rgba(125,178,238,0.32))
+        drop-shadow(0 0 54px rgba(45,93,170,0.28));
     }
     .portfolio-card--inkmeld .portfolio-app-badge {
       color: #7eb7ff;
@@ -655,7 +660,7 @@
         max-height: 200px;
       }
       .portfolio-card--vikingpal .portfolio-logo { scale: 1.22; }
-      .portfolio-card--inkmeld  .portfolio-logo { scale: 1; max-width: 280px; max-height: 150px; }
+      .portfolio-card--inkmeld  .portfolio-logo { scale: 1.08; max-width: 300px; max-height: 160px; }
       .portfolio-card--tipsypal .portfolio-logo { scale: 1.58; }
       .portfolio-card--vespera  .portfolio-logo { scale: 1.48; }
       .portfolio-card--nuria    .portfolio-logo { scale: 1.52; }
@@ -1047,7 +1052,7 @@
       <div class="cookie-icon" aria-hidden="true">🍪</div>
       <div class="cookie-text">
         <h3 id="cookie-title" data-i18n="cookie_title">We use cookies</h3>
-        <p data-i18n="cookie_text">We use cookies to improve your experience.</p>
+        <p data-i18n="cookie_text">We use cookieless measurement for basic traffic stats. Optional analytics cookies improve accuracy.</p>
         <p class="cookie-links">
           <a href="/privacy/" data-i18n="cookie_privacy">Privacy Policy</a>
           <span class="cookie-sep" aria-hidden="true">·</span>
