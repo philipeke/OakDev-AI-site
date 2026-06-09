@@ -124,7 +124,8 @@ const TRANSLATIONS = {
     svc_other:       'Other',
     form_message:    'Tell us about your project',
     form_submit:     'Send Message',
-    form_success:    "Message sent! We'll get back to you within 24 hours.",
+    form_sending:    'Sending...',
+    form_success:    "Thanks! We've received your message and will get back to you within 24 hours.",
     form_error:      'Something went wrong. Please try again or email us directly.',
     form_validation: 'Please fill in all required fields correctly.',
     /* Footer */
@@ -592,7 +593,8 @@ const TRANSLATIONS = {
     svc_other:       'Övrigt',
     form_message:    'Berätta om ditt projekt',
     form_submit:     'Skicka meddelande',
-    form_success:    'Meddelande skickat! Vi återkommer inom 24 timmar.',
+    form_sending:    'Skickar...',
+    form_success:    'Tack! Vi har tagit emot ditt meddelande och återkommer inom 24 timmar.',
     form_error:      'Något gick fel. Försök igen eller mejla oss direkt.',
     form_validation: 'Vänligen fyll i alla obligatoriska fält korrekt.',
     /* Footer */
@@ -1928,104 +1930,92 @@ function initReveal() {
    No account needed — uses hello@oakdev.app directly.
    ============================================================ */
 function initContactForm() {
-  const form   = document.getElementById('contactForm');
-  const status = document.getElementById('formStatus');
-  if (!form || !status) return;
+  const forms = document.querySelectorAll('form[data-ajax-action]');
+  if (!forms.length) return;
 
   const sentParam = new URLSearchParams(window.location.search).get('sent');
-  if (sentParam === '1') {
-    const t = TRANSLATIONS[Lang.get()];
-    status.textContent = t.form_success;
-    status.className   = 'form-status success';
-    window.history.replaceState(null, '', window.location.pathname + window.location.hash);
-  }
 
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-  }
+  forms.forEach((form, index) => {
+    const status = form.querySelector('.form-status');
+    if (!status) return;
 
-  function submitWithBrowser() {
-    HTMLFormElement.prototype.submit.call(form);
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const lang = Lang.get();
-    const t    = TRANSLATIONS[lang];
-
-    // Honeypot check (_honey field — bots fill it, humans don't)
-    const honey = form.querySelector('[name="_honey"]');
-    if (honey && honey.value) return; // Silently reject bots
-
-    const nameEl    = form.querySelector('[name="name"]');
-    const emailEl   = form.querySelector('[name="email"]');
-    const messageEl = form.querySelector('[name="message"]');
-    const submitBtn = form.querySelector('[type="submit"]');
-    const submitBtnHTML = submitBtn?.innerHTML || '';
-
-    // Validate
-    const name    = nameEl?.value.trim() || '';
-    const email   = emailEl?.value.trim() || '';
-    const message = messageEl?.value.trim() || '';
-
-    if (!name || !validateEmail(email) || message.length < 5) {
-      status.textContent = t.form_validation;
-      status.className   = 'form-status error';
-      return;
+    function getText(key, fallback = '') {
+      const lang = Lang.get();
+      return TRANSLATIONS[lang]?.[key] || TRANSLATIONS.en?.[key] || fallback;
     }
 
-    const payload = Object.fromEntries(new FormData(form).entries());
-    payload._replyto = email;
-
-    // Submit via the FormSubmit AJAX endpoint. If that path is blocked by a
-    // browser or service issue, fall back to the normal HTML form post.
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = '...';
-    }
-    status.className = 'form-status';
-    let isBrowserFallback = false;
-
-    try {
-      const res = await fetch(form.dataset.ajaxAction || form.action, {
-        method:  'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept':       'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const contentType = res.headers.get('content-type') || '';
-      const data = contentType.includes('application/json')
-        ? await res.json().catch(() => ({}))
-        : {};
-
-      if (res.ok && String(data.success ?? '').toLowerCase() !== 'false') {
-        status.textContent = t.form_success;
-        status.className   = 'form-status success';
-        form.reset();
-        Analytics.track('generate_lead', { method: 'contact_form' });
-      } else {
-        throw new Error(data.message || 'Server error');
+    function showStatus(type, message, shouldScroll = false) {
+      status.textContent = message;
+      status.className = `form-status ${type}`;
+      if (shouldScroll) {
+        window.setTimeout(() => {
+          status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          status.focus?.({ preventScroll: true });
+        }, 80);
       }
-    } catch {
-      isBrowserFallback = true;
-      submitWithBrowser();
-      return;
-    } finally {
-      if (!isBrowserFallback) {
+    }
+
+    if (sentParam === '1' && index === 0) {
+      showStatus('success', getText('form_success'), true);
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const honey = form.querySelector('[name="_honey"]');
+      if (honey && honey.value) return;
+
+      if (!form.checkValidity()) {
+        showStatus('error', getText('form_validation'));
+        form.reportValidity?.();
+        return;
+      }
+
+      const email = form.querySelector('[name="email"]')?.value.trim() || '';
+      const payload = Object.fromEntries(new FormData(form).entries());
+      if (email) payload._replyto = email;
+
+      const submitBtn = form.querySelector('[type="submit"]');
+      const submitBtnHTML = submitBtn?.innerHTML || '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = getText('form_sending', 'Sending...');
+      }
+      status.className = 'form-status';
+
+      try {
+        const res = await fetch(form.dataset.ajaxAction || form.action, {
+          method:  'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept':       'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const contentType = res.headers.get('content-type') || '';
+        const data = contentType.includes('application/json')
+          ? await res.json().catch(() => ({}))
+          : {};
+
+        if (!res.ok || String(data.success ?? '').toLowerCase() === 'false') {
+          throw new Error(data.message || 'Server error');
+        }
+
+        showStatus('success', getText('form_success'));
+        form.reset();
+        Analytics.track('generate_lead', { method: form.id || 'lead_form' });
+      } catch {
+        showStatus('error', getText('form_error'));
+      } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = submitBtnHTML || t.form_submit;
+          submitBtn.innerHTML = submitBtnHTML || getText('form_submit', 'Send Message');
         }
       }
-    }
-
-    if (isBrowserFallback) {
-      return;
-    }
+    });
   });
 }
 

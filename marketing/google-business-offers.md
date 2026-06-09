@@ -77,10 +77,10 @@ Nuvarande publika priser på webbplatsen:
 - App Studio: från €12,900 exkl. moms.
 - Consulting: €105/tim eller €3,900/mån exkl. moms.
 
-Rekommendation:
+Positionering:
 
-- Google Business Profile: börja med **Kostnadsfri AI-genomgång**.
-- Första betalda lokala insteg: **AI-pilot från 14 900 kr exkl. moms**.
+- Google Business Profile: lyft **AI-pilot från 14 900 kr exkl. moms** som första tydliga insteg.
 - Full första integration: behåll **AI Starter från €2,900** på webbplatsen.
+- Konsulting: använd tim- eller månadspris när kunden vill ha rådgivning före implementation.
 
-Det gör att Google-inlägget känns lätt att agera på, samtidigt som webbens paket fortfarande känns premium och produktionsnära.
+Det gör att Google-inlägget leder mot ett betalt nästa steg, samtidigt som webbens paket fortfarande känns premium och produktionsnära.

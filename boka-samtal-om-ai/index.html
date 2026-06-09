@@ -222,6 +222,7 @@
     }
 
     .booking-panel h2 {
+      color: #fff;
       font-size: 1.35rem;
       margin-bottom: 16px;
     }
@@ -260,6 +261,10 @@
 
     .booking-section[aria-labelledby='booking-form-heading'] .section-tag,
     .booking-section[aria-labelledby='booking-form-heading'] .section-title {
+      color: #fff;
+    }
+
+    #offer-heading {
       color: #fff;
     }
     .booking-grid {
@@ -343,6 +348,11 @@
       outline: none;
     }
 
+    .booking-form select option {
+      background: #0e0e0e;
+      color: #fff;
+    }
+
     .booking-form textarea {
       min-height: 132px;
       resize: vertical;
@@ -369,6 +379,12 @@
       justify-self: start;
       border: 0;
       cursor: pointer;
+    }
+
+    .booking-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
     }
 
     @media (max-width: 980px) {
@@ -503,9 +519,6 @@
           </article>
         </div>
 
-        <p class="booking-note">
-          <strong>Rekommendation:</strong> Använd “Kostnadsfri AI-genomgång” i Google Business Profile nu. När leads börjar komma in kan ni följa upp med AI-piloten som ett tydligt, betalt nästa steg.
-        </p>
       </div>
     </section>
 
@@ -519,7 +532,7 @@
               Skriv kort vad ni vill automatisera eller bygga. Det räcker med ett par meningar.
             </p>
 
-            <form id="booking-form" class="booking-form" action="https://formsubmit.co/hello@oakdev.app" method="POST">
+            <form id="booking-form" class="booking-form" action="https://formsubmit.co/hello@oakdev.app" data-ajax-action="https://formsubmit.co/ajax/hello@oakdev.app" method="POST" novalidate>
               <input type="hidden" name="_subject" value="Boka samtal om AI och automation">
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_template" value="table">
@@ -554,6 +567,7 @@
               </label>
 
               <button class="btn-primary booking-submit" type="submit">Skicka förfrågan</button>
+              <div class="form-status" role="alert" aria-live="polite" tabindex="-1"></div>
             </form>
           </div>
 
