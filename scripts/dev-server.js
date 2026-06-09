@@ -5,6 +5,7 @@ const http = require('http');
 const path = require('path');
 const chatbotHandler = require('../api/chatbot');
 const soroRssHandler = require('../api/soro-rss');
+const insightsFeedHandler = require('../api/insights-feed');
 
 const root = path.resolve(__dirname, '..');
 const port = Number(process.env.PORT || 4173);
@@ -106,6 +107,10 @@ async function handleSoroRssApi(req, res) {
   await soroRssHandler(req, res);
 }
 
+async function handleInsightsFeedApi(req, res) {
+  await insightsFeedHandler(req, res);
+}
+
 function serveStatic(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
   let pathname = decodeURIComponent(url.pathname);
@@ -144,6 +149,11 @@ const server = http.createServer((req, res) => {
 
   if (req.url.startsWith('/api/soro-rss')) {
     handleSoroRssApi(req, res);
+    return;
+  }
+
+  if (req.url.startsWith('/api/insights-feed')) {
+    handleInsightsFeedApi(req, res);
     return;
   }
 

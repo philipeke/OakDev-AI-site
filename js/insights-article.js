@@ -1,10 +1,10 @@
 'use strict';
 
-(function initSoroArticle() {
-  const root = document.querySelector('[data-soro-article]');
+(function initInsightsArticle() {
+  const root = document.querySelector('[data-insights-article]');
   if (!root) return;
 
-  const endpoint = root.dataset.endpoint || 'https://gf365.vercel.app/api/soro-rss';
+  const endpoint = root.dataset.endpoint || 'https://gf365.vercel.app/api/insights-feed';
   const status = root.querySelector('[data-article-status]');
   const titleNode = root.querySelector('[data-article-title]');
   const dateNode = root.querySelector('[data-article-date]');
@@ -118,7 +118,7 @@
   function parseFeed(xmlText) {
     const doc = new DOMParser().parseFromString(xmlText, 'application/xml');
     if (doc.querySelector('parsererror')) {
-      throw new Error('Soro returned invalid RSS XML.');
+      throw new Error('The content feed returned invalid XML.');
     }
 
     return Array.from(doc.querySelectorAll('item')).map((item) => {
@@ -141,7 +141,7 @@
     if (dateNode) {
       dateNode.textContent = article.date && !Number.isNaN(article.date.valueOf())
         ? formatter.format(article.date)
-        : 'OakDev Blogg';
+        : 'OakDev Insikter';
     }
     if (summaryNode) summaryNode.textContent = stripHtml(article.description);
 
@@ -157,29 +157,29 @@
     }
 
     document.title = `${article.title} | OakDev & AI AB`;
-    setStatus('Publicerad via Soro RSS.', 'ready');
+    setStatus('Artikeln är uppdaterad.', 'ready');
   }
 
   async function loadArticle() {
-    setStatus('Hämtar artikeln från Soro...', 'loading');
+    setStatus('Hämtar artikeln...', 'loading');
 
     try {
       const response = await fetch(endpoint, { headers: { Accept: 'application/xml,text/xml,*/*' } });
       const body = await response.text();
       if (!response.ok || !body.trim().startsWith('<')) {
-        throw new Error(body.trim() || 'Could not load RSS.');
+        throw new Error(body.trim() || 'Could not load content.');
       }
 
       const currentPath = normalizePath(window.location.href);
       const posts = parseFeed(body);
       const article = posts.find((post) => normalizePath(post.link) === currentPath);
       if (!article) {
-        throw new Error('No matching Soro article found for this URL.');
+        throw new Error('No matching article found for this URL.');
       }
 
       renderArticle(article);
     } catch {
-      setStatus('Kunde inte läsa artikeln från Soro just nu.', 'error');
+      setStatus('Kunde inte läsa artikeln just nu.', 'error');
     }
   }
 

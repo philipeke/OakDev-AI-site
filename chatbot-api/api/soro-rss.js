@@ -24,13 +24,13 @@ module.exports = async function soroRssHandler(req, res) {
     return;
   }
 
-  const feedUrl = process.env.SORO_RSS_FEED_URL || DEFAULT_FEED_URL;
+  const feedUrl = process.env.CONTENT_FEED_URL || process.env.SORO_RSS_FEED_URL || DEFAULT_FEED_URL;
 
   try {
     const response = await fetch(feedUrl, {
       headers: {
         Accept: 'application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8',
-        'User-Agent': 'OakDev-Soro-RSS/1.0 (+https://oakdev.app/blog/)',
+        'User-Agent': 'OakDev-Content-Feed/1.0 (+https://oakdev.app/insikter/)',
       },
       redirect: 'follow',
     });
@@ -48,7 +48,7 @@ module.exports = async function soroRssHandler(req, res) {
       502,
       'application/json; charset=utf-8',
       JSON.stringify({
-        error: 'Unable to fetch Soro RSS feed.',
+        error: 'Unable to fetch content feed.',
         detail: error && error.message ? error.message : 'Unknown error',
       }),
     );

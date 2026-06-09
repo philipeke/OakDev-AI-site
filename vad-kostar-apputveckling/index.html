@@ -61,7 +61,7 @@
         <a href="/app-studio/" class="nav-link" data-i18n="nav_studio">App Studio</a>
         <a href="/ai-automation/" class="nav-link" data-i18n="nav_ai">AI &amp; Automation</a>
         <a href="/consulting/" class="nav-link" data-i18n="nav_consulting">Consulting</a>
-        <a href="/blog/" class="nav-link" data-i18n="nav_blog">Blog</a>
+        <a href="/insikter/" class="nav-link" data-i18n="nav_insights">Insikter</a>
         <a href="/about/" class="nav-link" data-i18n="nav_about">About</a>
         <a href="/contact/" class="nav-link" data-i18n="nav_contact">Contact</a>
       </nav>
@@ -84,7 +84,7 @@
         <a href="/app-studio/" class="mobile-link" data-i18n="nav_studio">App Studio</a>
         <a href="/ai-automation/" class="mobile-link" data-i18n="nav_ai">AI &amp; Automation</a>
         <a href="/consulting/" class="mobile-link" data-i18n="nav_consulting">Consulting</a>
-        <a href="/blog/" class="mobile-link" data-i18n="nav_blog">Blog</a>
+        <a href="/insikter/" class="mobile-link" data-i18n="nav_insights">Insikter</a>
         <a href="/about/" class="mobile-link" data-i18n="nav_about">About</a>
         <a href="/contact/" class="mobile-link" data-i18n="nav_contact">Contact</a>
       </nav>
@@ -98,21 +98,21 @@
     </div>
   </header>
 
-  <main id="main" data-soro-article data-endpoint="https://gf365.vercel.app/api/soro-rss">
-    <article class="soro-article">
-      <div class="container soro-article-inner">
-        <a href="/blog/" class="blog-card-link">Tillbaka till bloggen</a>
-        <p class="blog-feed-status" data-article-status data-state="loading">Hämtar artikeln från Soro...</p>
-        <p class="blog-card-meta" data-article-date>OakDev Blogg</p>
+  <main id="main" data-insights-article data-endpoint="https://gf365.vercel.app/api/insights-feed">
+    <article class="insights-article">
+      <div class="container insights-article-inner">
+        <a href="/insikter/" class="blog-card-link">Tillbaka till insikter</a>
+        <p class="blog-feed-status" data-article-status data-state="loading">H&auml;mtar artikeln...</p>
+        <p class="blog-card-meta" data-article-date>OakDev Insikter</p>
         <h1 data-article-title>Vad kostar apputveckling egentligen?</h1>
-        <p class="soro-article-lead" data-article-summary>Vad kostar apputveckling? Få en tydlig bild av pris, tidsåtgång och vad som driver budgeten - från MVP till skalbar produkt.</p>
-        <img class="soro-article-image" data-article-image hidden alt="" />
-        <div class="soro-article-content" data-article-content></div>
+        <p class="insights-article-lead" data-article-summary>Vad kostar apputveckling? Få en tydlig bild av pris, tidsåtgång och vad som driver budgeten - från MVP till skalbar produkt.</p>
+        <img class="insights-article-image" data-article-image hidden alt="" />
+        <div class="insights-article-content" data-article-content></div>
       </div>
     </article>
   </main>
 
   <script src="/js/main.js?v=chatbot-service-7" defer></script>
-  <script src="/js/soro-article.js" defer></script>
+  <script src="/js/insights-article.js" defer></script>
 </body>
 </html>

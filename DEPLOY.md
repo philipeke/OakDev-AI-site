@@ -153,18 +153,18 @@ To activate it:
 
 Advertising personalization, Google signals, ad storage, and ad user data are disabled in the loader.
 
-## Soro RSS Blog
+## Content Feed
 
-The `/blog/` page reads OakDev's Soro RSS feed through the serverless proxy hosted on the existing Vercel backend:
-
-```text
-https://gf365.vercel.app/api/soro-rss
-```
-
-The default feed URL is set in `api/soro-rss.js`. To override it per environment, set:
+The `/insikter/` page reads OakDev's article feed through the serverless proxy hosted on the existing Vercel backend:
 
 ```text
-SORO_RSS_FEED_URL=https://app.trysoro.com/api/rss/YOUR-FEED-ID
+https://gf365.vercel.app/api/insights-feed
 ```
 
-If the page says the feed is disabled, enable the RSS feed/public publishing inside Soro and redeploy if the feed URL changed.
+The default feed URL is set in the content feed endpoint. To override it per environment, set:
+
+```text
+CONTENT_FEED_URL=https://example.com/path/to/feed.xml
+```
+
+If the page says the articles could not be loaded, check that the feed is publicly available and redeploy if the feed URL changed.
