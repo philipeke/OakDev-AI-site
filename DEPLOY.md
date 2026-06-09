@@ -155,10 +155,10 @@ Advertising personalization, Google signals, ad storage, and ad user data are di
 
 ## Soro RSS Blog
 
-The `/blog/` page reads OakDev's Soro RSS feed through the serverless proxy at:
+The `/blog/` page reads OakDev's Soro RSS feed through the serverless proxy hosted on the existing Vercel backend:
 
 ```text
-/api/soro-rss
+https://gf365.vercel.app/api/soro-rss
 ```
 
 The default feed URL is set in `api/soro-rss.js`. To override it per environment, set:

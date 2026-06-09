@@ -6,10 +6,18 @@ function send(res, statusCode, contentType, body) {
   res.statusCode = statusCode;
   res.setHeader('Content-Type', contentType);
   res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=3600');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type');
   res.end(body);
 }
 
 module.exports = async function soroRssHandler(req, res) {
+  if (req.method === 'OPTIONS') {
+    send(res, 204, 'text/plain; charset=utf-8', '');
+    return;
+  }
+
   if (req.method && !['GET', 'HEAD'].includes(req.method)) {
     res.setHeader('Allow', 'GET, HEAD');
     send(res, 405, 'text/plain; charset=utf-8', 'Method not allowed');
