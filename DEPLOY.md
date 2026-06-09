@@ -152,3 +152,19 @@ To activate it:
 ```
 
 Advertising personalization, Google signals, ad storage, and ad user data are disabled in the loader.
+
+## Soro RSS Blog
+
+The `/blog/` page reads OakDev's Soro RSS feed through the serverless proxy at:
+
+```text
+/api/soro-rss
+```
+
+The default feed URL is set in `api/soro-rss.js`. To override it per environment, set:
+
+```text
+SORO_RSS_FEED_URL=https://app.trysoro.com/api/rss/YOUR-FEED-ID
+```
+
+If the page says the feed is disabled, enable the RSS feed/public publishing inside Soro and redeploy if the feed URL changed.

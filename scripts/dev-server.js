@@ -4,6 +4,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const chatbotHandler = require('../api/chatbot');
+const soroRssHandler = require('../api/soro-rss');
 
 const root = path.resolve(__dirname, '..');
 const port = Number(process.env.PORT || 4173);
@@ -81,7 +82,7 @@ function readBody(req) {
   });
 }
 
-async function handleApi(req, res) {
+async function handleChatbotApi(req, res) {
   try {
     req.body = await readBody(req);
   } catch {
@@ -99,6 +100,10 @@ async function handleApi(req, res) {
   res.json = (payload) => sendJson(res, 200, payload);
 
   await chatbotHandler(req, res);
+}
+
+async function handleSoroRssApi(req, res) {
+  await soroRssHandler(req, res);
 }
 
 function serveStatic(req, res) {
@@ -133,7 +138,12 @@ loadEnv();
 
 const server = http.createServer((req, res) => {
   if (req.url.startsWith('/api/chatbot')) {
-    handleApi(req, res);
+    handleChatbotApi(req, res);
+    return;
+  }
+
+  if (req.url.startsWith('/api/soro-rss')) {
+    handleSoroRssApi(req, res);
     return;
   }
 
