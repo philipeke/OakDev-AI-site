@@ -2823,6 +2823,90 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+.soro-article {
+  padding: calc(var(--nav-h) + clamp(3rem, 7vw, 5.5rem)) 0 clamp(5rem, 9vw, 8rem);
+}
+
+.soro-article-inner {
+  max-width: 880px;
+}
+
+.soro-article h1 {
+  margin-top: 0.75rem;
+  font-size: clamp(2.7rem, 7vw, 5.7rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.soro-article-lead {
+  margin-top: 1.35rem;
+  color: var(--text-2);
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+}
+
+.soro-article-image {
+  width: 100%;
+  margin: clamp(2rem, 5vw, 3.5rem) 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+}
+
+.soro-article-content {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.06rem;
+  line-height: 1.85;
+}
+
+.soro-article-content p,
+.soro-article-content ul,
+.soro-article-content ol,
+.soro-article-content blockquote {
+  margin: 1.15rem 0;
+}
+
+.soro-article-content h2,
+.soro-article-content h3,
+.soro-article-content h4 {
+  margin: 2.4rem 0 1rem;
+  letter-spacing: 0;
+}
+
+.soro-article-content h2 {
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+}
+
+.soro-article-content h3 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.soro-article-content ul,
+.soro-article-content ol {
+  padding-left: 1.25rem;
+}
+
+.soro-article-content ul {
+  list-style: disc;
+}
+
+.soro-article-content ol {
+  list-style: decimal;
+}
+
+.soro-article-content a {
+  color: var(--green-bright);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.soro-article-content blockquote {
+  padding-left: 1.2rem;
+  border-left: 3px solid var(--green);
+  color: var(--text-2);
+}
+
 /* ── ANIMATIONS ──────────────────────────────────────────────── */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
