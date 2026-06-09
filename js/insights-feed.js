@@ -121,11 +121,11 @@
     const fragment = document.createDocumentFragment();
     posts.forEach((post) => {
       const article = document.createElement('article');
-      article.className = 'blog-card';
+      article.className = 'insights-card';
 
       if (post.image) {
         const media = document.createElement('a');
-        media.className = 'blog-card-media';
+        media.className = 'insights-card-media';
         media.href = post.link || '#';
         media.setAttribute('aria-label', post.title);
 
@@ -138,10 +138,10 @@
       }
 
       const body = document.createElement('div');
-      body.className = 'blog-card-body';
+      body.className = 'insights-card-body';
 
       const meta = document.createElement('p');
-      meta.className = 'blog-card-meta';
+      meta.className = 'insights-card-meta';
       meta.textContent = post.date && !Number.isNaN(post.date.valueOf())
         ? formatter.format(post.date)
         : 'OakDev';
@@ -156,14 +156,14 @@
 
       if (post.excerpt) {
         const excerpt = document.createElement('p');
-        excerpt.className = 'blog-card-excerpt';
+        excerpt.className = 'insights-card-excerpt';
         excerpt.textContent = post.excerpt;
         body.appendChild(excerpt);
       }
 
       if (post.link) {
         const readMore = document.createElement('a');
-        readMore.className = 'blog-card-link';
+        readMore.className = 'insights-card-link';
         readMore.href = post.link;
         readMore.textContent = 'Läs artikeln';
         body.appendChild(readMore);
