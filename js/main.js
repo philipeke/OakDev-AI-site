@@ -1205,6 +1205,7 @@ const PerformanceBudget = (() => {
   const lowCores = Number(navigator.hardwareConcurrency || 4) <= 4;
   const smallViewport = window.innerWidth < 768;
   const constrained = prefersReducedMotion || coarsePointer || lowMemory || lowCores || smallViewport;
+  const continuousMotionAllowed = !prefersReducedMotion && !coarsePointer && !smallViewport;
   const maxDpr = constrained ? 1.15 : 1.5;
   const canvasFps = prefersReducedMotion ? 24 : constrained ? 30 : 45;
 
@@ -1212,6 +1213,7 @@ const PerformanceBudget = (() => {
     prefersReducedMotion,
     coarsePointer,
     constrained,
+    continuousMotionAllowed,
     canvasFps,
     getDpr: () => Math.min(window.devicePixelRatio || 1, maxDpr),
   };
@@ -1226,6 +1228,13 @@ function rafDebounce(fn) {
       fn(...args);
     });
   };
+}
+
+function scheduleIdle(fn, timeout = 1800) {
+  if ('requestIdleCallback' in window) {
+    return window.requestIdleCallback(fn, { timeout });
+  }
+  return window.setTimeout(fn, timeout);
 }
 
 function initMotionBudget() {
@@ -1646,7 +1655,7 @@ class HeroScene {
    ============================================================ */
 function initLenis() {
   if (typeof Lenis === 'undefined') return null;
-  if (PerformanceBudget.prefersReducedMotion) return null;
+  if (!PerformanceBudget.continuousMotionAllowed) return null;
 
   const lenis = new Lenis({
     duration:   PerformanceBudget.constrained ? 0.85 : 1.05,
@@ -1703,6 +1712,7 @@ function initLenis() {
    ============================================================ */
 function initGSAP() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  if (!PerformanceBudget.continuousMotionAllowed) return;
 
   gsap.registerPlugin(ScrollTrigger);
   gsap.defaults({ force3D: true });
@@ -2036,10 +2046,76 @@ function initMarquee() {
 /* ============================================================
    CHATBOT WIDGET
    ============================================================ */
-function initChatbot() {
+const CHATBOT_STORAGE_KEY = 'oakdev_oakbot_state';
+
+function getStoredChatbotState() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(CHATBOT_STORAGE_KEY) || '{}');
+    return {
+      open: parsed.open === true,
+      minimized: parsed.minimized === true,
+    };
+  } catch {
+    return { open: false, minimized: false };
+  }
+}
+
+function ensureChatbotLaunchers() {
+  const getCopy = () => TRANSLATIONS[Lang.get()] || TRANSLATIONS.en;
+
+  function makeLauncher(className) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = className;
+    button.dataset.chatbotOpen = 'true';
+    button.dataset.i18n = 'nav_chatbot';
+    button.textContent = getCopy().nav_chatbot;
+    return button;
+  }
+
+  const navActions = document.querySelector('.nav-actions');
+  if (navActions && !navActions.querySelector('[data-chatbot-open]')) {
+    const launcher = makeLauncher('btn-chatbot-nav');
+    const bookButton = navActions.querySelector('.btn-book');
+    navActions.insertBefore(launcher, bookButton || navActions.firstChild);
+  }
+
+  document.querySelectorAll('.mobile-actions').forEach((actions) => {
+    if (actions.querySelector('[data-chatbot-open]')) return;
+    const launcher = makeLauncher('btn-chatbot-mobile');
+    const bookButton = actions.querySelector('.btn-book');
+    actions.insertBefore(launcher, bookButton || null);
+  });
+}
+
+function initChatbotLazy() {
+  ensureChatbotLaunchers();
+
+  const openOnDemand = (event) => {
+    event?.preventDefault();
+    initChatbot({ open: true });
+  };
+
+  document.querySelectorAll('[data-chatbot-open]').forEach((button) => {
+    button.addEventListener('click', openOnDemand, { once: true });
+  });
+
+  const storedState = getStoredChatbotState();
+  if (storedState.open || storedState.minimized) {
+    initChatbot();
+    return;
+  }
+
+  const idleDelay = PerformanceBudget.constrained ? 3600 : 1200;
+  window.setTimeout(() => {
+    scheduleIdle(() => initChatbot(), 1400);
+  }, idleDelay);
+}
+
+function initChatbot(options = {}) {
   if (document.getElementById('oakChatbot')) return;
 
-  const STORAGE_KEY = 'oakdev_oakbot_state';
+  const STORAGE_KEY = CHATBOT_STORAGE_KEY;
   const MAX_STORED_MESSAGES = 30;
   const getCopy = () => TRANSLATIONS[Lang.get()] || TRANSLATIONS.en;
   const defaultApiUrl = ['localhost', '127.0.0.1'].includes(window.location.hostname)
@@ -2113,29 +2189,7 @@ function initChatbot() {
     document.body.style.overflow = '';
   }
 
-  function makeLauncher(className) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = className;
-    button.dataset.chatbotOpen = 'true';
-    button.dataset.i18n = 'nav_chatbot';
-    button.textContent = getCopy().nav_chatbot;
-    return button;
-  }
-
-  const navActions = document.querySelector('.nav-actions');
-  if (navActions && !navActions.querySelector('[data-chatbot-open]')) {
-    const launcher = makeLauncher('btn-chatbot-nav');
-    const bookButton = navActions.querySelector('.btn-book');
-    navActions.insertBefore(launcher, bookButton || navActions.firstChild);
-  }
-
-  document.querySelectorAll('.mobile-actions').forEach((actions) => {
-    if (actions.querySelector('[data-chatbot-open]')) return;
-    const launcher = makeLauncher('btn-chatbot-mobile');
-    const bookButton = actions.querySelector('.btn-book');
-    actions.insertBefore(launcher, bookButton || null);
-  });
+  ensureChatbotLaunchers();
 
   const widget = document.createElement('section');
   widget.id = 'oakChatbot';
@@ -2767,7 +2821,9 @@ function initChatbot() {
 
   Lang.apply(Lang.get());
 
-  if (initialState.open) {
+  if (options.open) {
+    window.setTimeout(openChatbot, 0);
+  } else if (initialState.open) {
     window.setTimeout(openChatbot, 120);
   } else if (initialState.minimized) {
     widget.classList.add('minimized');
@@ -2801,8 +2857,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initContactForm();
   initMarquee();
-  initChatbot();
   initMotionBudget();
+  initChatbotLazy();
 
   // Three.js (non-blocking)
   if (typeof THREE !== 'undefined') {
