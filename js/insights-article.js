@@ -141,7 +141,7 @@
     if (dateNode) {
       dateNode.textContent = article.date && !Number.isNaN(article.date.valueOf())
         ? formatter.format(article.date)
-        : 'OakDev Insikter';
+        : 'OakDev Inspiration';
     }
     if (summaryNode) summaryNode.textContent = stripHtml(article.description);
 

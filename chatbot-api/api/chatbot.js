@@ -11,7 +11,7 @@ const SITE_CONTEXT = [
   'Typiska kundbehov: fa fler leads, svara snabbare pa kundfragor, minska admin, koppla ihop system, bygga MVP, modernisera webbplats, bygga mobilapp, automatisera offertuppfoljning, skapa intern kunskapsassistent.',
   'OakDev jobbar fran ide till lansering: upptackt, design/plan, bygge, launch, support och vidareutveckling.',
   'Kontaktmail: hello@oakdev.app.',
-  'Prisindikatorer fran sajten: AI Starter fran €2,900, AI Platform fran €8,900, App/MVP fran €4,900, Studio-app fran €12,900, Enterprise-app fran €28,900, IT-konsulting €105/tim och retainer €3,900/man. Hemsidor, chatbotar med kunskapsbas/integrationer och skraddarsydda projekt offereras efter scope.',
+  'Prisindikatorer fran sajten ar fran- och exempelpriser i SEK exkl moms: kostnadsfri AI-genomgang 20-30 min, AI-pilot fran 14 900 kr, leadflodesfix fran 6 900 kr, AI Starter fran 24 900 kr, AI Platform fran 59 000 kr, App/MVP fran 39 000 kr, Studio-app fran 89 000 kr, Enterprise-app fran 149 000 kr, IT-konsulting fran 1 100 kr/tim och retainer fran 29 000 kr/man. Hemsidor, chatbotar med kunskapsbas/integrationer och skraddarsydda projekt offereras efter scope.',
   'Viktiga sidor: [boka ett samtal](/boka-samtal-om-ai/#booking-form), [AI & Automation](/ai-automation/), [AI-chatbotar](/ai-chatbot-foretag/), [App Studio](/app-studio/), [IT-konsulting](/consulting/), [kontakt](/contact/), [webbplatser](/webbplats-foretag-uddevalla/), [mobilappar](/mobilapp-foretag-uddevalla/), [om OakDev](/about/).',
 ].join(' ');
 

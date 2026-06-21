@@ -14,7 +14,7 @@ const TRANSLATIONS = {
     nav_studio:      'App Studio',
     nav_ai:          'AI & Automation',
     nav_consulting:  'Consulting',
-    nav_insights:    'Insights',
+    nav_insights:    'Inspiration',
     nav_about:       'About',
     nav_contact:     'Contact',
     nav_book:        'Book a Call',
@@ -49,9 +49,9 @@ const TRANSLATIONS = {
     hero_offer1_title: 'Free AI review',
     hero_offer1_desc:  '20-30 min about one concrete workflow.',
     hero_offer2_title: 'AI pilot from SEK 14,900',
-    hero_offer2_desc:  'Quote follow-up, inbox triage, or internal admin.',
+    hero_offer2_desc:  'Example price excl. VAT: quotes, inbox, or admin.',
     hero_offer3_title: 'Lead-flow fix from SEK 6,900',
-    hero_offer3_desc:  'Website, forms, CTAs, and follow-up.',
+    hero_offer3_desc:  'Example price excl. VAT: website, forms, and follow-up.',
     scroll:          'Scroll',
     /* Services */
     services_tag:    'What We Build',
@@ -200,19 +200,22 @@ const TRANSLATIONS = {
     studio_cta_btn:       'Start a Project',
     /* Shared pricing */
     pkg_popular:          'Most Popular',
-    pkg_from:             'Starting from',
+    pkg_from:             'From',
     pkg_get_started:      'Start a Project',
     pkg_contact_us:       'Contact Us',
     /* App Studio pricing */
     app_pricing_tag:      'Pricing',
     app_pricing_title:    'App Development Packages',
-    app_pricing_desc:     'Transparent pricing for every project size. From first prototype to enterprise launch. All prices excl. VAT.',
+    app_pricing_desc:     'Starting and example prices in SEK, excl. VAT. We start with a focused first version and quote larger builds after a short review.',
     pkg_mvp_name:         'MVP',
     pkg_mvp_tagline:      'Validate your idea fast',
+    pkg_mvp_price:        'SEK 39,000',
     pkg_pro_name:         'Studio',
     pkg_pro_tagline:      'Full-featured production app',
+    pkg_pro_price:        'SEK 89,000',
     pkg_ent_name:         'Enterprise',
     pkg_ent_tagline:      'Complex systems at scale',
+    pkg_ent_price:        'SEK 149,000',
     /* AI & Automation page */
     ai_hero_badge:        'AI & Automation',
     ai_hero_title1:       'The Future of Business',
@@ -251,13 +254,17 @@ const TRANSLATIONS = {
     benefit6_desc:        'Every automated process frees your team for creative and strategic work — building a compounding productivity advantage over time.',
     ai_pricing_tag:       'Pricing',
     ai_pricing_title:     'AI & Automation Packages',
-    ai_pricing_desc:      'Clear pricing for intelligent systems. From first integration to full automation. All prices excl. VAT.',
+    ai_pricing_desc:      'Starting and example prices in SEK, excl. VAT. We keep the first scope tight so you can prove value before scaling.',
     pkg_ai1_name:         'AI Starter',
     pkg_ai1_tagline:      'Your first AI integration',
+    pkg_ai1_price:        'SEK 24,900',
     pkg_ai2_name:         'AI Platform',
     pkg_ai2_tagline:      'Full AI-powered system',
+    pkg_ai2_price:        'SEK 59,000',
     pkg_ai3_name:         'Enterprise AI',
     pkg_ai3_tagline:      'Complete automation transformation',
+    pkg_ai3_from:         'Scoped quote',
+    pkg_ai3_price:        'Let\'s talk',
     ai_process_tag:       'How We Work',
     ai_process_title:     'From Audit to Deployed Intelligence',
     ai_process_desc:      'A structured approach to building AI systems that actually work in production — and keep improving.',
@@ -332,7 +339,7 @@ const TRANSLATIONS = {
     cons_pricing_title:    'Consulting Packages',
     cons_pricing_sub:      'Flexible options — whether you need an hour of advice or a dedicated development team.',
     pkg_cons1_name:        'Hourly',
-    pkg_cons1_price:       '€105',
+    pkg_cons1_price:       'SEK 1,100',
     pkg_cons1_period:      '/h',
     pkg_cons1_desc:        'Perfect for targeted advice, code reviews, or quick fixes.',
     pkg_cons1_f1:          'Senior IT-expert on demand',
@@ -341,17 +348,17 @@ const TRANSLATIONS = {
     pkg_cons1_f4:          'No minimum commitment',
     pkg_cons1_cta:         'Book an Hour',
     pkg_cons2_name:        'Retainer',
-    pkg_cons2_price:       '€3,900',
+    pkg_cons2_price:       'SEK 29,000',
     pkg_cons2_period:      '/mo',
     pkg_cons2_desc:        'Ongoing IT support and strategic advisory every month.',
-    pkg_cons2_f1:          '40 hrs/mo dedicated time',
+    pkg_cons2_f1:          '20-30 hrs/mo dedicated time',
     pkg_cons2_f2:          'Priority response (< 4 hrs)',
     pkg_cons2_f3:          'Monthly strategy session',
     pkg_cons2_f4:          'Full-stack capability',
     pkg_cons2_f5:          'Flexible scope each month',
     pkg_cons2_cta:         'Start Retainer',
     pkg_cons3_name:        'Project',
-    pkg_cons3_price:       'Custom',
+    pkg_cons3_price:       'Scoped quote',
     pkg_cons3_period:      '',
     pkg_cons3_desc:        'End-to-end project delivery with fixed scope, timeline, and price.',
     pkg_cons3_f1:          'Fixed-price contract',
@@ -483,7 +490,7 @@ const TRANSLATIONS = {
     nav_studio:      'App-Studio',
     nav_ai:          'AI & Automation',
     nav_consulting:  'Konsult',
-    nav_insights:    'Insikter',
+    nav_insights:    'Inspiration',
     nav_about:       'Om oss',
     nav_contact:     'Kontakt',
     nav_book:        'Boka samtal',
@@ -518,9 +525,9 @@ const TRANSLATIONS = {
     hero_offer1_title: 'Kostnadsfri AI-genomgång',
     hero_offer1_desc:  '20-30 min om ett konkret arbetsflöde.',
     hero_offer2_title: 'AI-pilot från 14 900 kr',
-    hero_offer2_desc:  'Offertuppföljning, inkorg eller intern admin.',
+    hero_offer2_desc:  'Exempelpris exkl. moms: offert, inkorg eller admin.',
     hero_offer3_title: 'Leadflödesfix från 6 900 kr',
-    hero_offer3_desc:  'Webb, formulär, CTA och uppföljning.',
+    hero_offer3_desc:  'Exempelpris exkl. moms: webb, formulär och uppföljning.',
     scroll:          'Scrolla',
     /* Services */
     services_tag:    'Vad vi bygger',
@@ -675,13 +682,16 @@ const TRANSLATIONS = {
     /* App Studio pricing */
     app_pricing_tag:      'Priser',
     app_pricing_title:    'App-utvecklingspaket',
-    app_pricing_desc:     'Transparent prissättning för alla projektstorlekar. Från första prototyp till företagslansering. Alla priser exkl. moms.',
+    app_pricing_desc:     'Från- och exempelpriser i SEK exkl. moms. Vi börjar gärna med en fokuserad första version och offererar större byggen efter en kort genomgång.',
     pkg_mvp_name:         'MVP',
     pkg_mvp_tagline:      'Validera din idé snabbt',
+    pkg_mvp_price:        '39 000 kr',
     pkg_pro_name:         'Studio',
     pkg_pro_tagline:      'Fullfunktionell produktionsapp',
+    pkg_pro_price:        '89 000 kr',
     pkg_ent_name:         'Enterprise',
     pkg_ent_tagline:      'Komplexa system i stor skala',
+    pkg_ent_price:        '149 000 kr',
     /* AI & Automation page */
     ai_hero_badge:        'AI & Automation',
     ai_hero_title1:       'Företagens framtid',
@@ -720,13 +730,17 @@ const TRANSLATIONS = {
     benefit6_desc:        'Varje automatiserad process frigör ditt team för kreativt och strategiskt arbete och bygger upp en sammansatt produktivitetsfördel över tid.',
     ai_pricing_tag:       'Priser',
     ai_pricing_title:     'AI & Automationspaket',
-    ai_pricing_desc:      'Tydliga priser för intelligenta system. Från första integrationen till fullständig automation. Alla priser exkl. moms.',
+    ai_pricing_desc:      'Från- och exempelpriser i SEK exkl. moms. Vi håller första scopet tajt så ni kan bevisa värdet innan ni skalar.',
     pkg_ai1_name:         'AI Starter',
     pkg_ai1_tagline:      'Din första AI-integration',
+    pkg_ai1_price:        '24 900 kr',
     pkg_ai2_name:         'AI Platform',
     pkg_ai2_tagline:      'Fullt AI-drivet system',
+    pkg_ai2_price:        '59 000 kr',
     pkg_ai3_name:         'Enterprise AI',
     pkg_ai3_tagline:      'Fullständig automationstransformation',
+    pkg_ai3_from:         'Offert efter scope',
+    pkg_ai3_price:        'Vi pratar först',
     ai_process_tag:       'Hur vi arbetar',
     ai_process_title:     'Från analys till driftsatt intelligens',
     ai_process_desc:      'Ett strukturerat tillvägagångssätt för att bygga AI-system som faktiskt fungerar i produktion och fortsätter att förbättras.',
@@ -801,7 +815,7 @@ const TRANSLATIONS = {
     cons_pricing_title:    'Konsultpaket',
     cons_pricing_sub:      'Flexibla alternativ — oavsett om du behöver en timmes råd eller ett dedikerat utvecklar-team.',
     pkg_cons1_name:        'Timvis',
-    pkg_cons1_price:       '€105',
+    pkg_cons1_price:       '1 100 kr',
     pkg_cons1_period:      '/tim',
     pkg_cons1_desc:        'Perfekt för riktad rådgivning, kodgranskning eller snabba åtgärder.',
     pkg_cons1_f1:          'Senior IT-expertis on demand',
@@ -810,17 +824,17 @@ const TRANSLATIONS = {
     pkg_cons1_f4:          'Inget minimiåtagande',
     pkg_cons1_cta:         'Boka en Timme',
     pkg_cons2_name:        'Retainer',
-    pkg_cons2_price:       '€3 900',
+    pkg_cons2_price:       '29 000 kr',
     pkg_cons2_period:      '/mån',
     pkg_cons2_desc:        'Löpande IT-stöd och strategisk rådgivning varje månad.',
-    pkg_cons2_f1:          '40 tim/mån dedikerad tid',
+    pkg_cons2_f1:          '20-30 tim/mån dedikerad tid',
     pkg_cons2_f2:          'Prioriterad respons (< 4 tim)',
     pkg_cons2_f3:          'Månatlig strategisession',
     pkg_cons2_f4:          'Full-stack kapacitet',
     pkg_cons2_f5:          'Flexibelt scope varje månad',
     pkg_cons2_cta:         'Starta Retainer',
     pkg_cons3_name:        'Projekt',
-    pkg_cons3_price:       'Custom',
+    pkg_cons3_price:       'Offert',
     pkg_cons3_period:      '',
     pkg_cons3_desc:        'Helhetsleverans av projekt med fast scope, tidslinje och pris.',
     pkg_cons3_f1:          'Fast pris-kontrakt',
@@ -958,8 +972,35 @@ const Lang = (() => {
   function detect() {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored && SUPPORTED.includes(stored)) return stored;
-    const browser = (navigator.language || 'en').split('-')[0];
-    return SUPPORTED.includes(browser) ? browser : 'en';
+
+    // Visitors in Sweden default to Swedish, even with an English browser/OS.
+    if (inSweden()) return 'sv';
+
+    // Otherwise honour the browser/OS language preferences in order.
+    const prefs = navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || 'en'];
+    for (const pref of prefs) {
+      const code = String(pref).toLowerCase().split('-')[0];
+      if (SUPPORTED.includes(code)) return code;
+    }
+    return 'en';
+  }
+
+  // Heuristic: detect Swedish visitors without an IP lookup. Matches a
+  // Swedish timezone, region, or any Swedish entry in the language list.
+  function inSweden() {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      if (tz === 'Europe/Stockholm') return true;
+    } catch (e) { /* Intl unavailable */ }
+    const langs = navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || ''];
+    return langs.some((l) => {
+      const v = String(l).toLowerCase();
+      return v === 'sv' || v.startsWith('sv-') || v.endsWith('-se');
+    });
   }
 
   function apply(lang) {
@@ -990,6 +1031,13 @@ const Lang = (() => {
       const key = el.dataset.i18nLabel;
       const val = TRANSLATIONS[lang][key];
       if (val !== undefined) el.textContent = val;
+    });
+
+    // Translate input/textarea placeholders marked with data-i18n-placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.dataset.i18nPlaceholder;
+      const val = TRANSLATIONS[lang][key];
+      if (val !== undefined) el.setAttribute('placeholder', val);
     });
 
     // Update lang buttons
@@ -2014,7 +2062,7 @@ function initContactForm() {
           throw new Error(data.message || 'Server error');
         }
 
-        showStatus('success', getText('form_success'));
+        showStatus('success', getText('form_success'), true);
         form.reset();
         Analytics.track('generate_lead', { method: form.id || 'lead_form' });
       } catch {
@@ -2401,18 +2449,18 @@ function initChatbot(options = {}) {
       }
       if (asksPrice) {
         if (asksWebsite && asksChatbot) {
-          return 'Bra fråga. För AI-chatbotar listar OakDev paket som AI Starter från €2,900 och AI Platform från €8,900; priset beror mest på kunskapsbas, integrationer, testning och om den ska fånga leads eller kopplas till system. För hemsidor/webbprojekt är det mer scope-styrt: enklare webb/landningssida offereras efter innehåll och design, medan större app-/webbprojekt på sajten börjar från €4,900 respektive €12,900. För att ge ett vettigt spann: hur många sidor behöver hemsidan och ska chatboten bara svara på FAQ eller kopplas till dokument/CRM?';
+          return 'Bra fråga. För AI-chatbotar och automation listar OakDev en AI-pilot från 14 900 kr, AI Starter från 24 900 kr och AI Platform från 59 000 kr exkl. moms; priset beror mest på kunskapsbas, integrationer, testning och om den ska fånga leads eller kopplas till system. För hemsidor/webbprojekt är det mer scope-styrt: enklare webb/landningssida offereras efter innehåll och design, medan app-/webbprojekt har riktmärken från 39 000 kr för MVP och 89 000 kr för Studio. Hur många sidor behöver hemsidan och ska chatboten bara svara på FAQ eller kopplas till dokument/CRM?';
         }
         if (asksChatbot || asksAutomation) {
-          return 'För AI-lösningar listar OakDev AI Starter från €2,900 och AI Platform från €8,900. En enklare chatbot/prototyp ligger närmare starter-nivån, medan en skarp chatbot med kunskapsbas, integrationer, leadflöden och testning ofta behöver mer scope. Ska den bara svara på vanliga frågor, eller ska den kopplas till dokument, CRM eller bokningar?';
+          return 'För AI-lösningar listar OakDev AI-pilot från 14 900 kr, AI Starter från 24 900 kr och AI Platform från 59 000 kr exkl. moms. En enklare chatbot/prototyp ligger närmare pilot- eller starter-nivån, medan en skarp chatbot med kunskapsbas, integrationer, leadflöden och testning behöver mer scope. Ska den bara svara på vanliga frågor, eller ska den kopplas till dokument, CRM eller bokningar?';
         }
         if (asksWebsite) {
-          return 'En hemsida prissätts efter scope: antal sidor, designnivå, texter, SEO, formulär och eventuella integrationer. En enklare landningssida kan scope:as smalare, medan större webb-/app-projekt på sajten börjar från €4,900 och Studio-nivån från €12,900. Hur många sidor tänker du dig och finns text/bilder redan?';
+          return 'En hemsida prissätts efter scope: antal sidor, designnivå, texter, SEO, formulär och eventuella integrationer. En enklare landningssida kan scope:as smalare, medan större webb-/app-projekt har riktmärken från 39 000 kr för MVP och 89 000 kr för Studio exkl. moms. Hur många sidor tänker du dig och finns text/bilder redan?';
         }
         if (asksApp) {
-          return 'För appar/webbappar listar OakDev MVP från €4,900, Studio från €12,900 och Enterprise från €28,900. Skillnaden handlar främst om funktioner, designdjup, backend, integrationer och lanseringskrav. Vad ska första versionen kunna göra?';
+          return 'För appar/webbappar listar OakDev MVP från 39 000 kr, Studio från 89 000 kr och Enterprise från 149 000 kr exkl. moms. Skillnaden handlar främst om funktioner, designdjup, backend, integrationer och lanseringskrav. Vad ska första versionen kunna göra?';
         }
-        return 'Pris beror på omfattning, integrationer och hur mycket som ska designas eller automatiseras. Som riktmärken listar OakDev AI Starter från €2,900, AI Platform från €8,900 och app-/MVP-projekt från €4,900. Skriv gärna vad du vill bygga, ungefärlig budget och om det ska kopplas till några system.';
+        return 'Pris beror på omfattning, integrationer och hur mycket som ska designas eller automatiseras. Som från- och exempelpriser listar OakDev AI-pilot från 14 900 kr, AI Starter från 24 900 kr, AI Platform från 59 000 kr och app-/MVP-projekt från 39 000 kr exkl. moms. Skriv gärna vad du vill bygga, ungefärlig budget och om det ska kopplas till några system.';
       }
       if (includesAny(text, ['chatbot', 'chattbot', 'kundservice', 'support', 'faq'])) {
         return 'Absolut. OakDev kan bygga AI-chatbotar som svarar på kundfrågor, fångar leads och kopplas till era dokument eller system. Börja gärna med sidan [AI-chatbotar](/ai-chatbot-foretag/) eller [boka ett samtal](/boka-samtal-om-ai/#booking-form) om du vill skissa på en konkret lösning.';
@@ -2452,18 +2500,18 @@ function initChatbot(options = {}) {
     }
     if (asksPrice) {
       if (asksWebsite && asksChatbot) {
-        return 'Good question. For AI chatbots, OakDev lists AI Starter from €2,900 and AI Platform from €8,900; the price depends on knowledge base, integrations, testing, lead capture, and system connections. For websites, pricing depends more on scope: number of pages, design, copy, SEO, forms, and integrations; larger app/web projects on the site start from €4,900 and €12,900. How many pages do you need, and should the chatbot only answer FAQs or connect to documents/CRM?';
+        return 'Good question. For AI chatbots and automation, OakDev lists an AI pilot from SEK 14,900, AI Starter from SEK 24,900, and AI Platform from SEK 59,000 excl. VAT; the price depends on knowledge base, integrations, testing, lead capture, and system connections. For websites, pricing depends more on scope, while app/web projects use guide prices from SEK 39,000 for MVP and SEK 89,000 for Studio. How many pages do you need, and should the chatbot only answer FAQs or connect to documents/CRM?';
       }
       if (asksChatbot || asksAutomation) {
-        return 'For AI work, OakDev lists AI Starter from €2,900 and AI Platform from €8,900. A simple chatbot/prototype is closer to starter scope, while a production chatbot with a knowledge base, integrations, lead flows, and testing needs more scoping. Should it only answer FAQs, or connect to documents, CRM, or bookings?';
+        return 'For AI work, OakDev lists an AI pilot from SEK 14,900, AI Starter from SEK 24,900, and AI Platform from SEK 59,000 excl. VAT. A simple chatbot/prototype is closer to pilot or starter scope, while a production chatbot with a knowledge base, integrations, lead flows, and testing needs more scoping. Should it only answer FAQs, or connect to documents, CRM, or bookings?';
       }
       if (asksWebsite) {
-        return 'Website pricing depends on scope: number of pages, design level, copy, SEO, forms, and integrations. A small landing page can be scoped tighter, while larger app/web projects on the site start from €4,900 and Studio-level projects from €12,900. How many pages do you have in mind?';
+        return 'Website pricing depends on scope: number of pages, design level, copy, SEO, forms, and integrations. A small landing page can be scoped tighter, while larger app/web projects use guide prices from SEK 39,000 for MVP and SEK 89,000 for Studio excl. VAT. How many pages do you have in mind?';
       }
       if (asksApp) {
-        return 'For apps and web apps, OakDev lists MVP from €4,900, Studio from €12,900, and Enterprise from €28,900. The difference is mainly features, design depth, backend, integrations, and launch requirements. What should version one be able to do?';
+        return 'For apps and web apps, OakDev lists MVP from SEK 39,000, Studio from SEK 89,000, and Enterprise from SEK 149,000 excl. VAT. The difference is mainly features, design depth, backend, integrations, and launch requirements. What should version one be able to do?';
       }
-      return 'Pricing depends on scope, integrations, design depth, and automation complexity. As guideposts, OakDev lists AI Starter from €2,900, AI Platform from €8,900, and app/MVP projects from €4,900. Share what you want to build, rough budget, and any systems it should connect to.';
+      return 'Pricing depends on scope, integrations, design depth, and automation complexity. As starting/example prices, OakDev lists an AI pilot from SEK 14,900, AI Starter from SEK 24,900, AI Platform from SEK 59,000, and app/MVP projects from SEK 39,000 excl. VAT. Share what you want to build, rough budget, and any systems it should connect to.';
     }
     if (includesAny(text, ['chatbot', 'support', 'customer service', 'faq'])) {
       return 'Absolutely. OakDev can build AI chatbots that answer customer questions, capture leads, and connect to your documents or internal systems. Start with [AI chatbots](/ai-chatbot-foretag/) or [book a call](/boka-samtal-om-ai/#booking-form) to shape a concrete solution.';

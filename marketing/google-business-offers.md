@@ -71,16 +71,17 @@ https://oakdev.app/ai-automation-smaforetag-uddevalla/?utm_source=google&utm_med
 
 Nuvarande publika priser på webbplatsen:
 
-- AI Starter: från €2,900 exkl. moms.
-- AI Platform: från €8,900 exkl. moms.
-- App MVP: från €4,900 exkl. moms.
-- App Studio: från €12,900 exkl. moms.
-- Consulting: €105/tim eller €3,900/mån exkl. moms.
+- AI Starter: från 24 900 kr exkl. moms.
+- AI Platform: från 59 000 kr exkl. moms.
+- App MVP: från 39 000 kr exkl. moms.
+- App Studio: från 89 000 kr exkl. moms.
+- App Enterprise: från 149 000 kr exkl. moms.
+- Consulting: från 1 100 kr/tim eller 29 000 kr/mån exkl. moms.
 
 Positionering:
 
 - Google Business Profile: lyft **AI-pilot från 14 900 kr exkl. moms** som första tydliga insteg.
-- Full första integration: behåll **AI Starter från €2,900** på webbplatsen.
+- Full första integration: använd **AI Starter från 24 900 kr** på webbplatsen.
 - Konsulting: använd tim- eller månadspris när kunden vill ha rådgivning före implementation.
 
 Det gör att Google-inlägget leder mot ett betalt nästa steg, samtidigt som webbens paket fortfarande känns premium och produktionsnära.
