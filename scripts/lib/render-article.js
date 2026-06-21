@@ -1,23 +1,16 @@
 'use strict';
 
 /**
- * Live article renderer for Soro-published content.
+ * Shared article rendering for Soro-published content.
  *
- * Soro publishes articles to an RSS feed and links each one to a root-level
- * slug on oakdev.app (e.g. https://oakdev.app/webbapp-eller-mobilapp). Those
- * pages do not exist as static files, so without this handler every article
- * except the few that happen to match a real folder returns 404.
- *
- * A `vercel.json` rewrite sends any single-segment path that does NOT match a
- * static file or folder to this function. We fetch the feed, find the matching
- * item by its link path, sanitise the HTML and server-render a fully branded,
- * crawlable article page. New Soro articles therefore work instantly with no
- * rebuild.
+ * oakdev.app is hosted on GitHub Pages (static files only), so article pages
+ * must be pre-rendered into the repo. This module parses the Soro RSS feed and
+ * produces a fully branded, SEO-ready HTML page for each item. It is consumed
+ * by scripts/generate-articles.js (run locally and from a GitHub Action).
  */
 
-const DEFAULT_FEED_URL = 'https://app.trysoro.com/api/rss/9cda6f8a-4639-4ec2-a1ac-34323e1590c8';
 const SITE_ORIGIN = 'https://oakdev.app';
-const FEED_ENDPOINT = 'https://gf365.vercel.app/api/insights-feed';
+const FEED_URL = 'https://app.trysoro.com/api/rss/9cda6f8a-4639-4ec2-a1ac-34323e1590c8';
 
 /* ----------------------------- tiny helpers ----------------------------- */
 
@@ -28,10 +21,6 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
-}
-
-function escapeAttr(value) {
-  return escapeHtml(value);
 }
 
 function decodeEntities(value) {
@@ -62,13 +51,20 @@ function pickAttrUrl(block, name) {
   return m ? m[1] : '';
 }
 
-function normalizePath(value) {
+function pathFromLink(value) {
   try {
     const url = new URL(value, SITE_ORIGIN);
     return (url.pathname.replace(/\/+$/, '') || '/').toLowerCase();
   } catch {
     return '';
   }
+}
+
+function slugFromLink(value) {
+  const p = pathFromLink(value);
+  if (!p || p === '/') return '';
+  const slug = p.replace(/^\/+|\/+$/g, '');
+  return slug.includes('/') ? '' : slug; // single-segment root slugs only
 }
 
 function isHttpUrl(value) {
@@ -89,31 +85,26 @@ const ALLOWED_TAGS = new Set([
 
 function sanitizeHtml(html) {
   let out = String(html || '');
-
-  // Drop dangerous blocks and comments outright.
   out = out.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
   out = out.replace(/<!--[\s\S]*?-->/g, '');
+  out = out.replace(/<(\/?)h1\b/gi, '<$1h2'); // keep a single h1 on the page
 
-  // Normalise headings: demote h1 to h2 so the page keeps a single h1.
-  out = out.replace(/<(\/?)h1\b/gi, '<$1h2');
-
-  // Walk every tag; keep allow-listed tags (stripped of attributes), drop the
-  // rest while preserving their inner text.
-  out = out.replace(/<(\/?)([a-zA-Z0-9]+)([^>]*?)(\/?)>/g, (match, slash, rawName, attrs, selfClose) => {
+  out = out.replace(/<(\/?)([a-zA-Z0-9]+)([^>]*?)(\/?)>/g, (match, slash, rawName, attrs) => {
     const name = rawName.toLowerCase();
     if (!ALLOWED_TAGS.has(name)) return '';
-
     if (slash) return `</${name}>`;
 
     if (name === 'a') {
       const hrefMatch = attrs.match(/\bhref\s*=\s*"([^"]*)"/i) || attrs.match(/\bhref\s*=\s*'([^']*)'/i);
       const href = hrefMatch ? hrefMatch[1].trim() : '';
-      if (href && isHttpUrl(new URL(href, SITE_ORIGIN).toString())) {
+      if (href) {
         const abs = new URL(href, SITE_ORIGIN).toString();
-        const external = !abs.startsWith(SITE_ORIGIN);
-        return external
-          ? `<a href="${escapeAttr(abs)}" target="_blank" rel="noopener noreferrer">`
-          : `<a href="${escapeAttr(abs)}">`;
+        if (isHttpUrl(abs)) {
+          const external = !abs.startsWith(SITE_ORIGIN);
+          return external
+            ? `<a href="${escapeHtml(abs)}" target="_blank" rel="noopener noreferrer">`
+            : `<a href="${escapeHtml(abs)}">`;
+        }
       }
       return '<a>';
     }
@@ -134,10 +125,13 @@ function parseItems(xml) {
   while ((m = re.exec(xml))) {
     const block = m[1];
     const link = decodeEntities(pickTag(block, 'link'));
+    const slug = slugFromLink(link);
+    if (!slug) continue;
     items.push({
       title: decodeEntities(pickTag(block, 'title')) || 'OakDev artikel',
       link,
-      path: normalizePath(link),
+      slug,
+      path: `/${slug}`,
       description: decodeEntities(pickTag(block, 'description')),
       pubDate: pickTag(block, 'pubDate'),
       contentHtml: pickTag(block, 'content:encoded') || pickTag(block, 'description'),
@@ -158,10 +152,9 @@ function formatDate(pubDate) {
   }
 }
 
-/* ------------------------------- rendering ------------------------------- */
+/* ------------------------------ page markup ------------------------------ */
 
-function navMarkup() {
-  return `
+const NAV = `
   <header id="navbar" class="navbar" role="banner">
     <div class="nav-inner">
       <a href="/" class="nav-logo" aria-label="OakDev home">
@@ -208,10 +201,8 @@ function navMarkup() {
       </div>
     </div>
   </header>`;
-}
 
-function footerMarkup() {
-  return `
+const FOOTER = `
   <footer class="footer" role="contentinfo">
     <div class="footer-bottom">
       <div class="container">
@@ -230,11 +221,34 @@ function footerMarkup() {
       </div>
     </div>
   </footer>`;
-}
 
-function headMarkup({ title, description, canonical, image, jsonLd }) {
-  const safeTitle = escapeHtml(title);
-  const safeDesc = escapeAttr(description);
+function renderArticlePage(article) {
+  const canonical = `${SITE_ORIGIN}/${article.slug}`;
+  const safeTitle = escapeHtml(article.title);
+  const safeDesc = escapeHtml(article.description);
+  const dateLabel = formatDate(article.pubDate) || 'OakDev Inspiration';
+  const content = sanitizeHtml(article.contentHtml);
+  const image = article.image || `${SITE_ORIGIN}/assets/oakdev-tree-social.jpg`;
+  const imageTag = article.image
+    ? `<img class="insights-article-image" src="${escapeHtml(article.image)}" alt="" loading="eager" />`
+    : '';
+
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    image,
+    datePublished: article.pubDate ? new Date(article.pubDate).toISOString() : undefined,
+    mainEntityOfPage: canonical,
+    author: { '@type': 'Organization', name: 'OakDev & AI AB' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'OakDev & AI AB',
+      logo: { '@type': 'ImageObject', url: `${SITE_ORIGIN}/assets/oakdev-ai-high-resolution-logo-transparent.png` },
+    },
+  });
+
   return `<!DOCTYPE html>
 <html lang="sv" data-theme="dark">
 <head>
@@ -248,19 +262,19 @@ function headMarkup({ title, description, canonical, image, jsonLd }) {
   <meta name="description" content="${safeDesc}" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="author" content="OakDev &amp; AI AB" />
-  <link rel="canonical" href="${escapeAttr(canonical)}" />
-  <link rel="alternate" hreflang="sv-SE" href="${escapeAttr(canonical)}" />
-  <link rel="alternate" hreflang="x-default" href="${escapeAttr(canonical)}" />
+  <link rel="canonical" href="${escapeHtml(canonical)}" />
+  <link rel="alternate" hreflang="sv-SE" href="${escapeHtml(canonical)}" />
+  <link rel="alternate" hreflang="x-default" href="${escapeHtml(canonical)}" />
 
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="${escapeAttr(canonical)}" />
+  <meta property="og:url" content="${escapeHtml(canonical)}" />
   <meta property="og:title" content="${safeTitle}" />
   <meta property="og:description" content="${safeDesc}" />
-  <meta property="og:image" content="${escapeAttr(image || SITE_ORIGIN + '/assets/oakdev-tree-social.jpg')}" />
+  <meta property="og:image" content="${escapeHtml(image)}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${safeTitle}" />
   <meta name="twitter:description" content="${safeDesc}" />
-  <meta name="twitter:image" content="${escapeAttr(image || SITE_ORIGIN + '/assets/oakdev-tree-social.jpg')}" />
+  <meta name="twitter:image" content="${escapeHtml(image)}" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -272,141 +286,30 @@ function headMarkup({ title, description, canonical, image, jsonLd }) {
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/oakdev-tree-favicon-192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/oakdev-tree-apple-touch.png" />
   <link rel="stylesheet" href="/css/styles.css?v=2026-06" />
-  ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}
-</head>`;
-}
+  <script type="application/ld+json">${jsonLd}</script>
+</head>
 
-function renderArticlePage(article) {
-  const canonical = `${SITE_ORIGIN}${article.path}`;
-  const dateLabel = formatDate(article.pubDate) || 'OakDev Inspiration';
-  const content = sanitizeHtml(article.contentHtml);
-  const imageTag = article.image
-    ? `<img class="insights-article-image" src="${escapeAttr(article.image)}" alt="" loading="eager" />`
-    : '';
-
-  const jsonLd = JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.description,
-    image: article.image || `${SITE_ORIGIN}/assets/oakdev-tree-social.jpg`,
-    datePublished: article.pubDate ? new Date(article.pubDate).toISOString() : undefined,
-    mainEntityOfPage: canonical,
-    author: { '@type': 'Organization', name: 'OakDev & AI AB' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'OakDev & AI AB',
-      logo: { '@type': 'ImageObject', url: `${SITE_ORIGIN}/assets/oakdev-ai-high-resolution-logo-transparent.png` },
-    },
-  });
-
-  return `${headMarkup({ title: article.title, description: article.description, canonical, image: article.image, jsonLd })}
 <body class="insights-page">
   <div class="noise-overlay" aria-hidden="true"></div>
-${navMarkup()}
+${NAV}
   <main id="main">
     <article class="insights-article">
       <div class="container insights-article-inner">
         <a href="/insikter/" class="insights-card-link">&larr; Tillbaka till Inspiration</a>
         <p class="insights-card-meta">${escapeHtml(dateLabel)}</p>
-        <h1>${escapeHtml(article.title)}</h1>
-        <p class="insights-article-lead">${escapeHtml(article.description)}</p>
+        <h1>${safeTitle}</h1>
+        <p class="insights-article-lead">${safeDesc}</p>
         ${imageTag}
         <div class="insights-article-content">${content}</div>
         <a href="/boka-samtal-om-ai/" class="btn-primary insights-article-cta">Boka en kostnadsfri AI-genomgång</a>
       </div>
     </article>
   </main>
-${footerMarkup()}
+${FOOTER}
   <script src="/js/main.js?v=i18n-se-2026-06" defer></script>
 </body>
-</html>`;
+</html>
+`;
 }
 
-function renderNotFoundPage(slug) {
-  return `${headMarkup({
-    title: 'Artikeln hittades inte',
-    description: 'Den här artikeln kunde inte hittas. Utforska våra senaste artiklar och guider.',
-    canonical: `${SITE_ORIGIN}/${encodeURIComponent(slug)}`,
-    image: '',
-    jsonLd: '',
-  })}
-<body class="insights-page">
-  <div class="noise-overlay" aria-hidden="true"></div>
-${navMarkup()}
-  <main id="main">
-    <article class="insights-article">
-      <div class="container insights-article-inner" style="text-align:center;">
-        <p class="insights-card-meta">404</p>
-        <h1>Artikeln hittades inte</h1>
-        <p class="insights-article-lead">Sidan du letar efter finns inte längre eller har flyttats. Utforska våra senaste artiklar istället.</p>
-        <a href="/insikter/" class="btn-primary">Till Inspiration</a>
-      </div>
-    </article>
-  </main>
-${footerMarkup()}
-  <script src="/js/main.js?v=i18n-se-2026-06" defer></script>
-</body>
-</html>`;
-}
-
-/* -------------------------------- handler -------------------------------- */
-
-function resolveSlug(req) {
-  if (req.query && typeof req.query.slug === 'string' && req.query.slug) {
-    return req.query.slug;
-  }
-  try {
-    const url = new URL(req.url, SITE_ORIGIN);
-    const qsSlug = url.searchParams.get('slug');
-    if (qsSlug) return qsSlug;
-    return url.pathname.replace(/^\/+|\/+$/g, '');
-  } catch {
-    return '';
-  }
-}
-
-module.exports = async function articleHandler(req, res) {
-  if (req.method && !['GET', 'HEAD'].includes(req.method)) {
-    res.statusCode = 405;
-    res.setHeader('Allow', 'GET, HEAD');
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    res.end('Method not allowed');
-    return;
-  }
-
-  const slug = (resolveSlug(req) || '').toLowerCase();
-  const wantPath = `/${slug}`.replace(/\/+$/, '') || '/';
-  const feedUrl = process.env.CONTENT_FEED_URL || process.env.SORO_RSS_FEED_URL || DEFAULT_FEED_URL;
-
-  let html;
-  let statusCode = 200;
-
-  try {
-    const response = await fetch(feedUrl, {
-      headers: {
-        Accept: 'application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8',
-        'User-Agent': 'OakDev-Content-Feed/1.0 (+https://oakdev.app/insikter/)',
-      },
-      redirect: 'follow',
-    });
-    const xml = await response.text();
-    const items = parseItems(xml);
-    const article = items.find((item) => item.path === wantPath);
-
-    if (article) {
-      html = renderArticlePage(article);
-    } else {
-      statusCode = 404;
-      html = renderNotFoundPage(slug);
-    }
-  } catch (error) {
-    statusCode = 503;
-    html = renderNotFoundPage(slug);
-  }
-
-  res.statusCode = statusCode;
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=3600');
-  res.end(req.method === 'HEAD' ? '' : html);
-};
+module.exports = { SITE_ORIGIN, FEED_URL, parseItems, renderArticlePage, slugFromLink };
