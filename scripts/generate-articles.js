@@ -36,9 +36,12 @@ function readManifest() {
 }
 
 function writeManifest(slugs) {
+  // Deterministic content (no timestamp) so an unchanged feed produces no diff
+  // and therefore no commit — the scheduled run stays quiet unless something
+  // actually changed.
   fs.writeFileSync(
     MANIFEST_PATH,
-    JSON.stringify({ updated: new Date().toISOString(), slugs: slugs.slice().sort() }, null, 2) + '\n',
+    JSON.stringify({ slugs: slugs.slice().sort() }, null, 2) + '\n',
   );
 }
 
