@@ -104,6 +104,12 @@
   </url>
   <!-- BEGIN soro-articles (auto-generated) -->
   <url>
+    <loc>https://oakdev.app/api-integration-for-foretag-som-skalar</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://oakdev.app/fran-ide-till-app-lansering</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
