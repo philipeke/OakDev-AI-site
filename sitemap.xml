@@ -104,6 +104,12 @@
   </url>
   <!-- BEGIN soro-articles (auto-generated) -->
   <url>
+    <loc>https://oakdev.app/vad-kostar-att-bygga-app</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://oakdev.app/arkitektur-for-skalbara-saas</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
