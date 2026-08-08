@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "node scripts/dev-server.js",
+    "qa:mobile": "node scripts/check-mobile-overflow.js",
     "smoke:chatbot": "node scripts/smoke-chatbot.js",
     "generate:articles": "node scripts/generate-articles.js"
   },

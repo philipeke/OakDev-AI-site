@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css?v=2026-06">
+  <link rel="stylesheet" href="../css/styles.css?v=2026-08-mobile">
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/oakdev-tree-favicon-48.png" />
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/oakdev-tree-favicon-96.png" />
@@ -645,6 +645,8 @@
       cursor: grab;
       user-select: none;
       touch-action: pan-y;
+      overflow: hidden;
+      overflow: clip;
     }
 
     .client-marquee-wrap.is-dragging {
@@ -814,6 +816,17 @@
       background: #8fd600;
       box-shadow: 0 0 50px rgba(118,185,0,0.4), 0 0 100px rgba(118,185,0,0.15);
       transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+      .about-cta-btn {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        padding-inline: 1rem;
+        text-align: center;
+        white-space: normal;
+      }
     }
 
     /* ── SECTION HELPERS ── */

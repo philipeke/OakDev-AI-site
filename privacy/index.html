@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css?v=2026-06">
+  <link rel="stylesheet" href="../css/styles.css?v=2026-08-mobile">
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/oakdev-tree-favicon-48.png" />
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/oakdev-tree-favicon-96.png" />
@@ -127,6 +127,14 @@
       grid-template-columns: 260px 1fr;
       gap: 64px;
       align-items: start;
+    }
+
+    .privacy-layout > *,
+    .privacy-content,
+    .privacy-section,
+    .privacy-section > div {
+      min-width: 0;
+      max-width: 100%;
     }
 
     @media (max-width: 860px) {
@@ -334,6 +342,7 @@
     /* Table */
     .cookie-table {
       width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       margin-top: 20px;
       font-size: 0.87rem;
@@ -356,9 +365,66 @@
       color: rgba(255,255,255,0.5);
       vertical-align: top;
       line-height: 1.6;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .cookie-table tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 600px) {
+      .privacy-body {
+        padding-inline: 16px;
+      }
+
+      .cookie-table,
+      .cookie-table tbody,
+      .cookie-table tr,
+      .cookie-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .cookie-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .cookie-table tr {
+        margin-bottom: 14px;
+        padding: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.025);
+      }
+
+      .cookie-table td {
+        display: grid;
+        grid-template-columns: minmax(82px, 0.42fr) minmax(0, 1fr);
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .cookie-table td::before {
+        content: attr(data-label);
+        color: rgba(255,255,255,0.34);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .cookie-table tr:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     /* Section label helpers */
     .section-eyebrow {
@@ -704,22 +770,22 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>oakdev_lang</strong></td>
-                  <td>localStorage</td>
-                  <td>Stores your language preference (EN/SV) so you see the site in your chosen language on return visits.</td>
-                  <td>Until cleared</td>
+                  <td data-label="Name"><strong>oakdev_lang</strong></td>
+                  <td data-label="Type">localStorage</td>
+                  <td data-label="Purpose">Stores your language preference (EN/SV) so you see the site in your chosen language on return visits.</td>
+                  <td data-label="Duration">Until cleared</td>
                 </tr>
                 <tr>
-                  <td><strong>oakdev_cookies</strong></td>
-                  <td>localStorage</td>
-                  <td>Records whether you accepted or declined optional analytics cookies.</td>
-                  <td>Until cleared</td>
+                  <td data-label="Name"><strong>oakdev_cookies</strong></td>
+                  <td data-label="Type">localStorage</td>
+                  <td data-label="Purpose">Records whether you accepted or declined optional analytics cookies.</td>
+                  <td data-label="Duration">Until cleared</td>
                 </tr>
                 <tr>
-                  <td><strong>_ga</strong>, <strong>_ga_*</strong></td>
-                  <td>Cookie</td>
-                  <td>Google Analytics 4 measurement of page views and engagement after consent.</td>
-                  <td>Up to 2 years</td>
+                  <td data-label="Name"><strong>_ga</strong>, <strong>_ga_*</strong></td>
+                  <td data-label="Type">Cookie</td>
+                  <td data-label="Purpose">Google Analytics 4 measurement of page views and engagement after consent.</td>
+                  <td data-label="Duration">Up to 2 years</td>
                 </tr>
               </tbody>
             </table>
@@ -743,22 +809,22 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>oakdev_lang</strong></td>
-                  <td>localStorage</td>
-                  <td>Lagrar ditt språkval (EN/SV) så att du ser webbplatsen på ditt valda språk vid återbesök.</td>
-                  <td>Tills rensad</td>
+                  <td data-label="Namn"><strong>oakdev_lang</strong></td>
+                  <td data-label="Typ">localStorage</td>
+                  <td data-label="Syfte">Lagrar ditt språkval (EN/SV) så att du ser webbplatsen på ditt valda språk vid återbesök.</td>
+                  <td data-label="Varaktighet">Tills rensad</td>
                 </tr>
                 <tr>
-                  <td><strong>oakdev_cookies</strong></td>
-                  <td>localStorage</td>
-                  <td>Registrerar om du har accepterat eller avböjt valfria analyscookies.</td>
-                  <td>Tills rensad</td>
+                  <td data-label="Namn"><strong>oakdev_cookies</strong></td>
+                  <td data-label="Typ">localStorage</td>
+                  <td data-label="Syfte">Registrerar om du har accepterat eller avböjt valfria analyscookies.</td>
+                  <td data-label="Varaktighet">Tills rensad</td>
                 </tr>
                 <tr>
-                  <td><strong>_ga</strong>, <strong>_ga_*</strong></td>
-                  <td>Cookie</td>
-                  <td>Google Analytics 4-mätning av sidvisningar och engagemang efter samtycke.</td>
-                  <td>Upp till 2 år</td>
+                  <td data-label="Namn"><strong>_ga</strong>, <strong>_ga_*</strong></td>
+                  <td data-label="Typ">Cookie</td>
+                  <td data-label="Syfte">Google Analytics 4-mätning av sidvisningar och engagemang efter samtycke.</td>
+                  <td data-label="Varaktighet">Upp till 2 år</td>
                 </tr>
               </tbody>
             </table>

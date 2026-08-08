@@ -57,6 +57,9 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -67,6 +70,15 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 html.page-motion-paused *,
@@ -90,6 +102,14 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+svg,
+canvas,
+video,
+iframe,
+table {
+  max-width: 100%;
 }
 
 button {
@@ -119,6 +139,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .gradient-text {
@@ -130,6 +154,8 @@ h1, h2, h3, h4, h5, h6 {
   /* Extend background area so descenders (g,p,y) get full colour coverage */
   padding-bottom: 0.1em;
   display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 /* ── LAYOUT ─────────────────────────────────────────────────── */
@@ -138,6 +164,29 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 4vw, 3rem);
+  min-width: 0;
+}
+
+main,
+header,
+footer,
+section,
+article,
+aside,
+nav,
+.nav-inner,
+.nav-actions,
+.mobile-menu,
+.footer-grid,
+.services-grid,
+.process-grid,
+.stats-grid,
+.about-grid,
+.contact-grid,
+.insights-grid,
+.insights-article-inner,
+.insights-article-content {
+  min-width: 0;
 }
 
 .section {
@@ -695,8 +744,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .oak-chatbot-portal {
   position: absolute;
-  right: -34px;
-  bottom: -34px;
+  right: calc(-1 * clamp(1rem, 3vw, 2rem));
+  bottom: calc(-1 * clamp(1rem, 3vw, 2rem));
   width: 190px;
   height: 190px;
   pointer-events: none;
@@ -2841,6 +2890,9 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(2.7rem, 7vw, 5.7rem);
   line-height: 0.98;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .insights-article-lead {
@@ -3023,8 +3075,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .oak-chatbot-portal {
-    right: -48px;
-    bottom: -48px;
+    right: -0.75rem;
+    bottom: -0.75rem;
     width: 160px;
     height: 160px;
   }
@@ -3103,6 +3155,10 @@ h1, h2, h3, h4, h5, h6 {
   .btn-ghost {
     width: 100%;
     justify-content: center;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
   }
 
   .process-grid {
