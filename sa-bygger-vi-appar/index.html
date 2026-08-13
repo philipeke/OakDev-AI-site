@@ -378,14 +378,14 @@
       margin: 0;
     }
 
-    /* ── Pricing ── */
-    .pricing-section {
+    /* ── Capabilities ── */
+    .capability-section {
       padding: 120px 0;
       background: rgba(118,185,0,0.02);
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    .pricing-grid {
+    .capability-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
@@ -393,9 +393,9 @@
       align-items: start;
     }
 
-    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; } }
+    @media (max-width: 900px) { .capability-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; } }
 
-    .pricing-card {
+    .capability-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
@@ -405,23 +405,23 @@
       transition: border-color 0.35s, transform 0.35s;
     }
 
-    .pricing-card:hover {
+    .capability-card:hover {
       border-color: rgba(118,185,0,0.3);
       transform: translateY(-4px);
     }
 
-    .pricing-card--featured {
+    .capability-card--featured {
       background: rgba(118,185,0,0.06);
       border-color: rgba(118,185,0,0.35);
       transform: translateY(-8px);
     }
 
-    .pricing-card--featured:hover {
+    .capability-card--featured:hover {
       transform: translateY(-12px);
       border-color: rgba(118,185,0,0.6);
     }
 
-    .pricing-card--featured::before {
+    .capability-card--featured::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -429,7 +429,7 @@
       background: linear-gradient(90deg, transparent, #76b900, #39ff14, #76b900, transparent);
     }
 
-    .pricing-badge {
+    .capability-badge {
       display: inline-block;
       font-size: 0.65rem;
       font-weight: 600;
@@ -451,29 +451,6 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.4);
       margin-bottom: 12px;
-    }
-
-    .pkg-price {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-      margin-bottom: 8px;
-    }
-
-    .pkg-price .amount {
-      font-family: 'Outfit', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      color: #f0f0f0;
-      line-height: 1;
-    }
-
-    .pricing-card--featured .pkg-price .amount { color: #76b900; }
-
-    .pkg-price .period {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.4);
-      font-weight: 400;
     }
 
     .pkg-desc {
@@ -513,7 +490,7 @@
       background-size: 10px;
     }
 
-    .btn-pricing-outline {
+    .btn-capability-outline {
       display: block;
       width: 100%;
       padding: 14px 24px;
@@ -530,13 +507,13 @@
       transition: background 0.25s, border-color 0.25s, color 0.25s;
     }
 
-    .btn-pricing-outline:hover {
+    .btn-capability-outline:hover {
       background: rgba(118,185,0,0.1);
       border-color: #76b900;
       color: #a8d500;
     }
 
-    .btn-pricing-solid {
+    .btn-capability-solid {
       display: block;
       width: 100%;
       padding: 14px 24px;
@@ -553,7 +530,7 @@
       transition: background 0.25s, box-shadow 0.25s;
     }
 
-    .btn-pricing-solid:hover {
+    .btn-capability-solid:hover {
       background: #8fd600;
       box-shadow: 0 0 24px rgba(118,185,0,0.4);
     }
@@ -939,7 +916,7 @@
           <div class="why-num">03</div>
           <div class="why-divider"></div>
           <h3 data-i18n="cons_why3_title">Clear Product Scope</h3>
-          <p data-i18n="cons_why3_desc">Each build has a visible goal, a defined release, and an agreed price before production starts.</p>
+          <p data-i18n="cons_why3_desc">Each build has a visible goal, a defined release, and clear priorities before production starts.</p>
         </div>
 
         <div class="why-card reveal">
@@ -1014,24 +991,20 @@
     </div>
   </section>
 
-  <!-- ── PRICING ────────────────────────────────────────────── -->
-  <section class="pricing-section" id="pricing">
+  <!-- ── STUDIO PATHS ───────────────────────────────────────── -->
+  <section class="capability-section" id="studio-paths">
     <div class="container">
       <div class="section-header reveal" style="text-align:center;margin-bottom:0;">
-        <span class="section-eyebrow">Pricing</span>
-        <h2 class="section-title" data-i18n="cons_pricing_title">Ways to Start</h2>
-        <p class="section-sub" style="margin:0 auto;" data-i18n="cons_pricing_sub">Start with the smallest useful step, then grow the product when the evidence supports it.</p>
+        <span class="section-eyebrow">App Studio</span>
+        <h2 class="section-title" data-i18n="cons_capability_title">Ways to Build with the Studio</h2>
+        <p class="section-sub" style="margin:0 auto;" data-i18n="cons_capability_sub">Start with the product stage that matches what you need to learn, launch, or improve.</p>
       </div>
 
-      <div class="pricing-grid">
+      <div class="capability-grid">
 
         <!-- Prototype -->
-        <div class="pricing-card reveal">
+        <div class="capability-card reveal">
           <div class="pkg-name" data-i18n="pkg_cons1_name">Prototype</div>
-          <div class="pkg-price">
-            <span class="amount" data-i18n="pkg_cons1_price">SEK 19,000</span>
-            <span class="period" data-i18n="pkg_cons1_period"></span>
-          </div>
           <p class="pkg-desc" data-i18n="pkg_cons1_desc">Turn an idea into a testable product experience.</p>
           <ul class="pkg-features">
             <li data-i18n="pkg_cons1_f1">Focused product brief</li>
@@ -1039,17 +1012,13 @@
             <li data-i18n="pkg_cons1_f3">Clickable prototype</li>
             <li data-i18n="pkg_cons1_f4">Next-release recommendation</li>
           </ul>
-          <a href="/contact/" class="btn-pricing-outline" data-i18n="pkg_cons1_cta">Start a Prototype</a>
+          <a href="/contact/" class="btn-capability-outline" data-i18n="pkg_cons1_cta">Start a Prototype</a>
         </div>
 
         <!-- MVP (featured) -->
-        <div class="pricing-card pricing-card--featured reveal">
-          <div class="pricing-badge">Most Popular</div>
+        <div class="capability-card capability-card--featured reveal">
+          <div class="capability-badge">Core Product</div>
           <div class="pkg-name" data-i18n="pkg_cons2_name">MVP</div>
-          <div class="pkg-price">
-            <span class="amount" data-i18n="pkg_cons2_price">SEK 39,000</span>
-            <span class="period" data-i18n="pkg_cons2_period"> from</span>
-          </div>
           <p class="pkg-desc" data-i18n="pkg_cons2_desc">A focused, working first version for real users.</p>
           <ul class="pkg-features">
             <li data-i18n="pkg_cons2_f1">Product and UX design</li>
@@ -1058,16 +1027,12 @@
             <li data-i18n="pkg_cons2_f4">Test build and analytics</li>
             <li data-i18n="pkg_cons2_f5">Launch plan</li>
           </ul>
-          <a href="/contact/" class="btn-pricing-solid" data-i18n="pkg_cons2_cta">Build an MVP</a>
+          <a href="/contact/" class="btn-capability-solid" data-i18n="pkg_cons2_cta">Build an MVP</a>
         </div>
 
         <!-- Studio build -->
-        <div class="pricing-card reveal">
+        <div class="capability-card reveal">
           <div class="pkg-name" data-i18n="pkg_cons3_name">Studio Build</div>
-          <div class="pkg-price">
-            <span class="amount" data-i18n="pkg_cons3_price">From SEK 89,000</span>
-            <span class="period" data-i18n="pkg_cons3_period"></span>
-          </div>
           <p class="pkg-desc" data-i18n="pkg_cons3_desc">A polished production app designed for launch and growth.</p>
           <ul class="pkg-features">
             <li data-i18n="pkg_cons3_f1">Complete product design</li>
@@ -1075,7 +1040,7 @@
             <li data-i18n="pkg_cons3_f3">Backend and integrations</li>
             <li data-i18n="pkg_cons3_f4">Store launch support</li>
           </ul>
-          <a href="/contact/" class="btn-pricing-outline" data-i18n="pkg_cons3_cta">Discuss Your App</a>
+          <a href="/contact/" class="btn-capability-outline" data-i18n="pkg_cons3_cta">Discuss Your App</a>
         </div>
 
       </div>

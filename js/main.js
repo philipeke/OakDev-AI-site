@@ -46,10 +46,10 @@ const TRANSLATIONS = {
     hero_sub:        'OakDev designs, builds, and launches mobile apps, web apps, and thoughtful AI-powered product experiences — from the first prototype to the App Store.',
     hero_cta1:       'Start an App Project',
     hero_cta2:       'See Our Apps',
-    hero_offer1_title: 'App MVP from SEK 39,000',
-    hero_offer1_desc:  'A focused first version built to test and learn.',
-    hero_offer2_title: 'Studio Build from SEK 89,000',
-    hero_offer2_desc:  'Design, development, backend, and launch.',
+    hero_offer1_title: 'Mobile Apps for iOS and Android',
+    hero_offer1_desc:  'From a focused first release to a launched product.',
+    hero_offer2_title: 'App Studio from Idea to Launch',
+    hero_offer2_desc:  'Product design, development, backend, and store launch.',
     hero_offer3_title: 'AI That Belongs in the App',
     hero_offer3_desc:  'Search, assistants, personalization, voice, and vision.',
     scroll:          'Scroll',
@@ -198,24 +198,20 @@ const TRANSLATIONS = {
     studio_cta_title:     'Your App Idea Deserves to Exist.',
     studio_cta_desc:      'Tell us what you\'re building. We\'ll take it from concept to launch.',
     studio_cta_btn:       'Start a Project',
-    /* Shared pricing */
-    pkg_popular:          'Most Popular',
-    pkg_from:             'From',
+    /* Shared capability cards */
+    pkg_popular:          'End-to-End',
     pkg_get_started:      'Start a Project',
     pkg_contact_us:       'Contact Us',
-    /* App Studio pricing */
-    app_pricing_tag:      'Pricing',
-    app_pricing_title:    'App Development Packages',
-    app_pricing_desc:     'Starting and example prices in SEK, excl. VAT. We start with a focused first version and quote larger builds after a short review.',
-    pkg_mvp_name:         'MVP',
-    pkg_mvp_tagline:      'Validate your idea fast',
-    pkg_mvp_price:        'SEK 39,000',
-    pkg_pro_name:         'Studio',
-    pkg_pro_tagline:      'Full-featured production app',
-    pkg_pro_price:        'SEK 89,000',
-    pkg_ent_name:         'Enterprise',
-    pkg_ent_tagline:      'Complex systems at scale',
-    pkg_ent_price:        'SEK 149,000',
+    /* App Studio capabilities */
+    app_capabilities_tag:   'App Studio',
+    app_capabilities_title: 'What We Build',
+    app_capabilities_desc:  'Mobile apps, complete product builds, and AI-powered experiences — designed, developed, and launched by one focused studio.',
+    pkg_mvp_name:         'Mobile MVP',
+    pkg_mvp_tagline:      'A focused first release for real users',
+    pkg_pro_name:         'App Studio',
+    pkg_pro_tagline:      'A complete product from idea to launch',
+    pkg_ent_name:         'AI-Powered App',
+    pkg_ent_tagline:      'Useful AI built into the product experience',
     /* AI in Apps page */
     ai_hero_badge:        'AI in Apps',
     ai_hero_title1:       'AI Should Make the App',
@@ -245,26 +241,22 @@ const TRANSLATIONS = {
     benefit2_title:       'Clear User Control',
     benefit2_desc:        'People can review, edit, confirm, or undo important AI actions. The interface makes the boundary between suggestion and decision obvious.',
     benefit3_title:       'Built for Real Usage',
-    benefit3_desc:        'Latency, cost, fallbacks, model limits, and edge cases are product decisions from day one, not cleanup work after launch.',
+    benefit3_desc:        'Latency, fallbacks, model limits, and edge cases are product decisions from day one, not cleanup work after launch.',
     benefit4_title:       'Grounded by Design',
     benefit4_desc:        'When accuracy matters, the feature is anchored in approved product data and shows the user where an answer comes from.',
     benefit5_title:       'Privacy Considered Early',
     benefit5_desc:        'Data flows, retention, permissions, and model choices are shaped alongside the user experience before the feature ships.',
     benefit6_title:       'Improves with the Product',
     benefit6_desc:        'Feedback, quality signals, and usage data inform each release so the AI experience becomes more useful over time.',
-    ai_pricing_tag:       'Pricing',
-    ai_pricing_title:     'AI App Add-ons',
-    ai_pricing_desc:      'Starting and example prices in SEK, excl. VAT, for AI capabilities added to an app project. Every feature is scoped around one user outcome.',
-    pkg_ai1_name:         'AI Feature Sprint',
-    pkg_ai1_tagline:      'Prototype one useful capability',
-    pkg_ai1_price:        'SEK 24,900',
-    pkg_ai2_name:         'AI-Powered MVP',
-    pkg_ai2_tagline:      'A complete first app experience',
-    pkg_ai2_price:        'SEK 59,000',
-    pkg_ai3_name:         'AI Product',
-    pkg_ai3_tagline:      'A larger app where AI is core',
-    pkg_ai3_from:         'Scoped quote',
-    pkg_ai3_price:        'Let\'s talk',
+    ai_capabilities_tag:  'AI in Apps',
+    ai_capabilities_title:'Ways We Bring AI into Products',
+    ai_capabilities_desc: 'We design AI around a clear user outcome and make it a natural, reliable part of the mobile or web app.',
+    pkg_ai1_name:         'Search & Assistants',
+    pkg_ai1_tagline:      'Help users find, understand, and act',
+    pkg_ai2_name:         'Intelligent Workflows',
+    pkg_ai2_tagline:      'Connect AI to useful actions in the app',
+    pkg_ai3_name:         'AI-Native Products',
+    pkg_ai3_tagline:      'Build the core experience around AI',
     ai_process_tag:       'How We Work',
     ai_process_title:     'From Use Case to Shipped Feature',
     ai_process_desc:      'A product-led process for finding the right AI behavior, proving it quickly, and shipping it as a reliable part of the app.',
@@ -273,7 +265,7 @@ const TRANSLATIONS = {
     ai_step2_title:       'Prototype',
     ai_step2_desc:        'We test the interaction, model behavior, data boundaries, and fallbacks before committing to the full build.',
     ai_step3_title:       'Build',
-    ai_step3_desc:        'The feature is developed as part of the app, with real interfaces, evaluation, telemetry, safeguards, and sensible cost controls.',
+    ai_step3_desc:        'The feature is developed as part of the app, with real interfaces, evaluation, telemetry, safeguards, and clear operating limits.',
     ai_step4_title:       'Ship & Learn',
     ai_step4_desc:        'We release, measure how the feature helps, and improve it alongside the rest of the product.',
     ai_cta_title:         'Have an App That Could Be Smarter?',
@@ -315,7 +307,7 @@ const TRANSLATIONS = {
     cons_why2_title:       'Design and Code Together',
     cons_why2_desc:        'Interaction, visual design, backend, and mobile behavior evolve as one product instead of separate handoffs.',
     cons_why3_title:       'Clear Product Scope',
-    cons_why3_desc:        'Each build has a visible goal, a defined release, and an agreed price before production starts.',
+    cons_why3_desc:        'Each build has a visible goal, a defined release, and clear priorities before production starts.',
     cons_why4_title:       'Small Releases, Fast Learning',
     cons_why4_desc:        'We prefer a focused app in users\' hands over a large roadmap that never reaches the market.',
     cons_why5_title:       'Your Product, Your IP',
@@ -336,20 +328,16 @@ const TRANSLATIONS = {
     cons_step4_num:        '04',
     cons_step4_title:      'Launch & Learn',
     cons_step4_desc:       'We prepare the store release, monitor the first signals, and turn real feedback into the next focused version.',
-    cons_pricing_title:    'Ways to Start',
-    cons_pricing_sub:      'Start with the smallest useful step, then grow the product when the evidence supports it.',
-    pkg_cons1_name:        'Prototype',
-    pkg_cons1_price:       'SEK 19,000',
-    pkg_cons1_period:      '',
+    cons_capability_title: 'Ways to Build with the Studio',
+    cons_capability_sub:   'Start with the product stage that matches what you need to learn, launch, or improve.',
+    pkg_cons1_name:        'Product Prototype',
     pkg_cons1_desc:        'Turn an idea into a testable product experience.',
     pkg_cons1_f1:          'Focused product brief',
     pkg_cons1_f2:          'Core user flows',
     pkg_cons1_f3:          'Clickable prototype',
     pkg_cons1_f4:          'Next-release recommendation',
     pkg_cons1_cta:         'Start a Prototype',
-    pkg_cons2_name:        'MVP',
-    pkg_cons2_price:       'SEK 39,000',
-    pkg_cons2_period:      ' from',
+    pkg_cons2_name:        'Mobile MVP',
     pkg_cons2_desc:        'A focused, working first version for real users.',
     pkg_cons2_f1:          'Product and UX design',
     pkg_cons2_f2:          'Core app functionality',
@@ -358,8 +346,6 @@ const TRANSLATIONS = {
     pkg_cons2_f5:          'Launch plan',
     pkg_cons2_cta:         'Build an MVP',
     pkg_cons3_name:        'Studio Build',
-    pkg_cons3_price:       'From SEK 89,000',
-    pkg_cons3_period:      '',
     pkg_cons3_desc:        'A polished production app designed for launch and growth.',
     pkg_cons3_f1:          'Complete product design',
     pkg_cons3_f2:          'Mobile or web app build',
@@ -522,10 +508,10 @@ const TRANSLATIONS = {
     hero_sub:        'OakDev designar, bygger och lanserar mobilappar, webbappar och genomtänkta AI-drivna produktupplevelser — från första prototypen till App Store.',
     hero_cta1:       'Starta ett appprojekt',
     hero_cta2:       'Se våra appar',
-    hero_offer1_title: 'App-MVP från 39 000 kr',
-    hero_offer1_desc:  'En fokuserad första version för att testa och lära.',
-    hero_offer2_title: 'Studio-bygge från 89 000 kr',
-    hero_offer2_desc:  'Design, utveckling, backend och lansering.',
+    hero_offer1_title: 'Mobilappar för iOS och Android',
+    hero_offer1_desc:  'Från fokuserad första version till lanserad produkt.',
+    hero_offer2_title: 'App Studio från idé till lansering',
+    hero_offer2_desc:  'Produktdesign, utveckling, backend och butikslansering.',
     hero_offer3_title: 'AI som hör hemma i appen',
     hero_offer3_desc:  'Sök, assistenter, personalisering, röst och bild.',
     scroll:          'Scrolla',
@@ -674,24 +660,20 @@ const TRANSLATIONS = {
     studio_cta_title:     'Din appidé förtjänar att existera.',
     studio_cta_desc:      'Berätta vad du vill skapa. Vi tar det från koncept till lansering.',
     studio_cta_btn:       'Starta ett projekt',
-    /* Shared pricing */
-    pkg_popular:          'Mest populär',
-    pkg_from:             'Från',
+    /* Delade kompetenskort */
+    pkg_popular:          'Helhetsansvar',
     pkg_get_started:      'Starta ett projekt',
     pkg_contact_us:       'Kontakta oss',
-    /* App Studio pricing */
-    app_pricing_tag:      'Priser',
-    app_pricing_title:    'App-utvecklingspaket',
-    app_pricing_desc:     'Från- och exempelpriser i SEK exkl. moms. Vi börjar gärna med en fokuserad första version och offererar större byggen efter en kort genomgång.',
-    pkg_mvp_name:         'MVP',
-    pkg_mvp_tagline:      'Validera din idé snabbt',
-    pkg_mvp_price:        '39 000 kr',
-    pkg_pro_name:         'Studio',
-    pkg_pro_tagline:      'Fullfunktionell produktionsapp',
-    pkg_pro_price:        '89 000 kr',
-    pkg_ent_name:         'Enterprise',
-    pkg_ent_tagline:      'Komplexa system i stor skala',
-    pkg_ent_price:        '149 000 kr',
+    /* App Studios kompetenser */
+    app_capabilities_tag:   'App Studio',
+    app_capabilities_title: 'Det här bygger vi',
+    app_capabilities_desc:  'Mobilappar, kompletta produktbyggen och AI-drivna upplevelser — designade, utvecklade och lanserade av en fokuserad studio.',
+    pkg_mvp_name:         'Mobil MVP',
+    pkg_mvp_tagline:      'En fokuserad första release för riktiga användare',
+    pkg_pro_name:         'App Studio',
+    pkg_pro_tagline:      'En komplett produkt från idé till lansering',
+    pkg_ent_name:         'AI-driven app',
+    pkg_ent_tagline:      'Användbar AI inbyggd i produktupplevelsen',
     /* AI i appar */
     ai_hero_badge:        'AI i appar',
     ai_hero_title1:       'AI ska göra appen',
@@ -721,26 +703,22 @@ const TRANSLATIONS = {
     benefit2_title:       'Tydlig användarkontroll',
     benefit2_desc:        'Användaren kan granska, redigera, bekräfta eller ångra viktiga AI-handlingar. Gränsen mellan förslag och beslut är tydlig.',
     benefit3_title:       'Byggd för verklig användning',
-    benefit3_desc:        'Svarstid, kostnad, reservlägen, modellgränser och kantfall är produktbeslut från dag ett — inte städarbete efter lansering.',
+    benefit3_desc:        'Svarstid, reservlägen, modellgränser och kantfall är produktbeslut från dag ett — inte städarbete efter lansering.',
     benefit4_title:       'Grundad genom design',
     benefit4_desc:        'När precision är viktig förankras funktionen i godkänd produktdata och visar användaren var svaret kommer ifrån.',
     benefit5_title:       'Integritet från början',
     benefit5_desc:        'Dataflöden, lagring, behörigheter och modellval formas tillsammans med användarupplevelsen innan funktionen lanseras.',
     benefit6_title:       'Förbättras med produkten',
     benefit6_desc:        'Feedback, kvalitetssignaler och användningsdata vägleder varje version så AI-upplevelsen blir mer användbar över tid.',
-    ai_pricing_tag:       'Priser',
-    ai_pricing_title:     'AI-tillägg för appar',
-    ai_pricing_desc:      'Från- och exempelpriser i SEK exkl. moms för AI-förmågor i ett appprojekt. Varje funktion avgränsas kring ett tydligt användarresultat.',
-    pkg_ai1_name:         'AI Feature Sprint',
-    pkg_ai1_tagline:      'Prototypa en användbar förmåga',
-    pkg_ai1_price:        '24 900 kr',
-    pkg_ai2_name:         'AI-driven MVP',
-    pkg_ai2_tagline:      'En komplett första appupplevelse',
-    pkg_ai2_price:        '59 000 kr',
-    pkg_ai3_name:         'AI-produkt',
-    pkg_ai3_tagline:      'En större app där AI är central',
-    pkg_ai3_from:         'Offert efter scope',
-    pkg_ai3_price:        'Vi pratar först',
+    ai_capabilities_tag:  'AI i appar',
+    ai_capabilities_title:'Så bygger vi in AI i produkter',
+    ai_capabilities_desc: 'Vi designar AI kring ett tydligt användarresultat och gör den till en naturlig, pålitlig del av mobil- eller webbappen.',
+    pkg_ai1_name:         'Sök & assistenter',
+    pkg_ai1_tagline:      'Hjälp användare att hitta, förstå och agera',
+    pkg_ai2_name:         'Intelligenta arbetsflöden',
+    pkg_ai2_tagline:      'Koppla AI till användbara handlingar i appen',
+    pkg_ai3_name:         'AI-native produkter',
+    pkg_ai3_tagline:      'Bygg kärnupplevelsen kring AI',
     ai_process_tag:       'Hur vi arbetar',
     ai_process_title:     'Från användningsfall till lanserad funktion',
     ai_process_desc:      'En produktledd process för att hitta rätt AI-beteende, bevisa det snabbt och lansera det som en pålitlig del av appen.',
@@ -749,7 +727,7 @@ const TRANSLATIONS = {
     ai_step2_title:       'Prototyp',
     ai_step2_desc:        'Vi testar interaktionen, modellbeteendet, datagränserna och reservlägena innan hela bygget startar.',
     ai_step3_title:       'Bygg',
-    ai_step3_desc:        'Funktionen utvecklas som en del av appen, med riktiga gränssnitt, utvärdering, mätning, skyddsräcken och rimlig kostnadskontroll.',
+    ai_step3_desc:        'Funktionen utvecklas som en del av appen, med riktiga gränssnitt, utvärdering, mätning, skyddsräcken och tydliga driftgränser.',
     ai_step4_title:       'Lansera & lär',
     ai_step4_desc:        'Vi släpper funktionen, mäter hur den hjälper och förbättrar den tillsammans med resten av produkten.',
     ai_cta_title:         'Har du en app som kan bli smartare?',
@@ -791,7 +769,7 @@ const TRANSLATIONS = {
     cons_why2_title:       'Design och kod tillsammans',
     cons_why2_desc:        'Interaktion, visuell design, backend och mobilbeteende utvecklas som en produkt i stället för separata överlämningar.',
     cons_why3_title:       'Tydligt produktscope',
-    cons_why3_desc:        'Varje bygge har ett synligt mål, en definierad release och ett överenskommet pris innan produktionen startar.',
+    cons_why3_desc:        'Varje bygge har ett synligt mål, en definierad release och tydliga prioriteringar innan produktionen startar.',
     cons_why4_title:       'Små releaser, snabbt lärande',
     cons_why4_desc:        'Vi föredrar en fokuserad app i användarnas händer framför en stor roadmap som aldrig når marknaden.',
     cons_why5_title:       'Din produkt, din IP',
@@ -812,20 +790,16 @@ const TRANSLATIONS = {
     cons_step4_num:        '04',
     cons_step4_title:      'Lansera & lär',
     cons_step4_desc:       'Vi förbereder butikslanseringen, följer de första signalerna och gör verklig feedback till nästa fokuserade version.',
-    cons_pricing_title:    'Sätt att börja',
-    cons_pricing_sub:      'Börja med minsta användbara steg och utveckla produkten när verkliga signaler motiverar det.',
-    pkg_cons1_name:        'Prototyp',
-    pkg_cons1_price:       '19 000 kr',
-    pkg_cons1_period:      '',
+    cons_capability_title: 'Sätt att bygga med studion',
+    cons_capability_sub:   'Börja i det produktläge som passar det ni behöver lära, lansera eller förbättra.',
+    pkg_cons1_name:        'Produktprototyp',
     pkg_cons1_desc:        'Gör en idé till en testbar produktupplevelse.',
     pkg_cons1_f1:          'Fokuserad produktbrief',
     pkg_cons1_f2:          'Viktigaste användarflödena',
     pkg_cons1_f3:          'Klickbar prototyp',
     pkg_cons1_f4:          'Rekommendation för nästa release',
     pkg_cons1_cta:         'Starta en prototyp',
-    pkg_cons2_name:        'MVP',
-    pkg_cons2_price:       '39 000 kr',
-    pkg_cons2_period:      ' från',
+    pkg_cons2_name:        'Mobil MVP',
     pkg_cons2_desc:        'En fokuserad, fungerande första version för riktiga användare.',
     pkg_cons2_f1:          'Produkt- och UX-design',
     pkg_cons2_f2:          'Appens kärnfunktion',
@@ -834,8 +808,6 @@ const TRANSLATIONS = {
     pkg_cons2_f5:          'Lanseringsplan',
     pkg_cons2_cta:         'Bygg en MVP',
     pkg_cons3_name:        'Studio-bygge',
-    pkg_cons3_price:       'Från 89 000 kr',
-    pkg_cons3_period:      '',
     pkg_cons3_desc:        'En polerad produktionsapp byggd för lansering och tillväxt.',
     pkg_cons3_f1:          'Komplett produktdesign',
     pkg_cons3_f2:          'Mobil- eller webbappsbygge',
@@ -851,7 +823,7 @@ const TRANSLATIONS = {
     contact_hero_title2:    'Tillsammans',
     contact_hero_sub:       'Vi är ett litet team av teknikentusiaster med över 20 år i branschen, och vi älskar verkligen att prata om ny teknik. Hör av dig hur det passar dig bäst.',
     contact_ch_email_title: 'E-post',
-    contact_ch_email_desc:  'Bäst för projektförfrågningar och detaljerade offerter',
+    contact_ch_email_desc:  'Bäst för projektförfrågningar och detaljerade appidéer',
     contact_ch_phone_title: 'Telefon',
     contact_ch_phone_desc:  'Mån–fre, 08:00–18:00 CET',
     contact_ch_wa_title:    'WhatsApp',
@@ -2414,18 +2386,9 @@ function initChatbot(options = {}) {
   function buildFallbackReply(userText) {
     const isSv = userLooksSwedish(userText);
     const text = userText.toLowerCase();
-    const conversationText = messages
-      .map((message) => String(message.content || '').toLowerCase())
-      .join(' ');
-    const budgetMatch = text.match(/\b(\d[\d\s.,]*)\s*(kr|sek|kronor|:-)?\b/i);
-    const budget = budgetMatch
-      ? Number(budgetMatch[1].replace(/\s/g, '').replace(',', '.'))
-      : null;
-    const hasPriceContext = includesAny(conversationText, ['pris', 'kostar', 'budget', 'offert', 'price', 'cost', 'quote']);
     const asksWeather = includesAny(text, ['väder', 'vader', 'weather', 'regn', 'soligt', 'temperatur']);
     const greets = /^(hej|hejsan|hallå|hallo|hello|hi)\b/i.test(text.trim());
     const asksPrice = includesAny(text, ['pris', 'kostar', 'budget', 'paket', 'offert', 'price', 'cost', 'quote']);
-    const asksBudgetFollowup = budget && includesAny(text, ['får jag', 'far jag', 'för det', 'for det', 'räcker', 'racker', 'kan man få', 'kan man fa']);
     const asksAi = includesAny(text, ['ai', 'chatbot', 'chattbot', 'assistent', 'agent', 'smart sök', 'smart sok', 'personalisering', 'voice', 'vision']);
     const asksApp = includesAny(text, ['app', 'mobil', 'mvp', 'ios', 'android', 'webbapp', 'web app', 'pwa', 'saas']);
     const asksWebsite = includesAny(text, ['hemsida', 'website', 'webpage', 'landningssida', 'seo']);
@@ -2442,20 +2405,8 @@ function initChatbot(options = {}) {
       if (asksWebsite || asksConsulting || asksBusinessAutomation) {
         return 'OakDev erbjuder inte fristående hemsidor, verksamhetsautomation eller IT-konsulting. Studion fokuserar på mobilappar, webbappar och AI som en naturlig del av appupplevelsen. Om behovet egentligen är en digital produkt är [App Studio](/app-studio/) rätt startpunkt.';
       }
-      if (budget && (hasPriceContext || asksBudgetFollowup)) {
-        if (budget < 19000) {
-          return `Med ${budget.toLocaleString('sv-SE')} kr behöver appidén avgränsas hårt. En komplett prototyp börjar från 19 000 kr, så ett rimligt nästa steg är att tydliggöra användaren, kärnflödet och vad som kan vänta till version två.`;
-        }
-        if (budget < 39000) {
-          return `Med cirka ${budget.toLocaleString('sv-SE')} kr ligger en fokuserad app-prototyp nära till hands. OakDevs prototyppaket börjar från 19 000 kr, medan en fungerande app-MVP börjar från 39 000 kr exkl. moms.`;
-        }
-        return `Med en budget runt ${budget.toLocaleString('sv-SE')} kr kan en fokuserad första appversion vara realistisk. OakDev listar app-MVP från 39 000 kr, Studio-bygge från 89 000 kr och större appar från 149 000 kr exkl. moms.`;
-      }
       if (asksPrice) {
-        if (asksAi) {
-          return 'Som del av ett appprojekt börjar ett AI Feature Sprint från 24 900 kr och en AI-driven app-MVP från 59 000 kr exkl. moms. Priset påverkas främst av appflödet, datakällor, modellbeteende, kvalitetskrav och om funktionen ska kunna utföra handlingar.';
-        }
-        return 'OakDev listar app-prototyp från 19 000 kr, app-MVP från 39 000 kr, Studio-bygge från 89 000 kr och större appar från 149 000 kr exkl. moms. Det viktigaste för priset är vilken kärnuppgift första versionen ska lösa.';
+        return 'OakDev börjar med användaren, appens kärnflöde och den första release som ger verkligt värde. Beskriv gärna idén via [kontakt](/contact/) så kan studion hjälpa dig forma ett tydligt appupplägg.';
       }
       if (asksAi) {
         return 'OakDev bygger AI som en del av appupplevelsen: assistenter, smart sök, personalisering, generering, röst, bild och appnära automation. Läs mer på [AI i appar](/ai-automation/) eller beskriv vad användaren ska kunna göra.';
@@ -2478,20 +2429,8 @@ function initChatbot(options = {}) {
     if (asksWebsite || asksConsulting || asksBusinessAutomation) {
       return 'OakDev does not offer standalone websites, business automation, or IT consulting. The studio focuses on mobile apps, web apps, and AI as a natural part of the app experience. If the need is really a digital product, [App Studio](/app-studio/) is the right starting point.';
     }
-    if (budget && (hasPriceContext || asksBudgetFollowup)) {
-      if (budget < 19000) {
-        return `With ${budget.toLocaleString('en-US')} SEK, the app idea needs a very tight scope. A complete prototype starts from SEK 19,000, so the next useful step is to clarify the user, core flow, and what can wait until version two.`;
-      }
-      if (budget < 39000) {
-        return `With around ${budget.toLocaleString('en-US')} SEK, a focused app prototype is realistic. OakDev prototypes start from SEK 19,000, while a working app MVP starts from SEK 39,000 excl. VAT.`;
-      }
-      return `With a budget around ${budget.toLocaleString('en-US')} SEK, a focused first app version may be realistic. OakDev lists app MVPs from SEK 39,000, Studio builds from SEK 89,000, and larger apps from SEK 149,000 excl. VAT.`;
-    }
     if (asksPrice) {
-      if (asksAi) {
-        return 'As part of an app project, an AI Feature Sprint starts from SEK 24,900 and an AI-powered app MVP from SEK 59,000 excl. VAT. Scope depends on the app flow, data sources, model behavior, quality requirements, and whether the feature can take actions.';
-      }
-      return 'OakDev lists app prototypes from SEK 19,000, app MVPs from SEK 39,000, Studio builds from SEK 89,000, and larger apps from SEK 149,000 excl. VAT. The biggest price driver is the core job version one must solve.';
+      return 'OakDev starts with the user, the app’s core flow, and the first release that creates real value. Share the idea through [contact](/contact/) and the studio can help shape a clear app direction.';
     }
     if (asksAi) {
       return 'OakDev builds AI as part of the app experience: assistants, smart search, personalization, generation, voice, vision, and app-native automation. Explore [AI in Apps](/ai-automation/) or describe what the user should be able to do.';

@@ -13,12 +13,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oakdev.app/vad-kostar-apputveckling</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.74</priority>
-  </url>
-  <url>
     <loc>https://oakdev.app/mobilapp-foretag-uddevalla/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -182,12 +176,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://oakdev.app/vad-kostar-att-bygga-app</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://oakdev.app/arkitektur-for-skalbara-saas</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -232,12 +220,6 @@
   <url>
     <loc>https://oakdev.app/android-app-utveckling-for-foretag</loc>
     <lastmod>2026-06-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://oakdev.app/ios-app-utveckling-kostnad-vad-styr-priset</loc>
-    <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

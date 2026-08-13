@@ -25,6 +25,12 @@ const { FEED_URL, parseItems, renderArticlePage } = require('./lib/render-articl
 const ROOT = path.resolve(__dirname, '..');
 const MANIFEST_PATH = path.join(__dirname, '.articles-manifest.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const BLOCKED_ARTICLE_SLUGS = new Set([
+  'vad-kostar-apputveckling',
+  'vad-kostar-att-bygga-app',
+  'ios-app-utveckling-kostnad-vad-styr-priset',
+]);
+const COMMERCIAL_ARTICLE_TITLE = /(?:pris|kostnad|kostar|budget|offert)/i;
 
 function readManifest() {
   try {
@@ -53,6 +59,7 @@ function reservedSlugs(ownedSlugs) {
     'api', 'css', 'js', 'assets', 'scripts', 'marketing', 'chatbot-api',
     'sitemap.xml', 'robots.txt', 'cname', 'favicon.ico', 'index.html',
     'readme.md', 'deploy.md', 'package.json', 'vercel.json',
+    ...BLOCKED_ARTICLE_SLUGS,
   ]);
   for (const e of entries) {
     if (e.name.startsWith('.')) continue;
@@ -128,7 +135,10 @@ async function main() {
   const written = [];
   const skipped = [];
   for (const article of items) {
-    if (reserved.has(article.slug)) { skipped.push(article.slug); continue; }
+    if (reserved.has(article.slug) || COMMERCIAL_ARTICLE_TITLE.test(article.title)) {
+      skipped.push(article.slug);
+      continue;
+    }
     writeArticle(article);
     written.push(article.slug);
   }

@@ -1,118 +1,18 @@
 <!DOCTYPE html>
-<html lang="sv" data-theme="dark">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src 'self' https://fonts.gstatic.com;
-    img-src 'self' https: data: blob:;
-    connect-src 'self' https://gf365.vercel.app https://formsubmit.co https://www.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net;
-    frame-ancestors 'none';
-    base-uri 'self';
-    form-action 'self' https://formsubmit.co;
-    upgrade-insecure-requests;
-  " />
-
-  <title>Vad kostar apputveckling egentligen? | OakDev &amp; AI AB</title>
-  <meta name="description" content="Vad kostar apputveckling? Få en tydlig bild av pris, tidsåtgång och vad som driver budgeten - från MVP till skalbar produkt." />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="author" content="OakDev &amp; AI AB" />
-  <link rel="canonical" href="https://oakdev.app/vad-kostar-apputveckling" />
-  <link rel="alternate" hreflang="sv-SE" href="https://oakdev.app/vad-kostar-apputveckling" />
-  <link rel="alternate" hreflang="x-default" href="https://oakdev.app/vad-kostar-apputveckling" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://oakdev.app/vad-kostar-apputveckling" />
-  <meta property="og:title" content="Vad kostar apputveckling egentligen?" />
-  <meta property="og:description" content="Vad kostar apputveckling? Få en tydlig bild av pris, tidsåtgång och vad som driver budgeten - från MVP till skalbar produkt." />
-  <meta property="og:image" content="https://oakdev.app/assets/oakdev-tree-social.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Vad kostar apputveckling egentligen?" />
-  <meta name="twitter:description" content="Vad kostar apputveckling? Få en tydlig bild av pris, tidsåtgång och vad som driver budgeten - från MVP till skalbar produkt." />
-  <meta name="twitter:image" content="https://oakdev.app/assets/oakdev-tree-social.jpg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="48x48" href="/assets/oakdev-tree-favicon-48.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/oakdev-tree-favicon-96.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/oakdev-tree-favicon-192.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/oakdev-tree-apple-touch.png" />
-  <link rel="stylesheet" href="/css/styles.css?v=2026-08-mobile" />
+  <meta name="robots" content="noindex, follow" />
+  <meta http-equiv="refresh" content="0; url=/app-studio/" />
+  <link rel="canonical" href="https://oakdev.app/app-studio/" />
+  <title>Mobilappar och App Studio | OakDev &amp; AI AB</title>
 </head>
-
-<body class="insights-page">
-  <div class="noise-overlay" aria-hidden="true"></div>
-
-  <header id="navbar" class="navbar" role="banner">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="OakDev home">
-        <img src="/assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png" alt="OakDev &amp; AI AB" width="140" height="36" loading="eager" />
-      </a>
-      <nav class="nav-links" role="navigation" aria-label="Main navigation">
-        <a href="/" class="nav-link" data-i18n="nav_home">Home</a>
-        <a href="/app-studio/" class="nav-link" data-i18n="nav_studio">App Studio</a>
-        <a href="/ai-automation/" class="nav-link" data-i18n="nav_ai">AI in Apps</a>
-        <a href="/sa-bygger-vi-appar/" class="nav-link" data-i18n="nav_consulting">How We Build</a>
-        <a href="/insikter/" class="nav-link" data-i18n="nav_insights">Inspiration</a>
-        <a href="/about/" class="nav-link" data-i18n="nav_about">About</a>
-        <a href="/contact/" class="nav-link" data-i18n="nav_contact">Contact</a>
-      </nav>
-      <div class="nav-actions">
-        <div class="lang-switcher" role="group" aria-label="Language selector">
-          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
-          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
-        </div>
-        <a href="/boka-samtal-om-ai/" class="btn-book" data-i18n="nav_book">Start an App</a>
-        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-      </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <nav aria-label="Mobile navigation">
-        <a href="/" class="mobile-link" data-i18n="nav_home">Home</a>
-        <a href="/app-studio/" class="mobile-link" data-i18n="nav_studio">App Studio</a>
-        <a href="/ai-automation/" class="mobile-link" data-i18n="nav_ai">AI in Apps</a>
-        <a href="/sa-bygger-vi-appar/" class="mobile-link" data-i18n="nav_consulting">How We Build</a>
-        <a href="/insikter/" class="mobile-link" data-i18n="nav_insights">Inspiration</a>
-        <a href="/about/" class="mobile-link" data-i18n="nav_about">About</a>
-        <a href="/contact/" class="mobile-link" data-i18n="nav_contact">Contact</a>
-      </nav>
-      <div class="mobile-actions">
-        <div class="mobile-lang">
-          <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
-          <button class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
-        </div>
-        <a href="/boka-samtal-om-ai/" class="btn-book" style="display:block;text-align:center;" data-i18n="nav_book">Start an App</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="main" data-insights-article data-endpoint="https://gf365.vercel.app/api/insights-feed">
-    <article class="insights-article">
-      <div class="container insights-article-inner">
-        <a href="/insikter/" class="insights-card-link">&larr; Tillbaka till Inspiration</a>
-        <p class="insights-feed-status" data-article-status data-state="loading">H&auml;mtar artikeln...</p>
-        <p class="insights-card-meta" data-article-date>OakDev Inspiration</p>
-        <h1 data-article-title>Vad kostar apputveckling egentligen?</h1>
-        <p class="insights-article-lead" data-article-summary>Vad kostar apputveckling? Få en tydlig bild av pris, tidsåtgång och vad som driver budgeten - från MVP till skalbar produkt.</p>
-        <img class="insights-article-image" data-article-image hidden alt="" />
-        <div class="insights-article-content" data-article-content></div>
-      </div>
-    </article>
+<body>
+  <main>
+    <h1>Fortsätt till OakDev App Studio</h1>
+    <p>OakDev fokuserar på mobilappar, produktutveckling och AI-funktioner som hör hemma i appupplevelsen.</p>
+    <p><a href="/app-studio/">Utforska App Studio</a></p>
   </main>
-
-  <script src="/js/main.js?v=i18n-se-2026-06" defer></script>
-  <script src="/js/insights-article.js" defer></script>
 </body>
 </html>

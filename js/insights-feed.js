@@ -8,6 +8,13 @@
   const list = feedRoot.querySelector('[data-insights-posts]');
   const status = feedRoot.querySelector('[data-insights-status]');
   const count = feedRoot.querySelector('[data-insights-count]');
+  const hiddenArticlePaths = new Set([
+    '/vad-kostar-apputveckling',
+    '/vad-kostar-att-bygga-app',
+    '/ios-app-utveckling-kostnad-vad-styr-priset',
+  ]);
+  const commercialArticleTitle = /(?:pris|kostnad|kostar|budget|offert)/i;
+  const commercialExcerptLanguage = /(?:^|[^a-zåäö])(?:pris|timpris|offert|budget)[a-zåäö-]*(?=$|[^a-zåäö])/i;
 
   const formatter = new Intl.DateTimeFormat('sv-SE', {
     day: 'numeric',
@@ -47,6 +54,15 @@
       return ['http:', 'https:'].includes(url.protocol) ? url.toString() : '';
     } catch {
       return '';
+    }
+  }
+
+  function isVisibleArticle(value, title) {
+    try {
+      const path = new URL(value, window.location.origin).pathname.replace(/\/+$/, '') || '/';
+      return !hiddenArticlePaths.has(path) && !commercialArticleTitle.test(title);
+    } catch {
+      return false;
     }
   }
 
@@ -91,7 +107,10 @@
         '';
       const dateText = textFrom(item, 'pubDate') || textFrom(item, 'updated') || textFrom(item, 'published');
       const date = dateText ? new Date(dateText) : null;
-      const excerpt = stripHtml(descriptionHtml).slice(0, 240);
+      const description = stripHtml(descriptionHtml);
+      const excerpt = commercialExcerptLanguage.test(description)
+        ? 'En guide om produktmål, användarbeteende, teknikval och vägen till en hållbar lansering.'
+        : description.slice(0, 240);
 
       return {
         title,
@@ -100,7 +119,7 @@
         image: pickImage(item, descriptionHtml),
         excerpt: excerpt.length === 240 ? `${excerpt}...` : excerpt,
       };
-    });
+    }).filter((post) => isVisibleArticle(post.link, post.title));
   }
 
   function renderPosts(posts) {

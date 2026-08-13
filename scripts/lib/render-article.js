@@ -82,9 +82,25 @@ const ALLOWED_TAGS = new Set([
   'p', 'h2', 'h3', 'h4', 'ul', 'ol', 'li',
   'strong', 'em', 'b', 'i', 'a', 'blockquote', 'br',
 ]);
+const RETIRED_ARTICLE_PATHS = new Set([
+  '/vad-kostar-apputveckling',
+  '/vad-kostar-att-bygga-app',
+  '/ios-app-utveckling-kostnad-vad-styr-priset',
+]);
+const COMMERCIAL_PRICING_LANGUAGE = /(?:^|[^\p{L}])(?:pris|timpris|offert|budget)[\p{L}-]*(?=$|[^\p{L}])/iu;
+
+function stripCommercialPricingBlocks(html) {
+  return String(html || '').replace(
+    /<(p|h2|h3|h4|li)\b[^>]*>[\s\S]*?<\/\1>/gi,
+    (block) => {
+      const plainText = decodeEntities(block.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+      return COMMERCIAL_PRICING_LANGUAGE.test(plainText) ? '' : block;
+    },
+  );
+}
 
 function sanitizeHtml(html) {
-  let out = String(html || '');
+  let out = stripCommercialPricingBlocks(html);
   out = out.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
   out = out.replace(/<!--[\s\S]*?-->/g, '');
   out = out.replace(/<(\/?)h1\b/gi, '<$1h2'); // keep a single h1 on the page
@@ -98,7 +114,11 @@ function sanitizeHtml(html) {
       const hrefMatch = attrs.match(/\bhref\s*=\s*"([^"]*)"/i) || attrs.match(/\bhref\s*=\s*'([^']*)'/i);
       const href = hrefMatch ? hrefMatch[1].trim() : '';
       if (href) {
-        const abs = new URL(href, SITE_ORIGIN).toString();
+        const parsed = new URL(href, SITE_ORIGIN);
+        const path = parsed.pathname.replace(/\/+$/, '') || '/';
+        const abs = RETIRED_ARTICLE_PATHS.has(path)
+          ? `${SITE_ORIGIN}/app-studio/`
+          : parsed.toString();
         if (isHttpUrl(abs)) {
           const external = !abs.startsWith(SITE_ORIGIN);
           return external
@@ -225,7 +245,10 @@ const FOOTER = `
 function renderArticlePage(article) {
   const canonical = `${SITE_ORIGIN}/${article.slug}`;
   const safeTitle = escapeHtml(article.title);
-  const safeDesc = escapeHtml(article.description);
+  const description = COMMERCIAL_PRICING_LANGUAGE.test(article.description)
+    ? `${article.title}. En guide om produktmål, användarbeteende, teknikval och vägen till en hållbar lansering.`
+    : article.description;
+  const safeDesc = escapeHtml(description);
   const dateLabel = formatDate(article.pubDate) || 'OakDev Inspiration';
   const content = sanitizeHtml(article.contentHtml);
   const image = article.image || `${SITE_ORIGIN}/assets/oakdev-tree-social.jpg`;
@@ -237,7 +260,7 @@ function renderArticlePage(article) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
-    description: article.description,
+    description,
     image,
     datePublished: article.pubDate ? new Date(article.pubDate).toISOString() : undefined,
     mainEntityOfPage: canonical,
@@ -301,7 +324,7 @@ ${NAV}
         <p class="insights-article-lead">${safeDesc}</p>
         ${imageTag}
         <div class="insights-article-content">${content}</div>
-        <a href="/boka-samtal-om-ai/" class="btn-primary insights-article-cta">Boka en kostnadsfri AI-genomgång</a>
+        <a href="/boka-samtal-om-ai/" class="btn-primary insights-article-cta">Boka ett appsamtal</a>
       </div>
     </article>
   </main>
