@@ -53,6 +53,23 @@ const TRANSLATIONS = {
     hero_offer3_title: 'AI That Belongs in the App',
     hero_offer3_desc:  'Search, assistants, personalization, voice, and vision.',
     scroll:          'Scroll',
+    /* Selected work */
+    work_tag:        'Selected Work',
+    work_title1:     'Not concepts.',
+    work_title2:     'Products with a pulse.',
+    work_desc:       'A glimpse inside apps shaped, built, and shipped by OakDev — each with its own world, interaction, and reason to exist.',
+    work_live:       'Live product',
+    work_building:   'In the studio',
+    work_tipsypal_desc: 'A playful AI writing companion that turns a mood into something worth sharing. Built as a real Android product, not a glossy prototype.',
+    work_chips_label: 'TipsyPal technology and product features',
+    work_chip_android: 'Android',
+    work_chip_ai: 'Generative AI',
+    work_chip_share: 'Share flows',
+    work_inkmeld_desc: 'A focused writing space where fragments become drafts and ideas keep their edge.',
+    work_viking_desc: 'Norse mythology, daily reflection, and an unmistakable visual identity in one atmospheric companion.',
+    work_case:       'View product story',
+    work_footer:     'Different audiences. Different worlds. The same obsession with a product that feels finished.',
+    work_all:        'Explore all apps',
     /* Services */
     services_tag:    'What We Build',
     services_title:  'Product Focus',
@@ -515,6 +532,23 @@ const TRANSLATIONS = {
     hero_offer3_title: 'AI som hör hemma i appen',
     hero_offer3_desc:  'Sök, assistenter, personalisering, röst och bild.',
     scroll:          'Scrolla',
+    /* Utvalda produkter */
+    work_tag:        'Utvalda produkter',
+    work_title1:     'Inte koncept.',
+    work_title2:     'Produkter med puls.',
+    work_desc:       'En inblick i appar som OakDev har format, byggt och lanserat — var och en med sin egen värld, interaktion och anledning att finnas.',
+    work_live:       'Lanserad produkt',
+    work_building:   'I studion',
+    work_tipsypal_desc: 'En lekfull AI-skrivkompis som gör ett humör till något värt att dela. Byggd som en riktig Android-produkt, inte en blank prototyp.',
+    work_chips_label: 'TipsyPals teknik och produktfunktioner',
+    work_chip_android: 'Android',
+    work_chip_ai: 'Generativ AI',
+    work_chip_share: 'Delningsflöden',
+    work_inkmeld_desc: 'En fokuserad skrivmiljö där fragment blir utkast och idéer behåller sin skärpa.',
+    work_viking_desc: 'Nordisk mytologi, daglig reflektion och en omisskännlig visuell identitet i en stämningsfull följeslagare.',
+    work_case:       'Se produktberättelsen',
+    work_footer:     'Olika målgrupper. Olika världar. Samma besatthet av en produkt som känns färdig.',
+    work_all:        'Utforska alla appar',
     /* Services */
     services_tag:    'Vad vi bygger',
     services_title:  'Produktfokus',
@@ -1012,11 +1046,21 @@ const Lang = (() => {
       if (val !== undefined) el.setAttribute('placeholder', val);
     });
 
+    document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+      const key = el.dataset.i18nAriaLabel;
+      const val = TRANSLATIONS[lang][key];
+      if (val !== undefined) el.setAttribute('aria-label', val);
+    });
+
     // Update lang buttons
     document.querySelectorAll('.lang-btn').forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
       btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang));
     });
+
+    document.dispatchEvent(new CustomEvent('oakdev:languagechange', {
+      detail: { lang },
+    }));
   }
 
   function init() {
@@ -1221,17 +1265,21 @@ const PerformanceBudget = (() => {
   const mq = (query) => window.matchMedia?.(query).matches || false;
   const prefersReducedMotion = mq('(prefers-reduced-motion: reduce)');
   const coarsePointer = mq('(pointer: coarse)');
-  const lowMemory = Number(navigator.deviceMemory || 4) <= 4;
-  const lowCores = Number(navigator.hardwareConcurrency || 4) <= 4;
+  const saveData = navigator.connection?.saveData === true;
+  const deviceMemory = Number(navigator.deviceMemory || 0);
+  const hardwareCores = Number(navigator.hardwareConcurrency || 0);
+  const lowMemory = deviceMemory > 0 && deviceMemory <= 4;
+  const lowCores = hardwareCores > 0 && hardwareCores <= 4;
   const smallViewport = window.innerWidth < 768;
-  const constrained = prefersReducedMotion || coarsePointer || lowMemory || lowCores || smallViewport;
-  const continuousMotionAllowed = !prefersReducedMotion && !coarsePointer && !smallViewport;
+  const constrained = prefersReducedMotion || coarsePointer || saveData || lowMemory || lowCores || smallViewport;
+  const continuousMotionAllowed = !constrained;
   const maxDpr = constrained ? 1.15 : 1.5;
   const canvasFps = prefersReducedMotion ? 24 : constrained ? 30 : 45;
 
   return {
     prefersReducedMotion,
     coarsePointer,
+    saveData,
     constrained,
     continuousMotionAllowed,
     canvasFps,
@@ -1265,7 +1313,7 @@ function initMotionBudget() {
 
   if (!('IntersectionObserver' in window)) return;
 
-  const roots = document.querySelectorAll('.hero, .section, .marquee-wrapper, .client-marquee-wrap, .oak-chatbot');
+  const roots = document.querySelectorAll('.hero, .section, .stats-section, .marquee-wrapper, .client-marquee-wrap, .oak-chatbot');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       entry.target.classList.toggle('motion-paused', !entry.isIntersecting);
@@ -1900,6 +1948,14 @@ function initCounters() {
   const counters = document.querySelectorAll('[data-count]');
   if (!counters.length) return;
 
+  if (PerformanceBudget.prefersReducedMotion) {
+    counters.forEach((counter) => {
+      const end = parseFloat(counter.dataset.count);
+      if (Number.isFinite(end)) counter.textContent = end.toLocaleString();
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(({ isIntersecting, target }) => {
       if (!isIntersecting) return;
@@ -1930,6 +1986,27 @@ function initCounters() {
 function initReveal() {
   if (typeof gsap !== 'undefined') return; // GSAP handles this
 
+  const motionReveals = document.querySelectorAll('[data-motion-reveal]');
+  const homeOwnsContinuousMotion = document.body.classList.contains('home-page')
+    && PerformanceBudget.continuousMotionAllowed;
+  if (motionReveals.length && !homeOwnsContinuousMotion) {
+    if (PerformanceBudget.prefersReducedMotion || !('IntersectionObserver' in window)) {
+      motionReveals.forEach((el) => el.classList.add('motion-in'));
+    } else {
+      document.documentElement.classList.add('motion-lite-ready');
+      const motionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          if (!isIntersecting) return;
+          target.classList.add('motion-in');
+          motionObserver.unobserve(target);
+        });
+      }, { rootMargin: '0px 0px -7% 0px', threshold: 0.08 });
+      motionReveals.forEach((el) => motionObserver.observe(el));
+    }
+  }
+
+  if (PerformanceBudget.prefersReducedMotion) return;
+
   // Hide elements via inline styles (no CSS dependency)
   document.querySelectorAll('[data-reveal]').forEach((el) => {
     const dir = el.dataset.reveal;
@@ -1952,6 +2029,300 @@ function initReveal() {
   }, { threshold: 0.12 });
 
   document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+}
+
+/* ============================================================
+   HOME PAGE SCROLL DIRECTION
+   Native, compositor-only motion with a single passive listener.
+   ============================================================ */
+function initHomeScrollMotion() {
+  if (!document.body.classList.contains('home-page')) return;
+
+  const root = document.documentElement;
+  const staticReveals = document.querySelectorAll('[data-motion-reveal]');
+  const liteRevealActive = root.classList.contains('motion-lite-ready');
+  const hero = document.getElementById('hero');
+  const services = document.getElementById('services');
+  const work = document.getElementById('selected-work');
+  const stats = document.querySelector('.stats-section');
+  const about = document.getElementById('about');
+  const process = document.getElementById('process');
+  if (!hero || !work) return;
+
+  const elements = {
+    heroLogo: hero.querySelector('.hero-logo-wrapper'),
+    headlineLines: [...hero.querySelectorAll('.headline-line')],
+    heroSub: hero.querySelector('.hero-subtext'),
+    heroCtas: hero.querySelector('.hero-ctas'),
+    heroOffers: hero.querySelector('.hero-offer-strip'),
+    heroSocial: hero.querySelector('.hero-social'),
+    servicesGrid: services?.querySelector('.services-grid'),
+    serviceCards: [...(services?.querySelectorAll('.service-card') || [])],
+    workBackground: work.querySelector('.work-stage-bg img'),
+    workHeading: work.querySelector('.work-heading-row'),
+    tipsyCard: work.querySelector('.work-card--tipsypal'),
+    tipsyFront: work.querySelector('.work-phone--front'),
+    tipsyBack: work.querySelector('.work-phone--back'),
+    inkmeldCard: work.querySelector('.work-card--inkmeld'),
+    inkmeldArt: work.querySelector('.work-card-art--inkmeld'),
+    vikingCard: work.querySelector('.work-card--vikingpal'),
+    vikingArt: work.querySelector('.work-card-art--vikingpal'),
+    statsGrid: stats?.querySelector('.stats-grid'),
+    statValues: [...(stats?.querySelectorAll('.stat-value-wrapper') || [])],
+    aboutText: about?.querySelector('.about-text-col'),
+    aboutCard: about?.querySelector('.about-card'),
+    processSteps: [...(process?.querySelectorAll('.process-step') || [])],
+  };
+
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const coarsePointerQuery = window.matchMedia('(pointer: coarse)');
+  const memory = Number(navigator.deviceMemory || 0);
+  const cores = Number(navigator.hardwareConcurrency || 0);
+  const permanentlyConstrained = PerformanceBudget.saveData
+    || (memory > 0 && memory <= 4)
+    || (cores > 0 && cores <= 4);
+  const motionTargets = [
+    elements.heroLogo,
+    ...elements.headlineLines,
+    elements.heroSub,
+    elements.heroCtas,
+    elements.heroOffers,
+    elements.heroSocial,
+    elements.servicesGrid,
+    elements.workBackground,
+    elements.workHeading,
+    elements.tipsyCard,
+    elements.tipsyFront,
+    elements.tipsyBack,
+    elements.inkmeldCard,
+    elements.inkmeldArt,
+    elements.vikingCard,
+    elements.vikingArt,
+    elements.statsGrid,
+    ...elements.statValues,
+    elements.aboutText,
+    elements.aboutCard,
+    ...elements.processSteps,
+  ].filter(Boolean);
+
+  const sections = [hero, services, work, stats, about, process].filter(Boolean);
+  const bounds = new Map();
+  const elementBounds = new Map();
+  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+  const mix = (from, to, progress) => from + (to - from) * progress;
+  const ease = (progress) => 1 - Math.pow(1 - clamp(progress), 3);
+  const setTransform = (element, value) => {
+    if (element) element.style.transform = value;
+  };
+  const runtimeMotionAllowed = () => !permanentlyConstrained
+    && !reducedMotionQuery.matches
+    && !coarsePointerQuery.matches
+    && window.innerWidth >= 768;
+  let motionEnabled = false;
+
+  function clearMotionStyles(revealAll = false) {
+    root.classList.remove('scroll-motion-enabled');
+    motionTargets.forEach((element) => {
+      element.style.removeProperty('transform');
+      element.style.removeProperty('opacity');
+    });
+    process?.style.removeProperty('--process-progress');
+    elements.processSteps.forEach((step) => step.classList.remove('motion-active'));
+    if (reducedMotionQuery.matches || (revealAll && !liteRevealActive)) {
+      staticReveals.forEach((element) => element.classList.add('motion-in'));
+    }
+  }
+
+  function measure() {
+    const scrollY = window.scrollY;
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      bounds.set(section, {
+        top: rect.top + scrollY,
+        height: rect.height,
+      });
+    });
+    [elements.tipsyCard, elements.inkmeldCard, elements.vikingCard]
+      .filter(Boolean)
+      .forEach((element) => {
+        let top = 0;
+        let node = element;
+        while (node) {
+          top += node.offsetTop || 0;
+          node = node.offsetParent;
+        }
+        elementBounds.set(element, { top, height: element.offsetHeight });
+      });
+    render();
+  }
+
+  function viewportProgress(section, startViewport = 0.92, endViewport = 0.08) {
+    const bound = bounds.get(section);
+    if (!bound) return 0;
+    const start = bound.top - window.innerHeight * startViewport;
+    const end = bound.top + bound.height - window.innerHeight * endViewport;
+    return clamp((window.scrollY - start) / Math.max(1, end - start));
+  }
+
+  function elementProgress(element, startViewport = 0.94, endViewport = 0.3) {
+    const bound = elementBounds.get(element);
+    if (!bound) return 0;
+    const start = bound.top - window.innerHeight * startViewport;
+    const end = bound.top + bound.height - window.innerHeight * endViewport;
+    return clamp((window.scrollY - start) / Math.max(1, end - start));
+  }
+
+  function renderHero() {
+    const bound = bounds.get(hero);
+    if (!bound) return;
+    const progress = ease(clamp(window.scrollY / Math.max(bound.height * 0.82, 1)));
+    const fade = clamp(1 - progress * 1.12, 0.16, 1);
+
+    setTransform(elements.heroLogo, `translate3d(0, ${mix(0, -72, progress).toFixed(2)}px, 0) scale(${mix(1, 1.19, progress).toFixed(4)})`);
+    elements.headlineLines.forEach((line, index) => {
+      const direction = index % 2 === 0 ? -1 : 1;
+      setTransform(line, `translate3d(${(direction * progress * (index === 1 ? 52 : 34)).toFixed(2)}px, ${(-18 * progress).toFixed(2)}px, 0) scale(${mix(1, 1.025, progress).toFixed(4)})`);
+      line.style.opacity = String(fade);
+    });
+    [elements.heroSub, elements.heroCtas, elements.heroOffers, elements.heroSocial].forEach((element, index) => {
+      if (!element) return;
+      setTransform(element, `translate3d(0, ${mix(0, -(76 + index * 4), progress).toFixed(2)}px, 0)`);
+      if (element === elements.heroSub) {
+        element.style.opacity = String(clamp(1 - progress * 1.1, 0.2, 1));
+      }
+    });
+  }
+
+  function renderWork() {
+    const progress = viewportProgress(work, 0.98, 0.08);
+    const enter = ease(clamp(progress / 0.58));
+    const drift = clamp((progress - 0.16) / 0.84);
+
+    setTransform(elements.workBackground, `translate3d(0, ${mix(-30, 38, progress).toFixed(2)}px, 0) scale(${mix(1.09, 1.025, progress).toFixed(4)})`);
+    setTransform(elements.workHeading, `translate3d(0, ${mix(54, -18, progress).toFixed(2)}px, 0) scale(${mix(0.96, 1.015, enter).toFixed(4)})`);
+    if (elements.workHeading) elements.workHeading.style.opacity = String(clamp(enter * 1.3));
+
+    [
+      [elements.tipsyCard, -54, -1.4],
+      [elements.inkmeldCard, 62, 1.5],
+      [elements.vikingCard, 74, -1.1],
+    ].forEach(([card, offset, rotation]) => {
+      if (!card) return;
+      const local = ease(elementProgress(card));
+      setTransform(card, `translate3d(${mix(offset, 0, local).toFixed(2)}px, ${mix(88, -10, local).toFixed(2)}px, 0) rotate(${mix(rotation, 0, local).toFixed(3)}deg) scale(${mix(0.925, 1, local).toFixed(4)})`);
+      card.style.opacity = String(clamp(local * 1.35));
+    });
+
+    setTransform(elements.tipsyFront, `translate3d(${mix(-24, 18, drift).toFixed(2)}px, ${mix(46, -26, drift).toFixed(2)}px, 0) rotate(${mix(-9, -4.5, drift).toFixed(2)}deg) scale(${mix(0.94, 1.025, drift).toFixed(4)})`);
+    setTransform(elements.tipsyBack, `translate3d(${mix(26, -14, drift).toFixed(2)}px, ${mix(-18, 38, drift).toFixed(2)}px, 0) rotate(${mix(8, 3.5, drift).toFixed(2)}deg) scale(${mix(0.88, 0.96, drift).toFixed(4)})`);
+    setTransform(elements.inkmeldArt, `translate3d(${mix(-18, 14, drift).toFixed(2)}px, 0, 0) scale(${mix(1.15, 1.06, drift).toFixed(4)})`);
+    setTransform(elements.vikingArt, `translate3d(${mix(30, -12, drift).toFixed(2)}px, ${mix(20, -16, drift).toFixed(2)}px, 0) rotate(${mix(5, -1, drift).toFixed(2)}deg) scale(${mix(1.12, 1.04, drift).toFixed(4)})`);
+  }
+
+  function renderServices() {
+    if (!services || !elements.servicesGrid) return;
+    const progress = ease(viewportProgress(services, 0.96, 0.28));
+    setTransform(elements.servicesGrid, `translate3d(0, ${mix(58, 0, progress).toFixed(2)}px, 0) scale(${mix(0.965, 1, progress).toFixed(4)})`);
+    elements.servicesGrid.style.opacity = String(clamp(progress * 1.45));
+  }
+
+  function renderStats() {
+    if (!stats || !elements.statsGrid) return;
+    const progress = ease(viewportProgress(stats, 0.96, 0.38));
+    setTransform(elements.statsGrid, `translate3d(0, ${mix(48, 0, progress).toFixed(2)}px, 0) scale(${mix(0.955, 1, progress).toFixed(4)})`);
+    elements.statsGrid.style.opacity = String(clamp(progress * 1.35));
+    elements.statValues.forEach((value, index) => {
+      const local = ease(clamp((progress - index * 0.09) / 0.72));
+      setTransform(value, `translate3d(0, ${mix(24, 0, local).toFixed(2)}px, 0) scale(${mix(0.84, 1, local).toFixed(4)})`);
+    });
+  }
+
+  function renderAbout() {
+    if (!about) return;
+    const progress = viewportProgress(about, 0.95, 0.12);
+    setTransform(elements.aboutText, `translate3d(0, ${mix(54, -28, progress).toFixed(2)}px, 0)`);
+    setTransform(elements.aboutCard, `translate3d(0, ${mix(84, -34, progress).toFixed(2)}px, 0) rotateY(${mix(5, -2.5, progress).toFixed(2)}deg) scale(${mix(0.94, 1.025, progress).toFixed(4)})`);
+  }
+
+  function renderProcess() {
+    if (!process) return;
+    const progress = viewportProgress(process, 0.94, 0.3);
+    process.style.setProperty('--process-progress', progress.toFixed(4));
+    elements.processSteps.forEach((step, index) => {
+      const local = ease(clamp((progress - index * 0.14) / 0.56));
+      setTransform(step, `translate3d(0, ${mix(50, 0, local).toFixed(2)}px, 0) scale(${mix(0.94, 1, local).toFixed(4)})`);
+      step.style.opacity = String(clamp(local * 1.4));
+      step.classList.toggle('motion-active', local > 0.72);
+    });
+  }
+
+  let scheduled = false;
+  function render() {
+    scheduled = false;
+    if (document.hidden || !motionEnabled) return;
+    if (!runtimeMotionAllowed()) {
+      updateMotionMode();
+      return;
+    }
+    const viewportTop = window.scrollY;
+    const viewportBottom = viewportTop + window.innerHeight;
+    const nearViewport = (section, margin = window.innerHeight * 0.75) => {
+      const bound = bounds.get(section);
+      return Boolean(bound && bound.top < viewportBottom + margin && bound.top + bound.height > viewportTop - margin);
+    };
+
+    if (nearViewport(hero, 0)) renderHero();
+    if (services && nearViewport(services)) renderServices();
+    if (nearViewport(work)) renderWork();
+    if (stats && nearViewport(stats)) renderStats();
+    if (about && nearViewport(about)) renderAbout();
+    if (process && nearViewport(process)) renderProcess();
+  }
+
+  function queueRender() {
+    if (scheduled || !motionEnabled) return;
+    scheduled = true;
+    requestAnimationFrame(render);
+  }
+
+  function updateMotionMode() {
+    const shouldEnable = runtimeMotionAllowed();
+    if (!shouldEnable) {
+      const wasEnabled = motionEnabled;
+      motionEnabled = false;
+      clearMotionStyles(wasEnabled);
+      return;
+    }
+
+    motionEnabled = true;
+    root.classList.remove('motion-lite-ready');
+    root.classList.add('scroll-motion-enabled');
+    staticReveals.forEach((element) => element.classList.add('motion-in'));
+    measure();
+  }
+
+  const handleViewportChange = rafDebounce(updateMotionMode);
+  const listenForChange = (query) => {
+    if (typeof query.addEventListener === 'function') {
+      query.addEventListener('change', updateMotionMode);
+    } else if (typeof query.addListener === 'function') {
+      query.addListener(updateMotionMode);
+    }
+  };
+
+  window.addEventListener('scroll', queueRender, { passive: true });
+  window.addEventListener('resize', handleViewportChange, { passive: true });
+  window.addEventListener('load', () => motionEnabled && measure(), { once: true });
+  document.fonts?.ready.then(() => motionEnabled && measure()).catch(() => {});
+  document.addEventListener('oakdev:languagechange', () => {
+    if (motionEnabled) requestAnimationFrame(measure);
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && motionEnabled) measure();
+  });
+  listenForChange(reducedMotionQuery);
+  listenForChange(coarsePointerQuery);
+  updateMotionMode();
 }
 
 /* ============================================================
@@ -2812,6 +3183,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initCounters();
   initReveal();
+  initHomeScrollMotion();
   initContactForm();
   initMarquee();
   initMotionBudget();

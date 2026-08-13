@@ -190,10 +190,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/oakdev-tree-apple-touch.png" />
 
   <!-- ── Stylesheet ────────────────────────────────────────── -->
-  <link rel="stylesheet" href="css/styles.css?v=2026-08-mobile" />
+  <link rel="stylesheet" href="css/styles.css?v=2026-08-motion" />
 </head>
 
-<body>
+<body class="home-page">
   <!-- ── Noise overlay ─────────────────────────────────────── -->
   <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -225,7 +225,7 @@
   <header id="navbar" class="navbar" role="banner">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="OakDev home">
-      <img src="/assets/oakdev-ai-high-resolution-logo-transparent_2_cropped.png" alt="OakDev &amp; AI AB" width="140" height="36" loading="eager" />
+      <img src="/assets/oakdev-nav-logo.png" alt="OakDev &amp; AI AB" width="121" height="36" loading="eager" />
     </a>
 
     <nav class="nav-links" role="navigation" aria-label="Main navigation">
@@ -297,7 +297,7 @@
           <img src="assets/icon.png"
                alt="OakDev &amp; AI AB"
                class="hero-logo"
-               width="280" height="auto"
+               width="280" height="280"
                loading="eager" />
         </div>
 
@@ -455,7 +455,7 @@
           </p>
         </div>
 
-        <div class="services-grid">
+        <div class="services-grid" data-motion-reveal>
           <!-- Card 1: App Studio -->
           <div class="service-card">
             <a href="app-studio/" class="service-card-inner" aria-label="App Studio service">
@@ -545,8 +545,132 @@
     </section>
 
     <!-- ──────────────────────────────────────────────────────
-         STATS SECTION
+         SELECTED WORK — real products and real interfaces
          ────────────────────────────────────────────────────── -->
+    <section id="selected-work" class="section work-section" aria-labelledby="work-heading">
+      <div class="work-stage-bg" aria-hidden="true">
+        <img src="assets/showcase/oakdev-product-stage.jpg"
+             alt=""
+             width="1672" height="941"
+             loading="lazy" decoding="async" fetchpriority="low" />
+      </div>
+
+      <div class="container work-container">
+        <div class="work-heading-row" data-motion-reveal>
+          <div>
+            <div class="section-tag" data-i18n="work_tag">Selected Work</div>
+            <h2 id="work-heading" class="work-title">
+              <span data-i18n="work_title1">Not concepts.</span>
+              <span class="gradient-text" data-i18n="work_title2">Products with a pulse.</span>
+            </h2>
+          </div>
+          <p class="work-lead" data-i18n="work_desc">
+            A glimpse inside apps shaped, built, and shipped by OakDev — each with its own world, interaction, and reason to exist.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <article class="work-card work-card--tipsypal" data-motion-reveal>
+            <div class="work-card-copy">
+              <div class="work-meta">
+                <span class="work-index">01</span>
+                <span class="work-status work-status--live" data-i18n="work_live">Live product</span>
+              </div>
+              <img src="assets/app%20logos/tipsypal-high-resolution-logo-transparent.png"
+                   class="work-wordmark work-wordmark--tipsypal"
+                   alt=""
+                   width="240" height="46"
+                   loading="lazy" decoding="async" />
+              <h3 class="sr-only">TipsyPal</h3>
+              <p data-i18n="work_tipsypal_desc">
+                A playful AI writing companion that turns a mood into something worth sharing. Built as a real Android product, not a glossy prototype.
+              </p>
+              <ul class="work-chips" aria-label="TipsyPal technology and product features" data-i18n-aria-label="work_chips_label">
+                <li data-i18n="work_chip_android">Android</li>
+                <li data-i18n="work_chip_ai">Generative AI</li>
+                <li data-i18n="work_chip_share">Share flows</li>
+              </ul>
+              <a href="app-studio/#portfolio" class="work-link">
+                <span data-i18n="work_case">View product story</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <div class="work-phone-scene" aria-hidden="true">
+              <div class="work-orbit work-orbit--one"></div>
+              <div class="work-orbit work-orbit--two"></div>
+              <div class="work-phone work-phone--back">
+                <img src="assets/showcase/tipsypal-result.png"
+                     srcset="assets/showcase/tipsypal-result-540.webp 540w, assets/showcase/tipsypal-result-810.webp 810w, assets/showcase/tipsypal-result.png 1080w"
+                     sizes="(max-width: 640px) 50vw, 285px"
+                     alt=""
+                     width="1080" height="2400"
+                     loading="lazy" decoding="async" fetchpriority="low" />
+              </div>
+              <div class="work-phone work-phone--front">
+                <img src="assets/showcase/tipsypal-home.png"
+                     srcset="assets/showcase/tipsypal-home-540.webp 540w, assets/showcase/tipsypal-home-810.webp 810w, assets/showcase/tipsypal-home.png 1080w"
+                     sizes="(max-width: 640px) 50vw, 285px"
+                     alt=""
+                     width="1080" height="2400"
+                     loading="lazy" decoding="async" fetchpriority="low" />
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card work-card--inkmeld" data-motion-reveal>
+            <img src="assets/showcase/inkmeld-stage.jpg"
+                 class="work-card-art work-card-art--inkmeld"
+                 alt=""
+                 width="1400" height="593"
+                 loading="lazy" decoding="async" fetchpriority="low" />
+            <div class="work-card-shade" aria-hidden="true"></div>
+            <div class="work-card-copy work-card-copy--overlay">
+              <h3 class="sr-only">InkMeld</h3>
+              <div class="work-meta">
+                <span class="work-index">02</span>
+                <span class="work-status" data-i18n="work_building">In the studio</span>
+              </div>
+              <p data-i18n="work_inkmeld_desc">A focused writing space where fragments become drafts and ideas keep their edge.</p>
+              <a href="app-studio/#portfolio" class="work-link">
+                <span data-i18n="work_case">View product story</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="work-card work-card--vikingpal" data-motion-reveal>
+            <div class="work-viking-glow" aria-hidden="true"></div>
+            <img src="assets/showcase/vikingpal-emblem.jpg"
+                 class="work-card-art work-card-art--vikingpal"
+                 alt=""
+                 width="720" height="720"
+                 loading="lazy" decoding="async" fetchpriority="low" />
+            <div class="work-card-shade" aria-hidden="true"></div>
+            <div class="work-card-copy work-card-copy--overlay">
+              <h3 class="sr-only">VikingPal</h3>
+              <div class="work-meta">
+                <span class="work-index">03</span>
+                <span class="work-status work-status--live" data-i18n="work_live">Live product</span>
+              </div>
+              <p data-i18n="work_viking_desc">Norse mythology, daily reflection, and an unmistakable visual identity in one atmospheric companion.</p>
+              <a href="app-studio/#portfolio" class="work-link">
+                <span data-i18n="work_case">View product story</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="work-footer" data-motion-reveal>
+          <span class="work-footer-line" aria-hidden="true"></span>
+          <p data-i18n="work_footer">Different audiences. Different worlds. The same obsession with a product that feels finished.</p>
+          <a href="app-studio/#portfolio" class="btn-ghost" data-i18n="work_all">Explore all apps</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company statistics -->
     <section class="stats-section" aria-label="Company statistics">
       <div class="container">
         <div class="stats-grid">
@@ -884,7 +1008,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand footer-col">
-          <img src="/assets/oakdev-ai-high-resolution-logo-transparent.png" alt="OakDev &amp; AI AB" width="130" height="auto" loading="lazy" />
+          <img src="/assets/oakdev-ai-high-resolution-logo-transparent.png" alt="OakDev &amp; AI AB" width="130" height="64" loading="lazy" />
           <p data-i18n="footer_desc">Premium app studio and AI product company. Building tomorrow's digital products today.</p>
           <div class="footer-brand-socials">
             <a href="https://www.linkedin.com/company/oakdev-ai/" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="LinkedIn">
@@ -966,7 +1090,7 @@
 
   <!-- Legacy hero dot animation is parked in js/legacy/dots-animation.js for a future page move. -->
   <!-- OakDev main script -->
-  <script src="js/main.js?v=i18n-se-2026-06" defer></script>
+  <script src="js/main.js?v=motion-2026-08" defer></script>
 
 </body>
 </html>
