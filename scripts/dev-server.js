@@ -3,7 +3,6 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const chatbotHandler = require('../api/chatbot');
 const soroRssHandler = require('../api/soro-rss');
 const insightsFeedHandler = require('../api/insights-feed');
 
@@ -53,56 +52,6 @@ function contentType(filePath) {
   }[ext] || 'application/octet-stream';
 }
 
-function sendJson(res, status, data) {
-  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
-  res.end(JSON.stringify(data));
-}
-
-function readBody(req) {
-  return new Promise((resolve, reject) => {
-    let body = '';
-    req.on('data', (chunk) => {
-      body += chunk;
-      if (body.length > 64 * 1024) {
-        req.destroy();
-        reject(new Error('Request body too large'));
-      }
-    });
-    req.on('end', () => {
-      if (!body) {
-        resolve({});
-        return;
-      }
-      try {
-        resolve(JSON.parse(body));
-      } catch (error) {
-        reject(error);
-      }
-    });
-    req.on('error', reject);
-  });
-}
-
-async function handleChatbotApi(req, res) {
-  try {
-    req.body = await readBody(req);
-  } catch {
-    sendJson(res, 400, { error: 'Invalid JSON body.' });
-    return;
-  }
-
-  res.status = (statusCode) => ({
-    json: (payload) => sendJson(res, statusCode, payload),
-    end: () => {
-      res.writeHead(statusCode);
-      res.end();
-    },
-  });
-  res.json = (payload) => sendJson(res, 200, payload);
-
-  await chatbotHandler(req, res);
-}
-
 async function handleSoroRssApi(req, res) {
   await soroRssHandler(req, res);
 }
@@ -142,11 +91,6 @@ function serveStatic(req, res) {
 loadEnv();
 
 const server = http.createServer((req, res) => {
-  if (req.url.startsWith('/api/chatbot')) {
-    handleChatbotApi(req, res);
-    return;
-  }
-
   if (req.url.startsWith('/api/soro-rss')) {
     handleSoroRssApi(req, res);
     return;
@@ -161,7 +105,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, () => {
-  const keyState = process.env.OPENAI_API_KEY ? 'configured' : 'missing';
   console.log(`OakDev dev server: http://localhost:${port}`);
-  console.log(`OPENAI_API_KEY: ${keyState}`);
 });

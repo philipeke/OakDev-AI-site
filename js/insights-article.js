@@ -4,7 +4,7 @@
   const root = document.querySelector('[data-insights-article]');
   if (!root) return;
 
-  const endpoint = root.dataset.endpoint || 'https://gf365.vercel.app/api/insights-feed';
+  const endpoint = root.dataset.endpoint || '/insights-feed.xml';
   const status = root.querySelector('[data-article-status]');
   const titleNode = root.querySelector('[data-article-title]');
   const dateNode = root.querySelector('[data-article-date]');
