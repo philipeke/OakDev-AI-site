@@ -283,17 +283,6 @@ const interactiveStates = [
     })()`,
     cleanup: "document.querySelector('.cookie-banner')?.classList.add('hidden')",
   },
-  {
-    name: 'chatbot-open',
-    setup: `(() => {
-      const chatbot = document.querySelector('.oak-chatbot');
-      if (!chatbot) return false;
-      chatbot.classList.remove('minimized');
-      chatbot.classList.add('open');
-      return true;
-    })()`,
-    cleanup: "document.querySelector('.oak-chatbot')?.classList.remove('open')",
-  },
 ];
 
 async function evaluateByValue(cdp, sessionId, expression) {

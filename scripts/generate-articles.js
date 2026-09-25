@@ -56,7 +56,7 @@ function reservedSlugs(ownedSlugs) {
   const owned = new Set(ownedSlugs);
   const entries = fs.readdirSync(ROOT, { withFileTypes: true });
   const reserved = new Set([
-    'api', 'css', 'js', 'assets', 'scripts', 'marketing', 'chatbot-api',
+    'api', 'css', 'js', 'assets', 'scripts', 'marketing',
     'sitemap.xml', 'robots.txt', 'cname', 'favicon.ico', 'index.html',
     'readme.md', 'deploy.md', 'package.json', 'vercel.json',
     ...BLOCKED_ARTICLE_SLUGS,
@@ -121,6 +121,7 @@ async function main() {
   });
   if (!res.ok) throw new Error(`Feed returned ${res.status}`);
   const xml = await res.text();
+  fs.writeFileSync(path.join(ROOT, 'insights-feed.xml'), xml);
 
   const items = parseItems(xml).map((a) => ({
     ...a,
