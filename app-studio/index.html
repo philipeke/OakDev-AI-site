@@ -418,7 +418,6 @@
     .portfolio-card--inkmeld  .portfolio-logo { scale: 1.16; max-width: 360px; max-height: 190px; --float-y: -5px; }
     .portfolio-card--tipsypal .portfolio-logo { scale: 2.2; --float-y: -6px; }
     .portfolio-card--vespera  .portfolio-logo { scale: 2.0; max-width: 260px; max-height: 260px; --float-y: -7px; }
-    .portfolio-card--ayara    .portfolio-logo { scale: 2.4; --float-y: -6px; }
 
     @keyframes floatLogo {
       0%, 100% { transform: translateY(0); }
@@ -581,28 +580,6 @@
       box-shadow: 0 8px 28px rgba(126,183,255,0.18);
     }
 
-    /* Ayara — Shia Islamic (dark navy + crimson) */
-    .portfolio-card--ayara .portfolio-logo-area {
-      background: linear-gradient(135deg, rgba(18,8,28,0.85) 0%, rgba(6,8,20,0.95) 100%);
-    }
-    .portfolio-card--ayara .portfolio-logo-area::before { background: rgba(194,59,90,0.5); }
-    .portfolio-card--ayara .portfolio-app-badge {
-      color: #e8708a;
-      background: rgba(194,59,90,0.1);
-      border-color: rgba(194,59,90,0.28);
-    }
-    .portfolio-card--ayara .portfolio-app-badge::before { background: #e8708a; }
-    .portfolio-card--ayara .btn-visit {
-      border-color: rgba(194,59,90,0.35);
-      color: #e8708a;
-    }
-    .portfolio-card--ayara .btn-visit:hover {
-      background: rgba(194,59,90,0.12);
-      border-color: #c23b5a;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 28px rgba(194,59,90,0.2);
-    }
-
     .btn-visit--disabled {
       cursor: default;
       opacity: 0.74;
@@ -618,8 +595,7 @@
       .portfolio-card--vikingpal .portfolio-logo,
       .portfolio-card--inkmeld .portfolio-logo,
       .portfolio-card--tipsypal .portfolio-logo,
-      .portfolio-card--vespera .portfolio-logo,
-      .portfolio-card--ayara .portfolio-logo {
+      .portfolio-card--vespera .portfolio-logo {
         max-width: 200px;
         max-height: 200px;
       }
@@ -627,7 +603,6 @@
       .portfolio-card--inkmeld  .portfolio-logo { scale: 1.08; max-width: 300px; max-height: 160px; }
       .portfolio-card--tipsypal .portfolio-logo { scale: 1.58; }
       .portfolio-card--vespera  .portfolio-logo { scale: 1.48; }
-      .portfolio-card--ayara    .portfolio-logo { scale: 1.68; }
     }
 
     /* ═══ TECH STACK ════════════════════════════════════════ */
@@ -1469,34 +1444,6 @@
                  rel="noopener noreferrer"
                  aria-label="Visit Vespera live site">
                 <span data-i18n="vespera_cta">Visit Vespera</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- ── Ayara ── -->
-          <article class="portfolio-card portfolio-card--ayara" data-reveal="up" data-reveal-delay="1">
-            <div class="portfolio-logo-area">
-              <img src="../assets/app%20logos/ayara.png"
-                   alt="Ayara app logo"
-                   class="portfolio-logo"
-                   width="200" height="200"
-                   loading="lazy" />
-            </div>
-            <div class="portfolio-info-area">
-              <span class="portfolio-app-badge" data-i18n="ayara_tagline">Shia Islamic Wisdom</span>
-              <h3 data-i18n="ayara_name">Ayara</h3>
-              <p data-i18n="ayara_desc">A reverent Shia Islamic app delivering daily Du'a, Quran, and teachings of the Ahl al-Bayt — crafted with deep respect for Shia tradition and spiritual practice.</p>
-              <a href="https://ayara.oakdev.app/"
-                 class="btn-visit"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 aria-label="Visit Ayara live site">
-                <span data-i18n="ayara_cta">Visit Ayara</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                      fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
