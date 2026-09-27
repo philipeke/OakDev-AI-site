@@ -576,6 +576,100 @@ nav,
   box-shadow: 0 6px 24px var(--green-glow);
 }
 
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 5px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  transition: background var(--dur-fast) ease;
+}
+
+.menu-toggle:hover {
+  background: var(--glass-bg-2);
+}
+
+.hamburger-line {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text-1);
+  border-radius: 2px;
+  transition: transform var(--dur-mid) var(--ease-out-expo),
+              opacity var(--dur-fast) ease;
+}
+
+.menu-toggle.open .hamburger-line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.menu-toggle.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menu-toggle.open .hamburger-line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: rgba(4, 4, 4, 0.97);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  gap: 0.25rem;
+  overflow: hidden;
+  max-height: 0;
+  padding: 0;
+  border-bottom: 0 solid var(--glass-border);
+  transition:
+    max-height 0.4s var(--ease-out-expo),
+    padding 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.mobile-menu.open {
+  max-height: 520px;
+  padding: 1.25rem 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.mobile-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: var(--radius-sm);
+  transition: color var(--dur-fast) ease, background var(--dur-fast) ease;
+}
+
+.mobile-link:hover {
+  color: var(--text-1);
+  background: var(--glass-bg-2);
+}
+
+.mobile-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobile-lang {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 /* ── HERO SECTION ───────────────────────────────────────────── */
 .hero {
   position: relative;
