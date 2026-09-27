@@ -38,8 +38,8 @@
   let frameScale = 1;
   let isVisible = true;
   const constrained = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768 || (navigator.hardwareConcurrency || 4) <= 4;
-  const frameGap = 1000 / (constrained ? 30 : 45);
-  const maxDpr = constrained ? 1.15 : 1.5;
+  const frameGap = 1000 / (constrained ? 24 : 30);
+  const maxDpr = constrained ? 1 : 1.25;
   const getDpr = () => Math.min(window.devicePixelRatio || 1, maxDpr);
 
   const blips   = [];
@@ -248,7 +248,7 @@
     ctx.strokeStyle = N + '0.9)';
     ctx.lineWidth   = 1.6;
     ctx.shadowColor = NEON_HEX;
-    ctx.shadowBlur  = 16;
+    ctx.shadowBlur  = 8;
     ctx.stroke();
     ctx.restore();
 
@@ -258,7 +258,7 @@
     ctx.arc(cx, cy, 4 * dotPulse, 0, Math.PI * 2);
     ctx.fillStyle   = NEON_HEX;
     ctx.shadowColor = NEON_HEX;
-    ctx.shadowBlur  = 22;
+    ctx.shadowBlur  = 10;
     ctx.fill();
     ctx.shadowBlur  = 0;
   }
@@ -297,7 +297,7 @@
       ctx.fillStyle = b.mouse ? NEON_HEX : N + '0.95)';
       if (b.mouse) {
         ctx.shadowColor = NEON_HEX;
-        ctx.shadowBlur  = 24;
+        ctx.shadowBlur  = 10;
       }
       ctx.fill();
       ctx.shadowBlur = 0;
@@ -371,7 +371,7 @@
       ctx.strokeStyle = N + ring.alpha + ')';
       ctx.lineWidth   = 1.2;
       ctx.shadowColor = NEON_HEX;
-      ctx.shadowBlur  = 6;
+      ctx.shadowBlur  = 4;
       ctx.stroke();
       ctx.shadowBlur  = 0;
     }

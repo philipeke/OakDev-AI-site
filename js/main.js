@@ -1229,8 +1229,8 @@ const PerformanceBudget = (() => {
   const smallViewport = window.innerWidth < 768;
   const constrained = prefersReducedMotion || coarsePointer || saveData || lowMemory || lowCores || smallViewport;
   const continuousMotionAllowed = !constrained;
-  const maxDpr = constrained ? 1.15 : 1.5;
-  const canvasFps = prefersReducedMotion ? 24 : constrained ? 30 : 45;
+  const maxDpr = constrained ? 1 : 1.25;
+  const canvasFps = prefersReducedMotion ? 20 : constrained ? 24 : 30;
 
   return {
     prefersReducedMotion,
@@ -1302,8 +1302,8 @@ class HeroScene {
 
     // Keep the hero rich, but avoid overdraw on high-DPI and low-power devices.
     this.particleCount = PerformanceBudget.constrained
-      ? (window.innerWidth < 768 ? 280 : 760)
-      : 1000;
+      ? (window.innerWidth < 768 ? 160 : 420)
+      : 620;
 
     this.setup();
     this.createParticles();
@@ -1325,7 +1325,7 @@ class HeroScene {
 
     this.renderer = new THREE.WebGLRenderer({
       canvas:           this.canvas,
-      antialias:        !PerformanceBudget.constrained,
+      antialias:        false,
       alpha:            true,
       powerPreference:  'high-performance',
       precision:        'mediump',
@@ -1429,9 +1429,9 @@ class HeroScene {
 
   createOrb() {
     /* ── Core sphere ── */
-    const sphereSegments = PerformanceBudget.constrained ? 40 : 64;
-    const glowSegments = PerformanceBudget.constrained ? 24 : 32;
-    const torusSegments = PerformanceBudget.constrained ? 72 : 100;
+    const sphereSegments = PerformanceBudget.constrained ? 28 : 40;
+    const glowSegments = PerformanceBudget.constrained ? 18 : 24;
+    const torusSegments = PerformanceBudget.constrained ? 48 : 64;
     const orbGeo = new THREE.SphereGeometry(8, sphereSegments, sphereSegments);
     const orbMat = new THREE.ShaderMaterial({
       uniforms: {
@@ -1471,7 +1471,7 @@ class HeroScene {
         }
       `,
       transparent: true,
-      side:        THREE.DoubleSide,
+      side:        THREE.FrontSide,
       blending:    THREE.AdditiveBlending,
       depthWrite:  false,
     });
@@ -1551,14 +1551,15 @@ class HeroScene {
   }
 
   start() {
-    if (this.raf || !this.shouldRun()) return;
+    if (this.raf || this.waitTimer || !this.shouldRun()) return;
     this.raf = requestAnimationFrame((now) => this.animate(now));
   }
 
   stop() {
-    if (!this.raf) return;
-    cancelAnimationFrame(this.raf);
+    if (this.raf) cancelAnimationFrame(this.raf);
     this.raf = null;
+    if (this.waitTimer) clearTimeout(this.waitTimer);
+    this.waitTimer = null;
   }
 
   updateRunState() {
@@ -1572,7 +1573,10 @@ class HeroScene {
 
     const elapsed = this.lastFrame ? now - this.lastFrame : this.frameGap;
     if (elapsed < this.frameGap) {
-      this.start();
+      this.waitTimer = setTimeout(() => {
+        this.waitTimer = null;
+        this.start();
+      }, this.frameGap - elapsed);
       return;
     }
 
@@ -1682,42 +1686,46 @@ function initLenis() {
   if (!PerformanceBudget.continuousMotionAllowed) return null;
 
   const lenis = new Lenis({
-    duration:   PerformanceBudget.constrained ? 0.85 : 1.05,
+    duration:   0.8,
     easing:     (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction:  'vertical',
-    smooth:     !PerformanceBudget.coarsePointer,
-    smoothWheel: !PerformanceBudget.coarsePointer,
+    smoothWheel: true,
     smoothTouch: false,
-    touchMultiplier: 2,
+    touchMultiplier: 1.4,
   });
 
-  // Connect to GSAP ticker if available
-  if (typeof gsap !== 'undefined') {
-    gsap.ticker.add((time) => {
-      if (!document.hidden) lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(500, 33);
-  } else {
-    let rafId = null;
-    function raf(time) {
-      rafId = null;
-      if (document.hidden) return;
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
+  let rafId = 0;
+  let idleTimer = 0;
+  const stop = () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = 0;
+  };
+  const frame = (time) => {
+    if (document.hidden) {
+      stop();
+      return;
     }
-    const start = () => {
-      if (!rafId && !document.hidden) rafId = requestAnimationFrame(raf);
-    };
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      } else {
-        start();
-      }
-    });
-    start();
-  }
+    lenis.raf(time);
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.update();
+    rafId = requestAnimationFrame(frame);
+  };
+  const start = (tailMs = 900) => {
+    if (!rafId && !document.hidden) rafId = requestAnimationFrame(frame);
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(stop, tailMs);
+  };
+
+  window.addEventListener('wheel', () => start(), { passive: true });
+  window.addEventListener('touchmove', () => start(), { passive: true });
+  window.addEventListener('scroll', () => start(), { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+  });
+
+  const scrollTo = lenis.scrollTo.bind(lenis);
+  lenis.scrollTo = (target, options) => {
+    start(1800);
+    return scrollTo(target, options);
+  };
 
   // Smooth anchor links
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -2430,6 +2438,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // Smooth scroll
   initLenis();
 
-  // GSAP (after Lenis since it hooks into ticker)
   initGSAP();
 });
